@@ -81,3 +81,21 @@ MapX.buttons=function(map,LC,bar){
  map.on('popupopen',e=>{if(innerWidth>700)return;const c=e.popup.getContent();const h=typeof c=='function'?c(e.popup._source):c;
   sh.querySelector('#mxD').innerHTML=typeof h=='string'?h:(h.outerHTML||'');sh.classList.add('has','open');sh.querySelector('#mxB').textContent='Hide';map.closePopup()});
  return btns};
+// Native live-aircraft layer via the Cloudflare relay (bounds-based, zoom >= 5, capped).
+MapX.aircraft=function(map,LC,statusEl){
+ const lay=L.layerGroup(),name='✈️ Live aircraft';LC.addOverlay(lay,name);let t=null,busy=false;
+ const say=h=>{if(statusEl)statusEl.innerHTML=h};
+ const load=async()=>{if(!map.hasLayer(lay)||busy)return;if(!window.TRAFFIC_RELAY){say('Live aircraft need the relay.');return}
+  if(map.getZoom()<5){lay.clearLayers();say('✈️ Zoom in (level 5+) to load live aircraft for the visible area.');return}
+  busy=true;const c=map.getCenter(),b=map.getBounds(),r=Math.max(10,Math.min(250,Math.round(b.getNorthEast().distanceTo(c)/1852)));
+  try{const j=await fetch(`${window.TRAFFIC_RELAY}/aircraft?lat=${c.lat.toFixed(2)}&lon=${c.lng.toFixed(2)}&dist=${r}`).then(x=>x.json());
+   let ac=(j.ac||[]).filter(a=>a.lat!=null&&b.contains([a.lat,a.lon]));const tot=ac.length;if(ac.length>600)ac=ac.filter((_,i)=>i%Math.ceil(tot/600)==0);
+   lay.clearLayers();const n={mil:0,com:0,pvt:0};
+   ac.forEach(a=>{const cs=(a.flight||'').trim(),mil=(a.dbFlags&1)==1,com=/^[A-Z]{3}\d/.test(cs),k=mil?'mil':com?'com':'pvt';n[k]++;const col={mil:'#f85149',com:'#58a6ff',pvt:'#3fb950'}[k],h=a.track??a.true_heading??0;
+    L.marker([a.lat,a.lon],{icon:L.divIcon({className:'',html:`<div style="transform:rotate(${h}deg);color:${col};font-size:17px;line-height:17px;text-shadow:0 0 2px #000,0 0 2px #000">✈</div>`,iconSize:[17,17],iconAnchor:[8,8]}),zIndexOffset:500})
+     .bindTooltip(`<b>${MapX.esc(cs||a.r||a.hex)}</b> ${MapX.esc(a.t||'')} · ${k=='mil'?'military':k=='com'?'airline':'private/GA'}<br>${a.alt_baro??'?'} ft · ${Math.round(a.gs||0)} kt · hdg ${Math.round(h)}°${a.r?' · '+MapX.esc(a.r):''}`).addTo(lay)});
+   say(tot?`✈️ <b>${tot}</b> aircraft in view${tot>ac.length?' (showing '+ac.length+')':''}: airline ${n.com}, private/GA ${n.pvt}, military ${n.mil} · ${MapX.esc(j.src)} · ${new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit',second:'2-digit'})} · refresh 20 s`
+     :`✈️ No aircraft returned (${MapX.esc(j.src||'')}${j.dbg?': '+MapX.esc(j.dbg.filter(x=>x.length<20).join(', ')):''}). The ADS-B APIs currently block Cloudflare's shared IPs; see notes.`)}catch(e){say('✈️ Aircraft relay error: '+MapX.esc(e.message))}
+  busy=false};
+ map.on('moveend',load);map.on('overlayadd layeradd',e=>{if(e.layer===lay)load()});map.on('layerremove',e=>{if(e.layer===lay)lay.clearLayers()});
+ clearInterval(t);t=setInterval(load,20000);return lay};

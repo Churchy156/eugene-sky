@@ -46,8 +46,13 @@ export default {
     const cors = { 'Access-Control-Allow-Origin': ALLOW.test(origin) ? origin : 'https://churchy156.github.io', 'Vary': 'Origin', 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=60' };
     if (url.pathname === '/aircraft') { // proxy adsb.lol (no browser CORS); 15 s edge cache per ~0.1° cell
       const la = (+url.searchParams.get('lat')).toFixed(1), lo = (+url.searchParams.get('lon')).toFixed(1), di = Math.min(250, +url.searchParams.get('dist') || 60);
-      const r = await fetch(`https://api.adsb.lol/v2/point/${la}/${lo}/${di}`, { cf: { cacheTtl: 15, cacheEverything: true } });
-      return new Response(r.body, { status: r.status, headers: { ...cors, 'Cache-Control': 'public, max-age=15' } });
+      const H = { headers: { 'User-Agent': 'eugene-sky-relay/1.0 (+https://github.com/Churchy156/eugene-sky; churchy156.github.io)' }, cf: { cacheTtl: 15, cacheEverything: true } };
+      let body = null, src = 'adsb.lol', dbg = [];
+      try { const r = await fetch(`https://api.adsb.lol/v2/point/${la}/${lo}/${di}`, H); dbg.push('lol ' + r.status); if (r.ok) body = await r.json(); else dbg.push((await r.text()).slice(0, 120)); } catch (e) { dbg.push('lol err ' + e); }
+      if (!body) { src = 'adsb.fi'; try { const r = await fetch(`https://opendata.adsb.fi/api/v2/lat/${la}/lon/${lo}/dist/${di}`, H); dbg.push('fi ' + r.status); if (r.ok) { const j = await r.json(); body = { ac: j.aircraft || j.ac || [], now: j.now }; } } catch (e) { dbg.push('fi err ' + e); } }
+      if (!body || !(body.ac || []).length) { src = 'opensky'; try { const d2 = di / 60; const r = await fetch(`https://opensky-network.org/api/states/all?lamin=${+la - d2}&lomin=${+lo - d2 * 1.4}&lamax=${+la + d2}&lomax=${+lo + d2 * 1.4}`, H); dbg.push('os ' + r.status);
+        if (r.ok) { const j = await r.json(); body = { now: j.time, ac: (j.states || []).map(s => ({ hex: s[0], flight: s[1], lon: s[5], lat: s[6], alt_baro: s[7] == null ? (s[8] ? 'ground' : null) : Math.round(s[7] * 3.281), gs: s[9] == null ? null : s[9] * 1.944, track: s[10], cat: s[17], country: s[2] })) }; } } catch (e) { dbg.push('os err ' + e); } }
+      return new Response(JSON.stringify({ ...(body || { ac: [] }), src, dbg }), { status: body ? 200 : 502, headers: { ...cors, 'Cache-Control': 'public, max-age=15' } });
     }
     const m = url.pathname.match(/^\/traffic\/([A-Z]{2})\.json$/);
     if (!m) return new Response('{"error":"use /traffic/<ST>.json"}', { status: 404, headers: cors });
