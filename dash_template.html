@@ -1,0 +1,73 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eugene Environment Dashboard</title>
+<script>/*PLOTLY*/</script>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#f6f7f9;color:#222;font-size:18px}
+header{background:#1f3b57;color:#fff;padding:14px 18px}h1{margin:0;font-size:24px}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 18px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 4px #0002}
+button,input{font-size:18px;padding:8px 12px;border-radius:8px;border:1px solid #bbb;background:#fff}
+button.on{background:#1f3b57;color:#fff}
+#cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;padding:12px 18px}
+.card{background:#fff;border-radius:10px;padding:10px 14px;box-shadow:0 1px 3px #0002}.card b{font-size:22px}
+.card small{color:#555;display:block;font-size:15px}.up{color:#b33}.dn{color:#2563a8}
+#chart{padding:0 6px}.note{font-size:14px;color:#555;padding:8px 18px 24px}
+</style></head><body>
+<header><h1>Eugene, OR — Environment, Space Weather & Markets</h1><div id="sub" style="font-size:15px;opacity:.85"></div><a href="outlook.html" style="color:#ffd43b;font-size:17px">📋 Today's plain-language outlook →</a></header>
+<div class="ctl">
+<button id="prev">◀ Day</button><input type="date" id="end"><button id="next">Day ▶</button>
+<span id="rng"></span></div>
+<div id="cards"></div><div id="chart"></div>
+<div class="note">Sources: NOAA GHCN (Eugene Airport), ERA5 via Open-Meteo (pressure), GFZ Kp, SILSO sunspots, NASA OMNI solar wind, ephem moon, NOAA CO-OPS 9435380 tides, NWS/IEM alerts, USGS NWIS rivers, EPA AirData PM2.5, ESPN Ducks schedule, BPA/EIA-930 grid, ORNL EAGLE-I outages, USGS quakes (M2.5+ within 500 km), ODOT crashes (2007–2024), Yahoo/FRED markets. Blank = no data (markets closed or outside coverage). "Normal" = average of the same calendar dates across all years with data. Correlation ≠ causation; earlier analysis found no useful link between space/moon/quake variables and weather or markets.</div>
+<script>
+/*DATA*/
+const _q=new URLSearchParams(location.search);const DAY=864e5,t0=Date.parse(D.start+'T00:00:00Z'),N=D.n;
+const iso=i=>new Date(t0+i*DAY).toISOString().slice(0,10);
+const idx=s=>Math.round((Date.parse(s+'T00:00:00Z')-t0)/DAY);
+const ranges={'7d':7,'30d':30,'90d':90,'6mo':182,'12mo':365};let span=+(_q.get('span')||30),end=_q.get('end')?Math.round((Date.parse(_q.get('end')+'T00:00:00Z')-Date.parse(D.start+'T00:00:00Z'))/864e5):N-1;
+const R=document.getElementById('rng');
+for(const k in ranges){const b=document.createElement('button');b.textContent=k;b.onclick=()=>{span=ranges[k];draw()};b.dataset.s=ranges[k];R.appendChild(b)}
+const E=document.getElementById('end');E.min=D.start;E.max=iso(N-1);
+E.onchange=()=>{const i=idx(E.value);if(i>=0&&i<N){end=i;draw()}};
+document.getElementById('prev').onclick=()=>{end=Math.max(span,end-1);draw()};
+document.getElementById('next').onclick=()=>{end=Math.min(N-1,end+1);draw()};
+const mean=(c,a,b)=>{let s=0,n=0;for(let i=Math.max(0,a);i<=b;i++){const v=D[c][i];if(v!=null){s+=v;n++}}return n?s/n:null};
+// normal: same calendar dates (month-day) across all years
+function normal(c,a,b){let s=0,n=0;const md=new Set();for(let i=a;i<=b;i++)md.add(iso(i).slice(5));
+ for(let i=0;i<N;i++){const v=D[c][i];if(v!=null&&md.has(iso(i).slice(5))){s+=v;n++}}return n?s/n:null}
+const CARDS=[['tmax_F','Avg high','°F',1],['tmin_F','Avg low','°F',1],['prcp_in','Avg daily rain','in',2],['pressure_msl_hPa_era5','Avg pressure','hPa',1],['kp_max','Avg max Kp','',2],['sunspot_n','Avg sunspots','',0],['eq_500km_M2.5plus','Local quakes/day','',2],['crashes_all_6cty','Crashes/day (6 cty)','',1],['daylight_hours','Daylight','h',2],['river_willamette_harrisburg_cfs','Willamette flow','cfs',0],['pm25_epa_lane_mean','PM2.5 (EPA)','µg/m³',1],['nws_alerts_any','NWS alerts/day','',2],['outage_lane_cust_out_peak','Lane peak cust. out','',0],['bpa_ba_load_avg_MW','BPA load','MW',0],['fin_sp500_close','S&P 500 avg','',0]];
+const f=(v,d)=>v==null?'—':v.toFixed(d);
+function draw(){
+ const a=Math.max(0,end-span+1),b=end;E.value=iso(b);
+ document.querySelectorAll('#rng button').forEach(x=>x.classList.toggle('on',+x.dataset.s==span));
+ document.getElementById('sub').textContent=`Window: ${iso(a)} → ${iso(b)} (${span} days)  ·  data ${D.start} → ${iso(N-1)}`;
+ let h='';for(const [c,l,u,d] of CARDS){const m=mean(c,a,b),p=mean(c,a-span,a-1),nm=c.startsWith('fin_')?null:normal(c,a,b);
+  const dl=(x,y)=>x==null||y==null?'':`<span class="${x>=y?'up':'dn'}">${x>=y?'▲':'▼'} ${f(Math.abs(x-y),d)}</span>`;
+  h+=`<div class="card">${l}<br><b>${f(m,d)} ${u}</b><small>prev ${span}d: ${f(p,d)} ${dl(m,p)}</small><small>normal: ${f(nm,d)} ${dl(m,nm)}</small></div>`}
+ document.getElementById('cards').innerHTML=h;
+ const x=[],sl=c=>D[c].slice(a,b+1);for(let i=a;i<=b;i++)x.push(iso(i));
+ const T=(c,name,ax,o={})=>Object.assign({x,y:sl(c),name,yaxis:ax,type:'scatter',mode:span<=31?'lines+markers':'lines',connectgaps:false},o);
+ const tr=[T('tmax_F','High °F','y',{line:{color:'#d9480f'}}),T('tmin_F','Low °F','y',{line:{color:'#1c7ed6'}}),T('prcp_in','Rain in','y2',{type:'bar',marker:{color:'#228be6'}}),
+ T('pressure_msl_hPa_era5','Pressure hPa','y3',{line:{color:'#495057'}}),
+ T('kp_max','Max Kp','y4',{type:'bar',marker:{color:'#ae3ec9'}}),T('sunspot_n','Sunspots','y5',{line:{color:'#f59f00'}}),T('sw_speed_kms','Solar wind km/s','y5',{line:{color:'#e64980',dash:'dot'}}),
+ T('moon_illum','Moon illum (0-1)','y6',{line:{color:'#868e96'}}),T('tide_range_ft','Tide range ft','y7',{line:{color:'#0ca678'}}),
+ T('eq_500km_M2.5plus','Local quakes M2.5+','y8',{type:'bar',marker:{color:'#795548'}}),
+ T('crashes_all_6cty','Crashes (6 cty)','y9',{line:{color:'#c92a2a'}}),T('crashes_lane','Crashes (Lane)','y9',{line:{color:'#ff8787'}}),
+ T('daylight_hours','Daylight h','y10',{line:{color:'#fab005'}}),T('sunset_hour_local','Sunset hour','y11',{line:{color:'#e8590c',dash:'dot'}}),
+ T('river_willamette_harrisburg_cfs','Willamette @Harrisburg cfs','y12',{line:{color:'#1971c2'}}),T('river_mckenzie_vida_cfs','McKenzie @Vida cfs','y12',{line:{color:'#66d9e8'}}),
+ T('nws_alerts_any','NWS alerts active','y13',{type:'bar',marker:{color:'#f03e3e'}}),T('ev_ducks_fb_home','Ducks FB home game','y13',{type:'bar',marker:{color:'#2f9e44'}}),T('ev_us_holiday','US holiday','y13',{type:'bar',marker:{color:'#7950f2'}}),
+ T('pm25_epa_lane_mean','PM2.5 EPA Lane','y14',{line:{color:'#5c3d2e'}}),T('pm25_ugm3_cams','PM2.5 model (2022+)','y14',{line:{color:'#a5735a',dash:'dot'}}),
+ T('bpa_ba_load_avg_MW','BPA load MW','y15',{line:{color:'#343a40'}}),T('bpa_hydro_gen_avg_MW','BPA hydro MW','y15',{line:{color:'#1c7ed6'}}),T('bpa_wind_gen_avg_MW','BPA wind MW','y15',{line:{color:'#37b24d'}}),
+ T('outage_lane_cust_out_peak','Lane cust. out (peak)','y16',{type:'bar',marker:{color:'#e03131'}}),T('outage_region_cust_out_peak','Region cust. out (peak)','y16',{line:{color:'#fd7e14'}}),
+ T('fin_sp500_close','S&P 500','y17',{line:{color:'#2b8a3e'}}),T('fin_gold_usd_oz','Gold $/oz','y17',{line:{color:'#b08900'}}),T('fin_dxy','Dollar idx ×50','y17',{y:sl('fin_dxy').map(v=>v==null?null:v*50),line:{color:'#364fc7'}})];
+ const P=[['Temp °F','Rain in'],['Pressure hPa'],['Kp','Sunspots / wind'],['Moon illum','Tide ft'],['Quakes'],['Crashes'],['Daylight h','Sunset hr'],['River cfs'],['Alerts / events'],['PM2.5 µg/m³'],['BPA grid MW'],['Power outages'],['Markets']];
+ const L={height:Math.max(1300,P.length*170),margin:{l:70,r:70,t:20,b:40},font:{size:15},legend:{orientation:'h',y:-0.03},hovermode:'x unified',showlegend:true,barmode:'overlay',xaxis:{type:'date',anchor:'y17'}};
+ const n=P.length,g=0.03,hgt=(1-g*(n-1))/n;let k=1;
+ P.forEach((p,j)=>{const top=1-j*(hgt+g),dom=[top-hgt,top];
+  L['yaxis'+(k==1?'':k)]={domain:dom,title:{text:p[0],font:{size:14}}};const primary=k;k++;
+  if(p[1]){L['yaxis'+k]={domain:dom,overlaying:'y'+(primary==1?'':primary),side:'right',title:{text:p[1],font:{size:14}}};k++}});
+ // map traces to axes: y1 temp,y2 rain,y3 pres,y4 kp,y5 sun,y6 moon,y7 tide,y8 quake,y9 crash,y10 mkts
+ // fix: x axis anchored to last; axis names with k scheme match order above
+ Plotly.react('chart',tr,L,{responsive:true,displaylogo:false});
+}
+draw();
+</script></body></html>

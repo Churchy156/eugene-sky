@@ -1,0 +1,46 @@
+name: Update data & deploy site
+on:
+  schedule:
+    - cron: '17 */3 * * *'   # every 3 hours at :17 UTC
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: update
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TZ: America/Los_Angeles
+      TRIPCHECK_KEY: ${{ secrets.TRIPCHECK_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12', cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Incremental data update
+        run: python update.py
+      - name: Build dashboard
+        run: python make_dash.py site/index.html
+      - name: Daily outlook page
+        run: python render_outlook.py || echo "outlook failed (non-fatal)"
+      - name: Commit updated dataset
+        run: |
+          git config user.name "eugene-sky-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/eugene_env_daily.csv.gz reports/ || true
+          git diff --cached --quiet || git commit -m "data update $(date +'%Y-%m-%d %H:%M %Z')"
+          git push || echo "push failed (non-fatal)"
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: site }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: '${{ steps.d.outputs.page_url }}' }
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4

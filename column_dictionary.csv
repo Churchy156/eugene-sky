@@ -1,0 +1,102 @@
+column,description,first,last,pct_days_nonblank
+tmax_F,"Daily max temp °F, Eugene Airport USW00024221 (NOAA GHCN-D)",1950-01-01,2026-10-09,100.0
+tmin_F,"Daily min temp °F, GHCN-D",1950-01-01,2026-10-09,100.0
+prcp_in,"Precip inches, GHCN-D",1950-01-01,2026-10-09,100.0
+snow_in,"Snowfall inches, GHCN-D",1950-01-01,2026-10-09,72.2
+wind_avg_mph,"Avg wind mph, GHCN-D",1984-01-01,2026-10-09,55.7
+kp_max,Max 3-hr Kp (GFZ Potsdam),1950-01-01,2026-10-12,100.0
+kp_sum,Sum of 8 Kp values,1950-01-01,2026-10-12,100.0
+Ap,Daily Ap (GFZ),1950-01-01,2026-10-12,100.0
+F107_adj,"F10.7 solar radio flux, adjusted (sfu)",1950-01-01,2026-10-12,98.2
+sunspot_n,Daily total sunspot number (SILSO),1950-01-01,2026-09-30,100.0
+flares_C,"GOES C-class flare count (NOAA NGDC), 1975-09..2016",1975-09-01,2016-12-31,53.8
+flares_M,GOES M-class flare count,1975-09-01,2016-12-31,53.8
+flares_X,GOES X-class flare count,1975-09-01,2016-12-31,53.8
+eq_global_M6plus,"Count of global M6+ quakes (USGS, UTC day)",1950-01-01,2026-10-12,100.0
+eq_global_maxmag,Max global M6+ magnitude (blank=none),1950-01-02,2026-10-12,28.6
+eq_500km_M2.5plus,"Count M2.5+ within 500 km of Eugene (USGS, PT day)",1950-01-01,2026-10-12,100.0
+eq_500km_maxmag,Max mag of those (blank=none),1950-01-14,2026-10-12,40.3
+moon_illum,Moon illuminated fraction at ~noon PT (ephem),1950-01-01,2026-10-12,100.0
+moon_age_days,Days since new moon,1950-01-01,2026-10-12,100.0
+moon_phase,Named phase,1950-01-01,2026-10-12,100.0
+tide_high_ft,"Highest observed high water, ft MLLW, NOAA 9435380 South Beach",1979-06-01,2026-08-31,61.2
+tide_low_ft,"Lowest observed low water, ft MLLW",1979-05-31,2026-08-31,61.2
+tide_range_ft,High minus low,1979-06-01,2026-08-31,61.2
+sw_Bz_gsm_nT,Daily mean IMF Bz GSM nT (NASA OMNI),1963-11-27,2026-09-18,72.4
+sw_B_nT,Daily mean |B| nT (OMNI),1963-11-27,2026-09-18,72.4
+sw_speed_kms,Solar wind speed km/s (OMNI),1963-11-27,2026-09-29,72.6
+sw_density_cc,Proton density /cc (OMNI),1963-11-27,2026-09-29,70.0
+pressure_msl_hPa_era5,Mean sea-level pressure hPa (ERA5 reanalysis via Open-Meteo),1950-01-01,2026-10-12,100.0
+surface_pressure_hPa_era5,Mean surface pressure hPa (ERA5),1950-01-01,2026-10-12,100.0
+rh_mean_pct_era5,Mean relative humidity % (ERA5),1950-01-01,2026-10-12,100.0
+wind_max_mph_era5,Max 10 m wind mph (ERA5),1950-01-01,2026-10-12,100.0
+solar_rad_MJm2_era5,Shortwave radiation sum MJ/m² (ERA5),1950-01-01,2026-10-12,100.0
+pm25_ugm3_cams,Daily mean PM2.5 µg/m³ (CAMS model via Open-Meteo),2022-08-03,2026-10-12,5.5
+us_aqi_max_cams,Daily max US AQI (CAMS model),2022-08-04,2026-10-12,5.5
+uv_index_max_cams,Daily max UV index (CAMS model),2022-08-03,2026-10-12,5.5
+fin_sp500_close,S&P 500 index close — Yahoo ^GSPC. Blank on market-closed days.,1950-01-03,2026-10-12,68.9
+fin_dow_close,Dow Jones Industrial Avg close — Yahoo ^DJI. Blank on market-closed days.,1992-01-02,2026-10-12,31.2
+fin_nasdaq_comp,Nasdaq Composite close — FRED NASDAQCOM. Blank on market-closed days.,1971-02-05,2026-10-12,50.1
+fin_gold_usd_oz,"Gold front-month futures settle, USD/oz — Yahoo GC=F (COMEX futures, not spot). Blank on market-closed days.",2000-08-30,2026-10-12,23.4
+fin_fed_funds_pct,"Effective federal funds rate, % (published 7 days/wk) — FRED DFF. Blank on market-closed days.",1954-07-01,2026-10-08,94.1
+fin_ust10y_pct,"10-yr Treasury constant-maturity yield, % — FRED DGS10. Blank on market-closed days.",1962-01-02,2026-10-08,57.7
+fin_dxy,ICE US Dollar Index (DXY) — Yahoo DX-Y.NYB. Blank on market-closed days.,1971-01-04,2026-10-12,50.5
+fin_usd_broad_idx,Fed nominal broad dollar index (Jan2006=100) — FRED DTWEXBGS. Blank on market-closed days.,2006-01-02,2026-10-02,18.6
+fin_usd_major_idx_old,Fed major-currencies dollar index (discontinued 2019) — FRED DTWEXM. Blank on market-closed days.,1973-01-02,2019-12-31,42.2
+fin_usd_per_eur,USD per 1 EUR — FRED DEXUSEU. Blank on market-closed days.,1999-01-04,2026-10-02,24.8
+fin_jpy_per_usd,JPY per 1 USD — FRED DEXJPUS. Blank on market-closed days.,1971-01-04,2026-10-02,49.8
+fin_usd_per_gbp,USD per 1 GBP — FRED DEXUSUK. Blank on market-closed days.,1971-01-04,2026-10-02,49.9
+fin_cny_per_usd,CNY per 1 USD — FRED DEXCHUS. Blank on market-closed days.,1981-01-02,2026-10-02,40.7
+fin_cad_per_usd,CAD per 1 USD — FRED DEXCAUS. Blank on market-closed days.,1971-01-04,2026-10-02,49.9
+fin_mxn_per_usd,MXN per 1 USD — FRED DEXMXUS. Blank on market-closed days.,1993-11-08,2026-10-02,29.4
+ret_sp500_close,Log return vs previous available observation of fin_sp500_close,1950-01-04,2026-10-12,68.9
+ret_dow_close,Log return vs previous available observation of fin_dow_close,1992-01-03,2026-10-12,31.2
+ret_nasdaq_comp,Log return vs previous available observation of fin_nasdaq_comp,1971-02-08,2026-10-12,50.1
+ret_gold_usd_oz,Log return vs previous available observation of fin_gold_usd_oz,2000-08-31,2026-10-12,23.4
+ret_fed_funds_pct,Daily change in percentage points vs previous available observation of fin_fed_funds_pct,1954-07-02,2026-10-08,94.1
+ret_ust10y_pct,Daily change in percentage points vs previous available observation of fin_ust10y_pct,1962-01-03,2026-10-08,57.7
+ret_dxy,Log return vs previous available observation of fin_dxy,1971-01-05,2026-10-12,50.5
+ret_usd_broad_idx,Log return vs previous available observation of fin_usd_broad_idx,2006-01-03,2026-10-02,18.5
+ret_usd_major_idx_old,Log return vs previous available observation of fin_usd_major_idx_old,1973-01-03,2019-12-31,42.2
+ret_usd_per_eur,Log return vs previous available observation of fin_usd_per_eur,1999-01-05,2026-10-02,24.8
+ret_jpy_per_usd,Log return vs previous available observation of fin_jpy_per_usd,1971-01-05,2026-10-02,49.8
+ret_usd_per_gbp,Log return vs previous available observation of fin_usd_per_gbp,1971-01-05,2026-10-02,49.9
+ret_cny_per_usd,Log return vs previous available observation of fin_cny_per_usd,1981-01-05,2026-10-02,40.7
+ret_cad_per_usd,Log return vs previous available observation of fin_cad_per_usd,1971-01-05,2026-10-02,49.9
+ret_mxn_per_usd,Log return vs previous available observation of fin_mxn_per_usd,1993-11-09,2026-10-02,29.4
+nws_alerts_any,"Count of NWS watch/warning/advisory events active that day for Eugene zone (ORZ008→ORZ118) or Lane County ORC039, group=any (IEM VTEC archive; zone archive starts 2005-10, county-only events earlier excluded)",2005-10-01,2026-10-12,27.4
+nws_alerts_warning,"Count of NWS watch/warning/advisory events active that day for Eugene zone (ORZ008→ORZ118) or Lane County ORC039, group=warning (IEM VTEC archive; zone archive starts 2005-10, county-only events earlier excluded)",2005-10-01,2026-10-12,27.4
+nws_alerts_winter,"Count of NWS watch/warning/advisory events active that day for Eugene zone (ORZ008→ORZ118) or Lane County ORC039, group=winter (IEM VTEC archive; zone archive starts 2005-10, county-only events earlier excluded)",2005-10-01,2026-10-12,27.4
+nws_alerts_heat,"Count of NWS watch/warning/advisory events active that day for Eugene zone (ORZ008→ORZ118) or Lane County ORC039, group=heat (IEM VTEC archive; zone archive starts 2005-10, county-only events earlier excluded)",2005-10-01,2026-10-12,27.4
+nws_alerts_wind,"Count of NWS watch/warning/advisory events active that day for Eugene zone (ORZ008→ORZ118) or Lane County ORC039, group=wind (IEM VTEC archive; zone archive starts 2005-10, county-only events earlier excluded)",2005-10-01,2026-10-12,27.4
+nws_alerts_flood,"Count of NWS watch/warning/advisory events active that day for Eugene zone (ORZ008→ORZ118) or Lane County ORC039, group=flood (IEM VTEC archive; zone archive starts 2005-10, county-only events earlier excluded)",2005-10-01,2026-10-12,27.4
+nws_alerts_fog,"Count of NWS watch/warning/advisory events active that day for Eugene zone (ORZ008→ORZ118) or Lane County ORC039, group=fog (IEM VTEC archive; zone archive starts 2005-10, county-only events earlier excluded)",2005-10-01,2026-10-12,27.4
+nws_alerts_smoke_airq,"Count of NWS watch/warning/advisory events active that day for Eugene zone (ORZ008→ORZ118) or Lane County ORC039, group=smoke_airq (IEM VTEC archive; zone archive starts 2005-10, county-only events earlier excluded)",2005-10-01,2026-10-12,27.4
+river_willamette_harrisburg_cfs,"USGS NWIS daily mean discharge, cfs (willamette harrisburg)",1950-01-01,2026-10-12,100.0
+river_mckenzie_vida_cfs,"USGS NWIS daily mean discharge, cfs (mckenzie vida)",1950-01-01,2026-10-12,100.0
+river_mckenzie_coburg_cfs,"USGS NWIS daily mean discharge, cfs (mckenzie coburg)",1950-01-01,2026-10-12,49.2
+pm25_epa_lane_mean,"EPA AirData daily PM2.5 µg/m³ (param 88101), mean of Lane County monitors",1999-01-01,2025-12-31,25.3
+pm25_epa_lane_max,Max of Lane County monitors,1999-01-01,2025-12-31,25.3
+fire_smoke_day,"1 if any Lane monitor ≥35.5 µg/m³ (AQI Unhealthy-for-Sensitive+); mostly wildfire smoke in summer/fall, wood smoke in winter",1999-01-01,2025-12-31,25.3
+fire_acres_100mi_year,ANNUAL total acres of fires >1000 ac within 100 mi of Eugene (NIFC perimeter history; no reliable daily dates — same value all year),1950-01-01,2025-12-31,99.0
+ev_us_holiday,"US federal holiday (pandas calendar, applied retroactively)",1950-01-01,2026-10-12,100.0
+ev_ducks_fb_home,Oregon Ducks football home game in Eugene (ESPN schedule API; 2001+),2001-07-01,2026-10-12,32.9
+ev_ducks_mbb_home,Oregon Ducks men's basketball home game in Eugene (ESPN schedule API; 2001+),2001-07-01,2026-10-12,32.9
+ev_uo_in_session_approx,APPROXIMATE UO quarter in session (rule-based: fall ~3 wks after Labor Day–Dec 13; winter 1st Mon Jan +10.5 wks; spring after ~10-day break). Not official calendar.,1950-01-01,2026-10-12,100.0
+ev_4j_break_approx,"APPROXIMATE Eugene 4J school break/summer (rule-based: Dec 21–Jan 3, late-March week, Thanksgiving Wed–Fri, Jun 14–day after Labor Day). Not official calendar.",1950-01-01,2026-10-12,100.0
+sunrise_local,"Sunrise local time Eugene (computed, ephem)",1950-01-01,2026-10-12,100.0
+sunset_local,Sunset local time,1950-01-01,2026-10-12,100.0
+daylight_hours,Hours between sunrise and sunset,1950-01-01,2026-10-12,100.0
+sunset_hour_local,Sunset as decimal hour local time (darkness during PM commute),1950-01-01,2026-10-12,100.0
+dst_in_effect,"1 if Pacific Daylight Time in effect (tz database, historical rules)",1950-01-01,2026-10-12,100.0
+dst_transition_day,"+1 spring-forward day, -1 fall-back day, 0 otherwise",1950-01-01,2026-10-12,100.0
+dst_week_after,1 for the transition day and 6 days after,1950-01-01,2026-10-12,100.0
+resp_ili_pct_oregon_weekly,"CDC ILINet weighted % of outpatient visits for influenza-like illness, Oregon, weekly (Delphi epidata); value repeated for the 7 days of its epiweek (Sun–Sat), not a daily measure",2010-10-03,2025-09-27,19.5
+bpa_ba_load_avg_MW,"BPA balancing-authority load, daily mean MW (BPA BALoad file 2000-2013; EIA-930 BPAT demand 2015-07+; gap 2014-mid-2015)",2000-01-01,2026-10-12,32.9
+bpa_hydro_gen_avg_MW,"BPAT net generation from hydro (thermal = coal+gas+nuclear+other), daily mean MW, EIA-930 (2018-07+ fuel detail; earlier mostly blank)",2018-07-01,2026-10-12,10.8
+bpa_wind_gen_avg_MW,"BPAT net generation from wind (thermal = coal+gas+nuclear+other), daily mean MW, EIA-930 (2018-07+ fuel detail; earlier mostly blank)",2018-07-01,2026-10-12,10.8
+bpa_solar_gen_avg_MW,"BPAT net generation from solar (thermal = coal+gas+nuclear+other), daily mean MW, EIA-930 (2018-07+ fuel detail; earlier mostly blank)",2018-07-01,2026-10-12,10.8
+bpa_thermal_gen_avg_MW,"BPAT net generation from thermal (thermal = coal+gas+nuclear+other), daily mean MW, EIA-930 (2018-07+ fuel detail; earlier mostly blank)",2018-07-01,2026-10-12,10.8
+outage_lane_cust_out_peak,"Peak customers without power in Lane County that day (ORNL EAGLE-I; utility coverage grew 2014-2018 so early years undercount, all reporting utilities incl. EWEB/Pacific Power/coops; 15-min snapshots)",2014-11-01,2025-12-31,14.5
+outage_lane_cust_hours,Approx customer-hours out in Lane County (sum of 15-min snapshots × 0.25 h),2014-11-01,2025-12-31,14.5
+outage_region_cust_out_peak,"Peak simultaneous customers out across Lane, Linn, Benton, Douglas, Lincoln, Marion, Polk, Coos, Deschutes, Yamhill, Jefferson, Klamath counties (EAGLE-I)",2014-11-01,2025-12-31,14.5

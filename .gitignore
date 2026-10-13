@@ -1,0 +1,9 @@
+.tripcheck_key
+*.key
+.env
+raw/
+site/
+__pycache__/
+.venv/
+site_update_log.txt
+*.xlsx
