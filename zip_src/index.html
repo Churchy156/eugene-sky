@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="mapx.js"></script>
+<script src="relay.js"></script><script src="mapx.js"></script>
 <style>
 body{font-family:system-ui,sans-serif;margin:0;background:#0f1720;color:#e6edf3}
 header{padding:12px 16px;background:#16212d;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -110,7 +110,7 @@ async function load(zip){
 }
 async function loadLL(lat,lon,label){
  st('Looking up your area…');let name=label||'Selected location',state='';
- try{const a=await J(`https://geo.fcc.gov/api/census/area?lat=${lat}&lon=${lon}&format=json`);const r=a.results[0];state=r.state_code;name=(label||'📍 My location')+' · '+r.county_name}catch(e){}
+ try{const a=await J(`https://geo.fcc.gov/api/census/area?lat=${lat}&lon=${lon}&format=json`);const r=a.results[0];state=r.state_code;name=(label||'📍 My location')}catch(e){}
  setLoc({lat,lon,name,state,zip:''});history.replaceState(null,'','#'+lat.toFixed(4)+','+lon.toFixed(4));start()}
 function geo(){if(!navigator.geolocation)return st('Location not supported in this browser.');st('Waiting for location permission…');
  navigator.geolocation.getCurrentPosition(p=>loadLL(p.coords.latitude,p.coords.longitude),e=>st('Location unavailable: '+e.message),{enableHighAccuracy:false,timeout:15000})}

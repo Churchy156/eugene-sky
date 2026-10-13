@@ -16,8 +16,8 @@ def get(u):
         except Exception: pass
     return {'events': []}
 def fetch(lg, path, g, ds):
-    e = get(f'https://site.api.espn.com/apis/site/v2/sports/{path}/scoreboard?dates={ds}&limit=1000{g}').get('events', [])
-    if len(ds) == 6 and len(e) >= 900:  # month capped: split into days
+    e = get(f'https://site.api.espn.com/apis/site/v2/sports/{path}/scoreboard?dates={ds}&limit=500{g}').get('events', [])
+    if len(ds) == 6 and (len(e) >= 450 or lg == 'CFB'):  # CFB month view only returns week 1  # month capped: split into days
         y, m = int(ds[:4]), int(ds[4:]); d = dt.date(y, m, 1); e = []
         while d.month == m: e += fetch(lg, path, g, d.strftime('%Y%m%d')); d += dt.timedelta(1)
     return e

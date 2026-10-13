@@ -1,0 +1,29 @@
+name: Live traffic relay (every 10 min)
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: live-traffic
+  cancel-in-progress: true
+jobs:
+  traffic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      TRIPCHECK_KEY: ${{ secrets.TRIPCHECK_KEY }}
+      FEED_TIMEOUT: '20'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Fetch feeds (keys stay server-side)
+        run: python zip_tools/build_traffic.py /tmp/out
+      - name: Publish to orphan 'live' branch (read via raw.githubusercontent.com, CORS *)
+        run: |
+          cd /tmp/out
+          git init -q -b live && git config user.name eugene-sky-bot && git config user.email actions@users.noreply.github.com
+          git add -A && git commit -qm "live traffic $(date -u +%FT%TZ)"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" live

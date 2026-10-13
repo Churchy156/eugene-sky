@@ -3,7 +3,7 @@ import json, os, urllib.request
 import pandas as pd
 import shutil
 OUT = 'site/zip'; os.makedirs(OUT, exist_ok=True)
-for f in ('index.html', 'radar.html', 'mapx.js', 'extra.js'): shutil.copy(f'zip_src/{f}', f'{OUT}/{f}')
+for f in ('index.html', 'radar.html', 'mapx.js', 'extra.js', 'relay.js'): shutil.copy(f'zip_src/{f}', f'{OUT}/{f}')
 shutil.copytree('zip_src/data', f'{OUT}/data', dirs_exist_ok=True)
 import subprocess, sys
 if not os.environ.get('SKIP_TRAFFIC'): subprocess.run([sys.executable, 'zip_tools/build_traffic.py', f'{OUT}/data'], check=False)

@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Radar · satellite · traffic</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="mapx.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="relay.js"></script><script src="mapx.js"></script>
 <style>html,body{margin:0;height:100%;background:#0f1720;color:#e6edf3;font:12px system-ui}#m{height:calc(100% - 34px)}#n{padding:4px 8px;height:26px;overflow:auto}</style></head>
 <body><div id="m"></div><div id="n"></div><script>
 const q=new URLSearchParams(location.search),lat=+(q.get('lat')||44.05),lon=+(q.get('lon')||-123.09),st=q.get('st')||'OR',z=+(q.get('z')||8);
