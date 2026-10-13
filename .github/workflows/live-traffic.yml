@@ -11,11 +11,13 @@ concurrency:
 jobs:
   traffic:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 9
     env:
       TRIPCHECK_KEY: ${{ secrets.TRIPCHECK_KEY }}
       FEED_TIMEOUT: '20'
       FIRMS_MAP_KEY: ${{ secrets.FIRMS_MAP_KEY }}
+      OPENSKY_CLIENT_ID: ${{ secrets.OPENSKY_CLIENT_ID }}
+      OPENSKY_CLIENT_SECRET: ${{ secrets.OPENSKY_CLIENT_SECRET }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -24,9 +26,17 @@ jobs:
         run: |
           python zip_tools/build_traffic.py /tmp/out
           python zip_tools/build_live_extra.py /tmp/out || true
+          python zip_tools/build_aircraft.py /tmp/out || true
       - name: Publish to orphan 'live' branch (read via raw.githubusercontent.com, CORS *)
         run: |
           cd /tmp/out
           git init -q -b live && git config user.name eugene-sky-bot && git config user.email actions@users.noreply.github.com
           git add -A && git commit -qm "live traffic $(date -u +%FT%TZ)"
           git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" live
+      - name: Refresh aircraft 3 more times (~every 2.5 min; ~2300 OpenSky credits/day)
+        run: |
+          for i in 1 2 3; do
+            sleep 140
+            python zip_tools/build_aircraft.py /tmp/out || continue
+            cd /tmp/out && git add -A && git commit -q --amend -m "live $(date -u +%FT%TZ)" && git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" live; cd - >/dev/null
+          done
