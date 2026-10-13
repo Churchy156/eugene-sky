@@ -9,7 +9,7 @@ Sky.map=function(map,LC){const g=n=>Sky.L[n]=L.layerGroup();
  const gibs=(id,lvl,ext,lab)=>{const l=L.tileLayer(`https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/${id}/default/${yday()}/GoogleMapsCompatible_Level${lvl}/{z}/{y}/{x}.${ext}`,{maxNativeZoom:lvl,maxZoom:18,opacity:.75,attribution:'NASA GIBS'});LC.addOverlay(l,'🛰 NASA '+lab+' ('+yday()+')')};
  gibs('MODIS_Terra_CorrectedReflectance_TrueColor',9,'jpg','MODIS true color');gibs('VIIRS_SNPP_CorrectedReflectance_TrueColor',9,'jpg','VIIRS true color');
  gibs('MODIS_Combined_Value_Added_AOD',6,'png','aerosol (smoke/dust)');gibs('MODIS_Terra_NDSI_Snow_Cover',8,'png','snow cover');gibs('VIIRS_SNPP_DayNightBand_At_Sensor_Radiance',8,'png','night lights');
- Sky.L['🔥 Fire hotspots (NASA FIRMS, 24 h)'].addTo(map);Sky.L['✈️ Live aircraft']=MapX.aircraft(map,LC,$('skyAir'));Sky.L['✈️ Live aircraft'].addTo(map);};
+ Sky.L['🔥 Fire hotspots (NASA FIRMS, 24 h)'].addTo(map);Sky.L['✈️ Live aircraft']=MapX.aircraft(map,LC,$('skyAir'));Sky.L['✈️ Live aircraft'].addTo(map);MapX.sats(map,LC,$('skyAir'));};
 Sky.planes=()=>{};
 Sky.load=async function(){const {lat,lon}=LOC;Object.entries(Sky.L).forEach(([k,l])=>{if(!/aircraft/.test(k))l.clearLayers()});clearInterval(Sky.T.p);clearInterval(Sky.T.i);clearInterval(Sky.T.f);
  $('skyAirFrame').src=`https://globe.adsb.lol/?lat=${lat.toFixed(3)}&lon=${lon.toFixed(3)}&zoom=9&hideSidebar&hideButtons`;

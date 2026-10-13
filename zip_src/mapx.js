@@ -100,3 +100,64 @@ MapX.aircraft=function(map,LC,statusEl){
   busy=false};
  map.on('moveend',load);map.on('overlayadd layeradd',e=>{if(e.layer===lay)load()});map.on('layerremove',e=>{if(e.layer===lay)lay.clearLayers()});
  clearInterval(t);t=setInterval(load,20000);return lay};
+// Overhead layers: satellites (CelesTrak OMM cached on live branch, SGP4 in-browser via satellite.js), terminator, aurora oval, visible passes.
+MapX.sats=function(map,LC,statusEl){
+ const RAW='https://raw.githubusercontent.com/Churchy156/eugene-sky/live/sats/',CT='https://celestrak.org/NORAD/elements/gp.php?FORMAT=json&GROUP=';
+ let el=null;if(statusEl){el=document.createElement('div');el.style.cssText='font:12px system-ui;margin-top:4px';statusEl.after(el)}
+ const say=(k,h)=>{if(!el)return;MapX._ss=MapX._ss||{};MapX._ss[k]=h;el.innerHTML=Object.values(MapX._ss).filter(Boolean).join('<br>')};
+ const lib=()=>window.satellite?Promise.resolve():(MapX._satLib=MapX._satLib||new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://unpkg.com/satellite.js@6.0.0/dist/satellite.min.js';s.onload=ok;s.onerror=no;document.head.appendChild(s)}));
+ const cache={},grp=g=>cache[g]=cache[g]||fetch(RAW+g+'.json?t='+Math.floor(Date.now()/3.6e6)).then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>fetch(CT+g).then(r=>r.json()))
+   .then(a=>a.map(o=>{try{return{n:o.OBJECT_NAME,id:o.NORAD_CAT_ID,ep:o.EPOCH,r:satellite.json2satrec(o)}}catch(e){return null}}).filter(Boolean));
+ const R=L.canvas({padding:.2}),D2R=Math.PI/180;
+ const pos=(s,d)=>{const p=satellite.propagate(s.r,d);if(!p||!p.position)return null;const g=satellite.eciToGeodetic(p.position,satellite.gstime(d)),v=p.velocity;
+  return{lat:satellite.degreesLat(g.latitude),lon:satellite.degreesLong(g.longitude),alt:g.height,v:Math.hypot(v.x,v.y,v.z),eci:p.position}};
+ const info=(s,p,tag)=>`<b>${MapX.esc(s.n)}</b> · ${tag}<br>NORAD ${s.id} · alt ${Math.round(p.alt)} km (${Math.round(p.alt*0.6214)} mi) · ${p.v.toFixed(2)} km/s (${Math.round(p.v*2237)} mph)<br>${p.lat.toFixed(2)}°, ${p.lon.toFixed(2)}° · elements ${MapX.esc((s.ep||'').slice(0,16))}Z`;
+ const mkSat=(name,groups,o)=>{const lay=L.layerGroup();LC.addOverlay(lay,name);let t=null,list=null,mk=new Map();
+  const tick=async()=>{if(!map.hasLayer(lay))return;try{await lib();if(!list){say(name,name+': loading elements…');list=(await Promise.all(groups.map(grp))).flat()}
+   const d=new Date(),b=map.getBounds().pad(.1);let shown=0,tot=0;const seen=new Set();
+   for(const s of list){const p=pos(s,d);if(!p||isNaN(p.lat))continue;tot++;let m=mk.get(s.id);
+    const inb=b.contains([p.lat,p.lon])&&shown<o.cap;if(!inb){if(m){lay.removeLayer(m);mk.delete(s.id)}continue}shown++;seen.add(s.id);
+    if(!m){m=L.circleMarker([p.lat,p.lon],{renderer:R,radius:o.r,color:o.c,weight:o.w||0,fillColor:o.c,fillOpacity:.9}).addTo(lay);if(o.label)m.bindTooltip(s.n.replace(/\s*\(.*\)/,''),{permanent:true,direction:'right',className:'',offset:[6,0]});mk.set(s.id,m)}
+    else m.setLatLng([p.lat,p.lon]);m._s=s;m.bindPopup(()=>{const q=pos(m._s,new Date());return info(m._s,q,name)})}
+   if(o.track)o.track(list,d);
+   say(name,`${name}: <b>${tot}</b> tracked, ${shown} drawn in view${shown>=o.cap?' (cap '+o.cap+')':''} · SGP4 every ${o.dt/1000}s`)}catch(e){say(name,name+': load error '+MapX.esc(e.message||e))}};
+  map.on('overlayadd layeradd',e=>{if(e.layer===lay){tick();clearInterval(t);t=setInterval(tick,o.dt)}});
+  map.on('layerremove',e=>{if(e.layer===lay){clearInterval(t);lay.clearLayers();mk.clear();say(name,'')}});map.on('moveend',tick);return lay};
+ const L1=mkSat('🛰️ Starlink',['starlink'],{cap:4000,r:2,c:'#e6edf3',dt:8000});
+ const trk=L.layerGroup();
+ const L2=mkSat('🚀 ISS + Tiangong',['stations'],{cap:60,r:5,c:'#f2cc60',w:1,dt:5000,label:1,track:(list,d)=>{if(d-(trk._t||0)<60000&&trk.getLayers().length)return;trk._t=+d;trk.clearLayers();
+   list.filter(s=>/^ISS \(ZARYA\)|^CSS \(TIANHE\)/.test(s.n)).forEach(s=>{let seg=[],last=null;const segs=[];
+    for(let m=-45;m<=95;m+=1){const p=pos(s,new Date(+d+m*6e4));if(!p)continue;if(last!=null&&Math.abs(p.lon-last)>180){segs.push(seg);seg=[]}seg.push([p.lat,p.lon]);last=p.lon}segs.push(seg);
+    segs.forEach(g=>L.polyline(g,{color:/ISS/.test(s.n)?'#f2cc60':'#ff7b72',weight:1.5,opacity:.8,dashArray:'4 4',interactive:false}).addTo(trk))});trk.addTo(L2)}});
+ mkSat('🧭 GPS/GNSS sats',['gps-ops','glo-ops','galileo','beidou'],{cap:400,r:3,c:'#3fb950',dt:10000});
+ mkSat('🌦️ Weather sats (NOAA/GOES/etc)',['weather','goes'],{cap:300,r:3.5,c:'#58a6ff',dt:10000});
+ // Day/night terminator
+ const term=L.layerGroup();LC.addOverlay(term,'🌗 Day/night');
+ const sun=d=>{const n=(d/864e5)+2440587.5-2451545,Lm=(280.46+.9856474*n)%360,g=(357.528+.9856003*n)*D2R,lam=(Lm+1.915*Math.sin(g)+.02*Math.sin(2*g))*D2R,eps=(23.439-4e-7*n)*D2R;
+  const dec=Math.asin(Math.sin(eps)*Math.sin(lam)),ra=Math.atan2(Math.cos(eps)*Math.sin(lam),Math.cos(lam)),gmst=(18.697374558+24.06570982441908*n)%24*15*D2R;return{dec,ra,gmst,lon:((ra-gmst)/D2R+540)%360-180,lat:dec/D2R}};
+ const drawT=()=>{if(!map.hasLayer(term))return;term.clearLayers();const s=sun(new Date()),pts=[];
+  for(let lo=-180;lo<=180;lo+=2){const la=Math.atan(-Math.cos((lo-s.lon)*D2R)/Math.tan(s.dec))/D2R;pts.push([la,lo])}const pole=s.dec>0?-90:90;
+  L.polygon([[pole,-180],...pts,[pole,180]],{color:'#000',weight:0,fillColor:'#000',fillOpacity:.32,interactive:false}).addTo(term);
+  L.circleMarker([s.lat,s.lon],{radius:7,color:'#ffd33d',fillColor:'#ffd33d',fillOpacity:1}).bindTooltip('☀️ Subsolar point').addTo(term)};
+ map.on('overlayadd layeradd',e=>{if(e.layer===term)drawT()});setInterval(drawT,60000);
+ // Aurora oval (NOAA SWPC OVATION, ~30-90 min forecast)
+ const aur=L.layerGroup();LC.addOverlay(aur,'🌌 Aurora oval');
+ const drawA=async()=>{if(!map.hasLayer(aur))return;try{const j=await fetch('https://services.swpc.noaa.gov/json/ovation_aurora_latest.json').then(r=>r.json());aur.clearLayers();let n=0;
+   j.coordinates.forEach(([lo,la,v])=>{if(v<8)return;n++;lo=lo>180?lo-360:lo;L.rectangle([[la-.5,lo-.5],[la+.5,lo+.5]],{renderer:R,weight:0,fillColor:v>50?'#ff4d6d':v>25?'#f2cc60':'#3fb950',fillOpacity:Math.min(.7,.15+v/80),interactive:false}).addTo(aur)});
+   say('aur',`🌌 Aurora (NOAA OVATION) forecast for ${new Date(j['Forecast Time']).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}: ${n} cells ≥8% probability (green ≥8, yellow ≥25, red ≥50)`)}catch(e){say('aur','🌌 Aurora load error')}};
+ map.on('overlayadd layeradd',e=>{if(e.layer===aur)drawA()});map.on('layerremove',e=>{if(e.layer===aur)say('aur','')});setInterval(drawA,15*60000);
+ // Visible passes over the chosen location (map center unless MapX.home set)
+ MapX.passes=async(lat,lon)=>{await lib();const obs={latitude:lat*D2R,longitude:lon*D2R,height:.1},list=[...await grp('stations'),...await grp('visual')],seen=new Set(),out=[],t0=Date.now();
+  const sunEl=d=>{const s=sun(d),H=s.gmst+lon*D2R-s.ra;return Math.asin(Math.sin(lat*D2R)*Math.sin(s.dec)+Math.cos(lat*D2R)*Math.cos(s.dec)*Math.cos(H))/D2R};
+  const lit=(p,d)=>{const s=sun(d),u=[Math.cos(s.dec)*Math.cos(s.ra),Math.cos(s.dec)*Math.sin(s.ra),Math.sin(s.dec)],r=p.eci,dot=r.x*u[0]+r.y*u[1]+r.z*u[2];if(dot>0)return true;return Math.hypot(r.x-dot*u[0],r.y-dot*u[1],r.z-dot*u[2])>6371};
+  for(const s of list){if(seen.has(s.id))continue;seen.add(s.id);const bright=/ISS \(ZARYA\)|CSS \(TIANHE\)/.test(s.n);let cur=null;
+   for(let m=0;m<36*60;m+=1){const d=new Date(t0+m*6e4),p=satellite.propagate(s.r,d);if(!p||!p.position)break;const la=satellite.ecfToLookAngles(obs,satellite.eciToEcf(p.position,satellite.gstime(d))),el=la.elevation/D2R;
+    if(el>10&&sunEl(d)<-6&&lit({eci:p.position},d)){if(!cur)cur={s,start:d,max:el,az:la.azimuth/D2R};else if(el>cur.max){cur.max=el}cur.end=d}else if(cur){out.push(cur);cur=null;if(!bright)break}}
+   if(cur)out.push(cur)}
+  out.sort((a,b)=>(b.s.n.match(/ISS|CSS/)?1:0)-(a.s.n.match(/ISS|CSS/)?1:0)||a.start-b.start);const pr=out.filter(x=>/ISS|CSS/.test(x.s.n)).slice(0,6).concat(out.filter(x=>!/ISS|CSS/.test(x.s.n)).sort((a,b)=>a.start-b.start).slice(0,12));
+  const dir=a=>['N','NE','E','SE','S','SW','W','NW'][Math.round(a/45)%8],f=d=>d.toLocaleString([], {weekday:'short',hour:'numeric',minute:'2-digit'});
+  return `<b>🔭 Visible passes, next 36 h</b> near ${lat.toFixed(2)}, ${lon.toFixed(2)}<br><small>sat sunlit, sky dark (sun &lt; −6°), &gt;10° up · 1-min steps</small><table style="font-size:12px">`+
+   (pr.length?pr.map(x=>`<tr><td>${MapX.esc(x.s.n.replace(/\s*\(.*\)/,''))}${/ISS|CSS/.test(x.s.n)?' ⭐':''}</td><td>${f(x.start)}</td><td>${Math.round((x.end-x.start)/6e4)+1} min</td><td>max ${Math.round(x.max)}°, rises ${dir(x.az)}</td></tr>`).join(''):'<tr><td>No visible passes found (daylight or no dark-sky windows).</td></tr>')+'</table>'};
+ const pb=L.layerGroup();LC.addOverlay(pb,'🔭 Visible passes');
+ map.on('overlayadd layeradd',async e=>{if(e.layer!==pb)return;const c=MapX.home||map.getCenter();say('pass','🔭 Computing passes…');try{const h=await MapX.passes(c.lat,c.lng);say('pass','');L.popup({maxWidth:420}).setLatLng(c).setContent(h).openOn(map)}catch(er){say('pass','🔭 pass error '+MapX.esc(er.message||er))}setTimeout(()=>map.removeLayer(pb),50)});
+ return L1};

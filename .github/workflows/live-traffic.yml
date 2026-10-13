@@ -27,6 +27,7 @@ jobs:
           python zip_tools/build_traffic.py /tmp/out
           python zip_tools/build_live_extra.py /tmp/out || true
           python zip_tools/build_aircraft.py /tmp/out || true
+          python zip_tools/build_sats.py /tmp/out || true
       - name: Publish to orphan 'live' branch (read via raw.githubusercontent.com, CORS *)
         run: |
           cd /tmp/out

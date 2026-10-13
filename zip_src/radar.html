@@ -4,7 +4,7 @@
 <body><div class="mxbar" id="bar" style="height:34px"></div><div id="m"></div><div id="n"></div><div id="n2" style="position:absolute;top:44px;left:50px;z-index:900;background:#16212dcc;padding:2px 6px;border-radius:6px"></div><script>
 const q=new URLSearchParams(location.search),lat=+(q.get('lat')||44.05),lon=+(q.get('lon')||-123.09),st=q.get('st')||'OR',z=+(q.get('z')||8);
 const map=L.map('m').setView([lat,lon],z);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(map);
-const lc=L.control.layers(null,{},{collapsed:innerWidth<600}).addTo(map),wx=MapX.weather(map,lon);for(const k in wx)lc.addOverlay(wx[k],k);MapX.aircraft(map,lc,document.getElementById('n2'));MapX.buttons(map,lc,document.getElementById('bar'));
+const lc=L.control.layers(null,{},{collapsed:innerWidth<600}).addTo(map),wx=MapX.weather(map,lon);for(const k in wx)lc.addOverlay(wx[k],k);MapX.aircraft(map,lc,document.getElementById('n2'));MapX.sats(map,lc,document.getElementById('n2'));MapX.buttons(map,lc,document.getElementById('bar'));
 wx['🌧 Radar loop (RainViewer, ~2 h)'].addTo(map);
 MapX.traffic(map,'data/',lat,lon,st,document.getElementById('n')).then(o=>{for(const k in o){lc.addOverlay(o[k],k);if(!/Work/.test(k))o[k].addTo(map)}});
 </script></body></html>
