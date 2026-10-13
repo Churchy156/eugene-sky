@@ -26,6 +26,8 @@ jobs:
         run: python update.py
       - name: Build dashboard
         run: python make_dash.py site/index.html
+      - name: Refresh game schedules (ESPN)
+        run: python zip_tools/build_games.py || echo "games refresh failed (non-fatal)"
       - name: ZIP dashboard prebuilt JSON
         run: python build_zip.py || echo "zip prebuild failed (non-fatal)"
       - name: Daily outlook page
@@ -34,7 +36,7 @@ jobs:
         run: |
           git config user.name "eugene-sky-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/eugene_env_daily.csv.gz reports/ || true
+          git add data/eugene_env_daily.csv.gz reports/ zip_src/data/games.json || true
           git diff --cached --quiet || git commit -m "data update $(date +'%Y-%m-%d %H:%M %Z')"
           git push || echo "push failed (non-fatal)"
       - uses: actions/upload-pages-artifact@v3

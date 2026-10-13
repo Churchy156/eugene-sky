@@ -3,7 +3,10 @@ import json, os, urllib.request
 import pandas as pd
 import shutil
 OUT = 'site/zip'; os.makedirs(OUT, exist_ok=True)
-shutil.copy('zip_src/index.html', f'{OUT}/index.html')
+for f in ('index.html', 'radar.html', 'mapx.js', 'extra.js'): shutil.copy(f'zip_src/{f}', f'{OUT}/{f}')
+shutil.copytree('zip_src/data', f'{OUT}/data', dirs_exist_ok=True)
+import subprocess, sys
+subprocess.run([sys.executable, 'zip_tools/build_traffic.py', f'{OUT}/data'], check=False)
 d = pd.read_csv('data/eugene_env_daily.csv.gz')
 def dump(cols, name, start=None):
     x = d[['date'] + cols].copy()

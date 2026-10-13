@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="mapx.js"></script>
 <style>
 body{font-family:system-ui,sans-serif;margin:0;background:#0f1720;color:#e6edf3}
 header{padding:12px 16px;background:#16212d;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -27,7 +28,7 @@ main{padding:12px 16px;max-width:1300px;margin:auto}
 <span id="per"></span><a href="../" class="small">Eugene dashboard</a></header>
 <main><div id="status">Enter a ZIP code.</div><div id="place"></div>
 <div class="cards" id="cards"></div>
-<div id="map"></div><div class="small">Map layers: toggle in the top-right. Quakes = window shown, 500 km. Fires = current WFIGS perimeters. AQI = Open-Meteo modeled grid.</div>
+<div id="map"></div><div class="small">Map layers: toggle in the top-right; radar loop controls bottom-left. Quakes = window shown, 500 km. Fires = current WFIGS perimeters. AQI = Open-Meteo modeled grid. Traffic within 200 km.</div><div class="small" id="trafNote"></div>
 <div class="grid">
 <div class="panel"><h3>Temperature (°F) vs 1950–last-year normal</h3><canvas id="cT"></canvas></div>
 <div class="panel"><h3>Precipitation (in)</h3><canvas id="cP"></canvas></div>
@@ -40,11 +41,15 @@ main{padding:12px 16px;max-width:1300px;margin:auto}
 <div class="panel"><h3>NWS forecast</h3><div id="fc" class="small">—</div></div>
 <div class="panel"><h3>Active NWS alerts</h3><div id="al" class="small">—</div></div>
 <div class="panel"><h3>Rivers (USGS live)</h3><div id="rv" class="small">—</div></div>
-<div class="panel"><h3>Notes &amp; limits</h3><div class="small">Weather history: Open-Meteo ERA5 reanalysis (1950→ ~5 days ago) + forecast model for recent/future days. Space weather and markets are global (from the Eugene dataset, updated every 3 h). Power outages: no free nationwide live feed (ODIN/poweroutage.us require access/licensing) — not shown. Crash, police and utility data are Eugene-only.</div></div>
+<div class="panel"><h3>Fatal crashes — county (NHTSA FARS 1975+)</h3><canvas id="cFars"></canvas><div id="xFarsN" class="small"></div></div>
+<div class="panel"><h3>Power — utilities &amp; outage history (EAGLE-I 2014+)</h3><div id="xUtil" class="small"></div><canvas id="cPow"></canvas><div id="xPowN" class="small"></div></div>
+<div class="panel"><h3>Game days (college &amp; pro home games ≤50 mi)</h3><canvas id="cGame"></canvas><div id="xGameN" class="small"></div></div>
+<div class="panel"><h3>Police / 911 / 311 / city crashes (open data)</h3><canvas id="cCity"></canvas><div id="xCityN" class="small"></div></div>
+<div class="panel"><h3>Notes &amp; limits</h3><div class="small">Weather history: Open-Meteo ERA5 reanalysis (1950→ ~5 days ago) + forecast model for recent/future days. Space weather and markets are global (from the Eugene dataset, updated every 3 h). Fatal crashes: NHTSA FARS by county 1975–latest release (~18-month lag). Power: EAGLE-I county history 2014–2025; no free nationwide live outage API (poweroutage.us/ODIN), so live status = utility outage-map links. Police/911: only cities with open daily datasets (Seattle, SF, LA, Chicago, NYC, Cincinnati, Austin, New Orleans). ER visits and most fire/EMS logs aren't public. Effects are simple averages, not causal.</div></div>
 </div></main>
 <script>
 const $=id=>document.getElementById(id), PER={'7d':7,'30d':30,'90d':90,'6mo':182,'12mo':365};
-let per='30d', W={}, G={}, LOC=null, charts={}, map, layers={};
+let LC,TRAF=[],per='30d', W={}, G={}, LOC=null, charts={}, map, layers={};
 const iso=d=>d.toISOString().slice(0,10), addD=(s,n)=>{const d=new Date(s+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return iso(d)};
 const st=m=>$('status').textContent=m;
 const J=async u=>{const r=await fetch(u);if(!r.ok)throw new Error(r.status+' '+u);return r.json()};
@@ -73,7 +78,7 @@ async function load(zip){
  W={};a.daily.time.forEach((d,i)=>{const r={};for(const k in a.daily)if(k!='time'&&a.daily[k][i]!=null)r[k]=a.daily[k][i];W[d]=r});
  const today=iso(new Date());f.daily.time.forEach((d,i)=>{const r=W[d]||(W[d]={});for(const k in f.daily)if(k!='time'&&f.daily[k][i]!=null&&r[k]==null)r[k]=f.daily[k][i];if(d>today)r.fc=true});
  if(!$('day').value)$('day').value=iso(new Date());
- initMap();render();live();}catch(e){st('Error: '+e.message)}
+ initMap();render();live();loadExtra();}catch(e){st('Error: '+e.message)}
 }
 const v=(d,k)=>k.startsWith('fin_')?(G.mk[d]||{})[k]:['kp_max','sw_speed_kms','sunspot_n','flares_M','flares_X'].includes(k)?(G.space[d]||{})[k]:(W[d]||{})[k];
 function stats(s,e,k,agg){const a=[];for(let d=s;d<=e;d=addD(d,1)){const x=v(d,k);if(x!=null)a.push(x)}if(!a.length)return null;const t=a.reduce((p,c)=>p+c,0);return agg=='sum'?t:agg=='max'?Math.max(...a):agg=='chg'?a[a.length-1]/a[0]*100-100:t/a.length}
@@ -94,7 +99,7 @@ function render(){ if(!LOC)return;const D=$('day').value,N=PER[per],s=addD(D,1-N
  ch('cK','bar',days,[['Kp max',S('kp_max'),'#a371f7'],['Solar wind',S('sw_speed_kms'),'#ffa65788',0,'y1','line']]);
  ch('cM','line',days,[['Moon %',days.map(moonIllum),'#e6edf3'],['Daylight h',days.map(d=>+daylight(d,LOC.lat).toFixed(2)),'#e3b341',0,'y1']]);
  ch('cF','line',days,[['S&P 500',S('fin_sp500_close'),'#3fb950'],['Gold $/oz',S('fin_gold_usd_oz'),'#e3b341',0,'y1']]);
- tides(s,D);quakes(s,D);
+ tides(s,D);quakes(s,D);if(window.renderExtra)renderExtra(s,D,ps,pe,days);
 }
 function ch(id,type,labels,sets){if(charts[id])charts[id].destroy();const y1=sets.some(x=>x[4]=='y1');
  charts[id]=new Chart($(id),{type,data:{labels,datasets:sets.map(([l,d,c,dash,ax,t])=>({label:l,data:d,borderColor:c,backgroundColor:c,yAxisID:ax||'y',type:t||type,borderDash:dash?[4,4]:[],pointRadius:labels.length>40?0:2,borderWidth:1.5,spanGaps:true}))},
@@ -108,10 +113,12 @@ async function tides(s,D){const near=G.tides.map(t=>[km(LOC.lat,LOC.lon,t[3],t[4
 // --- map ---
 function initMap(){if(!map){map=L.map('map');L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(map);
  ['Earthquakes','NWS alerts','Wildfire perimeters','Air quality (AQI)','River gauges','Tide stations'].forEach(n=>layers[n]=L.layerGroup());
- L.control.layers(null,layers,{collapsed:false}).addTo(map);['Earthquakes','NWS alerts','Wildfire perimeters','Air quality (AQI)','River gauges'].forEach(n=>layers[n].addTo(map))}
- Object.values(layers).forEach(l=>l.clearLayers());map.setView([LOC.lat,LOC.lon],8);if(layers.home)map.removeLayer(layers.home);layers.home=L.marker([LOC.lat,LOC.lon]).addTo(map).bindPopup(LOC.name+' '+LOC.zip);}
+ LC=L.control.layers(null,layers,{collapsed:innerWidth<700}).addTo(map);const wx=MapX.weather(map,LOC.lon);for(const k in wx)LC.addOverlay(wx[k],k);['Earthquakes','NWS alerts','Wildfire perimeters','Air quality (AQI)','River gauges'].forEach(n=>layers[n].addTo(map))}
+ Object.values(layers).forEach(l=>l.clearLayers());map.setView([LOC.lat,LOC.lon],8);if(layers.home)map.removeLayer(layers.home);layers.home=L.marker([LOC.lat,LOC.lon]).addTo(map).bindPopup(LOC.name+' '+LOC.zip);
+ (TRAF||[]).forEach(([k,l])=>{LC.removeLayer(l);map.removeLayer(l)});TRAF=[];
+ MapX.traffic(map,'data/',LOC.lat,LOC.lon,LOC.state,$('trafNote')).then(o=>{for(const k in o){LC.addOverlay(o[k],k);TRAF.push([k,o[k]]);if(!/Work/.test(k))o[k].addTo(map)}});}
 async function quakes(s,D){layers['Earthquakes'].clearLayers();try{const q=await J(`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude=${LOC.lat}&longitude=${LOC.lon}&maxradiuskm=500&minmagnitude=2.5&starttime=${s}&endtime=${addD(D,1)}&limit=2000`);
- const f=q.features;const mx=f.reduce((m,x)=>Math.max(m,x.properties.mag),0);$('eqcard').innerHTML=`<div class="t">Quakes M2.5+ ≤500 km · ${per}</div><div class="v">${f.length}</div><div class="c">largest M${mx.toFixed(1)}</div>`;
+ const f=q.features;const mx=f.reduce((m,x)=>Math.max(m,x.properties.mag),0);$('eqcard').innerHTML=`<div class="t">Quakes M2.5+ ≤500 km · ${per}</div><div class="v">${f.length}</div><div class="c">${f.length?'largest M'+mx.toFixed(1):'none in this window'}</div>`;
  f.forEach(x=>{const[lo,la]=x.geometry.coordinates;L.circleMarker([la,lo],{radius:2+x.properties.mag*2,color:'#f85149',weight:1,fillOpacity:.5}).bindPopup(`M${x.properties.mag} ${x.properties.place}<br>${new Date(x.properties.time).toLocaleString()}`).addTo(layers['Earthquakes'])})}catch(e){$('eqcard').innerHTML+='<div class="c">unavailable</div>'}}
 async function live(){const {lat,lon}=LOC;
  J(`https://api.weather.gov/alerts/active?area=${LOC.state}`).then(a=>{const g=L.geoJSON({type:'FeatureCollection',features:a.features.filter(f=>f.geometry)},{style:f=>({color:/Warning/.test(f.properties.event)?'#f85149':/Watch/.test(f.properties.event)?'#e3b341':'#58a6ff',weight:1,fillOpacity:.2}),onEachFeature:(f,l)=>l.bindPopup(`<b>${f.properties.event}</b><br>${f.properties.headline||''}`)});g.addTo(layers['NWS alerts']);
@@ -129,4 +136,4 @@ async function live(){const {lat,lon}=LOC;
  G.tides.map(t=>[km(lat,lon,t[3],t[4]),t]).filter(x=>x[0]<250).forEach(([d,t])=>L.circleMarker([t[3],t[4]],{radius:4,color:'#a5d6ff'}).bindPopup(`Tide station ${t[1]} #${t[0]}`).addTo(layers['Tide stations']));
 }
 loadGlobal().then(()=>{const z=location.hash.slice(1)||'97401';$('zip').value=z;load(z)}).catch(e=>st('Failed loading global data: '+e.message));
-</script></body></html>
+</script><script src="extra.js"></script></body></html>

@@ -12,11 +12,12 @@ button.on{background:#1f3b57;color:#fff}
 .card small{color:#555;display:block;font-size:15px}.up{color:#b33}.dn{color:#2563a8}
 #chart{padding:0 6px}.note{font-size:14px;color:#555;padding:8px 18px 24px}
 </style></head><body>
-<header><h1>Eugene, OR — Environment, Space Weather & Markets</h1><div id="sub" style="font-size:15px;opacity:.85"></div><a href="outlook.html" style="color:#ffd43b;font-size:17px">📋 Today's plain-language outlook →</a></header>
+<header><h1>Eugene, OR — Environment, Space Weather & Markets</h1><div id="sub" style="font-size:15px;opacity:.85"></div><a href="outlook.html" style="color:#ffd43b;font-size:17px">📋 Today's plain-language outlook →</a> <a href="zip/" style="color:#74c0fc;font-size:15px;margin-left:12px">🔎 Any US ZIP →</a></header>
 <div class="ctl">
 <button id="prev">◀ Day</button><input type="date" id="end"><button id="next">Day ▶</button>
 <span id="rng"></span></div>
 <div id="cards"></div><div id="chart"></div>
+<div style="margin:14px 0"><div style="font-size:17px;margin-bottom:4px">🗺️ Live radar · satellite · traffic cams &amp; incidents <a href="zip/#97401" style="color:#74c0fc;font-size:14px">(full map &amp; any-ZIP dashboard →)</a></div><iframe src="zip/radar.html?lat=44.05&lon=-123.09&st=OR&z=8" style="width:100%;height:460px;border:0;border-radius:10px" loading="lazy"></iframe></div>
 <div class="note">Sources: NOAA GHCN (Eugene Airport), ERA5 via Open-Meteo (pressure), GFZ Kp, SILSO sunspots, NASA OMNI solar wind, ephem moon, NOAA CO-OPS 9435380 tides, NWS/IEM alerts, USGS NWIS rivers, EPA AirData PM2.5, ESPN Ducks schedule, BPA/EIA-930 grid, ORNL EAGLE-I outages, USGS quakes (M2.5+ within 500 km), ODOT crashes (2007–2024), Yahoo/FRED markets. Blank = no data (markets closed or outside coverage). "Normal" = average of the same calendar dates across all years with data. Correlation ≠ causation; earlier analysis found no useful link between space/moon/quake variables and weather or markets.</div>
 <script>
 /*DATA*/
