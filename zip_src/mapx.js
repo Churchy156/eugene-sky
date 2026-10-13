@@ -59,22 +59,67 @@ window.MapX={esc,km:kmx,
   await draw();clearInterval(this._t);this._t=setInterval(draw,180000);
   return ov}
 };})();
-// One-tap horizontal layer buttons (gold = on) + mobile slide-up details sheet.
-MapX.buttons=function(map,LC,bar){
+// Left layer column (grouped, collapsible, scrollable) + phone drawer + mobile slide-up details sheet.
+// MapX.buttons(map,LC,bar[,statusEls]) — bar is hidden (kept for compatibility); statusEls are moved to the column bottom.
+MapX.CATS=[['Air & Space',/aircraft|starlink|iss|tiangong|gps|gnss|weather sats|day\/night|aurora|passes|sun|moon|planet/i],
+ ['Weather',/radar|nexrad|cloud|goes|satellite|precip|wind|temp|lightning|snow|wx/i],
+ ['Traffic',/camera|incident|closure|work zone|traffic|flow|road/i],
+ ['NASA',/nasa|gibs|firms|modis|viirs|eonet/i],
+ ['Hazards',/quake|fire|smoke|alert|river|outage|flood|volcan|air quality|aqi|tide|hazard/i],
+ ['Cyber & Bitcoin',/cyber|attack|bitcoin|node|ransom|tor/i],['Other',/./]];
+MapX.buttons=function(map,LC,bar,statusEls){
  if(!document.getElementById('mxcss')){const st=document.createElement('style');st.id='mxcss';st.textContent=`.leaflet-control-layers{display:none!important}
- .mxbar{display:flex;gap:6px;overflow-x:auto;padding:6px 2px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+ .mxbar{display:flex;gap:6px;overflow-x:auto;padding:6px 2px;scrollbar-width:thin}
  .mxbar button{flex:0 0 auto;white-space:nowrap;border-radius:18px;padding:6px 12px;border:1px solid #3a4a5c;background:#1d2b3a;color:#cfd8e3;font:13px system-ui;cursor:pointer}
  .mxbar button.on{background:#d4a72c;border-color:#f2cc60;color:#111;font-weight:600}
+ .mxwrap{display:flex;align-items:stretch;width:100%}.mxwrap>.leaflet-container{flex:1 1 auto;min-width:0}
+ .mxcol{position:relative;flex:0 0 230px;width:230px;background:#131d28;border:1px solid #2a3a4c;border-radius:10px 0 0 10px;margin-right:2px;transition:flex-basis .2s,width .2s;font:13px system-ui;color:#cfd8e3}
+ .mxcol .in{position:absolute;inset:0;display:flex;flex-direction:column}
+ .mxcol .hd{display:flex;justify-content:space-between;align-items:center;padding:7px 8px;border-bottom:1px solid #2a3a4c;font-weight:600}
+ .mxcol .hd button,.mxtog{border:1px solid #3a4a5c;background:#1d2b3a;color:#cfd8e3;border-radius:6px;padding:2px 8px;cursor:pointer;font:13px system-ui}
+ .mxcol .sc{flex:1;overflow:auto;padding:4px 6px;scrollbar-width:thin}
+ .mxcol details{margin:2px 0}.mxcol summary{cursor:pointer;font:600 11px system-ui;text-transform:uppercase;letter-spacing:.05em;color:#8fa3b8;padding:6px 2px}
+ .mxcol label{display:flex;align-items:center;gap:6px;padding:5px 6px;margin:2px 0;border-radius:7px;cursor:pointer;border:1px solid transparent;line-height:1.2}
+ .mxcol label:hover{background:#1d2b3a}.mxcol label.on{background:#d4a72c26;border-color:#d4a72c;color:#f2cc60;font-weight:600}
+ .mxcol label input{accent-color:#d4a72c;margin:0}.mxcol label .ic{width:20px;text-align:center;flex:0 0 20px}
+ .mxcol .stx{border-top:1px solid #2a3a4c;padding:6px 8px;font-size:11px;color:#9fb3c8;max-height:22%;overflow:auto}.mxcol .stx:empty{display:none}
+ .mxcol .stx>*{position:static!important;background:none!important;padding:0!important;height:auto!important;margin:0 0 3px!important}
+ .mxwrap.collapsed .mxcol{flex-basis:0;width:0;border:0;overflow:hidden;margin:0}
+ .mxtog{display:none;box-shadow:0 1px 5px #0008;padding:5px 10px;font-weight:600;background:#16212d}
+ .mxwrap.collapsed .mxtog{display:block}
  .mxsheet{position:fixed;left:0;right:0;bottom:0;z-index:2000;background:#16212df5;color:#e6edf3;border-radius:14px 14px 0 0;box-shadow:0 -4px 18px #0008;transform:translateY(calc(100% - 44px));transition:transform .25s;max-height:60vh;display:none}
  .mxsheet.open{transform:none}.mxsheet .hd{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;font:600 14px system-ui}
  .mxsheet .bd{padding:0 14px 14px;overflow:auto;max-height:calc(60vh - 44px);font:13px system-ui}.mxsheet .bd img{max-width:100%}
- @media(max-width:700px){.mxsheet.has{display:block}}`;document.head.appendChild(st)}
- const btns=new Map(),mk=(l,n)=>{const b=document.createElement('button');b.textContent=n;b.className=map.hasLayer(l)?'on':'';
-  b.onclick=()=>{map.hasLayer(l)?map.removeLayer(l):map.addLayer(l)};btns.set(l,b);bar.appendChild(b)};
+ .mxdim{display:none}
+ @media(max-width:700px){.mxsheet.has{display:block}
+  .mxcol{position:fixed;left:0;top:0;bottom:0;width:78vw;max-width:290px;z-index:3000;border-radius:0 12px 12px 0;transform:translateX(-105%);transition:transform .25s;box-shadow:4px 0 18px #000a;margin:0}
+  .mxwrap.drawer .mxcol{transform:none}.mxwrap.drawer .mxdim{display:block;position:fixed;inset:0;background:#0007;z-index:2999}
+  .mxwrap .mxtog{display:block}.mxwrap.collapsed .mxcol{width:78vw;flex-basis:auto;border:1px solid #2a3a4c}}`;document.head.appendChild(st)}
+ if(bar)bar.style.display='none';
+ const box=map.getContainer(),wrap=document.createElement('div');wrap.className='mxwrap';box.parentNode.insertBefore(wrap,box);
+ const col=document.createElement('div');col.className='mxcol';col.innerHTML='<div class="in"><div class="hd"><span>🗂 Map layers</span><button title="Hide layer column">«</button></div><div class="sc"></div><div class="stx"></div></div>';
+ const dim=document.createElement('div');dim.className='mxdim';wrap.append(col,dim,box);
+ const sc=col.querySelector('.sc'),stx=col.querySelector('.stx'),phone=()=>innerWidth<=700;
+ (statusEls||[]).filter(Boolean).forEach(e=>stx.appendChild(e));
+ const fix=()=>setTimeout(()=>map.invalidateSize(),260);
+ if(localStorage.mxCol==='0'&&!phone())wrap.classList.add('collapsed');
+ col.querySelector('.hd button').onclick=()=>{if(phone()){wrap.classList.remove('drawer');return}wrap.classList.add('collapsed');localStorage.mxCol='0';fix()};
+ dim.onclick=()=>wrap.classList.remove('drawer');
+ const Tg=L.Control.extend({options:{position:'topleft'},onAdd(){const b=L.DomUtil.create('button','mxtog');b.textContent='🗂 Layers';L.DomEvent.disableClickPropagation(b);
+  b.onclick=()=>{if(phone())wrap.classList.add('drawer');else{wrap.classList.remove('collapsed');localStorage.mxCol='1';fix()}};return b}});
+ new Tg().addTo(map);map.invalidateSize();
+ const secs={};const sec=c=>{if(secs[c])return secs[c];const d=document.createElement('details');d.open=localStorage['mxS_'+c]!=='0';d.innerHTML=`<summary>${c} <span class="n"></span></summary>`;
+  d.ontoggle=()=>localStorage['mxS_'+c]=d.open?'1':'0';
+  const order=MapX.CATS.map(x=>x[0]);const after=order.slice(order.indexOf(c)+1).map(k=>secs[k]).find(Boolean);sc.insertBefore(d,after||null);return secs[c]=d};
+ const cnt=()=>{for(const c in secs){const ls=secs[c].querySelectorAll('label');secs[c].style.display=ls.length?'':'none';secs[c].querySelector('.n').textContent=`(${[...ls].filter(l=>l.classList.contains('on')).length}/${ls.length})`}};
+ const btns=new Map(),mk=(l,n)=>{if(btns.has(l))return;const cat=MapX.CATS.find(x=>x[1].test(n))[0],m=n.match(/^(\S+)\s+(.*)$/),emo=m&&!/\w/.test(m[1]);
+  const b=document.createElement('label');b.innerHTML=`<input type=checkbox><span class="ic">${emo?m[1]:'•'}</span><span>${MapX.esc?MapX.esc(emo?m[2]:n):(emo?m[2]:n)}</span>`;b.title=n;
+  const cb=b.firstChild;cb.checked=map.hasLayer(l);b.className=cb.checked?'on':'';
+  cb.onchange=()=>{cb.checked?map.addLayer(l):map.removeLayer(l)};btns.set(l,b);sec(cat).appendChild(b);cnt()};
  Object.values(LC._layers||[]).forEach(o=>o.overlay&&mk(o.layer,o.name));
  const add=LC.addOverlay.bind(LC),rm=LC.removeLayer.bind(LC);
- LC.addOverlay=(l,n)=>{add(l,n);mk(l,n);return LC};LC.removeLayer=l=>{rm(l);const b=btns.get(l);if(b){b.remove();btns.delete(l)}return LC};
- const sync=e=>{const b=btns.get(e.layer);if(b)b.className=map.hasLayer(e.layer)?'on':''};map.on('layeradd layerremove',sync);
+ LC.addOverlay=(l,n)=>{add(l,n);mk(l,n);return LC};LC.removeLayer=l=>{rm(l);const b=btns.get(l);if(b){b.remove();btns.delete(l);cnt()}return LC};
+ const sync=e=>{const b=btns.get(e.layer);if(b){const on=map.hasLayer(e.layer);b.className=on?'on':'';b.firstChild.checked=on;cnt()}};map.on('layeradd layerremove',sync);
  // details sheet on phones
  const sh=document.createElement('div');sh.className='mxsheet';sh.innerHTML='<div class="hd"><span id="mxT">Details</span><button id="mxB" style="border-radius:14px;padding:4px 12px;background:#d4a72c;border:0;color:#111;font-weight:600">Hide</button></div><div class="bd" id="mxD"></div>';document.body.appendChild(sh);
  sh.querySelector('#mxB').onclick=()=>{sh.classList.toggle('open');sh.querySelector('#mxB').textContent=sh.classList.contains('open')?'Hide':'Details'};
