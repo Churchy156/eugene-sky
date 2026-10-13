@@ -14,7 +14,7 @@ def get(u, h=None, raw=False, n=3):
         except Exception:
             if i == n - 1: raise
 def _get(u, h=None, raw=False):
-    r = urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'Mozilla/5.0 eugene-sky', 'Accept-Encoding': 'gzip', **(h or {})}), timeout=45).read()
+    r = urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'Mozilla/5.0 eugene-sky', 'Accept-Encoding': 'gzip', **(h or {})}), timeout=int(os.environ.get("FEED_TIMEOUT","45"))).read()
     if r[:2] == b'\x1f\x8b': r = gzip.decompress(r)
     return r.decode('utf-8', 'replace') if raw else json.loads(r)
 def first_pt(g):

@@ -25,15 +25,35 @@ window.MapX={esc,km:kmx,
    lyr=frames.map(f=>L.tileLayer(`${j.host}${f.path}/256/{z}/{x}/{y}/2/1_1.png`,{opacity:0,maxNativeZoom:7,maxZoom:18,attribution:'RainViewer'}).addTo(radar));
    i=frames.length-1;show(i);play()}).catch(()=>{document.getElementById('rvT').textContent='RainViewer unavailable'});
   return ov},
+ // Live traffic: relay (Cloudflare Worker, if configured) > GitHub 'live' branch (10-min Actions relay) > 3-h site snapshot.
+ // Plus WZDx feeds that allow browser CORS are fetched directly. Auto-refresh every 3 min.
+ RELAY: window.TRAFFIC_RELAY||'', RAW:'https://raw.githubusercontent.com/Churchy156/eugene-sky/live/traffic/',
+ DIRECT:{WA:'https://wzdx.wsdot.wa.gov/api/v4/WorkZoneFeed',DE:'https://wzdx.e-dot.com/del_dot_feed_wzdx_v4.1.geojson',LA:'https://wzdx.e-dot.com/la_dot_d_feed_wzdx_v4.1.geojson',IN:'https://in.carsprogram.org/carsapi_v1/api/wzdx',MS:'https://api.mdottraffic.com/prod/v3/data/wzdx'},
  async traffic(map,base,lat,lon,st,noteEl){
   const cam=L.layerGroup(),inc=L.layerGroup(),wz=L.layerGroup(),ov={'📷 Traffic cameras':cam,'🚧 Incidents/closures':inc,'🦺 Work zones (WZDx)':wz};
-  try{const [cv,d]=await Promise.all([fetch(base+'traffic/coverage.json').then(r=>r.json()),fetch(base+`traffic/${st}.json`).then(r=>r.ok?r.json():null)]);
-   const c=(cv.states||{})[st]||{},R=200,near=a=>(a||[]).filter(x=>kmx(lat,lon,x[0],x[1])<R);
-   if(d){near(d.cam).forEach(x=>L.circleMarker([x[0],x[1]],{radius:4,color:'#e6edf3',fillColor:'#2f81f7',fillOpacity:1,weight:1}).bindPopup(()=>`<b>${esc(x[2])}</b><br><img src="${esc(x[3])}?t=${Date.now()}" style="width:300px;max-width:70vw" onerror="this.alt='image unavailable'">`,{maxWidth:320}).addTo(cam));
-    near(d.inc).forEach(x=>L.circleMarker([x[0],x[1]],{radius:5,color:'#f85149',fillOpacity:.8}).bindPopup(`<b>${esc(x[2])}</b><br>${esc(x[3])}<br><span style="color:#888">${esc(x[4])}</span>`).addTo(inc));
-    near(d.wz).forEach(x=>L.circleMarker([x[0],x[1]],{radius:4,color:'#e3b341',fillOpacity:.8}).bindPopup(`<b>${esc(x[2])}</b><br>${esc(x[3])}<br>${esc(x[4])} → ${esc(x[5])}`).addTo(wz))}
-   const lab=k=>c[k]?c[k].join(', '):'none for '+st;
-   if(noteEl)noteEl.innerHTML=`<b>Traffic coverage for ${st}</b> (snapshot ${new Date(cv.built).toLocaleString([], {timeZoneName:'short'})}, refreshed every 3 h; cameras load live when clicked): cameras — ${esc(lab('cam'))}; incidents — ${esc(lab('inc'))}; work zones — ${esc(lab('wz'))}. States with any feed: ${Object.keys(cv.states).sort().join(', ')}.`;
-  }catch(e){if(noteEl)noteEl.textContent='Traffic data unavailable: '+e.message}
+  const R=200,near=a=>(a||[]).filter(x=>kmx(lat,lon,x[0],x[1])<R),bust=u=>u+(u.includes('?')?'&':'?')+'t='+Date.now();
+  const tget=u=>fetch(u,{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);
+  let cv=null;
+  const draw=async()=>{
+   const cands=[];
+   if(this.RELAY)cands.push(['Cloudflare relay (live)',tget(this.RELAY+'/traffic/'+st+'.json')]);
+   cands.push(['GitHub Actions relay (~10 min)',tget(bust(this.RAW+st+'.json'))],['site snapshot (~3 h)',tget(base+`traffic/${st}.json`)]);
+   const got=(await Promise.all(cands.map(c=>c[1]))).map((d,i)=>[cands[i][0],d]).filter(x=>x[1]);
+   cv=cv||await tget(base+'traffic/coverage.json')||{states:{}};
+   got.sort((a,b)=>String(b[1].built).localeCompare(String(a[1].built)));const [src,d]=got[0]||['none',{cam:[],inc:[],wz:[]}];
+   let wzrows=d.wz||[],direct='';
+   if(this.DIRECT[st]){const j=await tget(this.DIRECT[st]);if(j&&j.features){wzrows=[];j.features.forEach(f=>{const p=f.properties||{},cd=p.core_details||p;let c=f.geometry&&f.geometry.coordinates;while(Array.isArray(c)&&Array.isArray(c[0]))c=c[0];
+     if(c)wzrows.push([c[1],c[0],(cd.road_names||[]).join(', '),cd.description||'',(p.start_date||'').slice(0,10),(p.end_date||'').slice(0,10)])});direct=` · work zones fetched live from ${st} DOT in your browser`}}
+   cam.clearLayers();inc.clearLayers();wz.clearLayers();
+   near(d.cam).forEach(x=>{const m=L.circleMarker([x[0],x[1]],{radius:5,color:'#e6edf3',fillColor:'#2f81f7',fillOpacity:1,weight:1});
+    const now=()=>new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit',timeZoneName:'short'});
+    m.bindTooltip(()=>`<div style="width:240px"><b>${esc(x[2])}</b><br><img src="${esc(bust(x[3]))}" style="width:240px;display:block" alt="loading…" onerror="this.alt='image unavailable'"><span style="color:#888">latest image · loaded ${now()}</span></div>`,{direction:'top',opacity:1,sticky:false});
+    m.bindPopup(()=>`<b>${esc(x[2])}</b><br><img src="${esc(bust(x[3]))}" style="width:420px;max-width:80vw" onerror="this.alt='image unavailable'"><br><span style="color:#888">loaded ${now()} · click again to refresh</span>`,{maxWidth:440});
+    m.on('click',()=>m.closeTooltip());m.addTo(cam)});
+   near(d.inc).forEach(x=>L.circleMarker([x[0],x[1]],{radius:5,color:'#f85149',fillOpacity:.8}).bindPopup(`<b>${esc(x[2])}</b><br>${esc(x[3])}<br><span style="color:#888">${esc(x[4])}</span>`).addTo(inc));
+   near(wzrows).forEach(x=>L.circleMarker([x[0],x[1]],{radius:4,color:'#e3b341',fillOpacity:.8}).bindPopup(`<b>${esc(x[2])}</b><br>${esc(x[3])}<br>${esc(x[4])} → ${esc(x[5])}`).addTo(wz));
+   const c=(cv.states||{})[st]||{},lab=k=>c[k]?c[k].join(', '):'none for '+st,ago=d.built?Math.round((Date.now()-Date.parse(d.built))/6e4):null;
+   if(noteEl)noteEl.innerHTML=`<b>Traffic ${st}</b> — source: ${esc(src)}, data ${ago==null?'?':ago+' min old'} (fetched ${new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit',timeZoneName:'short'})}, auto-refresh every 3 min${direct}). Cameras: ${esc(lab('cam'))} (hover = live thumbnail); incidents: ${esc(lab('inc'))}; work zones: ${esc(lab('wz'))}. States with any feed: ${Object.keys(cv.states||{}).sort().join(', ')}.`};
+  await draw();clearInterval(this._t);this._t=setInterval(draw,180000);
   return ov}
 };})();

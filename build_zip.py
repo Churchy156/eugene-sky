@@ -6,7 +6,7 @@ OUT = 'site/zip'; os.makedirs(OUT, exist_ok=True)
 for f in ('index.html', 'radar.html', 'mapx.js', 'extra.js'): shutil.copy(f'zip_src/{f}', f'{OUT}/{f}')
 shutil.copytree('zip_src/data', f'{OUT}/data', dirs_exist_ok=True)
 import subprocess, sys
-subprocess.run([sys.executable, 'zip_tools/build_traffic.py', f'{OUT}/data'], check=False)
+if not os.environ.get('SKIP_TRAFFIC'): subprocess.run([sys.executable, 'zip_tools/build_traffic.py', f'{OUT}/data'], check=False)
 d = pd.read_csv('data/eugene_env_daily.csv.gz')
 def dump(cols, name, start=None):
     x = d[['date'] + cols].copy()
@@ -25,4 +25,10 @@ try:
     json.dump(st, open(f'{OUT}/tide_stations.json', 'w'), separators=(',', ':'))
 except Exception as e:
     print('tide station refresh failed (keeping old):', e)
+m = {'tmax_F': 'temperature_2m_max', 'tmin_F': 'temperature_2m_min', 'prcp_in': 'precipitation_sum', 'snow_in': 'snowfall_sum',
+     'wind_max_mph_era5': 'wind_speed_10m_max', 'pressure_msl_hPa_era5': 'pressure_msl_mean', 'rh_mean_pct_era5': 'relative_humidity_2m_mean', 'solar_rad_MJm2_era5': 'shortwave_radiation_sum'}
+x = d[['date'] + list(m)].dropna(subset=['tmax_F', 'prcp_in'], how='all')
+e = {'date': list(x.date)}
+for k, v in m.items(): e[v] = [None if pd.isna(z) else round(float(z), 2) for z in x[k]]
+json.dump(e, open(f'{OUT}/data/eugene_wx.json', 'w'), separators=(',', ':'))
 print('zip prebuild done')
