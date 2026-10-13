@@ -26,6 +26,8 @@ jobs:
         run: python update.py
       - name: Build dashboard
         run: python make_dash.py site/index.html
+      - name: ZIP dashboard prebuilt JSON
+        run: python build_zip.py || echo "zip prebuild failed (non-fatal)"
       - name: Daily outlook page
         run: python render_outlook.py || echo "outlook failed (non-fatal)"
       - name: Commit updated dataset
