@@ -150,7 +150,7 @@ MapX.sats=function(map,LC,statusEl){
  MapX.passes=async(lat,lon)=>{await lib();const obs={latitude:lat*D2R,longitude:lon*D2R,height:.1},list=[...await grp('stations'),...await grp('visual')],seen=new Set(),out=[],t0=Date.now();
   const sunEl=d=>{const s=sun(d),H=s.gmst+lon*D2R-s.ra;return Math.asin(Math.sin(lat*D2R)*Math.sin(s.dec)+Math.cos(lat*D2R)*Math.cos(s.dec)*Math.cos(H))/D2R};
   const lit=(p,d)=>{const s=sun(d),u=[Math.cos(s.dec)*Math.cos(s.ra),Math.cos(s.dec)*Math.sin(s.ra),Math.sin(s.dec)],r=p.eci,dot=r.x*u[0]+r.y*u[1]+r.z*u[2];if(dot>0)return true;return Math.hypot(r.x-dot*u[0],r.y-dot*u[1],r.z-dot*u[2])>6371};
-  for(const s of list){if(seen.has(s.id))continue;seen.add(s.id);const bright=/ISS \(ZARYA\)|CSS \(TIANHE\)/.test(s.n);let cur=null;
+  for(const s of list){if(seen.has(s.id)||(/^(ISS|CSS) \(/.test(s.n)&&!/ISS \(ZARYA\)|CSS \(TIANHE\)/.test(s.n)))continue;seen.add(s.id);const bright=/ISS \(ZARYA\)|CSS \(TIANHE\)/.test(s.n);let cur=null;
    for(let m=0;m<36*60;m+=1){const d=new Date(t0+m*6e4),p=satellite.propagate(s.r,d);if(!p||!p.position)break;const la=satellite.ecfToLookAngles(obs,satellite.eciToEcf(p.position,satellite.gstime(d))),el=la.elevation/D2R;
     if(el>10&&sunEl(d)<-6&&lit({eci:p.position},d)){if(!cur)cur={s,start:d,max:el,az:la.azimuth/D2R};else if(el>cur.max){cur.max=el}cur.end=d}else if(cur){out.push(cur);cur=null;if(!bright)break}}
    if(cur)out.push(cur)}
