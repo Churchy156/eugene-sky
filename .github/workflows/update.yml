@@ -13,7 +13,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     env:
       TZ: America/Los_Angeles
       TRIPCHECK_KEY: ${{ secrets.TRIPCHECK_KEY }}
@@ -26,6 +26,14 @@ jobs:
         run: python update.py
       - name: Build dashboard
         run: python make_dash.py site/index.html
+      - name: NASA DONKI + NeoWs, cyber feeds (merged into dataset)
+        env:
+          NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
+        run: |
+          python zip_tools/build_nasa.py || echo "nasa failed (non-fatal)"
+          timeout 1500 python zip_tools/build_cyber.py || echo "cyber failed (non-fatal)"
+          python zip_tools/merge_daily.py || echo "merge failed (non-fatal)"
+          python zip_tools/build_world.py || echo "world failed (non-fatal)"
       - name: Refresh game schedules (ESPN)
         run: python zip_tools/build_games.py || echo "games refresh failed (non-fatal)"
       - name: ZIP dashboard prebuilt JSON
@@ -36,7 +44,7 @@ jobs:
         run: |
           git config user.name "eugene-sky-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/eugene_env_daily.csv.gz reports/ zip_src/data/games.json || true
+          git add data/eugene_env_daily.csv.gz reports/ zip_src/data/games.json zip_src/data/donki.json zip_src/data/cyber.json zip_src/data/cyber_pub.json data/donki_daily.json data/cyber_daily.json zip_src/data/world.json || true
           git diff --cached --quiet || git commit -m "data update $(date +'%Y-%m-%d %H:%M %Z')"
           git push || echo "push failed (non-fatal)"
       - uses: actions/upload-pages-artifact@v3

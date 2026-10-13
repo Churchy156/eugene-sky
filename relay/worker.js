@@ -44,6 +44,11 @@ export default {
   async fetch(req, env, ctx) {
     const url = new URL(req.url), origin = req.headers.get('Origin') || '';
     const cors = { 'Access-Control-Allow-Origin': ALLOW.test(origin) ? origin : 'https://churchy156.github.io', 'Vary': 'Origin', 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=60' };
+    if (url.pathname === '/aircraft') { // proxy adsb.lol (no browser CORS); 15 s edge cache per ~0.1° cell
+      const la = (+url.searchParams.get('lat')).toFixed(1), lo = (+url.searchParams.get('lon')).toFixed(1), di = Math.min(250, +url.searchParams.get('dist') || 60);
+      const r = await fetch(`https://api.adsb.lol/v2/point/${la}/${lo}/${di}`, { cf: { cacheTtl: 15, cacheEverything: true } });
+      return new Response(r.body, { status: r.status, headers: { ...cors, 'Cache-Control': 'public, max-age=15' } });
+    }
     const m = url.pathname.match(/^\/traffic\/([A-Z]{2})\.json$/);
     if (!m) return new Response('{"error":"use /traffic/<ST>.json"}', { status: 404, headers: cors });
     const cache = caches.default, key = new Request(url.origin + url.pathname);

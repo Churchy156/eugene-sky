@@ -1,0 +1,13 @@
+"""Merge prebuilt daily side-tables (DONKI, cyber) into data/eugene_env_daily.csv.gz (idempotent)."""
+import json, os, pandas as pd
+p = 'data/eugene_env_daily.csv.gz'; df = pd.read_csv(p)
+for f in ('data/donki_daily.json', 'data/cyber_daily.json'):
+    if not os.path.exists(f): continue
+    j = json.load(open(f)); cols = j['cols']
+    df = df.drop(columns=[c for c in cols if c in df])
+    t = pd.DataFrame([[k, *v] for k, v in j['d'].items()], columns=['date', *cols])
+    df = df.merge(t, on='date', how='left')
+    m = df.date >= j['start']
+    for c in cols: df.loc[m, c] = df.loc[m, c].fillna(0)
+    print('merged', f, len(t))
+df.to_csv(p, index=False, compression='gzip')

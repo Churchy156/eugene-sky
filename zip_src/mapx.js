@@ -11,6 +11,7 @@ window.MapX={esc,km:kmx,
   const vis=L.tileLayer(`https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/goes-${east?'east':'west'}-vis-1km-900913/{z}/{x}/{y}.png`,{opacity:.5,attribution:'GOES via Iowa Mesonet'});
   ir.addTo(sat);
   if(window.TOMTOM_KEY)ov['🚦 Live traffic flow (TomTom)']=L.tileLayer(`https://api.tomtom.com/traffic/map/4/tile/flow/relative0/{z}/{x}/{y}.png?key=${window.TOMTOM_KEY}`,{opacity:.85,attribution:'Traffic © TomTom'});
+  if(window.TOMTOM_KEY)ov['🚦 Traffic incidents (TomTom)']=L.tileLayer(`https://api.tomtom.com/traffic/map/4/tile/incidents/s3/{z}/{x}/{y}.png?key=${window.TOMTOM_KEY}`,{opacity:.9,attribution:'Traffic © TomTom'});
   ov['🌧 Radar loop (RainViewer, ~2 h)']=radar; ov['🌧 NEXRAD now (IEM)']=nex; ov['☁️ Satellite IR (GOES)']=sat; ov['☁️ Satellite visible (GOES, daytime)']=vis;
   let frames=[],i=0,timer=null,op=.65,lyr=[];
   panel.onAdd=()=>{const d=L.DomUtil.create('div');d.style.cssText='background:#16212dee;color:#e6edf3;padding:6px 8px;border-radius:8px;font:12px system-ui';
@@ -58,3 +59,25 @@ window.MapX={esc,km:kmx,
   await draw();clearInterval(this._t);this._t=setInterval(draw,180000);
   return ov}
 };})();
+// One-tap horizontal layer buttons (gold = on) + mobile slide-up details sheet.
+MapX.buttons=function(map,LC,bar){
+ if(!document.getElementById('mxcss')){const st=document.createElement('style');st.id='mxcss';st.textContent=`.leaflet-control-layers{display:none!important}
+ .mxbar{display:flex;gap:6px;overflow-x:auto;padding:6px 2px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+ .mxbar button{flex:0 0 auto;white-space:nowrap;border-radius:18px;padding:6px 12px;border:1px solid #3a4a5c;background:#1d2b3a;color:#cfd8e3;font:13px system-ui;cursor:pointer}
+ .mxbar button.on{background:#d4a72c;border-color:#f2cc60;color:#111;font-weight:600}
+ .mxsheet{position:fixed;left:0;right:0;bottom:0;z-index:2000;background:#16212df5;color:#e6edf3;border-radius:14px 14px 0 0;box-shadow:0 -4px 18px #0008;transform:translateY(calc(100% - 44px));transition:transform .25s;max-height:60vh;display:none}
+ .mxsheet.open{transform:none}.mxsheet .hd{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;font:600 14px system-ui}
+ .mxsheet .bd{padding:0 14px 14px;overflow:auto;max-height:calc(60vh - 44px);font:13px system-ui}.mxsheet .bd img{max-width:100%}
+ @media(max-width:700px){.mxsheet.has{display:block}}`;document.head.appendChild(st)}
+ const btns=new Map(),mk=(l,n)=>{const b=document.createElement('button');b.textContent=n;b.className=map.hasLayer(l)?'on':'';
+  b.onclick=()=>{map.hasLayer(l)?map.removeLayer(l):map.addLayer(l)};btns.set(l,b);bar.appendChild(b)};
+ Object.values(LC._layers||[]).forEach(o=>o.overlay&&mk(o.layer,o.name));
+ const add=LC.addOverlay.bind(LC),rm=LC.removeLayer.bind(LC);
+ LC.addOverlay=(l,n)=>{add(l,n);mk(l,n);return LC};LC.removeLayer=l=>{rm(l);const b=btns.get(l);if(b){b.remove();btns.delete(l)}return LC};
+ const sync=e=>{const b=btns.get(e.layer);if(b)b.className=map.hasLayer(e.layer)?'on':''};map.on('layeradd layerremove',sync);
+ // details sheet on phones
+ const sh=document.createElement('div');sh.className='mxsheet';sh.innerHTML='<div class="hd"><span id="mxT">Details</span><button id="mxB" style="border-radius:14px;padding:4px 12px;background:#d4a72c;border:0;color:#111;font-weight:600">Hide</button></div><div class="bd" id="mxD"></div>';document.body.appendChild(sh);
+ sh.querySelector('#mxB').onclick=()=>{sh.classList.toggle('open');sh.querySelector('#mxB').textContent=sh.classList.contains('open')?'Hide':'Details'};
+ map.on('popupopen',e=>{if(innerWidth>700)return;const c=e.popup.getContent();const h=typeof c=='function'?c(e.popup._source):c;
+  sh.querySelector('#mxD').innerHTML=typeof h=='string'?h:(h.outerHTML||'');sh.classList.add('has','open');sh.querySelector('#mxB').textContent='Hide';map.closePopup()});
+ return btns};

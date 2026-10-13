@@ -15,12 +15,15 @@ jobs:
     env:
       TRIPCHECK_KEY: ${{ secrets.TRIPCHECK_KEY }}
       FEED_TIMEOUT: '20'
+      FIRMS_MAP_KEY: ${{ secrets.FIRMS_MAP_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - name: Fetch feeds (keys stay server-side)
-        run: python zip_tools/build_traffic.py /tmp/out
+        run: |
+          python zip_tools/build_traffic.py /tmp/out
+          python zip_tools/build_live_extra.py /tmp/out || true
       - name: Publish to orphan 'live' branch (read via raw.githubusercontent.com, CORS *)
         run: |
           cd /tmp/out

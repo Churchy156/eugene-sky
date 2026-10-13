@@ -25,10 +25,10 @@ main{padding:12px 16px;max-width:1300px;margin:auto}
 <header><h1>☀️🌎 Sky &amp; Earth by ZIP</h1>
 <input id="zip" placeholder="ZIP code" size="7" value="97401"><button id="go">Load</button><button id="me" title="Use my location (asks permission)">📍 My location</button>
 <input type="date" id="day"><button data-s="-1">◀ day</button><button data-s="1">day ▶</button><button id="today">Today</button>
-<span id="per"></span><a href="../" class="small">Eugene dashboard</a></header>
+<span id="per"></span><a href="../" class="small">Eugene dashboard</a> <a href="../world/" class="small">🌍 World</a></header>
 <main><div id="status">Enter a ZIP code.</div><div id="place"></div>
 <div class="cards" id="cards"></div>
-<div id="map"></div><div class="small">Map layers: toggle in the top-right; radar loop controls bottom-left. Quakes = window shown, 500 km. Fires = current WFIGS perimeters. AQI = Open-Meteo modeled grid. Traffic within 200 km.</div><div class="small" id="trafNote"></div>
+<div class="mxbar" id="mxbar"></div><div id="map"></div><div class="small">Map layers: toggle in the top-right; radar loop controls bottom-left. Quakes = window shown, 500 km. Fires = current WFIGS perimeters. AQI = Open-Meteo modeled grid. Traffic within 200 km.</div><div class="small" id="trafNote"></div>
 <div class="grid">
 <div class="panel"><h3>Temperature (°F) vs 1950–last-year normal</h3><canvas id="cT"></canvas></div>
 <div class="panel"><h3>Precipitation (in)</h3><canvas id="cP"></canvas></div>
@@ -45,6 +45,9 @@ main{padding:12px 16px;max-width:1300px;margin:auto}
 <div class="panel"><h3>Power — utilities &amp; outage history (EAGLE-I 2014+)</h3><div id="xUtil" class="small"></div><canvas id="cPow"></canvas><div id="xPowN" class="small"></div></div>
 <div class="panel"><h3>Game days (college &amp; pro home games ≤50 mi)</h3><canvas id="cGame"></canvas><div id="xGameN" class="small"></div></div>
 <div class="panel"><h3>Police / 911 / 311 / city crashes (open data)</h3><canvas id="cCity"></canvas><div id="xCityN" class="small"></div></div>
+<div class="panel"><h3>✈️ Flights &amp; airports</h3><div id="skyAir" class="small"></div><iframe id="skyAirFrame" style="width:100%;height:300px;border:0;border-radius:8px" loading="lazy"></iframe><div id="skyFaa" class="small"></div></div>
+<div class="panel"><h3>🛰 NASA: space events, fires, solar energy</h3><canvas id="cDonki"></canvas><div id="skyFire" class="small"></div><div id="skyIss" class="small"></div><div id="skyDonki" class="small" style="max-height:260px;overflow:auto"></div><h3>Solar irradiance &amp; UV (NASA POWER)</h3><canvas id="cPower"></canvas></div>
+<div class="panel"><h3>🔐 Cyber activity</h3><canvas id="cCyber"></canvas><div id="skyCyber" class="small" style="max-height:300px;overflow:auto"></div></div>
 <div class="panel"><h3>Notes &amp; limits</h3><div class="small">Weather history: Open-Meteo ERA5 reanalysis (1950→ ~5 days ago) + forecast model for recent/future days. Space weather and markets are global (from the Eugene dataset, updated every 3 h). Fatal crashes: NHTSA FARS by county 1975–latest release (~18-month lag). Power: EAGLE-I county history 2014–2025; no free nationwide live outage API (poweroutage.us/ODIN), so live status = utility outage-map links. Police/911: only cities with open daily datasets (Seattle, SF, LA, Chicago, NYC, Cincinnati, Austin, New Orleans). ER visits and most fire/EMS logs aren't public. Effects are simple averages, not causal.</div></div>
 </div></main>
 <script>
@@ -101,7 +104,7 @@ async function loadWx(id){
 }
 function setLoc(L0){LOC=L0;localStorage.setItem('skyzip_last',JSON.stringify({lat:LOC.lat,lon:LOC.lon,zip:LOC.zip||''}));
  $('place').innerHTML=`<b>${LOC.name}${LOC.state?', '+LOC.state:''} ${LOC.zip||''}</b> <span class="small">(${LOC.lat.toFixed(3)}, ${LOC.lon.toFixed(3)})</span>`}
-async function start(){const id=++LOADID;if(!$('day').value)$('day').value=iso(new Date());initMap();live();loadExtra();
+async function start(){const id=++LOADID;if(!$('day').value)$('day').value=iso(new Date());initMap();live();loadExtra();Sky.load();
  try{await loadWx(id)}catch(e){st('Weather service unavailable right now ('+e.message+'). Other panels still work — try Reload in a minute.')}}
 async function load(zip){
  try{st('Looking up ZIP '+zip+'…');const z=await J('https://api.zippopotam.us/us/'+zip);const p=z.places[0];
@@ -133,7 +136,7 @@ function render(){ if(!LOC)return;const D=$('day').value,N=PER[per],s=addD(D,1-N
  ch('cK','bar',days,[['Kp max',S('kp_max'),'#a371f7'],['Solar wind',S('sw_speed_kms'),'#ffa65788',0,'y1','line']]);
  ch('cM','line',days,[['Moon %',days.map(moonIllum),'#e6edf3'],['Daylight h',days.map(d=>+daylight(d,LOC.lat).toFixed(2)),'#e3b341',0,'y1']]);
  ch('cF','line',days,[['S&P 500',S('fin_sp500_close'),'#3fb950'],['Gold $/oz',S('fin_gold_usd_oz'),'#e3b341',0,'y1']]);
- tides(s,D);quakes(s,D);if(window.renderExtra)renderExtra(s,D,ps,pe,days);
+ tides(s,D);quakes(s,D);if(window.renderExtra)renderExtra(s,D,ps,pe,days);if(typeof Sky!='undefined')Sky.render(s,D,days);
 }
 function ch(id,type,labels,sets){if(charts[id])charts[id].destroy();const y1=sets.some(x=>x[4]=='y1');
  charts[id]=new Chart($(id),{type,data:{labels,datasets:sets.map(([l,d,c,dash,ax,t])=>({label:l,data:d,borderColor:c,backgroundColor:c,yAxisID:ax||'y',type:t||type,borderDash:dash?[4,4]:[],pointRadius:labels.length>40?0:2,borderWidth:1.5,spanGaps:true}))},
@@ -148,7 +151,7 @@ async function tides(s,D){if(_td==LOC.lat+s+D)return;_td=LOC.lat+s+D;const near=
 // --- map ---
 function initMap(){if(!map){map=L.map('map');L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(map);
  ['Earthquakes','NWS alerts','Wildfire perimeters','Air quality (AQI)','River gauges','Tide stations'].forEach(n=>layers[n]=L.layerGroup());
- LC=L.control.layers(null,layers,{collapsed:innerWidth<700}).addTo(map);const wx=MapX.weather(map,LOC.lon);for(const k in wx)LC.addOverlay(wx[k],k);['Earthquakes','NWS alerts','Wildfire perimeters','Air quality (AQI)','River gauges'].forEach(n=>layers[n].addTo(map))}
+ LC=L.control.layers(null,layers,{collapsed:innerWidth<700}).addTo(map);const wx=MapX.weather(map,LOC.lon);for(const k in wx)LC.addOverlay(wx[k],k);Sky.map(map,LC);MapX.buttons(map,LC,$('mxbar'));['Earthquakes','NWS alerts','Wildfire perimeters','Air quality (AQI)','River gauges'].forEach(n=>layers[n].addTo(map))}
  Object.values(layers).forEach(l=>l.clearLayers());map.setView([LOC.lat,LOC.lon],8);if(layers.home)map.removeLayer(layers.home);layers.home=L.marker([LOC.lat,LOC.lon]).addTo(map).bindPopup(LOC.name+' '+LOC.zip);
  (TRAF||[]).forEach(([k,l])=>{LC.removeLayer(l);map.removeLayer(l)});TRAF=[];
  MapX.traffic(map,'data/',LOC.lat,LOC.lon,LOC.state,$('trafNote')).then(o=>{for(const k in o){LC.addOverlay(o[k],k);TRAF.push([k,o[k]]);if(!/Work/.test(k))o[k].addTo(map)}});}
@@ -173,4 +176,4 @@ async function live(){const {lat,lon}=LOC;
 loadGlobal().then(()=>{const h=decodeURIComponent(location.hash.slice(1)),m=h.match(/^(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)$/);
  if(m)return loadLL(+m[1],+m[2]);if(/^\d{5}$/.test(h)){$('zip').value=h;return load(h)}
  const last=JSON.parse(localStorage.getItem('skyzip_last')||'null');if(last&&last.zip){$('zip').value=last.zip;return load(last.zip)}if(last)return loadLL(last.lat,last.lon,'Last location');$('zip').value='97401';load('97401')}).catch(e=>st('Failed loading global data: '+e.message));
-</script><script src="extra.js"></script></body></html>
+</script><script src="extra.js"></script><script src="sky.js"></script></body></html>

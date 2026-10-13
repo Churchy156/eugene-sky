@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>World view — Sky & Earth</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><script src="../zip/mapx.js"></script>
+<style>body{margin:0;font-family:system-ui,sans-serif;background:#0f1720;color:#e6edf3}header{padding:10px 14px;background:#16212d;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+header h1{font-size:18px;margin:0}a{color:#74c0fc}#map{height:62vh}.wrap{display:grid;grid-template-columns:2fr 1fr;gap:12px;padding:12px}@media(max-width:800px){.wrap{grid-template-columns:1fr}#map{height:55vh}}
+.panel{background:#16212d;border-radius:10px;padding:10px;font-size:13px}.legend{background:#16212dee;padding:6px 8px;border-radius:8px;font:12px system-ui;color:#e6edf3}
+.leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.7)}.mxbar.metric button.on{background:#2f81f7;border-color:#58a6ff;color:#fff}</style></head><body>
+<header><h1>🌍 World view</h1><a href="../">Eugene dashboard</a><a href="../zip/">Any US ZIP</a><span class="small" id="st" style="font-size:12px;color:#9fb3c8"></span></header>
+<div style="padding:0 12px"><div class="mxbar metric" id="mbar"></div><div class="mxbar" id="lbar"></div></div>
+<div id="map"></div>
+<div class="wrap"><div class="panel" id="det"><b>Tap a country</b> for details.</div>
+<div class="panel"><b>Physical bitcoin attacks per year</b> (jlopp list)<canvas id="cA"></canvas><div id="aNote"></div></div></div>
+<div class="panel" style="margin:0 12px 12px"><b>Sources</b>: Bitcoin nodes — bitnodes.io snapshot, IPs geolocated with <a href="https://db-ip.com">DB-IP Lite</a> (CC BY 4.0); Vitality — World Bank WDI life expectancy (SP.DYN.LE00.IN); Fiscal — World Bank Worldwide Governance Indicators, Rule of Law estimate (RL.EST, −2.5…+2.5; property-rights proxy); Energy — firm/dispatchable share of electricity = fossil + nuclear + hydro, <a href="https://github.com/owid/energy-data">Our World in Data</a> (Ember/Energy Institute, CC BY 4.0); Time-price — hours of average work to produce $10k = $10,000 ÷ (World Bank GDP per person employed, constant 2021 PPP $ ÷ 2,000 h/yr), an approximation; Internet outages — <a href="https://ioda.inetintel.cc.gatech.edu">IODA</a>; botnet C2 — abuse.ch Feodo Tracker; attacks — <a href="https://github.com/jlopp/physical-bitcoin-attacks">Jameson Lopp</a> (Unlicense); quakes — USGS; natural events — NASA EONET; aurora — NOAA SWPC OVATION; country shapes — <a href="https://github.com/johan/world.geo.json">world.geo.json</a>. Inspired by HVE-maps' layout; data rebuilt from original sources.</div>
+<script>
+const $=id=>document.getElementById(id),esc=MapX.esc;let W,G,metric='btc',geo;
+const M={btc:['₿ Rails: bitcoin nodes per million people',c=>c.btc_nodes&&c.pop?c.btc_nodes/c.pop*1e6:c.btc_nodes?null:null,[1,5,20,60,150],'nodes/M'],
+ btcraw:['₿ Bitcoin nodes (count)',c=>c.btc_nodes,[5,50,200,1000,4000],'nodes'],
+ rule:['⚖️ Fiscal: rule of law / property rights',c=>c.rule,[-1,-.5,0,.5,1.2],'WGI est.'],
+ firm:['⚡ Energy: firm/dispatchable electricity share',c=>c.firm,[40,60,75,85,95],'%'],
+ life:['❤️ Vitality: life expectancy',c=>c.life,[60,67,72,77,81],'years'],
+ hours:['⏱ Time-price: work hours to earn $10k',c=>c.hours_10k,[100,200,400,1000,3000],'hours',1],
+ ioda:['🔐 Internet outage events (14 d)',c=>c.ioda14,[1,3,6,12,25],'events'],
+ attacks:['🔧 Physical bitcoin attacks (all years)',c=>c.attacks,[1,3,8,20,50],'attacks']};
+const pal=['#1a2b3c','#264b6e','#2f81f7','#3fb950','#e3b341','#f85149'];
+const col=(v,b,inv)=>{if(v==null)return '#2a2f36';let i=b.findIndex(x=>v<x);i=i<0?5:i;return pal[inv?5-i:i]};
+const map=L.map('map',{worldCopyJump:true}).setView([25,0],2);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:10}).addTo(map);
+const LC=L.control.layers(null,{}).addTo(map),leg=L.control({position:'bottomleft'});leg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.id='leg';return d};leg.addTo(map);
+function style(f){const c=W.c[f.id]||{},m=M[metric];return{fillColor:col(m[1](c),m[2],m[4]),weight:.5,color:'#0f1720',fillOpacity:.85}}
+function legend(){const m=M[metric];$('leg').innerHTML=`<b>${m[0]}</b><br>`+m[2].map((x,i)=>`<span style="background:${pal[m[4]?5-i:i]};display:inline-block;width:12px;height:12px"></span> &lt;${x} `).join('')+`<span style="background:${pal[m[4]?0:5]};display:inline-block;width:12px;height:12px"></span> more · ${m[3]}`}
+function details(id,name){const c=W.c[id]||{},f=(v,s='')=>v==null?'—':(+v).toLocaleString(undefined,{maximumFractionDigits:2})+s;
+ $('det').innerHTML=`<h3 style="margin:0 0 6px">${esc(c.name||name)}</h3>
+ ₿ Bitcoin nodes: <b>${f(c.btc_nodes)}</b> (${f(c.btc_nodes&&c.pop?c.btc_nodes/c.pop*1e6:null)} per million)<br>⚖️ Rule of law (WGI): <b>${f(c.rule)}</b> ${c.rule_yr?'('+c.rule_yr+')':''}<br>
+ ⚡ Firm/dispatchable electricity: <b>${f(c.firm,'%')}</b> ${c.firm_yr?'('+c.firm_yr+')':''}<br>❤️ Life expectancy: <b>${f(c.life,' yrs')}</b> ${c.life_yr?'('+c.life_yr+')':''}<br>
+ ⏱ Hours of average work to produce $10k: <b>${f(c.hours_10k)}</b> · GDP/person PPP $${f(c.gdp_pc)}<br>🔐 IODA internet outages (14 d): <b>${f(c.ioda14||0)}</b> · botnet C2 servers (Feodo): ${f(c.feodo||0)}<br>
+ 🔧 Physical bitcoin attacks: <b>${f(c.attacks||0)}</b>`+W.attacks.filter(a=>a[8]==id).slice(-6).reverse().map(a=>`<div>${esc(a[0])} · ${esc(a[3])} — <a target=_blank href="${esc(a[5])}">${esc(a[4])}</a></div>`).join('')}
+(async()=>{[W,G]=await Promise.all([fetch('../zip/data/world.json').then(r=>r.json()),fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json').then(r=>r.json())]);
+ // population for per-capita: World Bank via world.json? fetch live (CORS ok)
+ const p=await fetch('https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=20000&mrnev=1').then(r=>r.json()).catch(()=>null);(p&&p[1]||[]).forEach(r=>{if(r.countryiso3code&&W.c[r.countryiso3code])W.c[r.countryiso3code].pop=r.value});
+ geo=L.geoJSON(G,{style,onEachFeature:(f,l)=>{l.on('click',()=>{details(f.id,f.properties.name);if(innerWidth<800)$('det').scrollIntoView({behavior:'smooth'})});l.bindTooltip(()=>{const c=W.c[f.id]||{},v=M[metric][1](c);return `${esc(f.properties.name)}: ${v==null?'no data':(+v).toLocaleString(undefined,{maximumFractionDigits:1})+' '+M[metric][3]}`},{sticky:true})}}).addTo(map);
+ Object.entries(M).forEach(([k,m])=>{const b=document.createElement('button');b.textContent=m[0].split(':')[0];b.title=m[0];b.className=k==metric?'on':'';b.onclick=()=>{metric=k;document.querySelectorAll('#mbar button').forEach(x=>x.className=x==b?'on':'');geo.setStyle(style);legend()};$('mbar').appendChild(b)});legend();
+ $('st').textContent=`data built ${new Date(W.built).toLocaleString([], {timeZoneName:'short'})} · ${W.btc?W.btc.total.toLocaleString()+' reachable bitcoin nodes ('+W.btc.tor.toLocaleString()+' Tor)':''}`;
+ // overlays
+ const ov=n=>{const g=L.layerGroup();LC.addOverlay(g,n);return g};
+ const att=ov('🔧 Physical bitcoin attacks'),eq=ov('〰️ Earthquakes M4.5+ (30 d)'),eo=ov('🌋 NASA EONET events (fires, storms, volcanoes)'),au=ov('🌌 Aurora forecast (SWPC)'),sat=L.tileLayer(`https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_DayNightBand_At_Sensor_Radiance/default/${new Date(Date.now()-864e5).toISOString().slice(0,10)}/GoogleMapsCompatible_Level8/{z}/{y}/{x}.png`,{maxNativeZoom:8,opacity:.7});LC.addOverlay(sat,'🛰 NASA night lights');
+ W.attacks.forEach(a=>{if(a[6]==null)return;L.circleMarker([a[6],a[7]],{radius:4,color:'#f2cc60',fillColor:'#d4a72c',fillOpacity:.9,weight:1}).bindTooltip(`<b>${esc(a[0])}</b> · ${esc(a[3])}<br>${esc(a[2])}: ${esc(a[4])}`).bindPopup(`<b>${esc(a[0])}</b> · ${esc(a[3])}<br>${esc(a[2])}<br><a target=_blank href="${esc(a[5])}">${esc(a[4])}</a>`).addTo(att)});att.addTo(map);
+ fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson').then(r=>r.json()).then(j=>j.features.forEach(f=>{const[x,y]=f.geometry.coordinates;L.circleMarker([y,x],{radius:f.properties.mag*1.5,color:'#f85149',weight:1,fillOpacity:.4}).bindTooltip(`M${f.properties.mag} ${esc(f.properties.place)}`).addTo(eq)}));
+ fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&days=30').then(r=>r.json()).then(j=>j.events.forEach(e=>{const g=e.geometry[e.geometry.length-1];if(g.type!='Point')return;L.circleMarker([g.coordinates[1],g.coordinates[0]],{radius:4,color:'#ff7b00',fillOpacity:.8}).bindTooltip(esc(e.title)).addTo(eo)}));
+ fetch('https://services.swpc.noaa.gov/json/ovation_aurora_latest.json').then(r=>r.json()).then(j=>j.coordinates.forEach(([lo,la,p])=>{if(p<10)return;L.circleMarker([la,lo>180?lo-360:lo],{radius:2,stroke:false,fillColor:p>50?'#3fb950':'#2ea04366',fillOpacity:.6}).addTo(au)})).catch(()=>{});
+ MapX.buttons(map,LC,$('lbar'));
+ const y={};W.attacks.forEach(a=>{if(a[1])y[a[1]]=(y[a[1]]||0)+1});const ys=Object.keys(y).sort();
+ new Chart($('cA'),{type:'bar',data:{labels:ys,datasets:[{label:'attacks',data:ys.map(k=>y[k]),backgroundColor:'#d4a72c'}]},options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#9ab'}},y:{ticks:{color:'#9ab'}}}}});
+ const last30=W.attacks.filter(a=>{const d=Date.parse(a[0]);return d&&Date.now()-d<90*864e5});$('aNote').innerHTML=`${W.attacks.length} documented attacks; ${last30.length} dated in the last 90 days.`+last30.slice(-5).reverse().map(a=>`<div>${esc(a[0])} · ${esc(a[3])}</div>`).join('');
+})();
+</script></body></html>

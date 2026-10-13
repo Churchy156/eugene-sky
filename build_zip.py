@@ -3,7 +3,7 @@ import json, os, urllib.request
 import pandas as pd
 import shutil
 OUT = 'site/zip'; os.makedirs(OUT, exist_ok=True)
-for f in ('index.html', 'radar.html', 'mapx.js', 'extra.js', 'relay.js'): shutil.copy(f'zip_src/{f}', f'{OUT}/{f}')
+for f in ('index.html', 'radar.html', 'mapx.js', 'extra.js', 'relay.js', 'sky.js'): shutil.copy(f'zip_src/{f}', f'{OUT}/{f}')
 shutil.copytree('zip_src/data', f'{OUT}/data', dirs_exist_ok=True)
 import subprocess, sys
 if not os.environ.get('SKIP_TRAFFIC'): subprocess.run([sys.executable, 'zip_tools/build_traffic.py', f'{OUT}/data'], check=False)
@@ -31,4 +31,10 @@ x = d[['date'] + list(m)].dropna(subset=['tmax_F', 'prcp_in'], how='all')
 e = {'date': list(x.date)}
 for k, v in m.items(): e[v] = [None if pd.isna(z) else round(float(z), 2) for z in x[k]]
 json.dump(e, open(f'{OUT}/data/eugene_wx.json', 'w'), separators=(',', ':'))
+import collections
+cc = collections.defaultdict(list)
+for l in open('data/us_places.tsv'):
+    a, n, la, lo = l.rstrip('\n').split('\t'); cc[a].append((float(la), float(lo)))
+json.dump({k: [round(sum(x[0] for x in v) / len(v), 2), round(sum(x[1] for x in v) / len(v), 2)] for k, v in cc.items()}, open(f'{OUT}/data/state_centroids.json', 'w'))
+shutil.copytree('world_src', 'site/world', dirs_exist_ok=True)
 print('zip prebuild done')
