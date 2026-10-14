@@ -68,6 +68,11 @@ export default {
       if (body) ctx.waitUntil(caches.default.put(ck, resp.clone()));
       return new Response(resp.body, { status: resp.status, headers: { ...cors, 'Cache-Control': 'public, max-age=20' } });
     }
+    if (url.pathname === '/faa') { // FAA NAS airport status (XML), 2 min edge cache
+      const ck = new Request(url.origin + '/faa'); let r = await caches.default.match(ck);
+      if (!r) { const f = await fetch('https://nasstatus.faa.gov/api/airport-status-information'); r = new Response(await f.text(), { status: f.status, headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=120' } }); if (f.ok) ctx.waitUntil(caches.default.put(ck, r.clone())); }
+      return new Response(r.body, { status: r.status, headers: { ...cors, 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=120' } });
+    }
     const m = url.pathname.match(/^\/traffic\/([A-Z]{2})\.json$/);
     if (!m) return new Response('{"error":"use /traffic/<ST>.json"}', { status: 404, headers: cors });
     const cache = caches.default, key = new Request(url.origin + url.pathname);

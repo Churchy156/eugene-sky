@@ -37,4 +37,5 @@ for l in open('data/us_places.tsv'):
     a, n, la, lo = l.rstrip('\n').split('\t'); cc[a].append((float(la), float(lo)))
 json.dump({k: [round(sum(x[0] for x in v) / len(v), 2), round(sum(x[1] for x in v) / len(v), 2)] for k, v in cc.items()}, open(f'{OUT}/data/state_centroids.json', 'w'))
 shutil.copytree('world_src', 'site/world', dirs_exist_ok=True)
+shutil.copytree('travel_src', 'site/travel', dirs_exist_ok=True)
 print('zip prebuild done')
