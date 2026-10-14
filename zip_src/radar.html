@@ -5,6 +5,6 @@
 const q=new URLSearchParams(location.search),lat=+(q.get('lat')||44.05),lon=+(q.get('lon')||-123.09),st=q.get('st')||'OR',z=+(q.get('z')||8);
 const map=L.map('m').setView([lat,lon],z);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(map);
 const lc=L.control.layers(null,{},{collapsed:innerWidth<600}).addTo(map),wx=MapX.weather(map,lon);for(const k in wx)lc.addOverlay(wx[k],k);MapX.aircraft(map,lc,document.getElementById('n2'));MapX.sats(map,lc,document.getElementById('n2'));MapX.buttons(map,lc,document.getElementById('bar'),[document.getElementById('n2'),document.getElementById('n')]);
-wx['🌧 Radar loop (RainViewer, ~2 h)'].addTo(map);
+wx['🌧 Radar loop (NOAA NEXRAD, 50 min)'].addTo(map);
 MapX.traffic(map,'data/',lat,lon,st,document.getElementById('n')).then(o=>{for(const k in o){lc.addOverlay(o[k],k);if(!/Work/.test(k))o[k].addTo(map)}});
 </script></body></html>

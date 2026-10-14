@@ -1,0 +1,131 @@
+outcome,predictor,weather_adjusted,kind,pct_change,ci_lo,ci_hi,p,n_days,start,end,mean_daily,q_fdr,bonferroni_sig
+crashes_all_6cty,pressure_msl,False,per 1 SD,-2.661,-3.2789,-2.0391,0.0,6575,2007-01-01,2024-12-31,33.3854,0.0,True
+crashes_all_6cty,tmin_freezing,False,yes/no,6.9919,4.9172,9.1078,0.0,6575,2007-01-01,2024-12-31,33.3854,0.0,True
+crashes_all_6cty,rain_day(>0.1in),False,yes/no,12.8166,11.1218,14.5373,0.0,6575,2007-01-01,2024-12-31,33.3854,0.0,True
+crashes_all_6cty,rain_in,False,per 1 SD,4.8888,4.2799,5.5012,0.0,6575,2007-01-01,2024-12-31,33.3854,0.0,True
+crashes_all_6cty,snow_day,False,yes/no,30.869,17.7266,45.4786,0.0,2735,2013-07-01,2024-12-31,34.0201,0.0,True
+crashes_all_6cty,first_rain_after_7dry,False,yes/no,13.1858,6.6673,20.1027,0.0,6575,2007-01-01,2024-12-31,33.3854,0.0003,True
+crashes_lane,rain_day(>0.1in),False,yes/no,10.4742,7.9128,13.0965,0.0,6575,2007-01-01,2024-12-31,10.1551,0.0,True
+crashes_all_6cty,rsv_hosp_rate_or,False,per 1 SD,3.3545,1.9738,4.7538,0.0,1991,2018-09-30,2024-12-31,33.9297,0.0,True
+crashes_lane,tmin_freezing,False,yes/no,9.3365,6.1252,12.645,0.0,6575,2007-01-01,2024-12-31,10.1551,0.0,True
+crashes_lane,rain_in,False,per 1 SD,4.1307,3.1866,5.0834,0.0,6575,2007-01-01,2024-12-31,10.1551,0.0,True
+crashes_injury_fatal_6cty,rain_in,False,per 1 SD,3.9688,3.2605,4.6821,0.0,6575,2007-01-01,2024-12-31,17.3381,0.0,True
+crashes_injury_fatal_6cty,pressure_msl,False,per 1 SD,-2.2172,-2.9299,-1.4992,0.0,6575,2007-01-01,2024-12-31,17.3381,0.0,True
+crashes_injury_fatal_6cty,rain_day(>0.1in),False,yes/no,9.2445,7.344,11.1787,0.0,6575,2007-01-01,2024-12-31,17.3381,0.0,True
+springfield_police_calls,rain_in,False,per 1 SD,-2.5123,-3.6063,-1.4059,0.0,1377,2023-01-02,2026-10-09,77.0167,0.0001,True
+eugene_police_calls,rain_day(>0.1in),False,yes/no,-4.4423,-6.3334,-2.513,0.0,1379,2023-01-02,2026-10-11,152.5801,0.0001,True
+crashes_injury_fatal_6cty,rsv_hosp_rate_or,False,per 1 SD,4.0021,2.3631,5.6674,0.0,1991,2018-09-30,2024-12-31,18.7936,0.0,True
+springfield_police_calls,flu_hosp_rate_or,False,per 1 SD,3.6435,1.9216,5.3946,0.0,1077,2023-01-02,2026-10-03,75.5627,0.0002,True
+eugene_police_calls,covid_hosp_rate_or,False,per 1 SD,-2.6147,-3.9306,-1.2808,0.0001,1371,2023-01-02,2026-10-03,152.6397,0.0009,True
+springfield_police_calls,rain_day(>0.1in),False,yes/no,-5.503,-8.0647,-2.8699,0.0001,1379,2023-01-02,2026-10-11,76.9993,0.0004,True
+crashes_all_6cty,epa_aqi_official,False,per 1 SD,-1.3344,-2.0358,-0.6281,0.0002,6575,2007-01-01,2024-12-31,33.3854,0.0014,True
+crashes_injury_fatal_6cty,tmax,False,per 1 SD,2.8117,1.3273,4.3179,0.0002,6575,2007-01-01,2024-12-31,17.3381,0.0012,True
+crashes_all_6cty,pm25,False,per 1 SD,-2.871,-4.4303,-1.2862,0.0004,882,2022-08-03,2024-12-31,34.7426,0.0025,False
+eugene_police_calls,rain_in,False,per 1 SD,-1.4278,-2.2191,-0.6302,0.0005,1377,2023-01-02,2026-10-09,152.5977,0.0027,False
+crashes_injury_fatal_6cty,tmin_freezing,False,yes/no,4.0305,1.6925,6.4222,0.0007,6575,2007-01-01,2024-12-31,17.3381,0.0036,False
+springfield_police_calls,epa_aqi_official,False,per 1 SD,2.0735,0.8622,3.2993,0.0008,1185,2023-01-02,2026-03-31,77.8591,0.0039,False
+crashes_lane,first_rain_after_7dry,False,yes/no,15.6188,5.7223,26.4417,0.0015,6575,2007-01-01,2024-12-31,10.1551,0.0074,False
+crashes_all_6cty,moon_illum,True,per 1 SD,-0.963,-1.5573,-0.3652,0.0016,6575,2007-01-01,2024-12-31,33.3854,0.0078,False
+crashes_lane,rsv_hosp_rate_or,False,per 1 SD,3.5238,1.2778,5.8196,0.002,1991,2018-09-30,2024-12-31,9.7634,0.0092,False
+crashes_lane,moon_illum,True,per 1 SD,-1.435,-2.3486,-0.5127,0.0024,6575,2007-01-01,2024-12-31,10.1551,0.0104,False
+crashes_lane,pressure_msl,False,per 1 SD,-1.5022,-2.4615,-0.5336,0.0024,6575,2007-01-01,2024-12-31,10.1551,0.0104,False
+eugene_police_calls,tmax,False,per 1 SD,2.3706,0.8293,3.9355,0.0025,1377,2023-01-02,2026-10-09,152.5977,0.0104,False
+crashes_all_6cty,tmax,False,per 1 SD,-1.9624,-3.2203,-0.6883,0.0026,6575,2007-01-01,2024-12-31,33.3854,0.0107,False
+springfield_police_calls,tmax,False,per 1 SD,3.1231,1.0228,5.267,0.0034,1377,2023-01-02,2026-10-09,77.0167,0.0134,False
+crashes_injury_fatal_6cty,epa_aqi_official,False,per 1 SD,-1.1451,-1.9132,-0.3709,0.0038,6575,2007-01-01,2024-12-31,17.3381,0.0146,False
+springfield_police_calls,rsv_hosp_rate_or,False,per 1 SD,2.3989,0.7472,4.0777,0.0043,1371,2023-01-02,2026-10-03,77.0708,0.0159,False
+eugene_police_calls,rsv_hosp_rate_or,False,per 1 SD,1.7067,0.5062,2.9216,0.0052,1371,2023-01-02,2026-10-03,152.6397,0.0188,False
+crashes_all_6cty,full_moon(±1d),True,yes/no,-2.6512,-4.523,-0.7427,0.0067,6575,2007-01-01,2024-12-31,33.3854,0.0235,False
+crashes_lane,epa_aqi_official,False,per 1 SD,-1.4926,-2.5831,-0.3899,0.0081,6575,2007-01-01,2024-12-31,10.1551,0.0277,False
+crashes_all_6cty,kp_max,True,per 1 SD,0.8267,0.1898,1.4678,0.0109,6575,2007-01-01,2024-12-31,33.3854,0.0363,False
+crashes_injury_fatal_6cty,moon_illum,True,per 1 SD,-0.8867,-1.5714,-0.1974,0.0118,6575,2007-01-01,2024-12-31,17.3381,0.0383,False
+crashes_injury_fatal_6cty,pm25,False,per 1 SD,-2.3747,-4.2389,-0.4743,0.0146,882,2022-08-03,2024-12-31,19.1111,0.0461,False
+springfield_police_calls,pm25,False,per 1 SD,1.2651,0.2428,2.2978,0.0152,1379,2023-01-02,2026-10-11,76.9993,0.0469,False
+fatal_crashes_FARS_9cty,tmin_freezing,False,yes/no,9.0635,1.6378,17.0317,0.0159,18263,1975-01-01,2024-12-31,0.4628,0.048,False
+springfield_police_calls,pressure_msl,False,per 1 SD,1.2348,0.1875,2.293,0.0207,1379,2023-01-02,2026-10-11,76.9993,0.0612,False
+crashes_all_6cty,flu_hosp_rate_or,False,per 1 SD,1.8017,0.2117,3.4169,0.0262,1361,2018-09-30,2024-12-31,34.5195,0.075,False
+crashes_injury_fatal_6cty,first_rain_after_7dry,False,yes/no,7.9762,0.8977,15.5513,0.0265,6575,2007-01-01,2024-12-31,17.3381,0.075,False
+crashes_injury_fatal_6cty,full_moon(±1d),True,yes/no,-2.4483,-4.6057,-0.242,0.0298,6575,2007-01-01,2024-12-31,17.3381,0.0825,False
+eugene_police_calls,pressure_msl,False,per 1 SD,0.8286,0.0636,1.5995,0.0337,1379,2023-01-02,2026-10-11,152.5801,0.0913,False
+eugene_police_calls,covid_wastewater_log10,False,per 1 SD,1.123,0.0352,2.2227,0.043,1316,2023-01-02,2026-10-06,153.0532,0.1141,False
+crashes_all_6cty,pressure_change_24h,False,per 1 SD,-0.6386,-1.2559,-0.0175,0.0439,6575,2007-01-01,2024-12-31,33.3854,0.1142,False
+fatal_crashes_FARS_9cty,full_moon(±1d),True,yes/no,-6.9255,-13.2827,-0.1022,0.0468,18257,1975-01-01,2024-12-31,0.4629,0.1192,False
+eugene_police_calls,tmin_freezing,False,yes/no,-2.5983,-5.1811,0.055,0.0549,1379,2023-01-02,2026-10-11,152.5801,0.1372,False
+crashes_injury_fatal_6cty,kp_max,True,per 1 SD,0.7012,-0.0304,1.4383,0.0604,6575,2007-01-01,2024-12-31,17.3381,0.148,False
+fatal_crashes_FARS_9cty,pressure_change_24h,False,per 1 SD,-2.0672,-4.2108,0.1244,0.0643,18263,1975-01-01,2024-12-31,0.4628,0.1549,False
+fatal_crashes_FARS_9cty,tmax,False,per 1 SD,3.9913,-0.3065,8.4743,0.0691,18262,1975-01-01,2024-12-31,0.4629,0.1634,False
+crashes_injury_fatal_6cty,pressure_change_24h,False,per 1 SD,-0.6454,-1.3478,0.062,0.0737,6575,2007-01-01,2024-12-31,17.3381,0.171,False
+crashes_lane,full_moon(±1d),True,yes/no,-2.6135,-5.4958,0.3567,0.084,6575,2007-01-01,2024-12-31,10.1551,0.1917,False
+eugene_police_calls,tide_range,True,per 1 SD,0.6616,-0.0957,1.4247,0.087,1338,2023-01-02,2026-08-31,152.5867,0.1939,False
+eugene_police_calls,flu_hosp_rate_or,False,per 1 SD,1.0753,-0.1644,2.3304,0.0894,1077,2023-01-02,2026-10-03,151.2136,0.1939,False
+fatal_crashes_FARS_9cty,solar_wind_speed,True,per 1 SD,2.1047,-0.3209,4.5894,0.0895,16543,1975-01-01,2024-12-31,0.4618,0.1939,False
+crashes_all_6cty,us_aqi_max,False,per 1 SD,-1.3263,-2.8559,0.2274,0.0939,881,2022-08-04,2024-12-31,34.7378,0.2002,False
+springfield_police_calls,first_rain_after_7dry,False,yes/no,-7.8924,-16.4883,1.5882,0.1,1379,2023-01-02,2026-10-11,76.9993,0.2084,False
+springfield_police_calls,covid_wastewater_log10,False,per 1 SD,1.2451,-0.2412,2.7535,0.101,1316,2023-01-02,2026-10-06,77.2196,0.2084,False
+crashes_all_6cty,solar_wind_speed,True,per 1 SD,0.5208,-0.1083,1.1538,0.1049,6575,2007-01-01,2024-12-31,33.3854,0.213,False
+springfield_police_calls,covid_hosp_rate_or,False,per 1 SD,-1.4983,-3.2923,0.329,0.1075,1371,2023-01-02,2026-10-03,77.0708,0.2149,False
+springfield_police_calls,quakes_500km_M2.5+,True,per 1 SD,-0.9091,-2.016,0.2104,0.1111,1377,2023-01-02,2026-10-09,77.0167,0.2188,False
+eugene_police_calls,first_rain_after_7dry,False,yes/no,-5.1607,-11.6296,1.7818,0.1416,1379,2023-01-02,2026-10-11,152.5801,0.2747,False
+springfield_police_calls,us_aqi_max,False,per 1 SD,0.7471,-0.2698,1.7745,0.1504,1379,2023-01-02,2026-10-11,76.9993,0.2876,False
+crashes_lane,kp_max,True,per 1 SD,0.7096,-0.2722,1.701,0.1572,6575,2007-01-01,2024-12-31,10.1551,0.2961,False
+fatal_crashes_FARS_9cty,covid_wastewater_log10,False,per 1 SD,-6.3324,-14.6673,2.8166,0.1689,1567,2020-09-15,2024-12-31,0.5533,0.3136,False
+eugene_police_calls,moon_illum,True,per 1 SD,-0.5027,-1.2313,0.2314,0.179,1377,2023-01-02,2026-10-09,152.5977,0.3278,False
+springfield_police_calls,kp_max,True,per 1 SD,0.6873,-0.3329,1.718,0.1874,1377,2023-01-02,2026-10-09,77.0167,0.3384,False
+fatal_crashes_FARS_9cty,quakes_500km_M2.5+,True,per 1 SD,1.2189,-0.678,3.1519,0.2094,18257,1975-01-01,2024-12-31,0.4629,0.3729,False
+springfield_police_calls,full_moon(±1d),True,yes/no,-1.9766,-5.0579,1.2048,0.2205,1377,2023-01-02,2026-10-09,77.0167,0.3874,False
+crashes_lane,tmax,False,per 1 SD,-1.1918,-3.1149,0.7695,0.2318,6575,2007-01-01,2024-12-31,10.1551,0.4003,False
+fatal_crashes_FARS_9cty,covid_hosp_rate_or,False,per 1 SD,-5.7713,-14.5594,3.9206,0.234,1767,2020-03-01,2024-12-31,0.5439,0.4003,False
+springfield_police_calls,solar_wind_speed,True,per 1 SD,0.6177,-0.4819,1.7294,0.272,1366,2023-01-02,2026-09-29,77.0622,0.4552,False
+fatal_crashes_FARS_9cty,tide_range,True,per 1 SD,-1.2812,-3.5319,1.022,0.2731,16547,1979-06-01,2024-12-31,0.4541,0.4552,False
+crashes_lane,us_aqi_max,False,per 1 SD,-1.451,-4.0759,1.2456,0.2886,881,2022-08-04,2024-12-31,9.8717,0.4697,False
+fatal_crashes_FARS_9cty,rain_in,False,per 1 SD,1.2055,-1.0118,3.4724,0.289,18258,1975-01-01,2024-12-31,0.4629,0.4697,False
+crashes_lane,covid_wastewater_log10,False,per 1 SD,1.3544,-1.2021,3.9772,0.302,1567,2020-09-15,2024-12-31,9.7052,0.4847,False
+crashes_lane,pm25,False,per 1 SD,-1.323,-4.0455,1.4768,0.3508,882,2022-08-03,2024-12-31,9.8707,0.5562,False
+crashes_lane,tide_range,True,per 1 SD,0.44,-0.4998,1.3888,0.36,6575,2007-01-01,2024-12-31,10.1551,0.559,False
+crashes_all_6cty,covid_hosp_rate_or,False,per 1 SD,-0.7538,-2.3528,0.8714,0.3612,1767,2020-03-01,2024-12-31,32.9457,0.559,False
+crashes_injury_fatal_6cty,solar_wind_speed,True,per 1 SD,0.3345,-0.3928,1.0671,0.3683,6575,2007-01-01,2024-12-31,17.3381,0.5632,False
+crashes_injury_fatal_6cty,covid_wastewater_log10,False,per 1 SD,0.7768,-1.0181,2.6043,0.3987,1567,2020-09-15,2024-12-31,18.6796,0.6027,False
+fatal_crashes_FARS_9cty,kp_max,True,per 1 SD,0.9899,-1.3578,3.3934,0.4117,18257,1975-01-01,2024-12-31,0.4629,0.6109,False
+eugene_police_calls,quakes_500km_M2.5+,True,per 1 SD,0.2966,-0.4128,1.011,0.4135,1377,2023-01-02,2026-10-09,152.5977,0.6109,False
+crashes_lane,snow_day,False,yes/no,7.9368,-10.683,30.4382,0.4292,2735,2013-07-01,2024-12-31,9.8581,0.6269,False
+crashes_lane,flu_hosp_rate_or,False,per 1 SD,1.0069,-1.5064,3.5844,0.4358,1361,2018-09-30,2024-12-31,9.9963,0.6295,False
+crashes_injury_fatal_6cty,snow_day,False,yes/no,5.4128,-8.2332,21.0879,0.4561,2735,2013-07-01,2024-12-31,18.8936,0.6516,False
+eugene_police_calls,kp_max,True,per 1 SD,-0.2708,-1.0178,0.482,0.4797,1377,2023-01-02,2026-10-09,152.5977,0.6603,False
+fatal_crashes_FARS_9cty,epa_aqi_official,False,per 1 SD,0.8109,-1.4318,3.1047,0.4817,16374,1980-01-01,2024-12-31,0.4528,0.6603,False
+crashes_all_6cty,covid_wastewater_log10,False,per 1 SD,0.5458,-0.9697,2.0845,0.4824,1567,2020-09-15,2024-12-31,33.9094,0.6603,False
+crashes_injury_fatal_6cty,flu_hosp_rate_or,False,per 1 SD,0.6505,-1.1662,2.5006,0.4854,1361,2018-09-30,2024-12-31,19.0566,0.6603,False
+fatal_crashes_FARS_9cty,rsv_hosp_rate_or,False,per 1 SD,-2.9899,-11.0165,5.7607,0.4909,1991,2018-09-30,2024-12-31,0.5244,0.6603,False
+crashes_injury_fatal_6cty,us_aqi_max,False,per 1 SD,-0.6468,-2.4717,1.2122,0.4927,881,2022-08-04,2024-12-31,19.1101,0.6603,False
+eugene_police_calls,us_aqi_max,False,per 1 SD,-0.2366,-0.983,0.5154,0.5365,1379,2023-01-02,2026-10-11,152.5801,0.7116,False
+crashes_lane,solar_wind_speed,True,per 1 SD,0.2782,-0.6899,1.2557,0.5746,6575,2007-01-01,2024-12-31,10.1551,0.7475,False
+crashes_injury_fatal_6cty,storm_Kp>=5,True,yes/no,0.7932,-1.9526,3.6159,0.575,6575,2007-01-01,2024-12-31,17.3381,0.7475,False
+springfield_police_calls,moon_illum,True,per 1 SD,-0.2776,-1.2692,0.7239,0.5856,1377,2023-01-02,2026-10-09,77.0167,0.7537,False
+crashes_all_6cty,tide_range,True,per 1 SD,0.1633,-0.4434,0.7737,0.5986,6575,2007-01-01,2024-12-31,33.3854,0.7629,False
+crashes_injury_fatal_6cty,covid_hosp_rate_or,False,per 1 SD,-0.4611,-2.3643,1.4791,0.6389,1767,2020-03-01,2024-12-31,18.1483,0.8064,False
+springfield_police_calls,tide_range,True,per 1 SD,-0.2365,-1.2552,0.7926,0.6511,1338,2023-01-02,2026-08-31,77.1099,0.8095,False
+eugene_police_calls,pressure_change_24h,False,per 1 SD,0.1688,-0.5668,0.9098,0.6538,1379,2023-01-02,2026-10-11,152.5801,0.8095,False
+fatal_crashes_FARS_9cty,pm25,False,per 1 SD,-2.1601,-11.394,8.036,0.6659,882,2022-08-03,2024-12-31,0.5567,0.8167,False
+crashes_all_6cty,quakes_500km_M2.5+,True,per 1 SD,-0.1264,-0.7149,0.4656,0.6749,6575,2007-01-01,2024-12-31,33.3854,0.8199,False
+crashes_all_6cty,storm_Kp>=5,True,yes/no,0.4819,-1.9218,2.9446,0.6971,6575,2007-01-01,2024-12-31,33.3854,0.8392,False
+eugene_police_calls,pm25,False,per 1 SD,-0.1456,-0.9017,0.6164,0.7072,1379,2023-01-02,2026-10-11,152.5801,0.8435,False
+crashes_lane,quakes_500km_M2.5+,True,per 1 SD,-0.1546,-1.0637,0.7628,0.7402,6575,2007-01-01,2024-12-31,10.1551,0.8706,False
+eugene_police_calls,full_moon(±1d),True,yes/no,-0.39,-2.6931,1.9676,0.7434,1377,2023-01-02,2026-10-09,152.5977,0.8706,False
+fatal_crashes_FARS_9cty,flu_hosp_rate_or,False,per 1 SD,-1.5143,-10.7522,8.6797,0.7614,1361,2018-09-30,2024-12-31,0.4842,0.8838,False
+crashes_injury_fatal_6cty,quakes_500km_M2.5+,True,per 1 SD,0.0988,-0.5748,0.7769,0.7745,6575,2007-01-01,2024-12-31,17.3381,0.891,False
+eugene_police_calls,storm_Kp>=5,True,yes/no,0.2978,-1.8879,2.5321,0.7914,1377,2023-01-02,2026-10-09,152.5977,0.9025,False
+crashes_injury_fatal_6cty,tide_range,True,per 1 SD,0.0872,-0.612,0.7914,0.8074,6575,2007-01-01,2024-12-31,17.3381,0.9128,False
+fatal_crashes_FARS_9cty,pressure_msl,False,per 1 SD,-0.2719,-2.5187,2.0267,0.8148,18263,1975-01-01,2024-12-31,0.4628,0.9132,False
+eugene_police_calls,solar_wind_speed,True,per 1 SD,-0.0922,-0.9014,0.7236,0.8241,1366,2023-01-02,2026-09-29,152.5922,0.9157,False
+eugene_police_calls,epa_aqi_official,False,per 1 SD,0.0932,-0.7956,0.99,0.8378,1185,2023-01-02,2026-03-31,153.4878,0.9186,False
+fatal_crashes_FARS_9cty,storm_Kp>=5,True,yes/no,-0.6273,-6.7532,5.9012,0.8463,18257,1975-01-01,2024-12-31,0.4629,0.9186,False
+fatal_crashes_FARS_9cty,moon_illum,True,per 1 SD,-0.2035,-2.3245,1.9636,0.8526,18257,1975-01-01,2024-12-31,0.4629,0.9186,False
+fatal_crashes_FARS_9cty,us_aqi_max,False,per 1 SD,-0.8772,-9.816,8.9475,0.855,881,2022-08-04,2024-12-31,0.5573,0.9186,False
+fatal_crashes_FARS_9cty,snow_day,False,yes/no,-3.1429,-32.9445,39.9036,0.8648,10479,1975-01-01,2024-12-31,0.5085,0.9216,False
+crashes_lane,covid_hosp_rate_or,False,per 1 SD,-0.2084,-2.8847,2.5416,0.8804,1767,2020-03-01,2024-12-31,9.4041,0.9306,False
+springfield_police_calls,storm_Kp>=5,True,yes/no,0.1952,-2.7692,3.2501,0.8987,1377,2023-01-02,2026-10-09,77.0167,0.9325,False
+fatal_crashes_FARS_9cty,first_rain_after_7dry,False,yes/no,-1.1895,-19.3402,21.0456,0.908,18263,1975-01-01,2024-12-31,0.4628,0.9325,False
+crashes_lane,pressure_change_24h,False,per 1 SD,-0.0552,-0.9982,0.8968,0.9091,6575,2007-01-01,2024-12-31,10.1551,0.9325,False
+crashes_lane,storm_Kp>=5,True,yes/no,0.2139,-3.4716,4.04,0.911,6575,2007-01-01,2024-12-31,10.1551,0.9325,False
+fatal_crashes_FARS_9cty,rain_day(>0.1in),False,yes/no,0.1567,-5.1763,5.7896,0.9553,18263,1975-01-01,2024-12-31,0.4628,0.9702,False
+springfield_police_calls,tmin_freezing,False,yes/no,0.0779,-3.5196,3.8096,0.9667,1379,2023-01-02,2026-10-11,76.9993,0.9741,False
+springfield_police_calls,pressure_change_24h,False,per 1 SD,0.0167,-0.9862,1.0298,0.9741,1379,2023-01-02,2026-10-11,76.9993,0.9741,False

@@ -12,20 +12,26 @@ window.MapX={esc,km:kmx,
   ir.addTo(sat);
   if(window.TOMTOM_KEY)ov['🚦 Live traffic flow (TomTom)']=L.tileLayer(`https://api.tomtom.com/traffic/map/4/tile/flow/relative0/{z}/{x}/{y}.png?key=${window.TOMTOM_KEY}`,{opacity:.85,attribution:'Traffic © TomTom'});
   if(window.TOMTOM_KEY)ov['🚦 Traffic incidents (TomTom)']=L.tileLayer(`https://api.tomtom.com/traffic/map/4/tile/incidents/s3/{z}/{x}/{y}.png?key=${window.TOMTOM_KEY}`,{opacity:.9,attribution:'Traffic © TomTom'});
-  ov['🌧 Radar loop (RainViewer, ~2 h)']=radar; ov['🌧 NEXRAD now (IEM)']=nex; ov['☁️ Satellite IR (GOES)']=sat; ov['☁️ Satellite visible (GOES, daytime)']=vis;
+  // ArcGIS ImageServer exportImage as Leaflet tiles (NOAA mapservices: MRMS radar, NDGD/HRRR smoke)
+  const AG=(u,o)=>{const T=L.TileLayer.extend({getTileUrl(c){const z=c.z,n=2**z,E=20037508.342789244,sz=2*E/n,x0=-E+c.x*sz,y1=E-c.y*sz;
+    return `${u}/exportImage?bbox=${x0},${y1-sz},${x0+sz},${y1}&bboxSR=3857&imageSR=3857&size=256,256&format=png32&transparent=true&f=image`}});return new T('',o)};
+  const mrms=AG('https://mapservices.weather.noaa.gov/eventdriven/rest/services/radar/radar_base_reflectivity_time/ImageServer',{opacity:.65,attribution:'NOAA MRMS radar'});
+  const smoke=AG('https://mapservices.weather.noaa.gov/raster/rest/services/air_quality/ndgd_smoke_sfc_1hr_avg_time/ImageServer',{opacity:.55,attribution:'NOAA NDGD/HRRR near-surface smoke'});
+  ov['🌧 Radar loop (NOAA NEXRAD, 50 min)']=radar; ov['🌧 NOAA MRMS radar now']=mrms; ov['🌧 NEXRAD now (IEM)']=nex; ov['🔥 Near-surface smoke forecast (NOAA)']=smoke; ov['☁️ Satellite IR (GOES)']=sat; ov['☁️ Satellite visible (GOES, daytime)']=vis;
   let frames=[],i=0,timer=null,op=.65,lyr=[];
   panel.onAdd=()=>{const d=L.DomUtil.create('div');d.style.cssText='background:#16212dee;color:#e6edf3;padding:6px 8px;border-radius:8px;font:12px system-ui';
    d.innerHTML=`<button id="rvPlay" style="padding:2px 8px">⏸</button> <span id="rvT">radar…</span><br>opacity <input id="rvOp" type="range" min="0" max="100" value="65" style="width:110px;vertical-align:middle">`;
    L.DomEvent.disableClickPropagation(d);return d};
   panel.addTo(map);
-  const show=k=>{lyr.forEach((l,j)=>l.setOpacity(j==k?op:0));const f=frames[k];if(f)document.getElementById('rvT').textContent='Radar '+new Date(f.time*1e3).toLocaleTimeString([], {hour:'numeric',minute:'2-digit',timeZoneName:'short'})+(k==frames.length-1?' (latest)':'')};
+  const show=k=>{lyr.forEach((l,j)=>l.setOpacity(j==k?op:0));const f=frames[k];if(f!=null)document.getElementById('rvT').textContent='NOAA radar '+(f?`−${f} min`:'(latest)')};
   const play=()=>{if(timer)return;timer=setInterval(()=>{i=(i+1)%frames.length;show(i)},600);document.getElementById('rvPlay').textContent='⏸'};
   const pause=()=>{clearInterval(timer);timer=null;document.getElementById('rvPlay').textContent='▶'};
   setTimeout(()=>{document.getElementById('rvPlay').onclick=()=>timer?pause():play();
-   document.getElementById('rvOp').oninput=e=>{op=e.target.value/100;show(i);[nex,ir,vis].forEach(l=>l.setOpacity(op))}},0);
-  fetch('https://api.rainviewer.com/public/weather-maps.json').then(r=>r.json()).then(j=>{frames=j.radar.past;
-   lyr=frames.map(f=>L.tileLayer(`${j.host}${f.path}/256/{z}/{x}/{y}/2/1_1.png`,{opacity:0,maxNativeZoom:7,maxZoom:18,attribution:'RainViewer'}).addTo(radar));
-   i=frames.length-1;show(i);play()}).catch(()=>{document.getElementById('rvT').textContent='RainViewer unavailable'});
+   document.getElementById('rvOp').oninput=e=>{op=e.target.value/100;show(i);[nex,ir,vis,mrms,smoke].forEach(l=>l.setOpacity(op))}},0);
+  // IEM NEXRAD composite frames (public NOAA data; replaces personal-use-only RainViewer)
+  frames=[50,45,40,35,30,25,20,15,10,5,0];
+  lyr=frames.map(m=>L.tileLayer(`https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913${m?'-m'+String(m).padStart(2,'0')+'m':''}/{z}/{x}/{y}.png`,{opacity:0,attribution:'NOAA NEXRAD via Iowa Mesonet'}).addTo(radar));
+  i=frames.length-1;show(i);play();
   return ov},
  // Live traffic: relay (Cloudflare Worker, if configured) > GitHub 'live' branch (10-min Actions relay) > 3-h site snapshot.
  // Plus WZDx feeds that allow browser CORS are fetched directly. Auto-refresh every 3 min.

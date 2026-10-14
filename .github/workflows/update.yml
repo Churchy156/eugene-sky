@@ -24,6 +24,14 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Incremental data update
         run: python update.py
+      - name: New free sources (EPA AQS AQI, CDC wastewater/RESP-NET, FBI CDE crime, Treasury, CISA KEV)
+        env:
+          NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
+          MASTER: data/eugene_env_daily.csv.gz
+          DICT: column_dictionary.csv
+          AQS_FROM: '2025'
+          RAWDIR: /tmp/rawnew
+        run: timeout 600 python zip_tools/update_new.py || echo "new sources failed (non-fatal)"
       - name: Build dashboard
         run: python make_dash.py site/index.html
       - name: NASA DONKI + NeoWs, cyber feeds (merged into dataset)
