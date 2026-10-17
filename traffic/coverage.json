@@ -1,0 +1,257 @@
+{
+"built": "2026-10-17T18:39+00:00",
+"states": {
+"IA": {
+"wz": [
+"WZDx: Iowa DOT"
+]
+},
+"WI": {
+"wz": [
+"WZDx: Wisconsin DOT"
+]
+},
+"MD": {
+"wz": [
+"WZDx: Maryland DOT"
+]
+},
+"HI": {
+"wz": [
+"WZDx: Hawaii DOT"
+]
+},
+"FL": {
+"wz": [
+"WZDx: Florida DOT"
+]
+},
+"UT": {
+"wz": [
+"WZDx: Utah DOT"
+]
+},
+"OK": {
+"wz": [
+"WZDx: Oklahoma DOT"
+]
+},
+"MO": {
+"wz": [
+"WZDx: Missouri DOT",
+"WZDx: St. Charles County"
+]
+},
+"KY": {
+"wz": [
+"WZDx: Kentucky Transportation Cabinet"
+]
+},
+"NJ": {
+"wz": [
+"WZDx: New Jersey Institute of Technology"
+]
+},
+"WA": {
+"wz": [
+"WZDx: Washington State DOT"
+]
+},
+"LA": {
+"wz": [
+"WZDx: Louisiana DOTD"
+]
+},
+"DE": {
+"wz": [
+"WZDx: Delaware DOT"
+]
+},
+"AZ": {
+"wz": [
+"WZDx: Maricopa County DOT"
+]
+},
+"ID": {
+"wz": [
+"WZDx: Idaho DOT"
+]
+},
+"MS": {
+"wz": [
+"WZDx: Mississippi DOT"
+]
+},
+"ND": {
+"wz": [
+"WZDx: North Dakota DOT"
+]
+},
+"MN": {
+"wz": [
+"WZDx: Minnesota DOT"
+]
+},
+"TX": {
+"wz": [
+"WZDx: City of Austin"
+]
+},
+"OR": {
+"wz": [
+"WZDx: ODOT"
+],
+"cam": [
+"ODOT TripCheck"
+],
+"inc": [
+"ODOT TripCheck"
+]
+},
+"NC": {
+"wz": [
+"WZDx: North Carolina DOT"
+]
+},
+"IN": {
+"wz": [
+"WZDx: Indiana DOT"
+]
+},
+"KS": {
+"wz": [
+"WZDx: Kansas DOT"
+]
+},
+"CA": {
+"cam": [
+"Caltrans CWWP2"
+],
+"inc": [
+"CHP CAD"
+]
+}
+},
+"counts": {
+"IA": {
+"cam": 0,
+"inc": 0,
+"wz": 1110
+},
+"WI": {
+"cam": 0,
+"inc": 0,
+"wz": 3714
+},
+"MD": {
+"cam": 0,
+"inc": 0,
+"wz": 57
+},
+"HI": {
+"cam": 0,
+"inc": 0,
+"wz": 66
+},
+"FL": {
+"cam": 0,
+"inc": 0,
+"wz": 29050
+},
+"UT": {
+"cam": 0,
+"inc": 0,
+"wz": 744
+},
+"OK": {
+"cam": 0,
+"inc": 0,
+"wz": 73
+},
+"MO": {
+"cam": 0,
+"inc": 0,
+"wz": 648
+},
+"KY": {
+"cam": 0,
+"inc": 0,
+"wz": 213
+},
+"NJ": {
+"cam": 0,
+"inc": 0,
+"wz": 415
+},
+"WA": {
+"cam": 0,
+"inc": 0,
+"wz": 470
+},
+"LA": {
+"cam": 0,
+"inc": 0,
+"wz": 1
+},
+"DE": {
+"cam": 0,
+"inc": 0,
+"wz": 6
+},
+"AZ": {
+"cam": 0,
+"inc": 0,
+"wz": 2549
+},
+"ID": {
+"cam": 0,
+"inc": 0,
+"wz": 580
+},
+"MS": {
+"cam": 0,
+"inc": 0,
+"wz": 119
+},
+"ND": {
+"cam": 0,
+"inc": 0,
+"wz": 78
+},
+"MN": {
+"cam": 0,
+"inc": 0,
+"wz": 427
+},
+"TX": {
+"cam": 0,
+"inc": 0,
+"wz": 2673
+},
+"OR": {
+"cam": 1131,
+"inc": 134,
+"wz": 184
+},
+"NC": {
+"cam": 0,
+"inc": 0,
+"wz": 6450
+},
+"IN": {
+"cam": 0,
+"inc": 0,
+"wz": 1192
+},
+"KS": {
+"cam": 0,
+"inc": 0,
+"wz": 403
+},
+"CA": {
+"cam": 3407,
+"inc": 93,
+"wz": 0
+}
+}
+}
