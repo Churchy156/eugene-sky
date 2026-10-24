@@ -1,0 +1,247 @@
+{
+"built": "2026-10-24T13:33+00:00",
+"states": {
+"IA": {
+"wz": [
+"WZDx: Iowa DOT"
+]
+},
+"WI": {
+"wz": [
+"WZDx: Wisconsin DOT"
+]
+},
+"HI": {
+"wz": [
+"WZDx: Hawaii DOT"
+]
+},
+"UT": {
+"wz": [
+"WZDx: Utah DOT"
+]
+},
+"MO": {
+"wz": [
+"WZDx: Missouri DOT",
+"WZDx: St. Charles County"
+]
+},
+"FL": {
+"wz": [
+"WZDx: Florida DOT"
+]
+},
+"MD": {
+"wz": [
+"WZDx: Maryland DOT"
+]
+},
+"OK": {
+"wz": [
+"WZDx: Oklahoma DOT"
+]
+},
+"WA": {
+"wz": [
+"WZDx: Washington State DOT"
+]
+},
+"LA": {
+"wz": [
+"WZDx: Louisiana DOTD"
+]
+},
+"DE": {
+"wz": [
+"WZDx: Delaware DOT"
+]
+},
+"MN": {
+"wz": [
+"WZDx: Minnesota DOT"
+]
+},
+"NJ": {
+"wz": [
+"WZDx: New Jersey Institute of Technology"
+]
+},
+"KY": {
+"wz": [
+"WZDx: Kentucky Transportation Cabinet"
+]
+},
+"ND": {
+"wz": [
+"WZDx: North Dakota DOT"
+]
+},
+"AZ": {
+"wz": [
+"WZDx: Maricopa County DOT"
+]
+},
+"MS": {
+"wz": [
+"WZDx: Mississippi DOT"
+]
+},
+"ID": {
+"wz": [
+"WZDx: Idaho DOT"
+]
+},
+"IN": {
+"wz": [
+"WZDx: Indiana DOT"
+]
+},
+"TX": {
+"wz": [
+"WZDx: City of Austin"
+]
+},
+"KS": {
+"wz": [
+"WZDx: Kansas DOT"
+]
+},
+"OR": {
+"wz": [
+"WZDx: ODOT"
+],
+"cam": [
+"ODOT TripCheck"
+],
+"inc": [
+"ODOT TripCheck"
+]
+},
+"CA": {
+"cam": [
+"Caltrans CWWP2"
+],
+"inc": [
+"CHP CAD"
+]
+}
+},
+"counts": {
+"IA": {
+"cam": 0,
+"inc": 0,
+"wz": 930
+},
+"WI": {
+"cam": 0,
+"inc": 0,
+"wz": 3178
+},
+"HI": {
+"cam": 0,
+"inc": 0,
+"wz": 66
+},
+"UT": {
+"cam": 0,
+"inc": 0,
+"wz": 744
+},
+"MO": {
+"cam": 0,
+"inc": 0,
+"wz": 600
+},
+"FL": {
+"cam": 0,
+"inc": 0,
+"wz": 29287
+},
+"MD": {
+"cam": 0,
+"inc": 0,
+"wz": 74
+},
+"OK": {
+"cam": 0,
+"inc": 0,
+"wz": 74
+},
+"WA": {
+"cam": 0,
+"inc": 0,
+"wz": 443
+},
+"LA": {
+"cam": 0,
+"inc": 0,
+"wz": 2
+},
+"DE": {
+"cam": 0,
+"inc": 0,
+"wz": 16
+},
+"MN": {
+"cam": 0,
+"inc": 0,
+"wz": 408
+},
+"NJ": {
+"cam": 0,
+"inc": 0,
+"wz": 485
+},
+"KY": {
+"cam": 0,
+"inc": 0,
+"wz": 233
+},
+"ND": {
+"cam": 0,
+"inc": 0,
+"wz": 71
+},
+"AZ": {
+"cam": 0,
+"inc": 0,
+"wz": 2594
+},
+"MS": {
+"cam": 0,
+"inc": 0,
+"wz": 122
+},
+"ID": {
+"cam": 0,
+"inc": 0,
+"wz": 625
+},
+"IN": {
+"cam": 0,
+"inc": 0,
+"wz": 1141
+},
+"TX": {
+"cam": 0,
+"inc": 0,
+"wz": 2826
+},
+"KS": {
+"cam": 0,
+"inc": 0,
+"wz": 382
+},
+"OR": {
+"cam": 1131,
+"inc": 117,
+"wz": 168
+},
+"CA": {
+"cam": 3428,
+"inc": 66,
+"wz": 0
+}
+}
+}
