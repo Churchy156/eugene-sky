@@ -32,6 +32,8 @@ jobs:
           AQS_FROM: '2025'
           RAWDIR: /tmp/rawnew
         run: timeout 600 python zip_tools/update_new.py || echo "new sources failed (non-fatal)"
+      - name: Sports games within 100 mi (ESPN UO/OSU + MiLB refresh, merged into dataset)
+        run: timeout 300 python zip_tools/build_sports.py || echo "sports refresh failed (non-fatal)"
       - name: Build dashboard
         run: python make_dash.py site/index.html
       - name: NASA DONKI + NeoWs, cyber feeds (merged into dataset)
@@ -54,7 +56,7 @@ jobs:
         run: |
           git config user.name "eugene-sky-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/eugene_env_daily.csv.gz reports/ zip_src/data/games.json zip_src/data/donki.json zip_src/data/cyber.json zip_src/data/cyber_pub.json data/donki_daily.json data/cyber_daily.json zip_src/data/world.json || true
+          git add data/eugene_env_daily.csv.gz data/sports_games_100mi.csv reports/ zip_src/data/games.json zip_src/data/donki.json zip_src/data/cyber.json zip_src/data/cyber_pub.json data/donki_daily.json data/cyber_daily.json zip_src/data/world.json || true
           git diff --cached --quiet || git commit -m "data update $(date +'%Y-%m-%d %H:%M %Z')"
           git push || echo "push failed (non-fatal)"
       - uses: actions/upload-pages-artifact@v3

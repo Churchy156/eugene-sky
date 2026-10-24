@@ -28,7 +28,7 @@ def rows(lg, ev):
             c = e['competitions'][0]; a = c.get('venue', {}).get('address', {}); st = a.get('state'); city = (a.get('city') or '').lower()
             if not st or (st, city) not in P or c.get('neutralSite'): continue
             home = [x['team']['displayDisplayName' if 0 else 'displayName'] for x in c['competitors'] if x['homeAway'] == 'home'][0]
-            d = (dt.datetime.fromisoformat(e['date'].replace('Z', '+00:00')) - dt.timedelta(hours=7)).date().isoformat()
+            d = (dt.datetime.fromisoformat(e['date'].replace('Z', '+00:00')) - dt.timedelta(hours=7 if c.get('timeValid', True) else 5)).date().isoformat()  # TBA: ESPN stores midnight ET
             la, lo = P[(st, city)]; out.append([d, lg, home, la, lo])
         except Exception: continue
     return out

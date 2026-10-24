@@ -52,19 +52,59 @@ def rivers():
             L.append(f"- {n}: {o.get('primary')} {o.get('primaryUnit','ft')} observed, flood category: {o.get('floodCategory','?')}"+(f"; forecast {fc.get('primary')} ({fc.get('floodCategory')})" if fc.get('primary') not in (None,-999) else ''))
         except Exception as e: L.append(f'- {n}: unavailable ({e.__class__.__name__})')
     return L
+# Official kickoff times announced before ESPN's feed is updated (ESPN keeps a midnight-ET placeholder with timeValid=false)
+KICKOFF_OVERRIDES={('2483','2026-10-31'):('12:30','UO release 2026-10-19: Northwestern at Oregon, 12:30 PM PT, Peacock')}
+SPORTS_TODAY={}
+def _hav(lat,lon):
+    p1,p2=math.radians(LAT),math.radians(lat); dl=math.radians(lon-LON)
+    a=math.sin((p2-p1)/2)**2+math.cos(p1)*math.cos(p2)*math.sin(dl/2)**2; return 2*3958.8*math.asin(math.sqrt(a))
+_VEN={'Autzen Stadium':(44.0582,-123.0685),'Matthew Knight Arena':(44.0451,-123.0662),'Reser Stadium':(44.5595,-123.2811),
+      'Gill Coliseum':(44.5612,-123.2793),'PK Park':(44.059,-123.065),'Hayward Field':(44.0425,-123.0703),'Volcanoes Stadium':(45.0213,-123.0148)}
+def upcoming_games(days=7):
+    """Home games at venues within 100 mi of Eugene, today..today+days. Returns list of dicts sorted by date."""
+    G=[]; end=day+pd.Timedelta(days=days)
+    teams=[('2483','Ducks',(44.0451,-123.0662)),('204','Beavers',(44.5612,-123.2793))]
+    for sport,path in [('football','football/college-football'),("men's basketball",'basketball/mens-college-basketball'),("women's basketball",'basketball/womens-college-basketball')]:
+        for tid,nick,campus in teams:
+            try: ev=get(f'https://site.api.espn.com/apis/site/v2/sports/{path}/teams/{tid}/schedule').json().get('events',[])
+            except Exception: continue
+            for e in ev:
+                c=e['competitions'][0]; ts=pd.Timestamp(c.get('date') or e['date']); valid=c.get('timeValid',True)
+                # timeValid=false -> date/time not set; ESPN stores midnight Eastern, so take the Eastern date and show TBA
+                d=(ts.tz_convert(PT) if valid else ts.tz_convert('America/New_York')).tz_localize(None).normalize()
+                if not (day<=d<=end): continue
+                me=next((x for x in c['competitors'] if str(x['id'])==tid),None)
+                if not me or me.get('homeAway')!='home' or c.get('neutralSite'): continue
+                vn=(c.get('venue') or {}).get('fullName',''); ll=next((v for k,v in _VEN.items() if k in vn),campus)
+                if _hav(*ll)>100: continue
+                ko=ts.tz_convert(PT).strftime('%H:%M') if valid else None; note=''
+                ov=KICKOFF_OVERRIDES.get((tid,str(d.date())))
+                if ov and not ko: ko,note=ov
+                opp=next((x['team'].get('displayName','') for x in c['competitors'] if x is not me),'')
+                G.append(dict(date=d,ko=ko,team=nick,sport=sport,opp=opp,venue=vn,dist=_hav(*ll),note=note))
+    try:
+        j=get('https://statsapi.mlb.com/api/v1/schedule',params={'teamId':461,'sportId':13,'startDate':str(day.date()),'endDate':str(end.date())}).json()
+        for dd in j.get('dates',[]):
+            for g in dd['games']:
+                if g['teams']['home']['team']['id']!=461: continue
+                t=pd.Timestamp(g['gameDate']).tz_convert(PT)
+                G.append(dict(date=pd.Timestamp(dd['date']),ko=None if g.get('status',{}).get('startTimeTBD') else t.strftime('%H:%M'),team='Emeralds',sport='baseball',
+                              opp=g['teams']['away']['team']['name'],venue=g.get('venue',{}).get('name','PK Park'),dist=_hav(*_VEN['PK Park']),note=''))
+    except Exception: pass
+    return sorted(G,key=lambda g:(g['date'],g['ko'] or '99'))
 def events():
     L=[]
     hol=USFederalHolidayCalendar().holidays(day,day+pd.Timedelta(days=7))
     L+= [f"- US holiday: {h:%a %b %d}" for h in hol] or ['- No federal holidays in the next 7 days.']
-    for sport,path in [('Football','football/college-football'),('Men\'s basketball','basketball/mens-college-basketball')]:
-        try:
-            ev=get(f'https://site.api.espn.com/apis/site/v2/sports/{path}/teams/2483/schedule').json().get('events',[])
-            for e in ev:
-                t=pd.Timestamp(e['date']).tz_convert(PT); c=e['competitions'][0]
-                home=any(x['homeAway']=='home' and x['team']['id']=='2483' for x in c['competitors']) and not c.get('neutralSite')
-                if home and day<=t.tz_localize(None).normalize()<=day+pd.Timedelta(days=7):
-                    L.append(f"- Ducks {sport} HOME game {t:%a %b %d %I:%M %p} PT — {e['name']} (expect heavy traffic near Autzen/Matthew Knight Arena)")
-        except Exception: pass
+    G=upcoming_games(7)
+    SPORTS_TODAY['ducks_fb_home']=int(any(g['date']==day and g['team']=='Ducks' and g['sport']=='football' for g in G))
+    if not G: L.append('- No UO/OSU football or basketball or Emeralds home games within 100 mi in the next 7 days.')
+    else:
+        L.append(f"- Sports home games within 100 mi, next 7 days ({len(G)}):")
+        for g in G:
+            when=f"{g['date']:%a %b %d} "+(pd.Timestamp(f"2000-01-01 {g['ko']}").strftime('%I:%M %p').lstrip('0')+' PT' if g['ko'] else 'time TBA')
+            big=' — expect heavy traffic near the stadium' if g['sport']=='football' else ''
+            L.append(f"  - {when} — {g['team']} {g['sport']} HOME vs {g['opp']} @ {g['venue']} ({g['dist']:.0f} mi){big}"+(f" [{g['note']}]" if g['note'] else ''))
     L.append('- UO term / 4J breaks: see official calendars (dataset uses approximate rules).')
     return L
 SUN={}
@@ -104,7 +144,7 @@ def crash():
     pr=WX['precipitation_sum'][i] or 0; prev=WX['precipitation_sum'][:i]
     hol=int(day in USFederalHolidayCalendar().holidays(day,day))
     row=dict(dow=str(day.dayofweek),month=str(day.month),covid=0,wet=int(pr>=0.01),rain_in=min(pr,2),first_rain=0,freeze=int(WX['temperature_2m_min'][i]<=32),snow=int((WX['snowfall_sum'][i] or 0)>0),hot=int(WX['temperature_2m_max'][i]>=95),
-             sunset_hour_local=SUN.get('sunset',18),dst_week_after=0,hol=hol,ev_ducks_fb_home=0,ev_4j_break_approx=0,ev_uo_in_session_approx=1,fire_smoke_day=0,nws_alerts_winter=0)
+             sunset_hour_local=SUN.get('sunset',18),dst_week_after=0,hol=hol,ev_ducks_fb_home=SPORTS_TODAY.get('ducks_fb_home',0),ev_4j_break_approx=0,ev_uo_in_session_approx=1,fire_smoke_day=0,nws_alerts_winter=0)
     level=np.log(31.5)  # approx 2024 daily mean, 6-county ODOT reported crashes (latest year available)
     X=pd.DataFrame([row]); e=float(m.predict(X,offset=[level])[0])
     norm=dict(row,wet=0,rain_in=0,freeze=0,snow=0,hot=0); n=float(m.predict(pd.DataFrame([norm]),offset=[level])[0])

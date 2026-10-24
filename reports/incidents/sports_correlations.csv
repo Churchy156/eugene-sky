@@ -1,0 +1,87 @@
+outcome,predictor,spec,kind,pct_change,ci_lo,ci_hi,p,n_days,n_event_days,start,end,mean_daily,q_fdr
+crashes_injury_fatal_6cty,ducks_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,6.1436,2.5604,9.852,0.0007,6575,350,2007-01-01,2024-12-31,17.3381,0.0573
+crashes_lane,ducks_home_football,fall Saturdays only; month+year+holiday+weather,yes/no,14.2461,2.3489,27.5263,0.0176,234,101,2007-09-01,2024-11-30,9.2265,0.4718
+eugene_police_calls,milb_home_game,all days; DOWxmonth+year+holiday+weather,yes/no,-2.6068,-4.765,-0.3997,0.0209,1377,251,2023-01-02,2026-10-09,152.5977,0.4718
+crashes_all_6cty,ducks_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,3.489,0.4971,6.5699,0.0219,6575,350,2007-01-01,2024-12-31,33.3854,0.4718
+crashes_lane,"football_attendance (per 10k, game days only)",fall Saturday game days; month+year+holiday+weather,per unit,3.2576,0.322,6.2791,0.0294,148,148,2007-09-01,2024-11-30,9.5338,0.5052
+eugene_police_calls,ducks_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,-3.7998,-7.4811,0.028,0.0517,1377,63,2023-01-02,2026-10-09,152.5977,0.7271
+crashes_lane,ducks_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,8.7196,-0.512,18.8078,0.0648,6575,119,2007-01-01,2024-12-31,10.1551,0.7271
+crashes_injury_fatal_6cty,osu_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,3.4272,-0.2442,7.2337,0.0676,6575,326,2007-01-01,2024-12-31,17.3381,0.7271
+crashes_injury_fatal_6cty,hayward_major_meet,all days; DOWxmonth+year+holiday+weather,yes/no,5.7862,-1.1332,13.1899,0.1031,6575,67,2007-01-01,2024-12-31,17.3381,0.7336
+crashes_all_6cty,ducks_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,-2.428,-5.3231,0.5556,0.1097,6575,330,2007-01-01,2024-12-31,33.3854,0.7336
+springfield_police_calls,hayward_major_meet,all days; DOWxmonth+year+holiday+weather,yes/no,-9.2637,-19.7048,2.5351,0.1191,1377,10,2023-01-02,2026-10-09,77.0167,0.7336
+fatal_crashes_FARS_9cty,major_home_game_next_day,all days; DOWxmonth+year+holiday+weather,yes/no,18.0282,-4.3152,45.589,0.1216,18257,493,1975-01-01,2024-12-31,0.4629,0.7336
+crashes_all_6cty,osu_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,2.445,-0.6498,5.6363,0.1227,6575,326,2007-01-01,2024-12-31,33.3854,0.7336
+eugene_police_calls,games_within_100mi (per game),all days; DOWxmonth+year+holiday+weather,per unit,-0.9499,-2.1911,0.307,0.1379,1377,457,2023-01-02,2026-10-09,152.5977,0.7336
+crashes_lane,osu_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,3.6562,-1.1687,8.7168,0.1398,6575,326,2007-01-01,2024-12-31,10.1551,0.7336
+crashes_all_6cty,major_home_game_next_day,fall Saturdays only; month+year+holiday+weather,yes/no,-9.9982,-21.862,3.6669,0.1441,234,14,2007-09-01,2024-11-30,32.0342,0.7336
+springfield_police_calls,osu_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,-7.1966,-16.0654,2.6092,0.145,1377,22,2023-01-02,2026-10-09,77.0167,0.7336
+eugene_police_calls,major_home_game_next_day,all days; DOWxmonth+year+holiday+weather,yes/no,4.8124,-2.3026,12.4456,0.19,1377,39,2023-01-02,2026-10-09,152.5977,0.7506
+crashes_lane,major_home_game_next_day,fall Saturdays only; month+year+holiday+weather,yes/no,-16.3209,-35.9063,9.2491,0.1903,234,14,2007-09-01,2024-11-30,9.2265,0.7506
+crashes_injury_fatal_6cty,major_home_game_next_day,fall Saturdays only; month+year+holiday+weather,yes/no,-10.7665,-24.7519,5.8183,0.1903,234,14,2007-09-01,2024-11-30,16.7735,0.7506
+fatal_crashes_FARS_9cty,major_home_game(UO/OSU FB),all days; DOWxmonth+year+holiday+weather,yes/no,-12.3723,-28.2525,7.0229,0.1954,18257,493,1975-01-01,2024-12-31,0.4629,0.7506
+eugene_police_calls,ducks_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,-4.1419,-10.3215,2.4635,0.2134,1377,24,2023-01-02,2026-10-09,152.5977,0.7506
+crashes_injury_fatal_6cty,milb_home_game,all days; DOWxmonth+year+holiday+weather,yes/no,-1.5051,-3.8859,0.9348,0.2245,6575,1016,2007-01-01,2024-12-31,17.3381,0.7506
+crashes_lane,hayward_major_meet,all days; DOWxmonth+year+holiday+weather,yes/no,5.91,-3.5555,16.3046,0.2293,6575,67,2007-01-01,2024-12-31,10.1551,0.7506
+eugene_police_calls,ducks_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,2.4049,-1.5315,6.4987,0.2347,1377,62,2023-01-02,2026-10-09,152.5977,0.7506
+fatal_crashes_FARS_9cty,milb_home_game,all days; DOWxmonth+year+holiday+weather,yes/no,-7.0143,-17.5605,4.881,0.2364,7305,1135,2005-01-01,2024-12-31,0.4266,0.7506
+springfield_police_calls,milb_home_game,all days; DOWxmonth+year+holiday+weather,yes/no,-1.8104,-4.7596,1.2301,0.2403,1377,251,2023-01-02,2026-10-09,77.0167,0.7506
+fatal_crashes_FARS_9cty,hayward_major_meet,all days; DOWxmonth+year+holiday+weather,yes/no,-17.3002,-39.9374,13.869,0.2444,18257,85,1975-01-01,2024-12-31,0.4629,0.7506
+fatal_crashes_FARS_9cty,ducks_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,7.2437,-4.9901,21.0528,0.2578,18257,782,1975-01-01,2024-12-31,0.4629,0.7644
+crashes_lane,major_home_game(UO/OSU FB),fall Saturdays only; month+year+holiday+weather,yes/no,6.7996,-5.3833,20.5511,0.2871,234,150,2007-09-01,2024-11-30,9.2265,0.823
+springfield_police_calls,games_within_100mi (per game),all days; DOWxmonth+year+holiday+weather,per unit,-0.8982,-2.6067,0.8404,0.3092,1377,457,2023-01-02,2026-10-09,77.0167,0.8579
+crashes_lane,ducks_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,2.2244,-2.361,7.0252,0.3474,6575,350,2007-01-01,2024-12-31,10.1551,0.8627
+fatal_crashes_FARS_9cty,ducks_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,-9.0215,-25.5023,11.1052,0.3538,18257,307,1975-01-01,2024-12-31,0.4629,0.8627
+crashes_injury_fatal_6cty,ducks_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,-1.6313,-5.0738,1.936,0.3655,6575,330,2007-01-01,2024-12-31,17.3381,0.8627
+crashes_injury_fatal_6cty,games_within_100mi (per game),all days; DOWxmonth+year+holiday+weather,per unit,0.5056,-0.5993,1.6229,0.3712,6575,2021,2007-01-01,2024-12-31,17.3381,0.8627
+crashes_lane,ducks_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,-2.0635,-6.5719,2.6624,0.3858,6575,330,2007-01-01,2024-12-31,10.1551,0.8627
+fatal_crashes_FARS_9cty,ducks_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,7.5046,-8.7601,26.6686,0.3873,8462,427,2001-11-01,2024-12-31,0.4232,0.8627
+fatal_crashes_FARS_9cty,osu_home_football,fall Saturdays only; month+year+holiday+weather,yes/no,9.6554,-11.0782,35.2234,0.3887,650,263,1975-09-06,2024-11-30,0.5585,0.8627
+crashes_lane,major_home_game_next_day,all days; DOWxmonth+year+holiday+weather,yes/no,-3.9277,-12.3369,5.2882,0.3912,6575,183,2007-01-01,2024-12-31,10.1551,0.8627
+crashes_all_6cty,"football_attendance (per 10k, game days only)",fall Saturday game days; month+year+holiday+weather,per unit,0.6462,-1.1182,2.442,0.4754,148,148,2007-09-01,2024-11-30,32.3041,0.9722
+fatal_crashes_FARS_9cty,games_within_100mi (per game),all days; DOWxmonth+year+holiday+weather,per unit,-1.6101,-5.9116,2.8881,0.4767,18257,3163,1975-01-01,2024-12-31,0.4629,0.9722
+crashes_injury_fatal_6cty,ducks_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,-2.3178,-8.5681,4.3597,0.487,6575,119,2007-01-01,2024-12-31,17.3381,0.9722
+fatal_crashes_FARS_9cty,major_home_game_next_day,fall Saturdays only; month+year+holiday+weather,yes/no,-27.5761,-71.0607,81.2493,0.4906,650,15,1975-09-06,2024-11-30,0.5585,0.9722
+crashes_injury_fatal_6cty,osu_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,2.2676,-4.1458,9.1101,0.4974,6575,111,2007-01-01,2024-12-31,17.3381,0.9722
+crashes_lane,games_within_100mi (per game),all days; DOWxmonth+year+holiday+weather,per unit,0.471,-1.0111,1.9754,0.5355,6575,2021,2007-01-01,2024-12-31,10.1551,0.9791
+crashes_injury_fatal_6cty,osu_home_football,fall Saturdays only; month+year+holiday+weather,yes/no,2.2848,-5.167,10.3221,0.5583,234,92,2007-09-01,2024-11-30,16.7735,0.9791
+crashes_injury_fatal_6cty,"football_attendance (per 10k, game days only)",fall Saturday game days; month+year+holiday+weather,per unit,0.6357,-1.496,2.8136,0.5618,148,148,2007-09-01,2024-11-30,17.1622,0.9791
+fatal_crashes_FARS_9cty,ducks_home_football,fall Saturdays only; month+year+holiday+weather,yes/no,-5.8054,-23.6821,16.2588,0.5775,650,285,1975-09-06,2024-11-30,0.5585,0.9791
+crashes_all_6cty,ducks_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,-1.6068,-7.0707,4.1784,0.5784,6575,119,2007-01-01,2024-12-31,33.3854,0.9791
+crashes_all_6cty,major_home_game(UO/OSU FB),all days; DOWxmonth+year+holiday+weather,yes/no,-1.4736,-6.5159,3.8407,0.5797,6575,183,2007-01-01,2024-12-31,33.3854,0.9791
+eugene_police_calls,major_home_game(UO/OSU FB),all days; DOWxmonth+year+holiday+weather,yes/no,-1.7096,-7.8524,4.8426,0.6005,1377,39,2023-01-02,2026-10-09,152.5977,0.9791
+crashes_lane,osu_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,-2.2881,-10.7099,6.928,0.6147,6575,111,2007-01-01,2024-12-31,10.1551,0.9791
+springfield_police_calls,ducks_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,1.2365,-4.0297,6.7917,0.6521,1377,63,2023-01-02,2026-10-09,77.0167,0.9791
+eugene_police_calls,osu_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,1.6411,-5.3715,9.1733,0.6554,1377,22,2023-01-02,2026-10-09,152.5977,0.9791
+crashes_all_6cty,hayward_major_meet,all days; DOWxmonth+year+holiday+weather,yes/no,1.3944,-4.6209,7.7891,0.6572,6575,67,2007-01-01,2024-12-31,33.3854,0.9791
+eugene_police_calls,osu_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,0.8124,-3.1278,4.9129,0.6908,1377,64,2023-01-02,2026-10-09,152.5977,0.9791
+crashes_injury_fatal_6cty,major_home_game(UO/OSU FB),fall Saturdays only; month+year+holiday+weather,yes/no,1.4908,-6.4668,10.1254,0.7224,234,150,2007-09-01,2024-11-30,16.7735,0.9791
+crashes_lane,osu_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,0.8711,-3.8615,5.8368,0.7235,6575,311,2007-01-01,2024-12-31,10.1551,0.9791
+fatal_crashes_FARS_9cty,"football_attendance (per 10k, game days only)",fall Saturday game days; month+year+holiday+weather,per unit,1.1744,-5.9708,8.8625,0.7547,450,450,1975-09-13,2024-11-30,0.5489,0.9791
+springfield_police_calls,osu_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,-0.8567,-6.2485,4.8451,0.763,1377,59,2023-01-02,2026-10-09,77.0167,0.9791
+crashes_all_6cty,games_within_100mi (per game),all days; DOWxmonth+year+holiday+weather,per unit,0.1415,-0.8089,1.101,0.7714,6575,2021,2007-01-01,2024-12-31,33.3854,0.9791
+crashes_all_6cty,osu_home_football,fall Saturdays only; month+year+holiday+weather,yes/no,0.8816,-5.2524,7.4128,0.7839,234,92,2007-09-01,2024-11-30,32.0342,0.9791
+crashes_all_6cty,osu_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,0.7438,-4.7801,6.588,0.7968,6575,111,2007-01-01,2024-12-31,33.3854,0.9791
+eugene_police_calls,hayward_major_meet,all days; DOWxmonth+year+holiday+weather,yes/no,-1.1109,-9.444,7.9889,0.8036,1377,10,2023-01-02,2026-10-09,152.5977,0.9791
+crashes_injury_fatal_6cty,major_home_game_next_day,all days; DOWxmonth+year+holiday+weather,yes/no,-0.8119,-7.1715,5.9834,0.8095,6575,183,2007-01-01,2024-12-31,17.3381,0.9791
+fatal_crashes_FARS_9cty,osu_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,-1.492,-13.1909,11.7835,0.8157,18257,755,1975-01-01,2024-12-31,0.4629,0.9791
+crashes_all_6cty,milb_home_game,all days; DOWxmonth+year+holiday+weather,yes/no,-0.2501,-2.3861,1.9326,0.8206,6575,1016,2007-01-01,2024-12-31,33.3854,0.9791
+crashes_all_6cty,major_home_game_next_day,all days; DOWxmonth+year+holiday+weather,yes/no,-0.6431,-6.1549,5.1924,0.8246,6575,183,2007-01-01,2024-12-31,33.3854,0.9791
+crashes_injury_fatal_6cty,ducks_home_football,fall Saturdays only; month+year+holiday+weather,yes/no,0.8161,-6.5139,8.7209,0.8329,234,101,2007-09-01,2024-11-30,16.7735,0.9791
+springfield_police_calls,osu_home_mbb,all days; DOWxmonth+year+holiday+weather,yes/no,-0.5336,-5.9474,5.1919,0.8514,1377,64,2023-01-02,2026-10-09,77.0167,0.9791
+crashes_injury_fatal_6cty,osu_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,-0.3316,-3.9005,3.3698,0.8583,6575,311,2007-01-01,2024-12-31,17.3381,0.9791
+eugene_police_calls,osu_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,0.3586,-3.5923,4.4714,0.8613,1377,59,2023-01-02,2026-10-09,152.5977,0.9791
+crashes_lane,major_home_game(UO/OSU FB),all days; DOWxmonth+year+holiday+weather,yes/no,0.6901,-7.2966,9.3649,0.8704,6575,183,2007-01-01,2024-12-31,10.1551,0.9791
+fatal_crashes_FARS_9cty,osu_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,1.3547,-14.6842,20.4089,0.8783,8462,402,2001-11-01,2024-12-31,0.4232,0.9791
+crashes_injury_fatal_6cty,major_home_game(UO/OSU FB),all days; DOWxmonth+year+holiday+weather,yes/no,-0.4477,-6.322,5.7949,0.885,6575,183,2007-01-01,2024-12-31,17.3381,0.9791
+fatal_crashes_FARS_9cty,osu_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,1.4233,-16.7514,23.5659,0.8884,18257,286,1975-01-01,2024-12-31,0.4629,0.9791
+springfield_police_calls,ducks_home_football,all days; DOWxmonth+year+holiday+weather,yes/no,0.5923,-8.182,10.205,0.8991,1377,24,2023-01-02,2026-10-09,77.0167,0.9791
+fatal_crashes_FARS_9cty,major_home_game(UO/OSU FB),fall Saturdays only; month+year+holiday+weather,yes/no,-1.25,-21.4977,24.2202,0.9144,650,452,1975-09-06,2024-11-30,0.5585,0.9791
+crashes_all_6cty,ducks_home_football,fall Saturdays only; month+year+holiday+weather,yes/no,0.3392,-5.7465,6.8178,0.9155,234,101,2007-09-01,2024-11-30,32.0342,0.9791
+crashes_lane,milb_home_game,all days; DOWxmonth+year+holiday+weather,yes/no,-0.1445,-3.45,3.2742,0.9329,6575,1016,2007-01-01,2024-12-31,10.1551,0.9791
+springfield_police_calls,major_home_game_next_day,all days; DOWxmonth+year+holiday+weather,yes/no,-0.2957,-9.3743,9.6925,0.9515,1377,39,2023-01-02,2026-10-09,77.0167,0.9791
+crashes_lane,osu_home_football,fall Saturdays only; month+year+holiday+weather,yes/no,-0.2971,-10.8891,11.554,0.9586,234,92,2007-09-01,2024-11-30,9.2265,0.9791
+crashes_all_6cty,osu_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,-0.0628,-3.0882,3.0571,0.9681,6575,311,2007-01-01,2024-12-31,33.3854,0.9791
+springfield_police_calls,major_home_game(UO/OSU FB),all days; DOWxmonth+year+holiday+weather,yes/no,-0.1275,-8.655,9.1961,0.9777,1377,39,2023-01-02,2026-10-09,77.0167,0.9791
+crashes_all_6cty,major_home_game(UO/OSU FB),fall Saturdays only; month+year+holiday+weather,yes/no,-0.0934,-6.5851,6.8495,0.9783,234,150,2007-09-01,2024-11-30,32.0342,0.9791
+springfield_police_calls,ducks_home_wbb,all days; DOWxmonth+year+holiday+weather,yes/no,-0.0736,-5.4251,5.5808,0.9791,1377,62,2023-01-02,2026-10-09,77.0167,0.9791

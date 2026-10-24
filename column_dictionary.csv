@@ -114,3 +114,16 @@ resp_hosp_rsv_rate_or,"CDC RESP-NET RSV-NET weekly hospitalization rate per 100k
 resp_hosp_flu_rate_or,"CDC RESP-NET FluSurv-NET weekly hospitalization rate per 100k, Oregon (Portland-area catchment); weekly value repeated for each day of week; seasonal (off-season weeks may be blank)",2018-09-30,2026-10-03,6.6
 fin_ust_avg_rate_marketable_pct,"US Treasury average interest rate on total marketable debt %, month-end, carried forward (Treasury FiscalData)",2001-01-31,2026-10-13,33.3
 cyber_kev_added,Number of CVEs added to CISA Known Exploited Vulnerabilities catalog that day (catalog began 2021-11-03),2021-11-03,2026-10-13,6.4
+ducks_home_football,"1 if Oregon Ducks football home game at Autzen (or Hayward/Multnomah-in-radius) that day (Wikipedia 1950+, ESPN refresh)",1950-01-01,2026-10-24,100.0
+osu_home_football,"1 if Oregon State football home game in Corvallis that day (Wikipedia 1950+, ESPN refresh)",1950-01-01,2026-10-24,100.0
+major_home_game,1 if Ducks or Beavers home football game within 100 mi that day,1950-01-01,2026-10-24,100.0
+ducks_home_mbb,"1 if Oregon men's basketball home game (Sports-Reference <=2001, ESPN 2002+)",1950-11-01,2026-10-24,98.9
+osu_home_mbb,"1 if Oregon State men's basketball home game (Sports-Reference <=2001, ESPN 2002+)",1950-11-01,2026-10-24,98.9
+ducks_home_wbb,"1 if Oregon women's basketball home game (ESPN, 2001-02 season+)",2001-11-01,2026-10-24,32.5
+osu_home_wbb,"1 if Oregon State women's basketball home game (ESPN, 2001-02 season+)",2001-11-01,2026-10-24,32.5
+milb_home_games,"Eugene Emeralds + Salem-Keizer Volcanoes home games in-radius (MLB StatsAPI, 2005+; Volcanoes through 2019; no 2020 season)",2005-01-01,2026-10-24,28.4
+hayward_major_meet,"1 on days of US Olympic Trials (1972/76/80/2008/12/16/21/24), 2014 World U20s, 2022 World Championships at Hayward Field",1950-01-01,2026-10-24,100.0
+games_within_100mi,"Count of covered sports events at venues within 100 mi (haversine) of Eugene that day: UO/OSU football (1950+), UO/OSU men's basketball (1950-51+), UO/OSU women's basketball (2001-02+), Emeralds/Volcanoes MiLB home games (2005+), major Hayward Field meets. Source mix grows over time.",1950-01-01,2026-10-24,100.0
+football_attendance_100mi,Reported attendance summed over UO/OSU football games within 100 mi that day (Wikipedia/ESPN); blank if no game or not reported,1950-10-07,2026-10-17,2.3
+est_attendance_100mi,"Sum of reported attendance over all covered games within 100 mi (football 1950+, ESPN men's/women's basketball 2002+; MiLB and meets not included); partial, blank if none reported",1950-10-07,2026-10-17,5.0
+football_kickoff_hour,"Local (PT) kickoff hour, decimal, of the earliest in-radius UO/OSU football game that day; blank if no game or time unknown/TBA",1950-10-07,2026-10-17,1.7
