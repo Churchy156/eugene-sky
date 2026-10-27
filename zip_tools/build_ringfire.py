@@ -11,7 +11,7 @@ import ringfire_core as rc
 PT = ZoneInfo('America/Los_Angeles'); UTC = dt.timezone.utc
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DAILY = os.path.join(ROOT, 'data', 'ringfire_daily.json'); ZD = os.path.join(ROOT, 'zip_src', 'data')
-RAW = os.environ.get('RINGFIRE_RAW', '/workspace/eugene-env/raw/ringfire')
+RAW = os.environ.get('RINGFIRE_RAW') or ('/workspace/eugene-env/raw/ringfire' if os.path.isdir('/workspace/eugene-env') else os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'raw', 'ringfire'))
 NZ_BOX = (-49.0, -32.0, 164.0, 180.0)   # NZ mainland + near offshore (excludes Kermadecs north of 32S)
 COLS = ['nz_eq_M4plus', 'nz_eq_M5plus', 'nz_eq_maxmag', 'rof_eq_M5plus', 'rof_eq_M6plus', 'rof_eq_M7plus', 'rof_eq_maxmag',
         'volc_erupting_global', 'volc_erupting_rof', 'volc_new_eruptions_rof', 'tsunami_events_global', 'tsunami_events_rof',
@@ -105,7 +105,10 @@ def gvp_eruptions(holo=False):
     def load(name, fn):
         p = f'{RAW}/{fn}'
         try:
-            j = json.loads(rc.get(B + name, t=300)); os.makedirs(RAW, exist_ok=True); json.dump(j, open(p, 'w')); return j
+            j = json.loads(rc.get(B + name, t=300))
+            try: os.makedirs(RAW, exist_ok=True); json.dump(j, open(p, 'w'))
+            except Exception as e2: print('gvp cache write skipped', e2)
+            return j
         except Exception as e:
             print('gvp fetch failed, using cache', name, e); return json.load(open(p))
     if holo in _GVP: return _GVP[holo]
