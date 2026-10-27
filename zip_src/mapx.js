@@ -67,10 +67,10 @@ window.MapX={esc,km:kmx,
 };})();
 // Left layer column (grouped, collapsible, scrollable) + phone drawer + mobile slide-up details sheet.
 // MapX.buttons(map,LC,bar[,statusEls]) — bar is hidden (kept for compatibility); statusEls are moved to the column bottom.
-MapX.CATS=[['Air & Space',/aircraft|starlink|iss|tiangong|gps|gnss|weather sats|day\/night|aurora|passes|sun|moon|planet/i],
+MapX.CATS=[['Air & Space',/aircraft|starlink|\biss\b|tiangong|gps|gnss|weather sats|day\/night|aurora|passes|\bsun|moon|planet/i],
  ['Weather',/radar|nexrad|cloud|goes|satellite|precip|wind|temp|lightning|snow|wx/i],
  ['Traffic',/camera|incident|closure|work zone|traffic|flow|road/i],
- ['NASA',/nasa|gibs|firms|modis|viirs|eonet/i],
+ ['NASA',/nasa|gibs|firms|modis|viirs|\beonet/i],
  ['Hazards',/quake|fire|smoke|alert|river|outage|flood|volcan|air quality|aqi|tide|hazard/i],
  ['Cyber & Bitcoin',/cyber|attack|bitcoin|node|ransom|tor/i],['Other',/./]];
 MapX.buttons=function(map,LC,bar,statusEls){

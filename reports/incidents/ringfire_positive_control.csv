@@ -1,0 +1,5 @@
+outcome,predictor,lag_days,kind,pct_change,ci_lo,ci_hi,p,n_days,n_event_days,start,end
+RoF M5+ count (positive control),RoF quake M7+ day,1,yes/no,105.3379,73.5274,142.9799,0.0,19643,549,1973-01-01,2026-10-12
+RoF M5+ count (positive control),RoF quake M7+ day,2,yes/no,40.6273,25.8733,57.1106,0.0,19643,549,1973-01-01,2026-10-12
+RoF M5+ count (positive control),RoF quake M7+ day,3,yes/no,41.873,16.5235,72.7372,0.0005,19643,549,1973-01-01,2026-10-12
+RoF M5+ count (positive control),RoF quake M7+ day,7,yes/no,7.9801,-1.4562,18.3201,0.0998,19643,548,1973-01-01,2026-10-12

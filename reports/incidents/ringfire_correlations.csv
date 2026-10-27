@@ -1,0 +1,201 @@
+outcome,predictor,lag_days,kind,pct_change,ci_lo,ci_hi,p,n_days,n_event_days,start,end,q_fdr,bonferroni_sig
+crashes_injury_fatal_6cty,RoF new eruption day,3,yes/no,4.4298,1.8278,7.0983,0.0008,6575,521.0,2007-01-01,2024-12-31,0.152,False
+crashes_all_6cty,RoF tsunami event day,1,yes/no,4.8581,1.376,8.4597,0.0059,6575,214.0,2007-01-01,2024-12-31,0.4802,False
+crashes_all_6cty,RoF new eruption day,3,yes/no,3.2122,0.7534,5.731,0.0102,6575,521.0,2007-01-01,2024-12-31,0.4802,False
+oregon_quakes_500km_M2.5+,RoF quake M7+ day,0,yes/no,72.4314,13.2439,162.5537,0.0111,17087,495.0,1980-01-01,2026-10-12,0.4802,False
+oregon_quakes_500km_M2.5+,RoF M5+ count (log),0,per 1 SD,4.1888,0.7551,7.7395,0.0164,17087,,1980-01-01,2026-10-12,0.4802,False
+fatal_crashes_FARS_9cty,NZ M4+ count (log),2,per 1 SD,2.5626,0.3407,4.8336,0.0235,18257,,1975-01-01,2024-12-31,0.4802,False
+crashes_injury_fatal_6cty,RoF volcanoes erupting,2,per 1 SD,1.5611,0.2002,2.9405,0.0244,6575,,2007-01-01,2024-12-31,0.4802,False
+oregon_quakes_500km_M2.5+,RoF tsunami event day,0,yes/no,74.6141,7.3325,184.0712,0.0248,17087,427.0,1980-01-01,2026-10-12,0.4802,False
+crashes_injury_fatal_6cty,RoF volcanoes erupting,0,per 1 SD,1.5293,0.1622,2.9151,0.0282,6575,,2007-01-01,2024-12-31,0.4802,False
+crashes_injury_fatal_6cty,RoF tsunami event day,1,yes/no,4.1924,0.4188,8.1078,0.0291,6575,214.0,2007-01-01,2024-12-31,0.4802,False
+fatal_crashes_FARS_9cty,RoF tsunami event day,1,yes/no,14.9239,1.2057,30.5016,0.032,18257,430.0,1975-01-01,2024-12-31,0.4802,False
+crashes_injury_fatal_6cty,RoF volcanoes erupting,1,per 1 SD,1.4695,0.1051,2.8525,0.0347,6575,,2007-01-01,2024-12-31,0.4802,False
+fatal_crashes_FARS_9cty,NZ quake M5+ day,2,yes/no,9.782,0.6429,19.7511,0.0353,18257,1084.0,1975-01-01,2024-12-31,0.4802,False
+crashes_injury_fatal_6cty,RoF volcanoes erupting,3,per 1 SD,1.4468,0.0959,2.8158,0.0357,6575,,2007-01-01,2024-12-31,0.4802,False
+crashes_all_6cty,RoF new eruption day,2,yes/no,2.4448,0.1577,4.7842,0.036,6575,521.0,2007-01-01,2024-12-31,0.4802,False
+oregon_quakes_500km_M2.5+,RoF quake M7+ day,1,yes/no,57.0498,1.1892,143.7476,0.0441,17087,495.0,1980-01-01,2026-10-12,0.5518,False
+crashes_injury_fatal_6cty,RoF new eruption day,2,yes/no,2.4803,0.0114,5.0102,0.0489,6575,521.0,2007-01-01,2024-12-31,0.5552,False
+crashes_all_6cty,RoF quake M7+ day,0,yes/no,-3.1185,-6.169,0.0313,0.0523,6575,201.0,2007-01-01,2024-12-31,0.5552,False
+crashes_injury_fatal_6cty,RoF volcanoes erupting,7,per 1 SD,1.3233,-0.0156,2.6802,0.0527,6575,,2007-01-01,2024-12-31,0.5552,False
+crashes_injury_fatal_6cty,NZ M4+ count (log),7,per 1 SD,-0.6221,-1.2783,0.0384,0.0648,6575,,2007-01-01,2024-12-31,0.6223,False
+oregon_quakes_500km_M2.5+,RoF quake M6+ day,0,yes/no,14.41,-0.8519,32.0212,0.0653,17087,4043.0,1980-01-01,2026-10-12,0.6223,False
+lane_pm25_log,RoF new eruption day,2,yes/no,3.7565,-0.3956,8.0818,0.0768,7102,556.0,1999-01-01,2025-12-31,0.6979,False
+lane_pm25_log,RoF quake M7+ day,0,yes/no,6.4196,-0.7505,14.1078,0.0804,7102,214.0,1999-01-01,2025-12-31,0.6992,False
+fatal_crashes_FARS_9cty,RoF new eruption day,7,yes/no,7.3252,-1.0562,16.4165,0.0884,18257,1362.0,1975-01-01,2024-12-31,0.7126,False
+crashes_all_6cty,RoF quake M6+ day,0,yes/no,-1.1761,-2.5146,0.1809,0.0891,6575,1549.0,2007-01-01,2024-12-31,0.7126,False
+fatal_crashes_FARS_9cty,NZ quake M5+ day,1,yes/no,-7.4238,-15.4716,1.3902,0.0964,18257,1085.0,1975-01-01,2024-12-31,0.7417,False
+crashes_all_6cty,RoF volcanoes erupting,2,per 1 SD,1.0741,-0.2133,2.3781,0.1023,6575,,2007-01-01,2024-12-31,0.743,False
+crashes_all_6cty,NZ M4+ count (log),7,per 1 SD,-0.4761,-1.0471,0.0982,0.104,6575,,2007-01-01,2024-12-31,0.743,False
+crashes_all_6cty,RoF volcanoes erupting,1,per 1 SD,1.0402,-0.2537,2.3508,0.1156,6575,,2007-01-01,2024-12-31,0.7877,False
+oregon_quakes_500km_M2.5+,RoF new eruption day,2,yes/no,18.3364,-4.2527,46.2547,0.1193,17087,1271.0,1980-01-01,2026-10-12,0.7877,False
+fatal_crashes_FARS_9cty,RoF new eruption day,1,yes/no,-6.4535,-14.0396,1.8021,0.1221,18257,1359.0,1975-01-01,2024-12-31,0.7877,False
+oregon_quakes_500km_M2.5+,RoF tsunami event day,1,yes/no,49.9266,-11.8165,154.9002,0.1348,17087,427.0,1980-01-01,2026-10-12,0.7993,False
+crashes_all_6cty,RoF volcanoes erupting,0,per 1 SD,0.9886,-0.3057,2.2998,0.135,6575,,2007-01-01,2024-12-31,0.7993,False
+fatal_crashes_FARS_9cty,NZ M4+ count (log),0,per 1 SD,1.6866,-0.5243,3.9467,0.1359,18257,,1975-01-01,2024-12-31,0.7993,False
+crashes_all_6cty,RoF volcanoes erupting,3,per 1 SD,0.9292,-0.3559,2.2308,0.1572,6575,,2007-01-01,2024-12-31,0.8854,False
+fatal_crashes_FARS_9cty,RoF volcanoes erupting,7,per 1 SD,4.3407,-1.7728,10.8347,0.1678,18257,,1975-01-01,2024-12-31,0.8854,False
+fatal_crashes_FARS_9cty,RoF M5+ count (log),2,per 1 SD,-1.5487,-3.7318,0.6839,0.1725,18257,,1975-01-01,2024-12-31,0.8854,False
+fatal_crashes_FARS_9cty,RoF new eruption day,0,yes/no,5.672,-2.4608,14.483,0.1769,18257,1361.0,1975-01-01,2024-12-31,0.8854,False
+fatal_crashes_FARS_9cty,RoF quake M6+ day,7,yes/no,-3.4843,-8.3715,1.6635,0.181,18257,4169.0,1975-01-01,2024-12-31,0.8854,False
+crashes_injury_fatal_6cty,RoF quake M7+ day,0,yes/no,-2.5329,-6.1553,1.2293,0.1843,6575,201.0,2007-01-01,2024-12-31,0.8854,False
+oregon_quakes_500km_M2.5+,NZ quake M5+ day,7,yes/no,-8.2948,-19.3264,4.2454,0.1854,17087,1016.0,1980-01-01,2026-10-12,0.8854,False
+fatal_crashes_FARS_9cty,RoF volcanoes erupting,0,per 1 SD,4.1709,-1.9877,10.7166,0.1888,18257,,1975-01-01,2024-12-31,0.8854,False
+lane_pm25_log,RoF quake M7+ day,7,yes/no,5.0296,-2.4477,13.0799,0.1928,7102,201.0,1999-01-01,2025-12-31,0.8854,False
+lane_pm25_log,RoF M5+ count (log),3,per 1 SD,-0.7983,-2.025,0.4438,0.2068,7102,,1999-01-01,2025-12-31,0.8854,False
+lane_pm25_log,RoF tsunami event day,0,yes/no,5.0091,-2.7013,13.3305,0.209,7102,187.0,1999-01-01,2025-12-31,0.8854,False
+oregon_quakes_500km_M2.5+,RoF quake M6+ day,1,yes/no,6.8635,-3.7015,18.5876,0.2114,17087,4042.0,1980-01-01,2026-10-12,0.8854,False
+oregon_quakes_500km_M2.5+,NZ quake M5+ day,1,yes/no,-8.0257,-19.4848,5.0643,0.2178,17087,1015.0,1980-01-01,2026-10-12,0.8854,False
+crashes_all_6cty,RoF quake M7+ day,7,yes/no,-2.1879,-5.5728,1.3183,0.2183,6575,202.0,2007-01-01,2024-12-31,0.8854,False
+fatal_crashes_FARS_9cty,RoF volcanoes erupting,3,per 1 SD,3.8514,-2.2503,10.3339,0.2212,18257,,1975-01-01,2024-12-31,0.8854,False
+oregon_quakes_500km_M2.5+,RoF quake M7+ day,2,yes/no,13.1177,-7.4068,38.1916,0.2276,17087,495.0,1980-01-01,2026-10-12,0.8854,False
+oregon_quakes_500km_M2.5+,RoF quake M7+ day,3,yes/no,9.4624,-5.6347,26.9749,0.2325,17087,495.0,1980-01-01,2026-10-12,0.8854,False
+oregon_quakes_500km_M2.5+,NZ M4+ count (log),7,per 1 SD,2.4217,-1.5373,6.5398,0.2342,17087,,1980-01-01,2026-10-12,0.8854,False
+lane_pm25_log,RoF M5+ count (log),0,per 1 SD,0.7176,-0.4631,1.9124,0.2346,7102,,1999-01-01,2025-12-31,0.8854,False
+crashes_all_6cty,NZ quake M5+ day,3,yes/no,-1.5375,-4.1272,1.1221,0.2545,6575,326.0,2007-01-01,2024-12-31,0.9247,False
+lane_pm25_log,RoF M5+ count (log),7,per 1 SD,-0.7166,-1.939,0.5209,0.2551,7102,,1999-01-01,2025-12-31,0.9247,False
+crashes_all_6cty,NZ M4+ count (log),3,per 1 SD,-0.3776,-1.0299,0.2789,0.2589,6575,,2007-01-01,2024-12-31,0.9247,False
+lane_pm25_log,RoF quake M6+ day,1,yes/no,1.3932,-1.0495,3.8961,0.2661,7102,1702.0,1999-01-01,2025-12-31,0.93,False
+fatal_crashes_FARS_9cty,RoF quake M7+ day,2,yes/no,7.2716,-5.3935,21.6322,0.2735,18257,514.0,1975-01-01,2024-12-31,0.93,False
+crashes_all_6cty,RoF volcanoes erupting,7,per 1 SD,0.7083,-0.5582,1.9909,0.2743,6575,,2007-01-01,2024-12-31,0.93,False
+fatal_crashes_FARS_9cty,RoF volcanoes erupting,2,per 1 SD,3.3921,-2.7054,9.8718,0.2821,18257,,1975-01-01,2024-12-31,0.9403,False
+oregon_quakes_500km_M2.5+,RoF quake M7+ day,7,yes/no,12.9812,-9.7548,41.4452,0.287,17087,494.0,1980-01-01,2026-10-12,0.9411,False
+fatal_crashes_FARS_9cty,RoF tsunami event day,3,yes/no,7.2002,-6.8132,23.3209,0.3307,18257,430.0,1975-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF tsunami event day,7,yes/no,13.2754,-11.935,45.7029,0.3318,17087,426.0,1980-01-01,2026-10-12,0.96,False
+crashes_injury_fatal_6cty,RoF M5+ count (log),7,per 1 SD,0.3462,-0.3645,1.0619,0.3406,6575,,2007-01-01,2024-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF quake M6+ day,2,yes/no,0.7715,-0.8349,2.404,0.3486,6575,1549.0,2007-01-01,2024-12-31,0.96,False
+lane_pm25_log,RoF M5+ count (log),1,per 1 SD,0.5724,-0.6277,1.787,0.3514,7102,,1999-01-01,2025-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF M5+ count (log),0,per 1 SD,0.3408,-0.3769,1.0637,0.3529,6575,,2007-01-01,2024-12-31,0.96,False
+fatal_crashes_FARS_9cty,NZ M4+ count (log),1,per 1 SD,1.0605,-1.2021,3.3748,0.3612,18257,,1975-01-01,2024-12-31,0.96,False
+lane_pm25_log,NZ M4+ count (log),1,per 1 SD,0.5246,-0.6118,1.6741,0.367,7102,,1999-01-01,2025-12-31,0.96,False
+oregon_quakes_500km_M2.5+,NZ quake M5+ day,3,yes/no,-5.3315,-16.0516,6.7575,0.3716,17087,1015.0,1980-01-01,2026-10-12,0.96,False
+fatal_crashes_FARS_9cty,NZ quake M5+ day,0,yes/no,-4.076,-12.514,5.1759,0.3757,18257,1084.0,1975-01-01,2024-12-31,0.96,False
+lane_pm25_log,RoF volcanoes erupting,7,per 1 SD,-1.6852,-5.3216,2.0909,0.3768,7102,,1999-01-01,2025-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF quake M6+ day,0,yes/no,2.3166,-2.7519,7.6493,0.377,18257,4169.0,1975-01-01,2024-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF tsunami event day,2,yes/no,1.6324,-2.0141,5.4145,0.3851,6575,214.0,2007-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF volcanoes erupting,0,per 1 SD,5.3216,-6.3383,18.433,0.3864,17087,,1980-01-01,2026-10-12,0.96,False
+crashes_all_6cty,RoF quake M7+ day,3,yes/no,-1.3742,-4.4432,1.7934,0.3909,6575,201.0,2007-01-01,2024-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF quake M7+ day,3,yes/no,5.7414,-7.1482,20.4202,0.3999,18257,515.0,1975-01-01,2024-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF volcanoes erupting,1,per 1 SD,2.6311,-3.399,9.0376,0.4006,18257,,1975-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF new eruption day,3,yes/no,10.2163,-12.5195,38.8611,0.4092,17087,1271.0,1980-01-01,2026-10-12,0.96,False
+crashes_injury_fatal_6cty,RoF tsunami event day,0,yes/no,1.4055,-1.909,4.832,0.4104,6575,214.0,2007-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,NZ M4+ count (log),3,per 1 SD,-2.185,-7.2048,3.1062,0.4111,17087,,1980-01-01,2026-10-12,0.96,False
+oregon_quakes_500km_M2.5+,NZ quake M5+ day,2,yes/no,-4.401,-14.4615,6.8427,0.4276,17087,1015.0,1980-01-01,2026-10-12,0.96,False
+oregon_quakes_500km_M2.5+,RoF new eruption day,1,yes/no,7.3915,-10.2156,28.4515,0.4351,17087,1271.0,1980-01-01,2026-10-12,0.96,False
+fatal_crashes_FARS_9cty,RoF quake M7+ day,0,yes/no,-5.0654,-16.9949,8.5786,0.448,18257,513.0,1975-01-01,2024-12-31,0.96,False
+lane_pm25_log,NZ quake M5+ day,0,yes/no,-1.7294,-6.0749,2.8171,0.4496,7102,374.0,1999-01-01,2025-12-31,0.96,False
+crashes_injury_fatal_6cty,NZ quake M5+ day,1,yes/no,1.1996,-1.8816,4.3775,0.4497,6575,326.0,2007-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF M5+ count (log),2,per 1 SD,1.5292,-2.4065,5.6236,0.4518,17087,,1980-01-01,2026-10-12,0.96,False
+lane_pm25_log,RoF quake M7+ day,2,yes/no,2.5405,-4.186,9.7391,0.4686,7102,211.0,1999-01-01,2025-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF M5+ count (log),7,per 1 SD,-0.814,-2.9871,1.4078,0.4696,18257,,1975-01-01,2024-12-31,0.96,False
+crashes_all_6cty,RoF new eruption day,7,yes/no,0.8397,-1.4351,3.167,0.4726,6575,521.0,2007-01-01,2024-12-31,0.96,False
+crashes_injury_fatal_6cty,NZ quake M5+ day,0,yes/no,-1.2941,-4.7487,2.2857,0.4736,6575,326.0,2007-01-01,2024-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF quake M7+ day,3,yes/no,-1.3194,-4.8608,2.3538,0.4763,6575,201.0,2007-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF quake M6+ day,2,yes/no,-3.8284,-13.6252,7.0796,0.4764,17087,4041.0,1980-01-01,2026-10-12,0.96,False
+fatal_crashes_FARS_9cty,NZ quake M5+ day,7,yes/no,3.2822,-5.557,12.9488,0.4793,18257,1085.0,1975-01-01,2024-12-31,0.96,False
+crashes_injury_fatal_6cty,NZ quake M5+ day,3,yes/no,-1.1251,-4.1832,2.0307,0.4803,6575,326.0,2007-01-01,2024-12-31,0.96,False
+crashes_all_6cty,RoF quake M7+ day,2,yes/no,-1.155,-4.3327,2.1282,0.4859,6575,201.0,2007-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF tsunami event day,2,yes/no,7.0215,-11.8988,30.005,0.4942,17087,427.0,1980-01-01,2026-10-12,0.96,False
+crashes_all_6cty,RoF M5+ count (log),3,per 1 SD,0.2072,-0.3893,0.8072,0.4968,6575,,2007-01-01,2024-12-31,0.96,False
+lane_pm25_log,RoF quake M7+ day,3,yes/no,2.2843,-4.1922,9.1987,0.4986,7102,212.0,1999-01-01,2025-12-31,0.96,False
+lane_pm25_log,RoF volcanoes erupting,3,per 1 SD,-1.2899,-5.0435,2.6122,0.5116,7102,,1999-01-01,2025-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF new eruption day,7,yes/no,0.8463,-1.6767,3.434,0.5145,6575,521.0,2007-01-01,2024-12-31,0.96,False
+crashes_all_6cty,RoF quake M6+ day,2,yes/no,0.4405,-0.9106,1.81,0.5247,6575,1549.0,2007-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF volcanoes erupting,1,per 1 SD,3.7601,-7.6626,16.5957,0.5351,17087,,1980-01-01,2026-10-12,0.96,False
+lane_pm25_log,NZ quake M5+ day,1,yes/no,1.4393,-3.1095,6.2016,0.5415,7102,372.0,1999-01-01,2025-12-31,0.96,False
+fatal_crashes_FARS_9cty,NZ quake M5+ day,3,yes/no,-2.735,-11.0583,6.3672,0.5435,18257,1085.0,1975-01-01,2024-12-31,0.96,False
+lane_pm25_log,RoF quake M6+ day,3,yes/no,-0.7863,-3.3086,1.8017,0.5479,7102,1666.0,1999-01-01,2025-12-31,0.96,False
+crashes_injury_fatal_6cty,NZ M4+ count (log),3,per 1 SD,0.2186,-0.5121,0.9548,0.5586,6575,,2007-01-01,2024-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF quake M7+ day,7,yes/no,-1.1752,-5.0465,2.8539,0.562,6575,202.0,2007-01-01,2024-12-31,0.96,False
+fatal_crashes_FARS_9cty,NZ M4+ count (log),3,per 1 SD,0.6844,-1.6391,3.0627,0.5669,18257,,1975-01-01,2024-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF new eruption day,3,yes/no,2.3797,-5.599,11.0327,0.57,18257,1362.0,1975-01-01,2024-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF new eruption day,0,yes/no,0.7491,-1.8209,3.3864,0.5713,6575,521.0,2007-01-01,2024-12-31,0.96,False
+crashes_all_6cty,RoF new eruption day,1,yes/no,0.6734,-1.6494,3.051,0.5731,6575,521.0,2007-01-01,2024-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF quake M7+ day,1,yes/no,-1.0624,-4.6855,2.6984,0.5747,6575,201.0,2007-01-01,2024-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF quake M6+ day,2,yes/no,-1.4832,-6.5524,3.861,0.5793,18257,4168.0,1975-01-01,2024-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF M5+ count (log),1,per 1 SD,-0.2139,-0.9669,0.5448,0.5795,6575,,2007-01-01,2024-12-31,0.96,False
+lane_pm25_log,RoF tsunami event day,2,yes/no,2.0251,-5.0695,9.6499,0.5856,7102,200.0,1999-01-01,2025-12-31,0.96,False
+crashes_all_6cty,NZ quake M5+ day,0,yes/no,-0.8351,-3.8897,2.3166,0.5993,6575,326.0,2007-01-01,2024-12-31,0.96,False
+lane_pm25_log,RoF new eruption day,1,yes/no,1.0868,-2.9452,5.2864,0.6027,7102,569.0,1999-01-01,2025-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF tsunami event day,7,yes/no,-3.6458,-16.2478,10.8523,0.6035,18257,429.0,1975-01-01,2024-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF M5+ count (log),3,per 1 SD,0.5964,-1.6528,2.897,0.6063,18257,,1975-01-01,2024-12-31,0.96,False
+crashes_all_6cty,NZ quake M5+ day,2,yes/no,0.7446,-2.0831,3.654,0.6095,6575,326.0,2007-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF new eruption day,7,yes/no,-3.8299,-17.3694,11.9281,0.614,17087,1272.0,1980-01-01,2026-10-12,0.96,False
+fatal_crashes_FARS_9cty,RoF quake M6+ day,3,yes/no,-1.3294,-6.3379,3.9469,0.6146,18257,4171.0,1975-01-01,2024-12-31,0.96,False
+lane_pm25_log,RoF new eruption day,0,yes/no,1.0996,-3.1276,5.5114,0.6158,7102,562.0,1999-01-01,2025-12-31,0.96,False
+crashes_all_6cty,NZ M4+ count (log),1,per 1 SD,0.1669,-0.4981,0.8363,0.6237,6575,,2007-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF M5+ count (log),1,per 1 SD,-0.9732,-4.8512,3.0629,0.6314,17087,,1980-01-01,2026-10-12,0.96,False
+crashes_injury_fatal_6cty,RoF tsunami event day,3,yes/no,0.9239,-2.8187,4.8108,0.6334,6575,214.0,2007-01-01,2024-12-31,0.96,False
+lane_pm25_log,RoF volcanoes erupting,2,per 1 SD,-0.9317,-4.6877,2.9723,0.635,7102,,1999-01-01,2025-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF quake M6+ day,3,yes/no,-2.3854,-11.8373,8.0798,0.6422,17087,4041.0,1980-01-01,2026-10-12,0.96,False
+crashes_all_6cty,RoF tsunami event day,2,yes/no,0.6492,-2.1685,3.5482,0.6551,6575,214.0,2007-01-01,2024-12-31,0.96,False
+lane_pm25_log,NZ M4+ count (log),0,per 1 SD,0.2559,-0.8635,1.3879,0.6555,7102,,1999-01-01,2025-12-31,0.96,False
+lane_pm25_log,NZ M4+ count (log),7,per 1 SD,0.2582,-0.8897,1.4195,0.6607,7102,,1999-01-01,2025-12-31,0.96,False
+crashes_injury_fatal_6cty,NZ M4+ count (log),0,per 1 SD,0.1555,-0.5385,0.8543,0.6614,6575,,2007-01-01,2024-12-31,0.96,False
+lane_pm25_log,RoF volcanoes erupting,1,per 1 SD,-0.8437,-4.612,3.0734,0.6682,7102,,1999-01-01,2025-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF quake M7+ day,1,yes/no,2.8656,-9.6851,17.1605,0.6704,18257,515.0,1975-01-01,2024-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF tsunami event day,7,yes/no,0.8071,-2.9179,4.6749,0.6756,6575,215.0,2007-01-01,2024-12-31,0.96,False
+crashes_all_6cty,RoF M5+ count (log),7,per 1 SD,0.1393,-0.5173,0.8002,0.6784,6575,,2007-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF quake M6+ day,7,yes/no,3.1432,-10.9864,19.5156,0.6805,17087,4039.0,1980-01-01,2026-10-12,0.96,False
+fatal_crashes_FARS_9cty,RoF new eruption day,2,yes/no,1.7601,-6.4044,10.6369,0.6826,18257,1362.0,1975-01-01,2024-12-31,0.96,False
+lane_pm25_log,RoF quake M6+ day,7,yes/no,0.5414,-2.0677,3.22,0.6873,7102,1687.0,1999-01-01,2025-12-31,0.96,False
+crashes_all_6cty,RoF tsunami event day,3,yes/no,-0.6215,-3.6191,2.4694,0.6899,6575,214.0,2007-01-01,2024-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF quake M6+ day,1,yes/no,1.0315,-4.0308,6.3608,0.6956,18257,4170.0,1975-01-01,2024-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF M5+ count (log),0,per 1 SD,-0.4367,-2.6742,1.8522,0.7059,18257,,1975-01-01,2024-12-31,0.96,False
+lane_pm25_log,NZ quake M5+ day,3,yes/no,-0.8947,-5.456,3.8866,0.7085,7102,380.0,1999-01-01,2025-12-31,0.96,False
+fatal_crashes_FARS_9cty,RoF tsunami event day,0,yes/no,-2.6564,-15.7933,12.53,0.7159,18257,429.0,1975-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,RoF volcanoes erupting,7,per 1 SD,-2.3785,-14.2994,11.2006,0.7172,17087,,1980-01-01,2026-10-12,0.96,False
+lane_pm25_log,RoF new eruption day,3,yes/no,0.7345,-3.198,4.8268,0.7187,7102,553.0,1999-01-01,2025-12-31,0.96,False
+crashes_injury_fatal_6cty,RoF M5+ count (log),2,per 1 SD,-0.1186,-0.7624,0.5294,0.7192,6575,,2007-01-01,2024-12-31,0.96,False
+oregon_quakes_500km_M2.5+,NZ M4+ count (log),1,per 1 SD,0.8672,-3.793,5.7532,0.7205,17087,,1980-01-01,2026-10-12,0.96,False
+lane_pm25_log,RoF M5+ count (log),2,per 1 SD,-0.2237,-1.4514,1.0194,0.723,7102,,1999-01-01,2025-12-31,0.96,False
+oregon_quakes_500km_M2.5+,NZ quake M5+ day,0,yes/no,-2.326,-14.4683,11.5401,0.7282,17087,1015.0,1980-01-01,2026-10-12,0.96,False
+oregon_quakes_500km_M2.5+,RoF new eruption day,0,yes/no,-2.3384,-14.5998,11.6835,0.7296,17087,1271.0,1980-01-01,2026-10-12,0.96,False
+oregon_quakes_500km_M2.5+,RoF M5+ count (log),7,per 1 SD,0.7402,-3.4946,5.1609,0.7364,17087,,1980-01-01,2026-10-12,0.9616,False
+lane_pm25_log,RoF volcanoes erupting,0,per 1 SD,-0.651,-4.4167,3.2631,0.7404,7102,,1999-01-01,2025-12-31,0.9616,False
+crashes_all_6cty,RoF tsunami event day,0,yes/no,-0.435,-3.0615,2.2628,0.7493,6575,214.0,2007-01-01,2024-12-31,0.9668,False
+fatal_crashes_FARS_9cty,NZ M4+ count (log),7,per 1 SD,0.3597,-1.9168,2.6891,0.759,18257,,1975-01-01,2024-12-31,0.9704,False
+fatal_crashes_FARS_9cty,RoF tsunami event day,2,yes/no,-2.1403,-15.0083,12.676,0.7636,18257,430.0,1975-01-01,2024-12-31,0.9704,False
+lane_pm25_log,RoF new eruption day,7,yes/no,-0.5916,-4.4108,3.3803,0.7666,7102,568.0,1999-01-01,2025-12-31,0.9704,False
+crashes_injury_fatal_6cty,RoF quake M6+ day,3,yes/no,0.2362,-1.3483,1.8461,0.7717,6575,1549.0,2007-01-01,2024-12-31,0.9707,False
+crashes_all_6cty,RoF quake M6+ day,3,yes/no,0.1919,-1.157,1.5592,0.7816,6575,1549.0,2007-01-01,2024-12-31,0.977,False
+crashes_all_6cty,RoF new eruption day,0,yes/no,0.3108,-1.9973,2.6733,0.7939,6575,521.0,2007-01-01,2024-12-31,0.978,False
+oregon_quakes_500km_M2.5+,RoF volcanoes erupting,2,per 1 SD,1.5738,-9.7933,14.3733,0.7965,17087,,1980-01-01,2026-10-12,0.978,False
+lane_pm25_log,RoF quake M7+ day,1,yes/no,0.8427,-5.4171,7.5168,0.7974,7102,204.0,1999-01-01,2025-12-31,0.978,False
+crashes_injury_fatal_6cty,RoF quake M6+ day,0,yes/no,-0.2016,-1.7889,1.4114,0.8052,6575,1549.0,2007-01-01,2024-12-31,0.978,False
+lane_pm25_log,RoF quake M6+ day,2,yes/no,-0.3052,-2.7833,2.236,0.8119,7102,1684.0,1999-01-01,2025-12-31,0.978,False
+oregon_quakes_500km_M2.5+,NZ M4+ count (log),2,per 1 SD,-0.4029,-3.7288,3.0379,0.8158,17087,,1980-01-01,2026-10-12,0.978,False
+oregon_quakes_500km_M2.5+,RoF volcanoes erupting,3,per 1 SD,-1.31,-11.9746,10.6467,0.8212,17087,,1980-01-01,2026-10-12,0.978,False
+fatal_crashes_FARS_9cty,RoF M5+ count (log),1,per 1 SD,0.2444,-1.9191,2.4556,0.8264,18257,,1975-01-01,2024-12-31,0.978,False
+crashes_all_6cty,RoF quake M6+ day,1,yes/no,0.1355,-1.2005,1.4895,0.8434,6575,1549.0,2007-01-01,2024-12-31,0.978,False
+oregon_quakes_500km_M2.5+,NZ M4+ count (log),0,per 1 SD,-0.3789,-4.0824,3.4675,0.8443,17087,,1980-01-01,2026-10-12,0.978,False
+lane_pm25_log,NZ M4+ count (log),2,per 1 SD,-0.1115,-1.248,1.038,0.8484,7102,,1999-01-01,2025-12-31,0.978,False
+crashes_injury_fatal_6cty,NZ quake M5+ day,7,yes/no,-0.3032,-3.4682,2.9656,0.8536,6575,326.0,2007-01-01,2024-12-31,0.978,False
+oregon_quakes_500km_M2.5+,RoF tsunami event day,3,yes/no,-1.3989,-15.1859,14.6292,0.8545,17087,427.0,1980-01-01,2026-10-12,0.978,False
+crashes_injury_fatal_6cty,RoF quake M6+ day,1,yes/no,0.136,-1.4718,1.7702,0.8693,6575,1549.0,2007-01-01,2024-12-31,0.978,False
+crashes_injury_fatal_6cty,RoF M5+ count (log),3,per 1 SD,-0.0585,-0.754,0.6418,0.8694,6575,,2007-01-01,2024-12-31,0.978,False
+lane_pm25_log,NZ quake M5+ day,7,yes/no,-0.3716,-5.2175,4.7219,0.8836,7102,374.0,1999-01-01,2025-12-31,0.978,False
+oregon_quakes_500km_M2.5+,RoF M5+ count (log),3,per 1 SD,0.3166,-3.9487,4.7712,0.8866,17087,,1980-01-01,2026-10-12,0.978,False
+lane_pm25_log,NZ M4+ count (log),3,per 1 SD,0.0857,-1.1089,1.2947,0.8888,7102,,1999-01-01,2025-12-31,0.978,False
+lane_pm25_log,RoF tsunami event day,1,yes/no,0.4954,-6.2649,7.7432,0.8894,7102,194.0,1999-01-01,2025-12-31,0.978,False
+crashes_all_6cty,RoF quake M7+ day,1,yes/no,0.2049,-2.7054,3.2022,0.8918,6575,201.0,2007-01-01,2024-12-31,0.978,False
+crashes_all_6cty,NZ quake M5+ day,7,yes/no,-0.196,-2.9864,2.6747,0.8921,6575,326.0,2007-01-01,2024-12-31,0.978,False
+crashes_injury_fatal_6cty,RoF quake M7+ day,2,yes/no,0.2647,-3.6421,4.3299,0.8963,6575,201.0,2007-01-01,2024-12-31,0.978,False
+crashes_all_6cty,RoF quake M6+ day,7,yes/no,0.0833,-1.2596,1.4446,0.9038,6575,1550.0,2007-01-01,2024-12-31,0.978,False
+crashes_injury_fatal_6cty,RoF quake M6+ day,7,yes/no,-0.0965,-1.6591,1.491,0.9045,6575,1550.0,2007-01-01,2024-12-31,0.978,False
+crashes_injury_fatal_6cty,NZ quake M5+ day,2,yes/no,0.1924,-2.9093,3.3933,0.9046,6575,326.0,2007-01-01,2024-12-31,0.978,False
+crashes_injury_fatal_6cty,NZ M4+ count (log),1,per 1 SD,0.029,-0.6788,0.7419,0.9361,6575,,2007-01-01,2024-12-31,0.9991,False
+crashes_all_6cty,RoF M5+ count (log),0,per 1 SD,0.0253,-0.5986,0.653,0.9369,6575,,2007-01-01,2024-12-31,0.9991,False
+crashes_all_6cty,RoF M5+ count (log),2,per 1 SD,0.0218,-0.5395,0.5863,0.9394,6575,,2007-01-01,2024-12-31,0.9991,False
+lane_pm25_log,RoF quake M6+ day,0,yes/no,-0.086,-2.7355,2.6358,0.95,7102,1667.0,1999-01-01,2025-12-31,0.9991,False
+crashes_all_6cty,NZ quake M5+ day,1,yes/no,0.0741,-2.6262,2.8493,0.9577,6575,326.0,2007-01-01,2024-12-31,0.9991,False
+crashes_injury_fatal_6cty,RoF new eruption day,1,yes/no,0.0618,-2.5534,2.7472,0.9635,6575,521.0,2007-01-01,2024-12-31,0.9991,False
+crashes_all_6cty,RoF M5+ count (log),1,per 1 SD,-0.0155,-0.7835,0.7585,0.9686,6575,,2007-01-01,2024-12-31,0.9991,False
+crashes_all_6cty,NZ M4+ count (log),2,per 1 SD,-0.0091,-0.6521,0.638,0.9779,6575,,2007-01-01,2024-12-31,0.9991,False
+fatal_crashes_FARS_9cty,RoF quake M7+ day,7,yes/no,0.126,-12.0137,13.9408,0.9848,18257,515.0,1975-01-01,2024-12-31,0.9991,False
+crashes_all_6cty,NZ M4+ count (log),0,per 1 SD,0.0055,-0.5646,0.5788,0.985,6575,,2007-01-01,2024-12-31,0.9991,False
+lane_pm25_log,RoF tsunami event day,7,yes/no,0.0349,-6.2174,6.7041,0.9915,7102,189.0,1999-01-01,2025-12-31,0.9991,False
+crashes_injury_fatal_6cty,NZ M4+ count (log),2,per 1 SD,-0.0039,-0.7428,0.7404,0.9917,6575,,2007-01-01,2024-12-31,0.9991,False
+lane_pm25_log,RoF tsunami event day,3,yes/no,0.0229,-6.8708,7.4269,0.995,7102,187.0,1999-01-01,2025-12-31,0.9991,False
+lane_pm25_log,NZ quake M5+ day,2,yes/no,-0.007,-4.8242,5.054,0.9978,7102,370.0,1999-01-01,2025-12-31,0.9991,False
+crashes_all_6cty,RoF tsunami event day,7,yes/no,-0.0019,-3.3892,3.5042,0.9991,6575,215.0,2007-01-01,2024-12-31,0.9991,False

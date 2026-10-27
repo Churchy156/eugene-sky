@@ -42,6 +42,7 @@ jobs:
         run: |
           python zip_tools/build_nasa.py || echo "nasa failed (non-fatal)"
           timeout 1500 python zip_tools/build_cyber.py || echo "cyber failed (non-fatal)"
+          timeout 900 python zip_tools/build_ringfire.py || echo "ringfire/geonet failed (non-fatal)"
           python zip_tools/merge_daily.py || echo "merge failed (non-fatal)"
           python zip_tools/build_world.py || echo "world failed (non-fatal)"
       - name: Refresh game schedules (ESPN)
@@ -56,7 +57,7 @@ jobs:
         run: |
           git config user.name "eugene-sky-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/eugene_env_daily.csv.gz data/sports_games_100mi.csv reports/ zip_src/data/games.json zip_src/data/donki.json zip_src/data/cyber.json zip_src/data/cyber_pub.json data/donki_daily.json data/cyber_daily.json zip_src/data/world.json || true
+          git add data/eugene_env_daily.csv.gz data/sports_games_100mi.csv reports/ zip_src/data/games.json zip_src/data/donki.json zip_src/data/cyber.json zip_src/data/cyber_pub.json data/donki_daily.json data/cyber_daily.json zip_src/data/world.json data/ringfire_daily.json zip_src/data/ringfire.json || true
           git diff --cached --quiet || git commit -m "data update $(date +'%Y-%m-%d %H:%M %Z')"
           git push || echo "push failed (non-fatal)"
       - uses: actions/upload-pages-artifact@v3

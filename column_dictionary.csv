@@ -127,3 +127,17 @@ games_within_100mi,"Count of covered sports events at venues within 100 mi (have
 football_attendance_100mi,Reported attendance summed over UO/OSU football games within 100 mi that day (Wikipedia/ESPN); blank if no game or not reported,1950-10-07,2026-10-17,2.3
 est_attendance_100mi,"Sum of reported attendance over all covered games within 100 mi (football 1950+, ESPN men's/women's basketball 2002+; MiLB and meets not included); partial, blank if none reported",1950-10-07,2026-10-17,5.0
 football_kickoff_hour,"Local (PT) kickoff hour, decimal, of the earliest in-radius UO/OSU football game that day; blank if no game or time unknown/TBA",1950-10-07,2026-10-17,1.7
+nz_eq_M4plus,"New Zealand quakes M4+ per day (GeoNet FDSN catalog; box lat −49…−32, lon 164…180, excludes Kermadecs). PT calendar day",1950-01-01,2026-10-27,100.0
+nz_eq_M5plus,"New Zealand quakes M5+ per day (GeoNet), same box",1950-01-01,2026-10-27,100.0
+nz_eq_maxmag,"Largest NZ quake that day (GeoNet, M4+ only; blank = none)",1950-01-03,2026-10-25,44.8
+rof_eq_M5plus,Pacific Ring of Fire quakes M5+ per day (USGS ComCat; epicentre within ~400 km of PB2002 Pacific-rim subduction/convergent/transform boundaries). Catalog incomplete for M5–6 before ~1973,1950-01-01,2026-10-27,100.0
+rof_eq_M6plus,Ring of Fire quakes M6+ per day (USGS ComCat),1950-01-01,2026-10-27,100.0
+rof_eq_M7plus,Ring of Fire quakes M7+ per day (USGS ComCat),1950-01-01,2026-10-27,100.0
+rof_eq_maxmag,"Largest Ring of Fire quake that day (USGS, M5+ only; blank = none)",1950-01-02,2026-10-27,79.1
+volc_erupting_global,Volcanoes erupting worldwide that day (Smithsonian GVP eruption start/end dates; continuing eruptions run to today). GVP lags weeks for new eruptions,1950-01-01,2026-10-27,100.0
+volc_erupting_rof,Volcanoes erupting inside the Ring of Fire mask that day (Smithsonian GVP),1950-01-01,2026-10-27,100.0
+volc_new_eruptions_rof,New eruptions starting that day inside the Ring of Fire (Smithsonian GVP; unknown day = 1st of month),1950-01-01,2026-10-27,100.0
+tsunami_events_global,"Tsunami source events that day worldwide (NOAA NCEI HazEL, validity ≥3 probable/definite)",1950-01-01,2026-10-27,100.0
+tsunami_events_rof,Tsunami source events that day inside the Ring of Fire mask (NOAA NCEI),1950-01-01,2026-10-27,100.0
+ncei_sig_eq_global,NOAA NCEI significant earthquakes that day worldwide (damage/deaths/M7.5+/tsunami criteria),1950-01-01,2026-10-27,100.0
+ncei_sig_eq_rof,NOAA NCEI significant earthquakes that day inside the Ring of Fire mask,1950-01-01,2026-10-27,100.0

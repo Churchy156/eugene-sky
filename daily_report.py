@@ -178,8 +178,17 @@ def power():
     except Exception as e: L.append(f'- BPA interruptions report: unavailable ({e.__class__.__name__})')
     return L
 
+def ring_of_fire():  # GeoNet + Pacific Ring of Fire (shared code in eugene-sky/zip_tools/ringfire_core.py)
+    for p in (os.path.join(HERE,'zip_tools'),'/workspace/eugene-sky/zip_tools'):
+        if os.path.exists(os.path.join(p,'ringfire_core.py')):
+            if p not in sys.path: sys.path.insert(0,p)
+            break
+    import ringfire_core
+    return ringfire_core.report_lines()
+
 section('Weather',weather); section('NWS alerts',alerts); section('Roads (ODOT TripCheck)',roads); section('Wildfire & smoke',fire)
 section('Rivers (NOAA NWPS)',rivers); section('Events & calendar',events); section('Daylight',daylight); section('Space weather (NOAA SWPC)',space)
+section('Ring of Fire (Pacific quakes, volcanoes, tsunami)',ring_of_fire)
 section('Moon & tides',moontide); section('Power & grid',power); section('Markets snapshot',markets); section('Crash risk vs normal',crash)
 os.makedirs(os.path.join(HERE,'reports'),exist_ok=True); txt='\n'.join(out)
 open(os.path.join(HERE,'reports',f'outlook_{day.date()}.md'),'w').write(txt); print(txt)

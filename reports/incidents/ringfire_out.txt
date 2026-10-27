@@ -1,0 +1,29 @@
+crashes_all_6cty 40
+crashes_injury_fatal_6cty 80
+fatal_crashes_FARS_9cty 120
+oregon_quakes_500km_M2.5+ 160
+lane_pm25_log 200
+200 tests; q<0.05: 0 ; p<0.05: 17 (expected by chance ~ 10 )
+                       outcome               predictor  lag_days      kind  pct_change    ci_lo     ci_hi       p   q_fdr  n_days  n_event_days
+73   crashes_injury_fatal_6cty    RoF new eruption day         3    yes/no      4.4298   1.8278    7.0983  0.0008  0.1520    6575         521.0
+36            crashes_all_6cty   RoF tsunami event day         1    yes/no      4.8581   1.3760    8.4597  0.0059  0.4802    6575         214.0
+33            crashes_all_6cty    RoF new eruption day         3    yes/no      3.2122   0.7534    5.7310  0.0102  0.4802    6575         521.0
+125  oregon_quakes_500km_M2.5+       RoF quake M7+ day         0    yes/no     72.4314  13.2439  162.5537  0.0111  0.4802   17087         495.0
+130  oregon_quakes_500km_M2.5+     RoF M5+ count (log)         0  per 1 SD      4.1888   0.7551    7.7395  0.0164  0.4802   17087           NaN
+102    fatal_crashes_FARS_9cty      NZ M4+ count (log)         2  per 1 SD      2.5626   0.3407    4.8336  0.0235  0.4802   18257           NaN
+67   crashes_injury_fatal_6cty  RoF volcanoes erupting         2  per 1 SD      1.5611   0.2002    2.9405  0.0244  0.4802    6575           NaN
+155  oregon_quakes_500km_M2.5+   RoF tsunami event day         0    yes/no     74.6141   7.3325  184.0712  0.0248  0.4802   17087         427.0
+65   crashes_injury_fatal_6cty  RoF volcanoes erupting         0  per 1 SD      1.5293   0.1622    2.9151  0.0282  0.4802    6575           NaN
+76   crashes_injury_fatal_6cty   RoF tsunami event day         1    yes/no      4.1924   0.4188    8.1078  0.0291  0.4802    6575         214.0
+116    fatal_crashes_FARS_9cty   RoF tsunami event day         1    yes/no     14.9239   1.2057   30.5016  0.0320  0.4802   18257         430.0
+66   crashes_injury_fatal_6cty  RoF volcanoes erupting         1  per 1 SD      1.4695   0.1051    2.8525  0.0347  0.4802    6575           NaN
+97     fatal_crashes_FARS_9cty        NZ quake M5+ day         2    yes/no      9.7820   0.6429   19.7511  0.0353  0.4802   18257        1084.0
+68   crashes_injury_fatal_6cty  RoF volcanoes erupting         3  per 1 SD      1.4468   0.0959    2.8158  0.0357  0.4802    6575           NaN
+32            crashes_all_6cty    RoF new eruption day         2    yes/no      2.4448   0.1577    4.7842  0.0360  0.4802    6575         521.0
+
+Positive control:
+    lag_days  pct_change    ci_lo     ci_hi       p
+0         1    105.3379  73.5274  142.9799  0.0000
+1         2     40.6273  25.8733   57.1106  0.0000
+2         3     41.8730  16.5235   72.7372  0.0005
+3         7      7.9801  -1.4562   18.3201  0.0998

@@ -1,186 +1,210 @@
-184 tests
-                       outcome                   predictor      kind  pct_change    ci_lo    ci_hi       p   q_fdr  n_days
-0             crashes_all_6cty                pressure_msl  per 1 SD     -2.6610  -3.2789  -2.0391  0.0000  0.0000    6575
-3             crashes_all_6cty               tmin_freezing    yes/no      6.9919   4.9172   9.1078  0.0000  0.0000    6575
-5             crashes_all_6cty            rain_day(>0.1in)    yes/no     12.8166  11.1218  14.5373  0.0000  0.0000    6575
-4             crashes_all_6cty                     rain_in  per 1 SD      4.8888   4.2799   5.5012  0.0000  0.0000    6575
-6             crashes_all_6cty                    snow_day    yes/no     30.8690  17.7266  45.4786  0.0000  0.0000    2735
-7             crashes_all_6cty       first_rain_after_7dry    yes/no     13.1858   6.6673  20.1027  0.0000  0.0005    6575
-21            crashes_all_6cty            rsv_hosp_rate_or  per 1 SD      3.3545   1.9738   4.7538  0.0000  0.0000    1991
-35                crashes_lane                     rain_in  per 1 SD      4.1307   3.1866   5.0834  0.0000  0.0000    6575
-62   crashes_injury_fatal_6cty                pressure_msl  per 1 SD     -2.2172  -2.9299  -1.4992  0.0000  0.0000    6575
-36                crashes_lane            rain_day(>0.1in)    yes/no     10.4742   7.9128  13.0965  0.0000  0.0000    6575
-34                crashes_lane               tmin_freezing    yes/no      9.3365   6.1252  12.6450  0.0000  0.0000    6575
-67   crashes_injury_fatal_6cty            rain_day(>0.1in)    yes/no      9.2445   7.3440  11.1787  0.0000  0.0000    6575
-66   crashes_injury_fatal_6cty                     rain_in  per 1 SD      3.9688   3.2605   4.6821  0.0000  0.0000    6575
-83   crashes_injury_fatal_6cty            rsv_hosp_rate_or  per 1 SD      4.0021   2.3631   5.6674  0.0000  0.0000    1991
-158   springfield_police_calls                     rain_in  per 1 SD     -2.5123  -3.6063  -1.4059  0.0000  0.0001    1377
-129        eugene_police_calls            rain_day(>0.1in)    yes/no     -4.4423  -6.3334  -2.5130  0.0000  0.0001    1379
-173   springfield_police_calls            flu_hosp_rate_or  per 1 SD      3.6435   1.9216   5.3946  0.0000  0.0003    1077
-159   springfield_police_calls            rain_day(>0.1in)    yes/no     -5.5030  -8.0647  -2.8699  0.0001  0.0006    1379
-142        eugene_police_calls          covid_hosp_rate_or  per 1 SD     -2.6147  -3.9306  -1.2808  0.0001  0.0013    1371
-64   crashes_injury_fatal_6cty                        tmax  per 1 SD      2.8117   1.3273   4.3179  0.0002  0.0017    6575
-17            crashes_all_6cty            epa_aqi_official  per 1 SD     -1.3344  -2.0358  -0.6281  0.0002  0.0020    6575
-16            crashes_all_6cty                        pm25  per 1 SD     -2.8710  -4.4303  -1.2862  0.0004  0.0035     882
-128        eugene_police_calls                     rain_in  per 1 SD     -1.4278  -2.2191  -0.6302  0.0005  0.0038    1377
-65   crashes_injury_fatal_6cty               tmin_freezing    yes/no      4.0305   1.6925   6.4222  0.0007  0.0050    6575
-170   springfield_police_calls            epa_aqi_official  per 1 SD      2.0735   0.8622   3.2993  0.0008  0.0055    1185
-38                crashes_lane       first_rain_after_7dry    yes/no     15.6188   5.7223  26.4417  0.0015  0.0105    6575
-12            crashes_all_6cty                  moon_illum  per 1 SD     -0.9630  -1.5573  -0.3652  0.0016  0.0111    6575
-52                crashes_lane            rsv_hosp_rate_or  per 1 SD      3.5238   1.2778   5.8196  0.0020  0.0130    1991
-88   crashes_injury_fatal_6cty              ducks_home_mbb    yes/no      5.2915   1.8760   8.8216  0.0022  0.0138    6575
-31                crashes_lane                pressure_msl  per 1 SD     -1.5022  -2.4615  -0.5336  0.0024  0.0142    6575
-43                crashes_lane                  moon_illum  per 1 SD     -1.4350  -2.3486  -0.5127  0.0024  0.0142    6575
-126        eugene_police_calls                        tmax  per 1 SD      2.3706   0.8293   3.9355  0.0025  0.0142    1377
-2             crashes_all_6cty                        tmax  per 1 SD     -1.9624  -3.2203  -0.6883  0.0026  0.0146    6575
-156   springfield_police_calls                        tmax  per 1 SD      3.1231   1.0228   5.2670  0.0034  0.0184    1377
-79   crashes_injury_fatal_6cty            epa_aqi_official  per 1 SD     -1.1451  -1.9132  -0.3709  0.0038  0.0200    6575
-174   springfield_police_calls            rsv_hosp_rate_or  per 1 SD      2.3989   0.7472   4.0777  0.0043  0.0218    1371
-144        eugene_police_calls            rsv_hosp_rate_or  per 1 SD      1.7067   0.5062   2.9216  0.0052  0.0259    1371
-11            crashes_all_6cty              full_moon(±1d)    yes/no     -2.6512  -4.5230  -0.7427  0.0067  0.0323    6575
-48                crashes_lane            epa_aqi_official  per 1 SD     -1.4926  -2.5831  -0.3899  0.0081  0.0382    6575
-8             crashes_all_6cty                      kp_max  per 1 SD      0.8267   0.1898   1.4678  0.0109  0.0501    6575
-74   crashes_injury_fatal_6cty                  moon_illum  per 1 SD     -0.8867  -1.5714  -0.1974  0.0118  0.0529    6575
-78   crashes_injury_fatal_6cty                        pm25  per 1 SD     -2.3747  -4.2389  -0.4743  0.0146  0.0638     882
-169   springfield_police_calls                        pm25  per 1 SD      1.2651   0.2428   2.2978  0.0152  0.0649    1379
-96     fatal_crashes_FARS_9cty               tmin_freezing    yes/no      9.0635   1.6378  17.0317  0.0159  0.0664   18263
-154   springfield_police_calls                pressure_msl  per 1 SD      1.2348   0.1875   2.2930  0.0207  0.0847    1379
-20            crashes_all_6cty            flu_hosp_rate_or  per 1 SD      1.8017   0.2117   3.4169  0.0262  0.1039    1361
-69   crashes_injury_fatal_6cty       first_rain_after_7dry    yes/no      7.9762   0.8977  15.5513  0.0265  0.1039    6575
-73   crashes_injury_fatal_6cty              full_moon(±1d)    yes/no     -2.4483  -4.6057  -0.2420  0.0298  0.1143    6575
-124        eugene_police_calls                pressure_msl  per 1 SD      0.8286   0.0636   1.5995  0.0337  0.1266    1379
-141        eugene_police_calls      covid_wastewater_log10  per 1 SD      1.1230   0.0352   2.2227  0.0430  0.1570    1316
-1             crashes_all_6cty         pressure_change_24h  per 1 SD     -0.6386  -1.2559  -0.0175  0.0439  0.1570    6575
-92   crashes_injury_fatal_6cty          hayward_major_meet    yes/no      7.1930   0.1645  14.7147  0.0447  0.1570    6575
-54                crashes_lane         ducks_home_football    yes/no      7.9653   0.1497  16.3908  0.0456  0.1570    6575
-104    fatal_crashes_FARS_9cty              full_moon(±1d)    yes/no     -6.9255 -13.2827  -0.1022  0.0468  0.1570   18257
-26            crashes_all_6cty              ducks_home_mbb    yes/no      2.9087   0.0387   5.8610  0.0469  0.1570    6575
-118    fatal_crashes_FARS_9cty  major_home_game(UO/OSU FB)    yes/no    -13.1391 -24.4911  -0.0804  0.0487  0.1600   18257
-58                crashes_lane                osu_home_mbb    yes/no      4.6267  -0.0371   9.5081  0.0519  0.1675    6575
-127        eugene_police_calls               tmin_freezing    yes/no     -2.5983  -5.1811   0.0550  0.0549  0.1741    1379
-70   crashes_injury_fatal_6cty                      kp_max  per 1 SD      0.7012  -0.0304   1.4383  0.0604  0.1882    6575
-94     fatal_crashes_FARS_9cty         pressure_change_24h  per 1 SD     -2.0672  -4.2108   0.1244  0.0643  0.1973   18263
-95     fatal_crashes_FARS_9cty                        tmax  per 1 SD      3.9913  -0.3065   8.4743  0.0691  0.2086   18262
-63   crashes_injury_fatal_6cty         pressure_change_24h  per 1 SD     -0.6454  -1.3478   0.0620  0.0737  0.2166    6575
-152        eugene_police_calls              milb_home_game    yes/no     -1.9818  -4.1120   0.1958  0.0742  0.2166    1377
-42                crashes_lane              full_moon(±1d)    yes/no     -2.6135  -5.4958   0.3567  0.0840  0.2416    6575
-136        eugene_police_calls                  tide_range  per 1 SD      0.6616  -0.0957   1.4247  0.0870  0.2458    1338
-143        eugene_police_calls            flu_hosp_rate_or  per 1 SD      1.0753  -0.1644   2.3304  0.0894  0.2458    1077
-103    fatal_crashes_FARS_9cty            solar_wind_speed  per 1 SD      2.1047  -0.3209   4.5894  0.0895  0.2458   16543
-28            crashes_all_6cty              ducks_home_wbb    yes/no     -2.5187  -5.3598   0.4076  0.0909  0.2461    6575
-15            crashes_all_6cty                  us_aqi_max  per 1 SD     -1.3263  -2.8559   0.2274  0.0939  0.2505     881
-160   springfield_police_calls       first_rain_after_7dry    yes/no     -7.8924 -16.4883   1.5882  0.1000  0.2618    1379
-171   springfield_police_calls      covid_wastewater_log10  per 1 SD      1.2451  -0.2412   2.7535  0.1010  0.2618    1316
-10            crashes_all_6cty            solar_wind_speed  per 1 SD      0.5208  -0.1083   1.1538  0.1049  0.2680    6575
-172   springfield_police_calls          covid_hosp_rate_or  per 1 SD     -1.4983  -3.2923   0.3290  0.1075  0.2708    1371
-167   springfield_police_calls          quakes_500km_M2.5+  per 1 SD     -0.9091  -2.0160   0.2104  0.1111  0.2762    1377
-89   crashes_injury_fatal_6cty                osu_home_mbb    yes/no      2.8367  -0.6636   6.4605  0.1134  0.2782    6575
-116    fatal_crashes_FARS_9cty         ducks_home_football    yes/no    -12.0970 -25.7033   4.0010  0.1329  0.3218   18257
-130        eugene_police_calls       first_rain_after_7dry    yes/no     -5.1607 -11.6296   1.7818  0.1416  0.3368    1379
-90   crashes_injury_fatal_6cty              ducks_home_wbb    yes/no     -2.5694  -5.9028   0.8821  0.1428  0.3368    6575
-183   springfield_police_calls          hayward_major_meet    yes/no     -8.5621 -18.9993   3.2198  0.1478  0.3441    1377
-168   springfield_police_calls                  us_aqi_max  per 1 SD      0.7471  -0.2698   1.7745  0.1504  0.3460    1379
-39                crashes_lane                      kp_max  per 1 SD      0.7096  -0.2722   1.7010  0.1572  0.3570    6575
-111    fatal_crashes_FARS_9cty      covid_wastewater_log10  per 1 SD     -6.3324 -14.6673   2.8166  0.1689  0.3789    1567
-135        eugene_police_calls                  moon_illum  per 1 SD     -0.5027  -1.2313   0.2314  0.1790  0.3962    1377
-27            crashes_all_6cty                osu_home_mbb    yes/no      2.0333  -0.9324   5.0878  0.1811  0.3962    6575
-161   springfield_police_calls                      kp_max  per 1 SD      0.6873  -0.3329   1.7180  0.1874  0.3962    1377
-146        eugene_police_calls         ducks_home_football    yes/no     -3.9627  -9.5858   2.0101  0.1890  0.3962    1377
-177   springfield_police_calls           osu_home_football    yes/no     -5.6880 -13.5910   2.9379  0.1897  0.3962    1377
-149        eugene_police_calls              ducks_home_mbb    yes/no     -2.4782  -6.0786   1.2601  0.1910  0.3962    1377
-57                crashes_lane              ducks_home_mbb    yes/no      2.9800  -1.4606   7.6207  0.1916  0.3962    6575
-115    fatal_crashes_FARS_9cty          games_within_100mi  per 1 SD     -1.5882  -3.9849   0.8683  0.2031  0.4153   18257
-107    fatal_crashes_FARS_9cty          quakes_500km_M2.5+  per 1 SD      1.2189  -0.6780   3.1519  0.2094  0.4234   18257
-61                crashes_lane          hayward_major_meet    yes/no      6.0765  -3.4154  16.5011  0.2174  0.4348    6575
-164   springfield_police_calls              full_moon(±1d)    yes/no     -1.9766  -5.0579   1.2048  0.2205  0.4363    1377
-151        eugene_police_calls              ducks_home_wbb    yes/no      2.3776  -1.4274   6.3296  0.2240  0.4384    1377
-33                crashes_lane                        tmax  per 1 SD     -1.1918  -3.1149   0.7695  0.2318  0.4485    6575
-112    fatal_crashes_FARS_9cty          covid_hosp_rate_or  per 1 SD     -5.7713 -14.5594   3.9206  0.2340  0.4485    1767
-123    fatal_crashes_FARS_9cty          hayward_major_meet    yes/no    -16.9627 -39.6986  14.3457  0.2548  0.4834   18257
-122    fatal_crashes_FARS_9cty              milb_home_game    yes/no     -6.6122 -17.1600   5.2787  0.2632  0.4943    7305
-163   springfield_police_calls            solar_wind_speed  per 1 SD      0.6177  -0.4819   1.7294  0.2720  0.5025    1366
-106    fatal_crashes_FARS_9cty                  tide_range  per 1 SD     -1.2812  -3.5319   1.0220  0.2731  0.5025   16547
-46                crashes_lane                  us_aqi_max  per 1 SD     -1.4510  -4.0759   1.2456  0.2886  0.5214     881
-97     fatal_crashes_FARS_9cty                     rain_in  per 1 SD      1.2055  -1.0118   3.4724  0.2890  0.5214   18258
-49                crashes_lane      covid_wastewater_log10  per 1 SD      1.3544  -1.2021   3.9772  0.3020  0.5395    1567
-53                crashes_lane          games_within_100mi  per 1 SD      0.5174  -0.5271   1.5728  0.3329  0.5890    6575
-47                crashes_lane                        pm25  per 1 SD     -1.3230  -4.0455   1.4768  0.3508  0.6148     882
-150        eugene_police_calls                osu_home_mbb    yes/no      1.7489  -1.9582   5.5963  0.3599  0.6154    1377
-44                crashes_lane                  tide_range  per 1 SD      0.4400  -0.4998   1.3888  0.3600  0.6154    6575
-19            crashes_all_6cty          covid_hosp_rate_or  per 1 SD     -0.7538  -2.3528   0.8714  0.3612  0.6154    1767
-72   crashes_injury_fatal_6cty            solar_wind_speed  per 1 SD      0.3345  -0.3928   1.0671  0.3683  0.6164    6575
-59                crashes_lane              ducks_home_wbb    yes/no     -2.0910  -6.5052   2.5316  0.3693  0.6164    6575
-182   springfield_police_calls              milb_home_game    yes/no     -1.3367  -4.2082   1.6208  0.3718  0.6164    1377
-80   crashes_injury_fatal_6cty      covid_wastewater_log10  per 1 SD      0.7768  -1.0181   2.6043  0.3987  0.6521    1567
-119    fatal_crashes_FARS_9cty              ducks_home_mbb    yes/no      5.0319  -6.3259  17.7669  0.4005  0.6521   18257
-101    fatal_crashes_FARS_9cty                      kp_max  per 1 SD      0.9899  -1.3578   3.3934  0.4117  0.6616   18257
-137        eugene_police_calls          quakes_500km_M2.5+  per 1 SD      0.2966  -0.4128   1.0110  0.4135  0.6616    1377
-145        eugene_police_calls          games_within_100mi  per 1 SD     -0.3188  -1.1021   0.4707  0.4276  0.6750    1377
-37                crashes_lane                    snow_day    yes/no      7.9368 -10.6830  30.4382  0.4292  0.6750    2735
-51                crashes_lane            flu_hosp_rate_or  per 1 SD      1.0069  -1.5064   3.5844  0.4358  0.6795    1361
-91   crashes_injury_fatal_6cty              milb_home_game    yes/no     -0.9605  -3.3552   1.4935  0.4396  0.6797    6575
-179   springfield_police_calls              ducks_home_mbb    yes/no      1.9721  -3.0708   7.2774  0.4504  0.6907    1377
-68   crashes_injury_fatal_6cty                    snow_day    yes/no      5.4128  -8.2332  21.0879  0.4561  0.6936    2735
-117    fatal_crashes_FARS_9cty           osu_home_football    yes/no     -6.1655 -20.7471  11.0988  0.4602  0.6941   18257
-121    fatal_crashes_FARS_9cty              ducks_home_wbb    yes/no      6.0961  -9.6121  24.5341  0.4692  0.6973    8462
-131        eugene_police_calls                      kp_max  per 1 SD     -0.2708  -1.0178   0.4820  0.4797  0.6973    1377
-175   springfield_police_calls          games_within_100mi  per 1 SD     -0.3865  -1.4521   0.6907  0.4804  0.6973    1377
-110    fatal_crashes_FARS_9cty            epa_aqi_official  per 1 SD      0.8109  -1.4318   3.1047  0.4817  0.6973   16374
-18            crashes_all_6cty      covid_wastewater_log10  per 1 SD      0.5458  -0.9697   2.0845  0.4824  0.6973    1567
-82   crashes_injury_fatal_6cty            flu_hosp_rate_or  per 1 SD      0.6505  -1.1662   2.5006  0.4854  0.6973    1361
-114    fatal_crashes_FARS_9cty            rsv_hosp_rate_or  per 1 SD     -2.9899 -11.0165   5.7607  0.4909  0.6973    1991
-77   crashes_injury_fatal_6cty                  us_aqi_max  per 1 SD     -0.6468  -2.4717   1.2122  0.4927  0.6973     881
-85   crashes_injury_fatal_6cty         ducks_home_football    yes/no     -1.8724  -7.2484   3.8151  0.5108  0.7079    6575
-181   springfield_police_calls              ducks_home_wbb    yes/no     -1.7481  -6.7817   3.5573  0.5110  0.7079    1377
-30            crashes_all_6cty          hayward_major_meet    yes/no      2.0804  -4.0081   8.5550  0.5117  0.7079    6575
-138        eugene_police_calls                  us_aqi_max  per 1 SD     -0.2366  -0.9830   0.5154  0.5365  0.7366    1379
-148        eugene_police_calls  major_home_game(UO/OSU FB)    yes/no     -1.4528  -6.2227   3.5596  0.5632  0.7665    1377
-84   crashes_injury_fatal_6cty          games_within_100mi  per 1 SD      0.2279  -0.5493   1.0111  0.5665  0.7665    6575
-41                crashes_lane            solar_wind_speed  per 1 SD      0.2782  -0.6899   1.2557  0.5746  0.7667    6575
-71   crashes_injury_fatal_6cty                 storm_Kp>=5    yes/no      0.7932  -1.9526   3.6159  0.5750  0.7667    6575
-25            crashes_all_6cty  major_home_game(UO/OSU FB)    yes/no     -1.1490  -5.1168   2.9849  0.5804  0.7682    6575
-165   springfield_police_calls                  moon_illum  per 1 SD     -0.2776  -1.2692   0.7239  0.5856  0.7696    1377
-13            crashes_all_6cty                  tide_range  per 1 SD      0.1633  -0.4434   0.7737  0.5986  0.7811    6575
-81   crashes_injury_fatal_6cty          covid_hosp_rate_or  per 1 SD     -0.4611  -2.3643   1.4791  0.6389  0.8278    1767
-166   springfield_police_calls                  tide_range  per 1 SD     -0.2365  -1.2552   0.7926  0.6511  0.8290    1338
-125        eugene_police_calls         pressure_change_24h  per 1 SD      0.1688  -0.5668   0.9098  0.6538  0.8290    1379
-120    fatal_crashes_FARS_9cty                osu_home_mbb    yes/no     -2.6399 -13.6137   9.7278  0.6610  0.8290   18257
-56                crashes_lane  major_home_game(UO/OSU FB)    yes/no      1.4376  -4.8733   8.1671  0.6632  0.8290    6575
-109    fatal_crashes_FARS_9cty                        pm25  per 1 SD     -2.1601 -11.3940   8.0360  0.6659  0.8290     882
-55                crashes_lane           osu_home_football    yes/no     -1.7414  -9.2931   6.4391  0.6668  0.8290    6575
-14            crashes_all_6cty          quakes_500km_M2.5+  per 1 SD     -0.1264  -0.7149   0.4656  0.6749  0.8312    6575
-87   crashes_injury_fatal_6cty  major_home_game(UO/OSU FB)    yes/no     -0.9846  -5.5284   3.7777  0.6797  0.8312    6575
-180   springfield_police_calls                osu_home_mbb    yes/no      1.0797  -3.9833   6.4096  0.6821  0.8312    1377
-23            crashes_all_6cty         ducks_home_football    yes/no     -0.9753  -5.7108   3.9981  0.6951  0.8384    6575
-9             crashes_all_6cty                 storm_Kp>=5    yes/no      0.4819  -1.9218   2.9446  0.6971  0.8384    6575
-139        eugene_police_calls                        pm25  per 1 SD     -0.1456  -0.9017   0.6164  0.7072  0.8450    1379
-176   springfield_police_calls         ducks_home_football    yes/no      1.4932  -6.4417  10.1011  0.7212  0.8561    1377
-45                crashes_lane          quakes_500km_M2.5+  per 1 SD     -0.1546  -1.0637   0.7628  0.7402  0.8712    6575
-134        eugene_police_calls              full_moon(±1d)    yes/no     -0.3900  -2.6931   1.9676  0.7434  0.8712    1377
-113    fatal_crashes_FARS_9cty            flu_hosp_rate_or  per 1 SD     -1.5143 -10.7522   8.6797  0.7614  0.8867    1361
-76   crashes_injury_fatal_6cty          quakes_500km_M2.5+  per 1 SD      0.0988  -0.5748   0.7769  0.7745  0.8947    6575
-153        eugene_police_calls          hayward_major_meet    yes/no     -1.2615  -9.6027   7.8493  0.7780  0.8947    1377
-147        eugene_police_calls           osu_home_football    yes/no      0.8514  -5.2423   7.3370  0.7898  0.8989    1377
-132        eugene_police_calls                 storm_Kp>=5    yes/no      0.2978  -1.8879   2.5321  0.7914  0.8989    1377
-75   crashes_injury_fatal_6cty                  tide_range  per 1 SD      0.0872  -0.6120   0.7914  0.8074  0.9115    6575
-93     fatal_crashes_FARS_9cty                pressure_msl  per 1 SD     -0.2719  -2.5187   2.0267  0.8148  0.9142   18263
-133        eugene_police_calls            solar_wind_speed  per 1 SD     -0.0922  -0.9014   0.7236  0.8241  0.9190    1366
-140        eugene_police_calls            epa_aqi_official  per 1 SD      0.0932  -0.7956   0.9900  0.8378  0.9200    1185
-178   springfield_police_calls  major_home_game(UO/OSU FB)    yes/no      0.6840  -5.9166   7.7477  0.8438  0.9200    1377
-102    fatal_crashes_FARS_9cty                 storm_Kp>=5    yes/no     -0.6273  -6.7532   5.9012  0.8463  0.9200   18257
-86   crashes_injury_fatal_6cty           osu_home_football    yes/no      0.5663  -5.0338   6.4967  0.8468  0.9200    6575
-105    fatal_crashes_FARS_9cty                  moon_illum  per 1 SD     -0.2035  -2.3245   1.9636  0.8526  0.9200   18257
-108    fatal_crashes_FARS_9cty                  us_aqi_max  per 1 SD     -0.8772  -9.8160   8.9475  0.8550  0.9200     881
-99     fatal_crashes_FARS_9cty                    snow_day    yes/no     -3.1429 -32.9445  39.9036  0.8648  0.9252   10479
-50                crashes_lane          covid_hosp_rate_or  per 1 SD     -0.2084  -2.8847   2.5416  0.8804  0.9317    1767
-22            crashes_all_6cty          games_within_100mi  per 1 SD      0.0514  -0.6198   0.7271  0.8810  0.9317    6575
-162   springfield_police_calls                 storm_Kp>=5    yes/no      0.1952  -2.7692   3.2501  0.8987  0.9417    1377
-100    fatal_crashes_FARS_9cty       first_rain_after_7dry    yes/no     -1.1895 -19.3402  21.0456  0.9080  0.9417   18263
-32                crashes_lane         pressure_change_24h  per 1 SD     -0.0552  -0.9982   0.8968  0.9091  0.9417    6575
-40                crashes_lane                 storm_Kp>=5    yes/no      0.2139  -3.4716   4.0400  0.9110  0.9417    6575
-98     fatal_crashes_FARS_9cty            rain_day(>0.1in)    yes/no      0.1567  -5.1763   5.7896  0.9553  0.9741   18263
-24            crashes_all_6cty           osu_home_football    yes/no     -0.1118  -4.9912   5.0181  0.9651  0.9741    6575
-60                crashes_lane              milb_home_game    yes/no     -0.0728  -3.3788   3.3464  0.9662  0.9741    6575
-157   springfield_police_calls               tmin_freezing    yes/no      0.0779  -3.5196   3.8096  0.9667  0.9741    1379
-29            crashes_all_6cty              milb_home_game    yes/no     -0.0395  -2.1871   2.1553  0.9715  0.9741    6575
-155   springfield_police_calls         pressure_change_24h  per 1 SD      0.0167  -0.9862   1.0298  0.9741  0.9741    1379
+208 tests
+                       outcome                        predictor      kind  pct_change    ci_lo    ci_hi       p   q_fdr  n_days
+0             crashes_all_6cty                     pressure_msl  per 1 SD     -2.6610  -3.2789  -2.0391  0.0000  0.0000    6575
+3             crashes_all_6cty                    tmin_freezing    yes/no      6.9919   4.9172   9.1078  0.0000  0.0000    6575
+5             crashes_all_6cty                 rain_day(>0.1in)    yes/no     12.8166  11.1218  14.5373  0.0000  0.0000    6575
+4             crashes_all_6cty                          rain_in  per 1 SD      4.8888   4.2799   5.5012  0.0000  0.0000    6575
+6             crashes_all_6cty                         snow_day    yes/no     30.8690  17.7266  45.4786  0.0000  0.0000    2735
+7             crashes_all_6cty            first_rain_after_7dry    yes/no     13.1858   6.6673  20.1027  0.0000  0.0005    6575
+25            crashes_all_6cty                 rsv_hosp_rate_or  per 1 SD      3.3545   1.9738   4.7538  0.0000  0.0000    1991
+38                crashes_lane                    tmin_freezing    yes/no      9.3365   6.1252  12.6450  0.0000  0.0000    6575
+39                crashes_lane                          rain_in  per 1 SD      4.1307   3.1866   5.0834  0.0000  0.0000    6575
+40                crashes_lane                 rain_day(>0.1in)    yes/no     10.4742   7.9128  13.0965  0.0000  0.0000    6575
+75   crashes_injury_fatal_6cty                 rain_day(>0.1in)    yes/no      9.2445   7.3440  11.1787  0.0000  0.0000    6575
+70   crashes_injury_fatal_6cty                     pressure_msl  per 1 SD     -2.2172  -2.9299  -1.4992  0.0000  0.0000    6575
+95   crashes_injury_fatal_6cty                 rsv_hosp_rate_or  per 1 SD      4.0021   2.3631   5.6674  0.0000  0.0000    1991
+74   crashes_injury_fatal_6cty                          rain_in  per 1 SD      3.9688   3.2605   4.6821  0.0000  0.0000    6575
+178   springfield_police_calls                          rain_in  per 1 SD     -2.5123  -3.6063  -1.4059  0.0000  0.0001    1377
+145        eugene_police_calls                 rain_day(>0.1in)    yes/no     -4.4423  -6.3334  -2.5130  0.0000  0.0001    1379
+197   springfield_police_calls                 flu_hosp_rate_or  per 1 SD      3.6435   1.9216   5.3946  0.0000  0.0004    1077
+162        eugene_police_calls               covid_hosp_rate_or  per 1 SD     -2.6147  -3.9306  -1.2808  0.0001  0.0015    1371
+179   springfield_police_calls                 rain_day(>0.1in)    yes/no     -5.5030  -8.0647  -2.8699  0.0001  0.0006    1379
+21            crashes_all_6cty                 epa_aqi_official  per 1 SD     -1.3344  -2.0358  -0.6281  0.0002  0.0022    6575
+72   crashes_injury_fatal_6cty                             tmax  per 1 SD      2.8117   1.3273   4.3179  0.0002  0.0019    6575
+20            crashes_all_6cty                             pm25  per 1 SD     -2.8710  -4.4303  -1.2862  0.0004  0.0040     882
+144        eugene_police_calls                          rain_in  per 1 SD     -1.4278  -2.2191  -0.6302  0.0005  0.0042    1377
+73   crashes_injury_fatal_6cty                    tmin_freezing    yes/no      4.0305   1.6925   6.4222  0.0007  0.0057    6575
+194   springfield_police_calls                 epa_aqi_official  per 1 SD      2.0735   0.8622   3.2993  0.0008  0.0063    1185
+42                crashes_lane            first_rain_after_7dry    yes/no     15.6188   5.7223  26.4417  0.0015  0.0118    6575
+12            crashes_all_6cty                       moon_illum  per 1 SD     -0.9630  -1.5573  -0.3652  0.0016  0.0125    6575
+60                crashes_lane                 rsv_hosp_rate_or  per 1 SD      3.5238   1.2778   5.8196  0.0020  0.0146    1991
+100  crashes_injury_fatal_6cty                   ducks_home_mbb    yes/no      5.2915   1.8760   8.8216  0.0022  0.0156    6575
+47                crashes_lane                       moon_illum  per 1 SD     -1.4350  -2.3486  -0.5127  0.0024  0.0161    6575
+35                crashes_lane                     pressure_msl  per 1 SD     -1.5022  -2.4615  -0.5336  0.0024  0.0161    6575
+142        eugene_police_calls                             tmax  per 1 SD      2.3706   0.8293   3.9355  0.0025  0.0161    1377
+2             crashes_all_6cty                             tmax  per 1 SD     -1.9624  -3.2203  -0.6883  0.0026  0.0166    6575
+176   springfield_police_calls                             tmax  per 1 SD      3.1231   1.0228   5.2670  0.0034  0.0208    1377
+91   crashes_injury_fatal_6cty                 epa_aqi_official  per 1 SD     -1.1451  -1.9132  -0.3709  0.0038  0.0226    6575
+198   springfield_police_calls                 rsv_hosp_rate_or  per 1 SD      2.3989   0.7472   4.0777  0.0043  0.0247    1371
+164        eugene_police_calls                 rsv_hosp_rate_or  per 1 SD      1.7067   0.5062   2.9216  0.0052  0.0293    1371
+11            crashes_all_6cty                   full_moon(±1d)    yes/no     -2.6512  -4.5230  -0.7427  0.0067  0.0365    6575
+56                crashes_lane                 epa_aqi_official  per 1 SD     -1.4926  -2.5831  -0.3899  0.0081  0.0432    6575
+8             crashes_all_6cty                           kp_max  per 1 SD      0.8267   0.1898   1.4678  0.0109  0.0564    6575
+87   crashes_injury_fatal_6cty  ring_of_fire_volcanoes_erupting  per 1 SD      1.5293   0.3466   2.7259  0.0111  0.0564    6575
+82   crashes_injury_fatal_6cty                       moon_illum  per 1 SD     -0.8867  -1.5714  -0.1974  0.0118  0.0583    6575
+90   crashes_injury_fatal_6cty                             pm25  per 1 SD     -2.3747  -4.2389  -0.4743  0.0146  0.0704     882
+193   springfield_police_calls                             pm25  per 1 SD      1.2651   0.2428   2.2978  0.0152  0.0717    1379
+108    fatal_crashes_FARS_9cty                    tmin_freezing    yes/no      9.0635   1.6378  17.0317  0.0159  0.0734   18263
+174   springfield_police_calls                     pressure_msl  per 1 SD      1.2348   0.1875   2.2930  0.0207  0.0937    1379
+190   springfield_police_calls  ring_of_fire_volcanoes_erupting  per 1 SD      2.5650   0.3539   4.8248  0.0227  0.1007    1377
+24            crashes_all_6cty                 flu_hosp_rate_or  per 1 SD      1.8017   0.2117   3.4169  0.0262  0.1126    1361
+77   crashes_injury_fatal_6cty            first_rain_after_7dry    yes/no      7.9762   0.8977  15.5513  0.0265  0.1126    6575
+81   crashes_injury_fatal_6cty                   full_moon(±1d)    yes/no     -2.4483  -4.6057  -0.2420  0.0298  0.1241    6575
+140        eugene_police_calls                     pressure_msl  per 1 SD      0.8286   0.0636   1.5995  0.0337  0.1375    1379
+161        eugene_police_calls           covid_wastewater_log10  per 1 SD      1.1230   0.0352   2.2227  0.0430  0.1713    1316
+1             crashes_all_6cty              pressure_change_24h  per 1 SD     -0.6386  -1.2559  -0.0175  0.0439  0.1713    6575
+104  crashes_injury_fatal_6cty               hayward_major_meet    yes/no      7.1930   0.1645  14.7147  0.0447  0.1713    6575
+62                crashes_lane              ducks_home_football    yes/no      7.9653   0.1497  16.3908  0.0456  0.1713    6575
+116    fatal_crashes_FARS_9cty                   full_moon(±1d)    yes/no     -6.9255 -13.2827  -0.1022  0.0468  0.1713   18257
+30            crashes_all_6cty                   ducks_home_mbb    yes/no      2.9087   0.0387   5.8610  0.0469  0.1713    6575
+134    fatal_crashes_FARS_9cty       major_home_game(UO/OSU FB)    yes/no    -13.1391 -24.4911  -0.0804  0.0487  0.1746   18257
+66                crashes_lane                     osu_home_mbb    yes/no      4.6267  -0.0371   9.5081  0.0519  0.1829    6575
+143        eugene_police_calls                    tmin_freezing    yes/no     -2.5983  -5.1811   0.0550  0.0549  0.1902    1379
+17            crashes_all_6cty  ring_of_fire_volcanoes_erupting  per 1 SD      0.9886  -0.0328   2.0205  0.0579  0.1973    6575
+78   crashes_injury_fatal_6cty                           kp_max  per 1 SD      0.7012  -0.0304   1.4383  0.0604  0.2025    6575
+106    fatal_crashes_FARS_9cty              pressure_change_24h  per 1 SD     -2.0672  -4.2108   0.1244  0.0643  0.2124   18263
+107    fatal_crashes_FARS_9cty                             tmax  per 1 SD      3.9913  -0.3065   8.4743  0.0691  0.2247   18262
+71   crashes_injury_fatal_6cty              pressure_change_24h  per 1 SD     -0.6454  -1.3478   0.0620  0.0737  0.2338    6575
+172        eugene_police_calls                   milb_home_game    yes/no     -1.9818  -4.1120   0.1958  0.0742  0.2338    1377
+46                crashes_lane                   full_moon(±1d)    yes/no     -2.6135  -5.4958   0.3567  0.0840  0.2609    6575
+152        eugene_police_calls                       tide_range  per 1 SD      0.6616  -0.0957   1.4247  0.0870  0.2660    1338
+163        eugene_police_calls                 flu_hosp_rate_or  per 1 SD      1.0753  -0.1644   2.3304  0.0894  0.2660    1077
+115    fatal_crashes_FARS_9cty                 solar_wind_speed  per 1 SD      2.1047  -0.3209   4.5894  0.0895  0.2660   16543
+32            crashes_all_6cty                   ducks_home_wbb    yes/no     -2.5187  -5.3598   0.4076  0.0909  0.2664    6575
+19            crashes_all_6cty                       us_aqi_max  per 1 SD     -1.3263  -2.8559   0.2274  0.0939  0.2713     881
+180   springfield_police_calls            first_rain_after_7dry    yes/no     -7.8924 -16.4883   1.5882  0.1000  0.2839    1379
+195   springfield_police_calls           covid_wastewater_log10  per 1 SD      1.2451  -0.2412   2.7535  0.1010  0.2839    1316
+15            crashes_all_6cty             ring_of_fire_M6+_day    yes/no     -1.1761  -2.5793   0.2474  0.1049  0.2872    6575
+10            crashes_all_6cty                 solar_wind_speed  per 1 SD      0.5208  -0.1083   1.1538  0.1049  0.2872    6575
+196   springfield_police_calls               covid_hosp_rate_or  per 1 SD     -1.4983  -3.2923   0.3290  0.1075  0.2903    1371
+187   springfield_police_calls               quakes_500km_M2.5+  per 1 SD     -0.9091  -2.0160   0.2104  0.1111  0.2962    1377
+101  crashes_injury_fatal_6cty                     osu_home_mbb    yes/no      2.8367  -0.6636   6.4605  0.1134  0.2985    6575
+132    fatal_crashes_FARS_9cty              ducks_home_football    yes/no    -12.0970 -25.7033   4.0010  0.1329  0.3455   18257
+146        eugene_police_calls            first_rain_after_7dry    yes/no     -5.1607 -11.6296   1.7818  0.1416  0.3614    1379
+102  crashes_injury_fatal_6cty                   ducks_home_wbb    yes/no     -2.5694  -5.9028   0.8821  0.1428  0.3614    6575
+156        eugene_police_calls  ring_of_fire_volcanoes_erupting  per 1 SD      1.2052  -0.4091   2.8457  0.1442  0.3614    1377
+207   springfield_police_calls               hayward_major_meet    yes/no     -8.5621 -18.9993   3.2198  0.1478  0.3643    1377
+192   springfield_police_calls                       us_aqi_max  per 1 SD      0.7471  -0.2698   1.7745  0.1504  0.3643    1379
+191   springfield_police_calls         ring_of_fire_tsunami_day    yes/no      3.9234  -1.3898   9.5230  0.1506  0.3643    1377
+43                crashes_lane                           kp_max  per 1 SD      0.7096  -0.2722   1.7010  0.1572  0.3757    6575
+155        eugene_police_calls                 nz_quake_M5+_day    yes/no      2.4717  -0.9690   6.0319  0.1611  0.3809    1377
+127    fatal_crashes_FARS_9cty           covid_wastewater_log10  per 1 SD     -6.3324 -14.6673   2.8166  0.1689  0.3947    1567
+151        eugene_police_calls                       moon_illum  per 1 SD     -0.5027  -1.2313   0.2314  0.1790  0.4110    1377
+31            crashes_all_6cty                     osu_home_mbb    yes/no      2.0333  -0.9324   5.0878  0.1811  0.4110    6575
+122    fatal_crashes_FARS_9cty  ring_of_fire_volcanoes_erupting  per 1 SD      4.1709  -1.9301  10.6515  0.1845  0.4110   18257
+181   springfield_police_calls                           kp_max  per 1 SD      0.6873  -0.3329   1.7180  0.1874  0.4110    1377
+166        eugene_police_calls              ducks_home_football    yes/no     -3.9627  -9.5858   2.0101  0.1890  0.4110    1377
+201   springfield_police_calls                osu_home_football    yes/no     -5.6880 -13.5910   2.9379  0.1897  0.4110    1377
+169        eugene_police_calls                   ducks_home_mbb    yes/no     -2.4782  -6.0786   1.2601  0.1910  0.4110    1377
+65                crashes_lane                   ducks_home_mbb    yes/no      2.9800  -1.4606   7.6207  0.1916  0.4110    6575
+131    fatal_crashes_FARS_9cty               games_within_100mi  per 1 SD     -1.5882  -3.9849   0.8683  0.2031  0.4311   18257
+119    fatal_crashes_FARS_9cty               quakes_500km_M2.5+  per 1 SD      1.2189  -0.6780   3.1519  0.2094  0.4400   18257
+69                crashes_lane               hayward_major_meet    yes/no      6.0765  -3.4154  16.5011  0.2174  0.4522    6575
+184   springfield_police_calls                   full_moon(±1d)    yes/no     -1.9766  -5.0579   1.2048  0.2205  0.4542    1377
+171        eugene_police_calls                   ducks_home_wbb    yes/no      2.3776  -1.4274   6.3296  0.2240  0.4567    1377
+37                crashes_lane                             tmax  per 1 SD     -1.1918  -3.1149   0.7695  0.2318  0.4680    6575
+128    fatal_crashes_FARS_9cty               covid_hosp_rate_or  per 1 SD     -5.7713 -14.5594   3.9206  0.2340  0.4680    1767
+139    fatal_crashes_FARS_9cty               hayward_major_meet    yes/no    -16.9627 -39.6986  14.3457  0.2548  0.5048   18257
+138    fatal_crashes_FARS_9cty                   milb_home_game    yes/no     -6.6122 -17.1600   5.2787  0.2632  0.5166    7305
+183   springfield_police_calls                 solar_wind_speed  per 1 SD      0.6177  -0.4819   1.7294  0.2720  0.5260    1366
+118    fatal_crashes_FARS_9cty                       tide_range  per 1 SD     -1.2812  -3.5319   1.0220  0.2731  0.5260   16547
+54                crashes_lane                       us_aqi_max  per 1 SD     -1.4510  -4.0759   1.2456  0.2886  0.5466     881
+109    fatal_crashes_FARS_9cty                          rain_in  per 1 SD      1.2055  -1.0118   3.4724  0.2890  0.5466   18258
+57                crashes_lane           covid_wastewater_log10  per 1 SD      1.3544  -1.2021   3.9772  0.3020  0.5659    1567
+61                crashes_lane               games_within_100mi  per 1 SD      0.5174  -0.5271   1.5728  0.3329  0.6182    6575
+55                crashes_lane                             pm25  per 1 SD     -1.3230  -4.0455   1.4768  0.3508  0.6421     882
+50                crashes_lane             ring_of_fire_M6+_day    yes/no     -1.0371  -3.2005   1.1746  0.3552  0.6421    6575
+170        eugene_police_calls                     osu_home_mbb    yes/no      1.7489  -1.9582   5.5963  0.3599  0.6421    1377
+48                crashes_lane                       tide_range  per 1 SD      0.4400  -0.4998   1.3888  0.3600  0.6421    6575
+23            crashes_all_6cty               covid_hosp_rate_or  per 1 SD     -0.7538  -2.3528   0.8714  0.3612  0.6421    1767
+80   crashes_injury_fatal_6cty                 solar_wind_speed  per 1 SD      0.3345  -0.3928   1.0671  0.3683  0.6445    6575
+67                crashes_lane                   ducks_home_wbb    yes/no     -2.0910  -6.5052   2.5316  0.3693  0.6445    6575
+206   springfield_police_calls                   milb_home_game    yes/no     -1.3367  -4.2082   1.6208  0.3718  0.6445    1377
+121    fatal_crashes_FARS_9cty                 nz_quake_M5+_day    yes/no     -4.0760 -12.5720   5.2457  0.3791  0.6518   18257
+120    fatal_crashes_FARS_9cty             ring_of_fire_M6+_day    yes/no      2.3166  -2.8097   7.7133  0.3825  0.6521   18257
+92   crashes_injury_fatal_6cty           covid_wastewater_log10  per 1 SD      0.7768  -1.0181   2.6043  0.3987  0.6717    1567
+135    fatal_crashes_FARS_9cty                   ducks_home_mbb    yes/no      5.0319  -6.3259  17.7669  0.4005  0.6717   18257
+113    fatal_crashes_FARS_9cty                           kp_max  per 1 SD      0.9899  -1.3578   3.3934  0.4117  0.6826   18257
+153        eugene_police_calls               quakes_500km_M2.5+  per 1 SD      0.2966  -0.4128   1.0110  0.4135  0.6826    1377
+86   crashes_injury_fatal_6cty                 nz_quake_M5+_day    yes/no     -1.2941  -4.4196   1.9336  0.4275  0.6920    6575
+165        eugene_police_calls               games_within_100mi  per 1 SD     -0.3188  -1.1021   0.4707  0.4276  0.6920    1377
+41                crashes_lane                         snow_day    yes/no      7.9368 -10.6830  30.4382  0.4292  0.6920    2735
+59                crashes_lane                 flu_hosp_rate_or  per 1 SD      1.0069  -1.5064   3.5844  0.4358  0.6973    1361
+103  crashes_injury_fatal_6cty                   milb_home_game    yes/no     -0.9605  -3.3552   1.4935  0.4396  0.6980    6575
+203   springfield_police_calls                   ducks_home_mbb    yes/no      1.9721  -3.0708   7.2774  0.4504  0.7098    1377
+76   crashes_injury_fatal_6cty                         snow_day    yes/no      5.4128  -8.2332  21.0879  0.4561  0.7133    2735
+133    fatal_crashes_FARS_9cty                osu_home_football    yes/no     -6.1655 -20.7471  11.0988  0.4602  0.7143   18257
+137    fatal_crashes_FARS_9cty                   ducks_home_wbb    yes/no      6.0961  -9.6121  24.5341  0.4692  0.7160    8462
+147        eugene_police_calls                           kp_max  per 1 SD     -0.2708  -1.0178   0.4820  0.4797  0.7160    1377
+88   crashes_injury_fatal_6cty         ring_of_fire_tsunami_day    yes/no      1.4055  -2.4457   5.4088  0.4799  0.7160    6575
+199   springfield_police_calls               games_within_100mi  per 1 SD     -0.3865  -1.4521   0.6907  0.4804  0.7160    1377
+126    fatal_crashes_FARS_9cty                 epa_aqi_official  per 1 SD      0.8109  -1.4318   3.1047  0.4817  0.7160   16374
+22            crashes_all_6cty           covid_wastewater_log10  per 1 SD      0.5458  -0.9697   2.0845  0.4824  0.7160    1567
+94   crashes_injury_fatal_6cty                 flu_hosp_rate_or  per 1 SD      0.6505  -1.1662   2.5006  0.4854  0.7160    1361
+130    fatal_crashes_FARS_9cty                 rsv_hosp_rate_or  per 1 SD     -2.9899 -11.0165   5.7607  0.4909  0.7166    1991
+89   crashes_injury_fatal_6cty                       us_aqi_max  per 1 SD     -0.6468  -2.4717   1.2122  0.4927  0.7166     881
+97   crashes_injury_fatal_6cty              ducks_home_football    yes/no     -1.8724  -7.2484   3.8151  0.5108  0.7290    6575
+205   springfield_police_calls                   ducks_home_wbb    yes/no     -1.7481  -6.7817   3.5573  0.5110  0.7290    1377
+34            crashes_all_6cty               hayward_major_meet    yes/no      2.0804  -4.0081   8.5550  0.5117  0.7290    6575
+158        eugene_police_calls                       us_aqi_max  per 1 SD     -0.2366  -0.9830   0.5154  0.5365  0.7591    1379
+16            crashes_all_6cty                 nz_quake_M5+_day    yes/no     -0.8351  -3.5586   1.9654  0.5551  0.7801    6575
+168        eugene_police_calls       major_home_game(UO/OSU FB)    yes/no     -1.4528  -6.2227   3.5596  0.5632  0.7856    1377
+96   crashes_injury_fatal_6cty               games_within_100mi  per 1 SD      0.2279  -0.5493   1.0111  0.5665  0.7856    6575
+45                crashes_lane                 solar_wind_speed  per 1 SD      0.2782  -0.6899   1.2557  0.5746  0.7869    6575
+79   crashes_injury_fatal_6cty                      storm_Kp>=5    yes/no      0.7932  -1.9526   3.6159  0.5750  0.7869    6575
+29            crashes_all_6cty       major_home_game(UO/OSU FB)    yes/no     -1.1490  -5.1168   2.9849  0.5804  0.7890    6575
+185   springfield_police_calls                       moon_illum  per 1 SD     -0.2776  -1.2692   0.7239  0.5856  0.7909    1377
+13            crashes_all_6cty                       tide_range  per 1 SD      0.1633  -0.4434   0.7737  0.5986  0.8002    6575
+51                crashes_lane                 nz_quake_M5+_day    yes/no     -1.1498  -5.3329   3.2181  0.6001  0.8002    6575
+53                crashes_lane         ring_of_fire_tsunami_day    yes/no     -1.2875  -6.3343   4.0312  0.6284  0.8325    6575
+93   crashes_injury_fatal_6cty               covid_hosp_rate_or  per 1 SD     -0.4611  -2.3643   1.4791  0.6389  0.8411    1767
+186   springfield_police_calls                       tide_range  per 1 SD     -0.2365  -1.2552   0.7926  0.6511  0.8419    1338
+141        eugene_police_calls              pressure_change_24h  per 1 SD      0.1688  -0.5668   0.9098  0.6538  0.8419    1379
+136    fatal_crashes_FARS_9cty                     osu_home_mbb    yes/no     -2.6399 -13.6137   9.7278  0.6610  0.8419   18257
+64                crashes_lane       major_home_game(UO/OSU FB)    yes/no      1.4376  -4.8733   8.1671  0.6632  0.8419    6575
+125    fatal_crashes_FARS_9cty                             pm25  per 1 SD     -2.1601 -11.3940   8.0360  0.6659  0.8419     882
+63                crashes_lane                osu_home_football    yes/no     -1.7414  -9.2931   6.4391  0.6668  0.8419    6575
+188   springfield_police_calls             ring_of_fire_M6+_day    yes/no     -0.5258  -2.8925   1.8986  0.6679  0.8419    1377
+14            crashes_all_6cty               quakes_500km_M2.5+  per 1 SD     -0.1264  -0.7149   0.4656  0.6749  0.8445    6575
+99   crashes_injury_fatal_6cty       major_home_game(UO/OSU FB)    yes/no     -0.9846  -5.5284   3.7777  0.6797  0.8445    6575
+204   springfield_police_calls                     osu_home_mbb    yes/no      1.0797  -3.9833   6.4096  0.6821  0.8445    1377
+27            crashes_all_6cty              ducks_home_football    yes/no     -0.9753  -5.7108   3.9981  0.6951  0.8530    6575
+9             crashes_all_6cty                      storm_Kp>=5    yes/no      0.4819  -1.9218   2.9446  0.6971  0.8530    6575
+159        eugene_police_calls                             pm25  per 1 SD     -0.1456  -0.9017   0.6164  0.7072  0.8602    1379
+123    fatal_crashes_FARS_9cty         ring_of_fire_tsunami_day    yes/no     -2.6564 -15.8435  12.5971  0.7170  0.8670   18257
+200   springfield_police_calls              ducks_home_football    yes/no      1.4932  -6.4417  10.1011  0.7212  0.8671    1377
+49                crashes_lane               quakes_500km_M2.5+  per 1 SD     -0.1546  -1.0637   0.7628  0.7402  0.8835    6575
+150        eugene_police_calls                   full_moon(±1d)    yes/no     -0.3900  -2.6931   1.9676  0.7434  0.8835    1377
+189   springfield_police_calls                 nz_quake_M5+_day    yes/no     -0.7404  -5.3056   4.0448  0.7570  0.8947    1377
+129    fatal_crashes_FARS_9cty                 flu_hosp_rate_or  per 1 SD     -1.5143 -10.7522   8.6797  0.7614  0.8947    1361
+84   crashes_injury_fatal_6cty               quakes_500km_M2.5+  per 1 SD      0.0988  -0.5748   0.7769  0.7745  0.9040    6575
+173        eugene_police_calls               hayward_major_meet    yes/no     -1.2615  -9.6027   7.8493  0.7780  0.9040    1377
+167        eugene_police_calls                osu_home_football    yes/no      0.8514  -5.2423   7.3370  0.7898  0.9094    1377
+148        eugene_police_calls                      storm_Kp>=5    yes/no      0.2978  -1.8879   2.5321  0.7914  0.9094    1377
+18            crashes_all_6cty         ring_of_fire_tsunami_day    yes/no     -0.4350  -3.7485   2.9927  0.8007  0.9137    6575
+83   crashes_injury_fatal_6cty                       tide_range  per 1 SD      0.0872  -0.6120   0.7914  0.8074  0.9137    6575
+85   crashes_injury_fatal_6cty             ring_of_fire_M6+_day    yes/no     -0.2016  -1.8299   1.4537  0.8100  0.9137    6575
+105    fatal_crashes_FARS_9cty                     pressure_msl  per 1 SD     -0.2719  -2.5187   2.0267  0.8148  0.9137   18263
+154        eugene_police_calls             ring_of_fire_M6+_day    yes/no     -0.2088  -1.9601   1.5738  0.8170  0.9137    1377
+149        eugene_police_calls                 solar_wind_speed  per 1 SD     -0.0922  -0.9014   0.7236  0.8241  0.9166    1366
+160        eugene_police_calls                 epa_aqi_official  per 1 SD      0.0932  -0.7956   0.9900  0.8378  0.9215    1185
+202   springfield_police_calls       major_home_game(UO/OSU FB)    yes/no      0.6840  -5.9166   7.7477  0.8438  0.9215    1377
+114    fatal_crashes_FARS_9cty                      storm_Kp>=5    yes/no     -0.6273  -6.7532   5.9012  0.8463  0.9215   18257
+98   crashes_injury_fatal_6cty                osu_home_football    yes/no      0.5663  -5.0338   6.4967  0.8468  0.9215    6575
+117    fatal_crashes_FARS_9cty                       moon_illum  per 1 SD     -0.2035  -2.3245   1.9636  0.8526  0.9215   18257
+124    fatal_crashes_FARS_9cty                       us_aqi_max  per 1 SD     -0.8772  -9.8160   8.9475  0.8550  0.9215     881
+111    fatal_crashes_FARS_9cty                         snow_day    yes/no     -3.1429 -32.9445  39.9036  0.8648  0.9273   10479
+58                crashes_lane               covid_hosp_rate_or  per 1 SD     -0.2084  -2.8847   2.5416  0.8804  0.9350    1767
+26            crashes_all_6cty               games_within_100mi  per 1 SD      0.0514  -0.6198   0.7271  0.8810  0.9350    6575
+182   springfield_police_calls                      storm_Kp>=5    yes/no      0.1952  -2.7692   3.2501  0.8987  0.9475    1377
+112    fatal_crashes_FARS_9cty            first_rain_after_7dry    yes/no     -1.1895 -19.3402  21.0456  0.9080  0.9475   18263
+36                crashes_lane              pressure_change_24h  per 1 SD     -0.0552  -0.9982   0.8968  0.9091  0.9475    6575
+44                crashes_lane                      storm_Kp>=5    yes/no      0.2139  -3.4716   4.0400  0.9110  0.9475    6575
+110    fatal_crashes_FARS_9cty                 rain_day(>0.1in)    yes/no      0.1567  -5.1763   5.7896  0.9553  0.9788   18263
+28            crashes_all_6cty                osu_home_football    yes/no     -0.1118  -4.9912   5.0181  0.9651  0.9788    6575
+68                crashes_lane                   milb_home_game    yes/no     -0.0728  -3.3788   3.3464  0.9662  0.9788    6575
+177   springfield_police_calls                    tmin_freezing    yes/no      0.0779  -3.5196   3.8096  0.9667  0.9788    1379
+52                crashes_lane  ring_of_fire_volcanoes_erupting  per 1 SD     -0.0327  -1.5918   1.5511  0.9675  0.9788    6575
+33            crashes_all_6cty                   milb_home_game    yes/no     -0.0395  -2.1871   2.1553  0.9715  0.9788    6575
+175   springfield_police_calls              pressure_change_24h  per 1 SD      0.0167  -0.9862   1.0298  0.9741  0.9788    1379
+157        eugene_police_calls         ring_of_fire_tsunami_day    yes/no      0.0112  -3.8171   3.9919  0.9955  0.9955    1377
