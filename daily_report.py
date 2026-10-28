@@ -178,6 +178,15 @@ def power():
     except Exception as e: L.append(f'- BPA interruptions report: unavailable ({e.__class__.__name__})')
     return L
 
+def _zip_tools():
+    for p in (os.path.join(HERE,'zip_tools'),'/workspace/eugene-sky/zip_tools'):
+        if os.path.exists(os.path.join(p,'eq_map.py')):
+            if p not in sys.path: sys.path.insert(0,p)
+            return
+def earthquakes():  # USGS near-Eugene + worldwide; renders reports/eq_map_DATE.png and copies it to the email attachments folder (eq_map.py)
+    _zip_tools(); import eq_map
+    return eq_map.report_lines(day.date(), os.path.join(HERE,'reports'))
+
 def ring_of_fire():  # GeoNet + Pacific Ring of Fire (shared code in eugene-sky/zip_tools/ringfire_core.py)
     for p in (os.path.join(HERE,'zip_tools'),'/workspace/eugene-sky/zip_tools'):
         if os.path.exists(os.path.join(p,'ringfire_core.py')):
@@ -188,7 +197,13 @@ def ring_of_fire():  # GeoNet + Pacific Ring of Fire (shared code in eugene-sky/
 
 section('Weather',weather); section('NWS alerts',alerts); section('Roads (ODOT TripCheck)',roads); section('Wildfire & smoke',fire)
 section('Rivers (NOAA NWPS)',rivers); section('Events & calendar',events); section('Daylight',daylight); section('Space weather (NOAA SWPC)',space)
-section('Ring of Fire (Pacific quakes, volcanoes, tsunami)',ring_of_fire)
+section('Earthquakes',earthquakes); section('Ring of Fire (Pacific quakes, volcanoes, tsunami)',ring_of_fire)
 section('Moon & tides',moontide); section('Power & grid',power); section('Markets snapshot',markets); section('Crash risk vs normal',crash)
 os.makedirs(os.path.join(HERE,'reports'),exist_ok=True); txt='\n'.join(out)
 open(os.path.join(HERE,'reports',f'outlook_{day.date()}.md'),'w').write(txt); print(txt)
+try:  # HTML email version with the quake map inline (cid:eq_map_DATE.png). Re-run `python zip_tools/eq_map.py html reports/email_DATE.md` after editing the email .md.
+    _zip_tools(); import eq_map
+    _src=os.path.join(HERE,'reports',f'email_{day.date()}.md')
+    eq_map.write_html(_src if os.path.exists(_src) else os.path.join(HERE,'reports',f'outlook_{day.date()}.md'),
+                      html_path=os.path.join(HERE,'reports',f'email_{day.date()}.html'))
+except Exception as e: print(f'(email html failed: {e.__class__.__name__}: {e})',file=sys.stderr)
