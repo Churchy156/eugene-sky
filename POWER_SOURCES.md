@@ -1,19 +1,14 @@
-# Power outage & grid sources (Eugene ~100 mi)
-| Utility / source | Live feed used? | History | Link |
+# Power outage & grid sources — Steven's utilities (EWEB, Emerald PUD, Blachly-Lane, Pacific Power)
+Daily report "Power & grid" uses `zip_tools/power_feeds.py`; every feed is the public JSON the utility's own outage map loads (no login, no key).
+
+| Utility / source | Live feed | Daily column (from 2026-10-28, no history) | Outage map |
 |---|---|---|---|
-| EWEB | Yes – public ArcGIS FeatureServer (PublicOutageMap_Public_View) | none public (EAGLE-I county totals) | https://www.eweb.org/outages-and-safety/power-outages/power-outage-map |
-| Consumers Power Inc | Yes – https://outage.cpi.coop/data/outages.json | none | https://outage.cpi.coop/ |
-| Pacific Power | No documented public API (map only) | EAGLE-I | https://www.pacificpower.net/outages-safety.html |
-| Springfield Utility Board | No feed found | EAGLE-I | https://www.subutil.org/ |
-| Lane Electric Coop | No feed found | EAGLE-I | https://www.laneelectric.com/ |
-| Emerald PUD | No feed found | EAGLE-I | https://www.epud.org/ |
-| Blachly-Lane Electric | No feed found | EAGLE-I | https://www.blachlylane.coop/ |
-| Central Lincoln PUD | No feed found | EAGLE-I | https://www.clpud.org/ |
-| Douglas Electric Coop | No feed found | EAGLE-I | https://www.douglaselectric.com/ |
-| PGE | No public API | EAGLE-I | https://portlandgeneral.com/outages |
+| EWEB | ArcGIS FeatureServer `services7.arcgis.com/6AM8yPAeyXiPc9eF/.../PublicOutageMap_Public_View/FeatureServer/0` | outage_live_eweb_cust_out_max | https://www.eweb.org/outages-and-safety/power-outages/power-outage-map |
+| Emerald PUD | NISC hosted map data `https://outagemap-data.cloud.coop/epud/Hosted_Outage_Map/summary.json` (outages + Territory/ZIP regions) | outage_live_epud_cust_out_max | https://epud.outagemap.coop/ |
+| Blachly-Lane Electric | NISC hosted map data `https://outagemap-data.cloud.coop/blachlylane/Hosted_Outage_Map/summary.json` (outages + Cities/Substation regions) | outage_live_blachly_cust_out_max | https://blachlylane.outagemap.coop/ |
+| Pacific Power | `https://www.pacificpower.net/etc/pcorp/datafiles/outagemap/mapOR.json` (points, customers, cause, ETR, ZIP) + `listOR.json` (by ZIP/county) | outage_live_pacific_near_cust_out_max (≤45 mi of Eugene), outage_live_pacific_or_cust_out_max (Oregon) | https://www.pacificpower.net/outages-safety.html |
+| BPA transmission interruptions | Outages/DIR/TODAY.HTM (rolling week); report shows ≤4 Eugene-district lines near Eugene | – | https://transmission.bpa.gov/Business/Operations/Outages/ |
+| BPA BA load & generation | baltwg.txt (5-min, last 7 days) | bpa_* columns | https://transmission.bpa.gov/Business/Operations/Wind/ |
 | ORNL EAGLE-I (all utilities, county level, 15-min) | n/a | 2014-11 → 2025 | https://doi.org/10.6084/m9.figshare.24237376 |
-| BPA BA load & generation | Yes – baltwg.txt (5-min, last 7 days) | BPA BALoad 2000-2013 + EIA-930 BPAT 2015-07 → | https://transmission.bpa.gov/Business/Operations/Wind/ |
-| BPA transmission interruptions | Yes – Outages/DIR/TODAY.HTM (rolling week) | only 1999-2008 annual summary xls (not daily) | https://transmission.bpa.gov/Business/Operations/Outages/ |
-| BPA OATI / OASIS notices | No – requires OATI login/certificate | – | https://www.oasis.oati.com/BPAT/ |
-| ODIN (odin.caiso.com) | Endpoint did not respond | – | – |
-| EIA OE-417 major disturbances | not added (event list, manual xls) | 2000 → | https://www.oe.netl.doe.gov/OE417_annual_summary.aspx |
+
+Not in the report (one-line footnote only): Consumers Power Inc (feed https://outage.cpi.coop/data/outages.json, still logged as outage_live_cpi_cust_out_max), Springfield Utility Board https://www.subutil.org/, Lane Electric https://www.laneelectric.com/, Central Lincoln PUD, Douglas Electric, PGE.

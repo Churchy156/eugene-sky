@@ -152,31 +152,13 @@ def crash():
     lvl='ELEVATED' if rel>0.15 else 'slightly above normal' if rel>0.05 else 'about normal' if rel>-0.05 else 'below normal'
     return [f"- Expected reported crashes (6-county ODOT-style count): ~{e:.0f} vs ~{n:.0f} on a dry day with the same weekday/season → **{lvl}** ({rel:+.0%}).",
             '- Drivers: rain amount (+21% per inch), freezing low (+8%), winter-storm alerts (+16%), holidays (−23%). Model is rough (held-out r≈0.52); treat as a nudge, not a prediction.']
-def power():
-    L=[]
-    try:
-        f=get('https://services7.arcgis.com/6AM8yPAeyXiPc9eF/arcgis/rest/services/PublicOutageMap_Public_View/FeatureServer/0/query',params=dict(where='1=1',outFields='custcnt,cause,etor,status',returnGeometry='false',f='json')).json()['features']
-        a=[x['attributes'] for x in f if x['attributes'].get('status')!='Restored']
-        L.append(f"- EWEB (Eugene): {len(a)} active outage(s), {sum(x['custcnt'] or 0 for x in a)} customers"+(' — '+'; '.join(f"{x['custcnt']} cust, {x['cause']}, ETR {x['etor']}" for x in a[:4]) if a else ''))
-    except Exception as e: L.append(f'- EWEB: unavailable ({e.__class__.__name__})')
-    try:
-        o=get('https://outage.cpi.coop/data/outages.json').json()
-        L.append(f"- Consumers Power Inc (Linn/Benton/Lane coop): {len(o)} outage(s), {sum(x.get('customersOutNow') or 0 for x in o)} customers out")
-    except Exception as e: L.append(f'- Consumers Power: unavailable ({e.__class__.__name__})')
-    L.append('- No public machine-readable feed found for Pacific Power, SUB, Lane Electric, Emerald PUD, Blachly-Lane, Central Lincoln PUD, Douglas Electric, PGE — check their outage maps (links in POWER_SOURCES.md).')
-    try:
-        t=get('https://transmission.bpa.gov/business/operations/Wind/baltwg.txt').text.splitlines()
-        rows=[r.split('\t') for r in t if r[:2].isdigit() and len(r.split('\t'))>=6 and r.split('\t')[1].strip()]
-        r=rows[-1]; L.append(f"- BPA grid ({r[0]} PT): load {r[1]} MW; wind/solar {r[2]} MW; hydro {r[3]} MW; thermal {r[4]} MW; nuclear {r[5]} MW")
-    except Exception as e: L.append(f'- BPA load/generation: unavailable ({e.__class__.__name__})')
-    try:
-        import re,html
-        h=get('https://transmission.bpa.gov/Business/Operations/Outages/DIR/TODAY.HTM').text
-        rows=[[html.unescape(re.sub('<[^>]+>','',c)).strip() for c in re.findall(r'(?s)<t[dh].*?</t[dh]>',r)] for r in re.findall(r'(?s)<tr.*?</tr>',h)]
-        loc=[r for r in rows if len(r)>9 and ('EUG' in r[9].split() or any(k in r[2] for k in ['Lane','Eugene','EWEB','Springfield','Blachly','Emerald','Alvey','Lookout','Marion','Santiam']))]
-        L.append(f"- BPA transmission interruptions in today's report: {len(rows)} total, {len(loc)} in the Eugene district or nearby"+''.join(f"\n  - {r[0]} {r[2]} ({r[4]}; {r[5]}/{r[6]})" for r in loc[:6]))
-    except Exception as e: L.append(f'- BPA interruptions report: unavailable ({e.__class__.__name__})')
-    return L
+def power():  # Steven's utilities: EWEB, Emerald PUD, Blachly-Lane, Pacific Power + nearby BPA lines (zip_tools/power_feeds.py)
+    for p in (os.path.join(HERE,'zip_tools'),'/workspace/eugene-sky/zip_tools'):
+        if os.path.exists(os.path.join(p,'power_feeds.py')):
+            if p not in sys.path: sys.path.insert(0,p)
+            break
+    import power_feeds
+    return power_feeds.report_lines()
 
 def _zip_tools():
     for p in (os.path.join(HERE,'zip_tools'),'/workspace/eugene-sky/zip_tools'):

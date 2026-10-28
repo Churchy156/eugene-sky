@@ -136,6 +136,15 @@ def _():
     for col,v in [('outage_live_eweb_cust_out_max',e),('outage_live_cpi_cust_out_max',c)]:
         if col not in df: df[col]=np.nan
         df.loc[today,col]=max(v,df.loc[today,col]) if pd.notna(df.loc[today,col]) else v
+@src('EPUD + Blachly-Lane (NISC) + Pacific Power live outage snapshot (zip_tools/power_feeds.py)')
+def _():
+    import sys; sys.path.insert(0,os.path.join(os.path.dirname(os.path.abspath(__file__)),'zip_tools')); import power_feeds
+    snap=power_feeds.snapshot(); got=0
+    for col,v in snap.items():
+        if col=='outage_live_eweb_cust_out_max' or v is None: continue
+        if col not in df: df[col]=np.nan
+        df.loc[today,col]=max(v,df.loc[today,col]) if pd.notna(df.loc[today,col]) else v; got+=1
+    if not got: raise RuntimeError('no utility feed answered')
 df.to_csv(P,float_format='%.5g',compression='gzip')
 print('\n'.join(log)); print('rows',len(df),'last',df.index.max().date())
 open('site_update_log.txt','w').write(f'{dt.datetime.now(PT):%Y-%m-%d %H:%M %Z}\n'+'\n'.join(log)+'\n')
