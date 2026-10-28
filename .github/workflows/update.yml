@@ -36,6 +36,8 @@ jobs:
         run: timeout 300 python zip_tools/build_sports.py || echo "sports refresh failed (non-fatal)"
       - name: Betting lines for UO/OSU home games (ESPN refresh, merged into dataset)
         run: timeout 600 python zip_tools/build_odds.py --raw /tmp/odds --fetch || echo "odds refresh failed (non-fatal)"
+      - name: School calendars + high-school home games (merge only, no network)
+        run: timeout 120 python zip_tools/build_schools.py || echo "schools merge failed (non-fatal)"
       - name: Build dashboard
         run: python make_dash.py site/index.html
       - name: NASA DONKI + NeoWs, cyber feeds (merged into dataset)

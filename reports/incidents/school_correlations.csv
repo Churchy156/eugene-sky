@@ -1,0 +1,45 @@
+outcome,predictor,spec,kind,pct_change,ci_lo,ci_hi,p,n_days,n_event_days,start,end,mean_daily,q_BH
+crashes_lane,school_in_session,S,yes/no,10.7668,6.8468,14.8306,0.0,3899,3112,2007-01-01,2024-12-31,11.0485,0.0
+crashes_lane,school_in_session (no Christmas-New Year),S,yes/no,9.6682,5.3129,14.2037,0.0,3653,3063,2007-01-08,2024-12-17,11.0646,0.0001
+crashes_lane,schools_in_session_count (per district),S,per unit,1.5581,1.0768,2.0417,0.0,3899,3397,2007-01-01,2024-12-31,11.0485,0.0
+crashes_lane,one-off weekday off (4J),S,yes/no,-1.3234,-9.5096,7.6034,0.763,3238,126,2007-01-04,2024-12-20,11.2557,0.7944
+crashes_lane,early_release_any,S,yes/no,-1.8877,-6.1183,2.5335,0.3968,3288,344,2007-09-05,2024-12-20,11.2682,0.5631
+crashes_lane,hs_football_friday,F,yes/no,17.8813,-0.7078,39.9506,0.0603,234,189,2007-09-07,2024-11-29,13.0513,0.1768
+crashes_lane,"hs_football_friday (Sep 1-Nov 15, no Black Friday)",F,yes/no,-4.55,-30.1087,30.3552,0.7696,195,179,2007-09-07,2024-11-15,13.1538,0.7944
+crashes_lane,"hs_home_football (per game, fall Fridays)",F,per unit,0.5582,-1.8324,3.007,0.6502,234,189,2007-09-07,2024-11-29,13.0513,0.7529
+crashes_lane,hs_football_friday -> next day (Sat),Fs,yes/no,18.2125,-4.9692,47.049,0.133,234,192,2007-09-01,2024-11-30,9.2265,0.3059
+crashes_lane,hs_home_games (per game),A,per unit,0.4577,0.1092,0.8075,0.01,6575,2879,2007-01-01,2024-12-31,10.1551,0.0489
+crashes_lane,hs_home_basketball (per game),A,per unit,0.5098,-0.1664,1.1906,0.1398,6575,1033,2007-01-01,2024-12-31,10.1551,0.3059
+crashes_lane,hs_rivalry_game,A,yes/no,3.7167,0.5306,7.0036,0.0219,6575,723,2007-01-01,2024-12-31,10.1551,0.0802
+crashes_lane,hs_playoff_home_games,A,yes/no,3.6632,-1.39,8.9754,0.1582,6575,263,2007-01-01,2024-12-31,10.1551,0.3059
+crashes_injury_fatal_6cty,school_in_session,S,yes/no,5.8407,3.0617,8.6947,0.0,3899,3112,2007-01-01,2024-12-31,18.4065,0.0003
+crashes_injury_fatal_6cty,school_in_session (no Christmas-New Year),S,yes/no,3.8715,0.7967,7.0402,0.0132,3653,3063,2007-01-08,2024-12-17,18.49,0.0582
+crashes_injury_fatal_6cty,schools_in_session_count (per district),S,per unit,0.9261,0.5702,1.2833,0.0,3899,3397,2007-01-01,2024-12-31,18.4065,0.0
+crashes_injury_fatal_6cty,one-off weekday off (4J),S,yes/no,2.833,-3.4589,9.5349,0.3858,3238,126,2007-01-04,2024-12-20,18.6365,0.5631
+crashes_injury_fatal_6cty,early_release_any,S,yes/no,-2.5237,-5.637,0.6923,0.1227,3288,344,2007-09-05,2024-12-20,18.8221,0.3
+crashes_injury_fatal_6cty,hs_football_friday,F,yes/no,18.2508,4.5172,33.7889,0.0078,234,189,2007-09-07,2024-11-29,21.9915,0.0428
+crashes_injury_fatal_6cty,"hs_football_friday (Sep 1-Nov 15, no Black Friday)",F,yes/no,3.6395,-17.8168,30.6975,0.7626,195,179,2007-09-07,2024-11-15,22.3538,0.7944
+crashes_injury_fatal_6cty,"hs_home_football (per game, fall Fridays)",F,per unit,0.6932,-1.0442,2.4612,0.4366,234,189,2007-09-07,2024-11-29,21.9915,0.6003
+crashes_injury_fatal_6cty,hs_football_friday -> next day (Sat),Fs,yes/no,18.2899,2.2666,36.8238,0.0237,234,192,2007-09-01,2024-11-30,16.7735,0.0802
+crashes_injury_fatal_6cty,hs_home_games (per game),A,per unit,0.4837,0.2257,0.7423,0.0002,6575,2879,2007-01-01,2024-12-31,17.3381,0.0017
+crashes_injury_fatal_6cty,hs_home_basketball (per game),A,per unit,0.8682,0.355,1.3841,0.0009,6575,1033,2007-01-01,2024-12-31,17.3381,0.0056
+crashes_injury_fatal_6cty,hs_rivalry_game,A,yes/no,1.6997,-0.662,4.1176,0.1597,6575,723,2007-01-01,2024-12-31,17.3381,0.3059
+crashes_injury_fatal_6cty,hs_playoff_home_games,A,yes/no,4.2956,0.4492,8.2894,0.0283,6575,263,2007-01-01,2024-12-31,17.3381,0.0888
+eugene_police_calls,school_in_session,S,yes/no,1.5165,-1.4328,4.5541,0.317,808,644,2023-01-02,2026-10-09,158.9641,0.5056
+eugene_police_calls,school_in_session (no Christmas-New Year),S,yes/no,1.1611,-2.1578,4.5926,0.4976,763,634,2023-01-06,2026-10-09,159.599,0.6256
+eugene_police_calls,schools_in_session_count (per district),S,per unit,0.2019,-0.1971,0.6026,0.3217,808,704,2023-01-02,2026-10-09,158.9641,0.5056
+eugene_police_calls,one-off weekday off (4J),S,yes/no,-10.1875,-17.6357,-2.0657,0.015,664,20,2023-01-04,2026-10-09,159.4654,0.06
+eugene_police_calls,early_release_any,S,yes/no,-0.7958,-5.5247,4.1697,0.7485,704,141,2023-01-02,2026-10-09,159.4489,0.7944
+eugene_police_calls,hs_home_games (per game),A,per unit,0.2008,-0.0845,0.4868,0.168,1379,693,2023-01-02,2026-10-11,152.5801,0.3079
+eugene_police_calls,hs_home_basketball (per game),A,per unit,0.2647,-0.3085,0.8412,0.3661,1379,232,2023-01-02,2026-10-11,152.5801,0.5555
+eugene_police_calls,hs_rivalry_game,A,yes/no,-0.8402,-3.4808,1.8726,0.5401,1379,136,2023-01-02,2026-10-11,152.5801,0.6601
+eugene_police_calls,hs_playoff_home_games,A,yes/no,-1.3095,-4.9672,2.4891,0.4939,1379,66,2023-01-02,2026-10-11,152.5801,0.6256
+springfield_police_calls,school_in_session,S,yes/no,-2.1108,-5.6202,1.529,0.2521,808,644,2023-01-02,2026-10-09,78.021,0.4266
+springfield_police_calls,school_in_session (no Christmas-New Year),S,yes/no,-3.1631,-6.9139,0.7388,0.1108,763,634,2023-01-06,2026-10-09,78.405,0.2867
+springfield_police_calls,schools_in_session_count (per district),S,per unit,-0.314,-0.807,0.1814,0.2137,808,704,2023-01-02,2026-10-09,78.021,0.3761
+springfield_police_calls,one-off weekday off (4J),S,yes/no,-3.7074,-12.8569,6.4027,0.4583,664,20,2023-01-04,2026-10-09,78.1943,0.6111
+springfield_police_calls,early_release_any,S,yes/no,0.8387,-4.8084,6.8208,0.7764,704,141,2023-01-02,2026-10-09,78.152,0.7944
+springfield_police_calls,hs_home_games (per game),A,per unit,0.3421,-0.0504,0.7363,0.0877,1379,693,2023-01-02,2026-10-11,76.9993,0.2412
+springfield_police_calls,hs_home_basketball (per game),A,per unit,0.5748,-0.2259,1.3821,0.1599,1379,232,2023-01-02,2026-10-11,76.9993,0.3059
+springfield_police_calls,hs_rivalry_game,A,yes/no,-0.4767,-4.1467,3.3338,0.8032,1379,136,2023-01-02,2026-10-11,76.9993,0.8032
+springfield_police_calls,hs_playoff_home_games,A,yes/no,1.283,-3.8349,6.6733,0.6299,1379,66,2023-01-02,2026-10-11,76.9993,0.7491

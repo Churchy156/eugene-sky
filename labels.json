@@ -179,6 +179,10 @@
 "label": "Hours of daylight",
 "explain": ""
 },
+"districts_out_count": {
+"label": "Districts off on a weekday (of 9)",
+"explain": "Breaks, holidays and teacher days during the school year."
+},
 "ducks_home_football": {
 "label": "Ducks home football game",
 "explain": ""
@@ -189,6 +193,18 @@
 },
 "ducks_home_wbb": {
 "label": "Ducks women's basketball home game",
+"explain": ""
+},
+"early_release": {
+"label": "Early-release school day",
+"explain": "At least one local district lets students out early."
+},
+"early_release_any": {
+"label": "Early-release school day",
+"explain": "At least one local district lets students out early."
+},
+"early_release_count": {
+"label": "Districts with early release",
 "explain": ""
 },
 "epa_aqi_official": {
@@ -405,6 +421,38 @@
 },
 "home_won": {
 "label": "Home team won",
+"explain": ""
+},
+"hs_football_friday": {
+"label": "High-school football Friday night",
+"explain": "A Friday with at least one local varsity home football game."
+},
+"hs_friday_football": {
+"label": "High-school football Friday night",
+"explain": "A Friday with at least one local varsity home football game."
+},
+"hs_home_basketball": {
+"label": "High-school home basketball games",
+"explain": ""
+},
+"hs_home_football": {
+"label": "High-school home football games",
+"explain": ""
+},
+"hs_home_games": {
+"label": "High-school home games",
+"explain": ""
+},
+"hs_local_derby_games": {
+"label": "High-school games between two local schools",
+"explain": ""
+},
+"hs_playoff_home_games": {
+"label": "High-school playoff games hosted locally",
+"explain": ""
+},
+"hs_rivalry_game": {
+"label": "Big high-school rivalry game",
 "explain": ""
 },
 "kp_max": {
@@ -738,6 +786,26 @@
 "rsv_hosp_rate_or": {
 "label": "RSV hospital admissions, Oregon",
 "explain": ""
+},
+"school_4j_in_session": {
+"label": "Eugene 4J school day",
+"explain": "1 = Eugene 4J students are in class."
+},
+"school_calendar_real_count": {
+"label": "Districts with a real calendar",
+"explain": ""
+},
+"school_in_session": {
+"label": "School in session (Eugene 4J)",
+"explain": ""
+},
+"school_out_weekday": {
+"label": "Weekday with no school (Eugene 4J)",
+"explain": ""
+},
+"schools_in_session_count": {
+"label": "School districts in class (of 9)",
+"explain": "How many of the 9 local districts have students in class that day."
 },
 "skill": {
 "label": "Forecast improvement",

@@ -164,3 +164,16 @@ wbb_home_spread,"Point spread for the Ducks/Beavers home women's basketball game
 wbb_upset,Home women's basketball game ended in an upset (underdog won),2020-12-13,2026-03-01,0.3
 games_with_odds,Number of Ducks/Beavers home games (football + basketball) that day with a betting line,2007-08-30,2026-10-28,24.9
 any_upset_home_loss,Any Ducks/Beavers home team (football or basketball) lost as the betting favourite that day,2007-08-30,2026-10-17,2.6
+schools_in_session_count,"Number of the 9 local school districts (4J, Bethel, Springfield, Junction City, Monroe, Harrisburg, Creswell, Pleasant Hill, South Lane/Cottage Grove) with students in class that day (0-9). Real district calendars where available, otherwise an estimated 4J-style rule; see school_calendar_real_count.",1950-01-01,2026-10-28,100.0
+school_4j_in_session,Eugene 4J students in class that day (1/0). Real 4J calendars 2007-08 to 2026-27; estimated rule before that.,1950-01-01,2026-10-28,100.0
+districts_out_count,"Number of the 9 districts with a scheduled no-school weekday inside their school year (breaks, holidays, in-service, grading/conference days). Summer and weekends count as 0.",1950-01-01,2026-10-28,100.0
+early_release_count,Number of the 9 districts with an early-release / half day that day (real calendars only).,1950-01-01,2026-10-28,100.0
+early_release_any,Any of the 9 districts has an early-release / half day (1/0; real calendars only).,1950-01-01,2026-10-28,100.0
+school_calendar_real_count,How many of the 9 districts use a real published calendar for this day (the rest use the estimated rule).,1950-01-01,2026-10-28,100.0
+hs_home_games,"Varsity high-school home games at the 13 local high schools (football, basketball, soccer, volleyball, baseball, softball; MaxPreps), plus neutral-site games held locally.",2005-09-02,2026-10-28,27.5
+hs_home_football,Varsity high-school home football games at the 13 local high schools that day.,2005-09-02,2026-10-28,27.5
+hs_football_friday,A Friday with at least one local varsity high-school home football game (1/0).,2005-09-02,2026-10-28,27.5
+hs_home_basketball,Varsity high-school home basketball games (boys + girls) at the 13 local high schools.,2005-09-02,2026-10-28,27.5
+hs_playoff_home_games,Locally hosted varsity high-school state-playoff games (OSAA brackets).,2005-09-02,2026-10-28,27.5
+hs_rivalry_game,"Big local rivalry games that day (Thurston-Springfield, Sheldon-South Eugene, Churchill-South Eugene, Sheldon-Churchill, North Eugene-Willamette, Creswell-Pleasant Hill, Junction City-Harrisburg, Monroe-Harrisburg).",2005-09-02,2026-10-28,27.5
+hs_local_derby_games,Home games where both teams are among the 13 local high schools (any sport).,2005-09-02,2026-10-28,27.5

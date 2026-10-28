@@ -92,6 +92,42 @@ def upcoming_games(days=7):
                               opp=g['teams']['away']['team']['name'],venue=g.get('venue',{}).get('name','PK Park'),dist=_hav(*_VEN['PK Park']),note=''))
     except Exception: pass
     return sorted(G,key=lambda g:(g['date'],g['ko'] or '99'))
+def school_lines(days=7):
+    """No-school / early-release days (9 local districts) and notable HS home football+basketball games, today..today+days."""
+    import io
+    def rd(name):
+        for p in (os.path.join(HERE,'data',name), os.path.join('/workspace/eugene-sky/data',name)):
+            if os.path.exists(p): return pd.read_csv(p, dtype=str)
+        return pd.read_csv(io.StringIO(get(f'https://raw.githubusercontent.com/Churchy156/eugene-sky/main/data/{name}').text), dtype=str)
+    NM={'4j':'4J','bethel':'Bethel','springfield':'Springfield','junction_city':'Junction City','monroe':'Monroe','harrisburg':'Harrisburg','creswell':'Creswell','pleasant_hill':'Pleasant Hill','south_lane':'South Lane (Cottage Grove)'}
+    L=[]; end=day+pd.Timedelta(days=days)
+    try:
+        c=rd('school_calendars.csv'); c['d']=pd.to_datetime(c.date); c=c[(c.d>=day)&(c.d<=end)&(c.d.dt.dayofweek<5)]
+        lab={'no_school':'no school','no_school_some_grades':'no school (some grades)','early_release':'early release','conference':'conferences'}
+        c=c[c.event_type.isin(lab)]
+        if len(c):
+            L.append('- School days off / short days, next 7 days:')
+            for (d,et),g in c.groupby(['d','event_type']):
+                L.append(f"  - {d:%a %b %d}: {lab[et]} — {', '.join(sorted(NM.get(k,k) for k in g.district_key.unique()))}")
+        else: L.append('- All local districts with a published calendar are in normal session the next 7 days.')
+        cov=rd('school_calendar_coverage.csv'); sy=f"{day.year if day.month>=7 else day.year-1}-{str((day.year if day.month>=7 else day.year-1)+1)[2:]}"
+        miss=[NM[k] for k in NM if not ((cov.district_key==k)&(cov.school_year==sy)).any()]
+        if miss: L.append(f"  - (No published {sy} calendar found for: {', '.join(miss)}.)")
+    except Exception as e: L.append(f'- School calendars unavailable ({e.__class__.__name__}).')
+    try:
+        h=rd('hs_sports_games.csv'); h['d']=pd.to_datetime(h.date)
+        h=h[(h.d>=day)&(h.d<=end)&(h.sport.isin(['football','boys_basketball','girls_basketball']))].sort_values(['d','time_local'])
+        nb=h[(h.sport!='football')&(h.marquee_rivalry!='1')&(h.game_type!='state playoff')]
+        h=h.drop(nb.index)   # notable = all football + basketball rivalry/playoff games
+        if len(h) or len(nb):
+            L.append(f'- High-school home games, next 7 days: {len(h)} notable'+(f' (+{len(nb)} other basketball home games)' if len(nb) else '')+':')
+            for r in h.head(12).itertuples():
+                t=pd.Timestamp(f'2000-01-01 {r.time_local}').strftime('%I:%M %p').lstrip('0')+' PT' if isinstance(r.time_local,str) and r.time_local else 'time TBA'
+                tag=(' [state playoff]' if r.game_type=='state playoff' else '')+(' [rivalry]' if r.marquee_rivalry=='1' else '')
+                L.append(f"  - {r.d:%a %b %d} {t} — {r.sport.replace('_',' ')}: {r.away_team} @ {r.home_team}{tag}")
+            if len(h)>12: L.append(f'  - …and {len(h)-12} more.')
+    except Exception as e: L.append(f'- HS schedule unavailable ({e.__class__.__name__}).')
+    return L
 def events():
     L=[]
     hol=USFederalHolidayCalendar().holidays(day,day+pd.Timedelta(days=7))
@@ -105,7 +141,9 @@ def events():
             when=f"{g['date']:%a %b %d} "+(pd.Timestamp(f"2000-01-01 {g['ko']}").strftime('%I:%M %p').lstrip('0')+' PT' if g['ko'] else 'time TBA')
             big=' — expect heavy traffic near the stadium' if g['sport']=='football' else ''
             L.append(f"  - {when} — {g['team']} {g['sport']} HOME vs {g['opp']} @ {g['venue']} ({g['dist']:.0f} mi){big}"+(f" [{g['note']}]" if g['note'] else ''))
-    L.append('- UO term / 4J breaks: see official calendars (dataset uses approximate rules).')
+    try: L+=school_lines(7)
+    except Exception: pass
+    L.append('- UO term: see the official UO calendar (dataset uses approximate rules).')
     return L
 SUN={}
 def daylight():
