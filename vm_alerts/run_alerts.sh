@@ -5,7 +5,7 @@
 set -u
 APP=/opt/eugene-alerts; REPO=$APP/repo; DATA=/var/lib/eugene-alerts; LOGF=/var/log/eugene-alerts/run.log
 mkdir -p "$DATA/out" /var/log/eugene-alerts
-[ -f /etc/eugene-alerts/alerts.env ] && { set -a; . /etc/eugene-alerts/alerts.env; set +a; }
+for f in /etc/eugene-alerts/op.env /etc/eugene-alerts/alerts.env; do [ -f "$f" ] && { set -a; . "$f"; set +a; }; done   # root-only files
 export TZ=America/Los_Angeles MPLBACKEND=Agg FEED_TIMEOUT=20
 export ALERT_STATE=$DATA/alert_state.json ALERT_LOG=/var/log/eugene-alerts/alert_check.log ALERT_REPORTS=$DATA/out ALERT_ATTACH=$DATA/out
 log(){ echo "$(date '+%F %T %Z') $*" >> "$LOGF"; }
