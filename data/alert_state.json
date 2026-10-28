@@ -1,0 +1,51 @@
+{
+ "created": "2026-10-28T15:25:40+00:00",
+ "nws": {
+  "urn:oid:2.49.0.1.840.0.76f850cd1abf7fca2d6f1f69cdfb39f79d4e343a.002.1": {
+   "event": "Winter Weather Advisory",
+   "first_seen": "2026-10-28T15:25:40+00:00",
+   "last_seen": "2026-10-28T15:25:40+00:00",
+   "refs": [],
+   "seeded": true
+  }
+ },
+ "outage": {},
+ "quake": {},
+ "seeded_feeds": [
+  "quakes",
+  "tsunami",
+  "nws",
+  "power:eweb",
+  "power:epud",
+  "power:blachly",
+  "power:pacific"
+ ],
+ "tsunami": {},
+ "updated": "2026-10-28T15:25:40+00:00",
+ "util": {
+  "blachly": {
+   "alerted": false,
+   "cust": 0,
+   "high": false,
+   "last_seen": "2026-10-28T15:25:40+00:00"
+  },
+  "epud": {
+   "alerted": false,
+   "cust": 1,
+   "high": false,
+   "last_seen": "2026-10-28T15:25:40+00:00"
+  },
+  "eweb": {
+   "alerted": false,
+   "cust": 8,
+   "high": false,
+   "last_seen": "2026-10-28T15:25:40+00:00"
+  },
+  "pacific": {
+   "alerted": false,
+   "cust": 1,
+   "high": false,
+   "last_seen": "2026-10-28T15:25:40+00:00"
+  }
+ }
+}
