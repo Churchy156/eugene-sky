@@ -134,7 +134,9 @@ def report_lines():
     if v: L.append(f"- **EWEB:** {'no outages right now' if not v['outages'] else _plural(v['outages'],'outage')+', '+_plural(v['cust'],'customer')+' out'}"+(f". Largest: {v['largest']}" if v['largest'] else '')+'.')
     for key,label,slug,pref in [('epud','Emerald PUD','epud',['Territory','ZipCode']),('blachly','Blachly-Lane','blachlylane',['Cities','Substation'])]:
         v=line(label,LINKS[key],nisc,slug,pref)
-        if v: L.append(f"- **{label}:** {'no outages right now' if not v['outages'] else _plural(v['outages'],'outage')+(f" ({v['planned']} planned)" if v['planned'] else '')+', '+_plural(v['cust'],'customer')+' out'} (of {v['served']:,} served)"+(f". Hardest-hit area: {v['largest']}" if v['largest'] else '')+'.')
+        if v:
+            now_txt = 'no outages right now' if not v['outages'] else _plural(v['outages'],'outage')+(' ({} planned)'.format(v['planned']) if v['planned'] else '')+', '+_plural(v['cust'],'customer')+' out'
+            L.append(f"- **{label}:** {now_txt} (of {v['served']:,} served)"+(f". Hardest-hit area: {v['largest']}" if v['largest'] else '')+'.')
     v=line('Pacific Power',LINKS['pacific'],pacific)
     if v:
         s=f"- **Pacific Power:** {'no outages' if not v['outages'] else _plural(v['outages'],'outage')+', '+_plural(v['cust'],'customer')+' out'} within {NEAR_MI} mi of Eugene"

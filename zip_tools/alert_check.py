@@ -289,7 +289,8 @@ def body_lines(items):
         L.append('## Earthquake' + ('s' if len(qs) > 1 else ''))
         for q in qs:
             t = parse(q['t'])
-            L.append(f"- **M{q['mag']:.1f}** {q['place']} — {quake_where(q) if q['km'] <= EQ_REGION_KM else f'{km_to_mi(q['km']):,.0f} mi from Eugene'}" +
+            where = quake_where(q) if q['km'] <= EQ_REGION_KM else '{:,.0f} mi from Eugene'.format(km_to_mi(q['km']))
+            L.append(f"- **M{q['mag']:.1f}** {q['place']} — {where}" +
                      (f" (USGS raised it from M{q['revised_from']:.1f})" if q.get('revised_from') else ''))
             L.append(f"  - {ptime(t)}, {q['depth']:.0f} km deep" + (f", felt by {q['felt']:,} people so far" if q.get('felt') else '') +
                      ('. USGS tsunami flag is set — check https://www.tsunami.gov' if q.get('tsunami') else ''))
