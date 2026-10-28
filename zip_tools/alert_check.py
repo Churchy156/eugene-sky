@@ -38,10 +38,13 @@ PWR_NEAR_MI = 45                         # Pacific Power outages within 45 mi of
 NWS_SAME = '041039'                      # Lane County FIPS (NWS SAME code)
 NWS_ZONES = 'ORZ118,ORC039'              # as used in daily_report.py alerts()
 EXPIRE_DAYS = 7
-STATE = '/workspace/eugene-env/data/alert_state.json'
-LOG = '/workspace/eugene-env/data/alert_check.log'
-REPORTS = '/workspace/eugene-env/reports'
-ATTACH = '/home/box/agent-data/agents/15f61d5b-1432-45e0-800f-fc00e7b4ab04/attachments'
+# Paths default to the box; GitHub Actions (.github/workflows/alerts.yml) overrides them with env vars.
+STATE = os.environ.get('ALERT_STATE', '/workspace/eugene-env/data/alert_state.json')
+LOG = os.environ.get('ALERT_LOG', '/workspace/eugene-env/data/alert_check.log')
+REPORTS = os.environ.get('ALERT_REPORTS', '/workspace/eugene-env/reports')
+ATTACH = os.environ.get('ALERT_ATTACH', '/home/box/agent-data/agents/15f61d5b-1432-45e0-800f-fc00e7b4ab04/attachments')
+DIRTY_FILE = os.environ.get('ALERT_DIRTY_FILE')   # if set, gets '1' when the state changed in a way worth committing, else '0'
+STATE_REFRESH_H = 12                     # Actions: re-commit unchanged state at most this often so last_seen/expiry stays honest
 OR_COAST = [(46.25, -123.98), (45.9, -123.96), (45.5, -123.95), (45.0, -124.0), (44.6, -124.07), (44.0, -124.13),
             (43.4, -124.25), (42.8, -124.5), (42.4, -124.42), (42.0, -124.21)]
 NWS_RANK = {'statement': 1, 'outlook': 1, 'advisory': 2, 'watch': 3, 'warning': 4, 'emergency': 5}
@@ -176,6 +179,13 @@ def save_state(S):
     tmp = STATE + '.tmp'; os.makedirs(os.path.dirname(STATE), exist_ok=True)
     json.dump(S, open(tmp, 'w'), indent=1, sort_keys=True); os.replace(tmp, STATE)
 
+def signature(S):
+    """State minus timestamps/counts: changes only when keys or alert flags change."""
+    if S is None: return None
+    drop = {'last_seen', 'cust', 'peak', 'where', 'first_seen'}
+    return json.dumps({k: ({kk: {a: b for a, b in vv.items() if a not in drop} if isinstance(vv, dict) else vv for kk, vv in v.items()} if isinstance(v, dict) else v)
+                       for k, v in S.items() if k not in ('updated', 'created')}, sort_keys=True, default=str)
+
 # ----------------------------- detection -----------------------------
 def nws_rank(ev): ev = (ev or '').lower(); return max([v for k, v in NWS_RANK.items() if k in ev] or [1])
 
@@ -226,6 +236,7 @@ def detect(D, S, seed=False):
         cur = {i['id']: i for i in items}
         for i in items:
             old = S['outage'].get(i['id'])
+            if old is None and i['cust'] < PWR_NEW_OUTAGE: continue   # small outages aren't tracked (keeps state stable)
             if old is None:
                 S['outage'][i['id']] = old = dict(util=u, cust=i['cust'], peak=i['cust'], first_seen=now, last_seen=now,
                                                   alerted=False, seeded_big=seed and i['cust'] >= PWR_NEW_OUTAGE, where=i['where'])
@@ -376,7 +387,9 @@ def write_alert(items, suffix=''):
     if qs:
         name = f'alert_map_{stamp}.png'
         try:
-            p = render_map(qs, os.path.join(REPORTS, name)); os.makedirs(ATTACH, exist_ok=True); shutil.copy2(p, os.path.join(ATTACH, name)); att = name
+            p = render_map(qs, os.path.join(REPORTS, name)); os.makedirs(ATTACH, exist_ok=True)
+            if os.path.abspath(ATTACH) != os.path.abspath(REPORTS): shutil.copy2(p, os.path.join(ATTACH, name))
+            att = name
         except Exception as e: log(f'map failed: {type(e).__name__}: {e}\n{traceback.format_exc()[-600:]}')
     htp = os.path.join(REPORTS, f'alert_{stamp}.html')
     open(htp, 'w').write(eq_map.md_to_html('\n'.join(md[2:]), None if att == '-' else att, subj)
@@ -403,11 +416,14 @@ def main():
     if '--test' in a:
         mdp, htp, att = write_alert(fake_items(), suffix='_test'); print(f'ALERT {mdp} {htp} {att}'); return 0
     t0 = time.time(); D = fetch_all(); S = load_state()
+    sig0 = signature(S); stale = S is None or (NOW - (parse(S.get('updated')) or NOW)).total_seconds() > STATE_REFRESH_H * 3600
     seed = S is None or '--seed' in a
     if seed: S = dict(created=iso(NOW))
     new = detect(D, S, seed=seed)
     ok = {k: ('fail' if v is None else (','.join(f"{u}:{'fail' if x is None else len(x)}" for u, x in v.items()) if k == 'power' else len(v))) for k, v in D.items()}
     log(f"{'SEED' if seed else 'run'} {time.time() - t0:.1f}s feeds={ok} new={len(new)}" + (f" [{'; '.join(headline(i) for i in new)}]" if new else ''))
+    if DIRTY_FILE:
+        open(DIRTY_FILE, 'w').write('1' if (new or stale or signature(S) != sig0) else '0')
     if new:
         mdp, htp, att = write_alert(new)
         if '--dry-run' not in a: save_state(S)

@@ -1,0 +1,105 @@
+name: Urgent alerts (quakes, tsunami, NWS, power) every 10 min
+# Runs zip_tools/alert_check.py. State lives in the repo (data/alert_state.json).
+# NONE  -> nothing is pushed, except the state file when it changed structurally (first-run seed, a new feed's
+#          silent seed, a tracked outage clearing) or at most every 12 h to keep 7-day expiry accurate.
+# ALERT -> commit reports/alerts/<UTC stamp>/{alert.md,alert.html,map.png} + state, then POST JSON to the webhook.
+# Secrets: ALERT_WEBHOOK_URL, ALERT_WEBHOOK_KEY (POST is skipped if either is missing).
+# Optional repo variables: ALERT_WEBHOOK_HEADER (default "Authorization"), ALERT_WEBHOOK_PREFIX (default "Bearer ").
+#   -> header sent:  Authorization: Bearer <ALERT_WEBHOOK_KEY>
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'normal = real check; test = sample alert (no commit; POSTs with "test": true if secrets are set)'
+        type: choice
+        options: [normal, test]
+        default: normal
+permissions:
+  contents: write
+concurrency:
+  group: urgent-alerts
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      TZ: America/Los_Angeles
+      FEED_TIMEOUT: '20'
+      ALERT_STATE: data/alert_state.json
+      ALERT_LOG: /tmp/alert_check.log
+      ALERT_REPORTS: /tmp/alert_out
+      ALERT_ATTACH: /tmp/alert_out
+      ALERT_DIRTY_FILE: /tmp/alert_dirty
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12', cache: pip }
+      - run: pip install -q requests matplotlib pillow
+      - name: Check feeds
+        id: chk
+        run: |
+          if [ "${{ github.event.inputs.mode }}" = "test" ]; then ARGS=--test; else ARGS=; fi
+          OUT=$(python zip_tools/alert_check.py $ARGS | tail -1)
+          echo "result: $OUT"
+          echo "--- log ---"; cat /tmp/alert_check.log 2>/dev/null || true
+          echo "line=$OUT" >> "$GITHUB_OUTPUT"
+          echo "dirty=$(cat /tmp/alert_dirty 2>/dev/null || echo 0)" >> "$GITHUB_OUTPUT"
+      - name: Commit state / alert
+        id: commit
+        if: startsWith(steps.chk.outputs.line, 'ALERT') && github.event.inputs.mode != 'test' || (steps.chk.outputs.line == 'NONE' && steps.chk.outputs.dirty == '1')
+        env:
+          LINE: ${{ steps.chk.outputs.line }}
+        run: |
+          git config user.name "eugene-sky-bot"
+          git config user.email "actions@users.noreply.github.com"
+          MSG="alert state $(date -u +%FT%TZ)"
+          if [[ "$LINE" == ALERT* ]]; then
+            read -r _ MD HTML ATT <<< "$LINE"
+            STAMP=$(date -u +%Y%m%dT%H%M%SZ); DIR=reports/alerts/$STAMP; mkdir -p "$DIR"
+            cp "$MD" "$DIR/alert.md"
+            if [ "$ATT" != "-" ]; then cp "/tmp/alert_out/$ATT" "$DIR/$ATT"; fi
+            cp "$HTML" "$DIR/alert.html"
+            echo "dir=$DIR" >> "$GITHUB_OUTPUT"; echo "att=$ATT" >> "$GITHUB_OUTPUT"
+            MSG="alert: $(head -1 "$MD" | cut -c1-120)"
+            git add "$DIR"
+          fi
+          git add -f data/alert_state.json
+          git diff --cached --quiet && exit 0
+          git commit -qm "$MSG"
+          for i in 1 2 3 4; do git pull -q --rebase -X theirs && git push -q && break; sleep $((i*5)); done
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: POST to webhook
+        if: startsWith(steps.chk.outputs.line, 'ALERT')
+        env:
+          LINE: ${{ steps.chk.outputs.line }}
+          DIR: ${{ steps.commit.outputs.dir }}
+          SHA: ${{ steps.commit.outputs.sha }}
+          TEST: ${{ github.event.inputs.mode == 'test' }}
+          URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+          KEY: ${{ secrets.ALERT_WEBHOOK_KEY }}
+          HDR: ${{ vars.ALERT_WEBHOOK_HEADER || 'Authorization' }}
+          PREFIX: ${{ vars.ALERT_WEBHOOK_PREFIX || 'Bearer ' }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ -z "$URL" ] || [ -z "$KEY" ]; then echo "::notice::ALERT_WEBHOOK_URL / ALERT_WEBHOOK_KEY not set — skipping POST"; exit 0; fi
+          python - <<'PY'
+          import os, json, urllib.request
+          _, md, html, att = os.environ['LINE'].split()[:4]
+          d = os.environ.get('DIR') or ''
+          rel = lambda name, local: f"{d}/{name}" if d else local
+          text = open(md).read(); sha = os.environ.get('SHA') or os.popen('git rev-parse HEAD').read().strip()
+          body = dict(subject=text.splitlines()[0].strip(), md_path=rel('alert.md', md), html_path=rel('alert.html', html),
+                      map_path=None if att == '-' else rel(att, f'/tmp/alert_out/{att}'), commit=sha, text=text,
+                      html=open(html).read(), repo=os.environ['REPO'], test=os.environ.get('TEST') == 'true',
+                      raw_base=f"https://raw.githubusercontent.com/{os.environ['REPO']}/{sha}/" if d else None)
+          req = urllib.request.Request(os.environ['URL'], data=json.dumps(body).encode(), method='POST',
+                                       headers={'Content-Type': 'application/json', os.environ['HDR']: os.environ['PREFIX'] + os.environ['KEY']})
+          for i in range(3):
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as r: print('webhook', r.status); break
+              except Exception as e: print('webhook attempt', i + 1, 'failed:', type(e).__name__, str(e)[:200])
+          PY
