@@ -1,0 +1,9 @@
+/var/log/eugene-alerts/*.log {
+  weekly
+  rotate 8
+  maxsize 5M
+  compress
+  missingok
+  notifempty
+  copytruncate
+}

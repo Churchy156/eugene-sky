@@ -1,0 +1,8 @@
+[Unit]
+Description=Eugene ASAP alerts - one check/send pass
+Wants=network-online.target
+After=network-online.target
+[Service]
+Type=oneshot
+ExecStart=/opt/eugene-alerts/repo/vm_alerts/run_alerts.sh
+TimeoutStartSec=480

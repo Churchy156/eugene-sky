@@ -3,6 +3,7 @@ name: Urgent alerts (quakes, tsunami, NWS, power) every 10 min
 # NONE  -> nothing is pushed, except the state file when it changed structurally (first-run seed, a new feed's
 #          silent seed, a tracked outage clearing) or at most every 12 h to keep 7-day expiry accurate.
 # ALERT -> commit reports/alerts/<UTC stamp>/{alert.md,alert.html,map.png} + state, then POST JSON to the webhook.
+# Backup only: skips the POST while repo variable ALERT_PRIMARY_HEARTBEAT (set by the GROKBOTS VM) is < 30 min old.
 # Secrets: ALERT_WEBHOOK_URL, ALERT_WEBHOOK_KEY (POST is skipped if either is missing).
 # Optional repo variables: ALERT_WEBHOOK_HEADER (default "Authorization"), ALERT_WEBHOOK_PREFIX (default "Bearer ").
 #   -> header sent:  Authorization: Bearer <ALERT_WEBHOOK_KEY>
@@ -84,8 +85,16 @@ jobs:
           HDR: ${{ vars.ALERT_WEBHOOK_HEADER || 'Authorization' }}
           PREFIX: ${{ vars.ALERT_WEBHOOK_PREFIX || 'Bearer ' }}
           REPO: ${{ github.repository }}
+          HEARTBEAT: ${{ vars.ALERT_PRIMARY_HEARTBEAT }}
         run: |
           if [ -z "$URL" ] || [ -z "$KEY" ]; then echo "::notice::ALERT_WEBHOOK_URL / ALERT_WEBHOOK_KEY not set — skipping POST"; exit 0; fi
+          # Backup mode: the GROKBOTS eugene-alerts VM is the main sender. If its heartbeat is under 30 min old it has
+          # (or will) email this alert itself, so skip the POST to avoid duplicates. Test runs always POST.
+          if [ "$TEST" != "true" ] && [ -n "$HEARTBEAT" ]; then
+            AGE=$(( $(date -u +%s) - $(date -u -d "$HEARTBEAT" +%s 2>/dev/null || echo 0) ))
+            if [ "$AGE" -lt 1800 ]; then echo "::notice::Main sender (GROKBOTS VM) heartbeat ${AGE}s old — skipping webhook POST"; exit 0; fi
+            echo "Main sender heartbeat stale (${AGE}s) — backup POST"
+          fi
           python - <<'PY'
           import os, json, urllib.request
           _, md, html, att = os.environ['LINE'].split()[:4]
