@@ -1,0 +1,33 @@
+group,outcome,compared_with,category,n,pct_change,ci_lo,ci_hi,p
+Ducks+Beavers home football,crashes_lane,fall Saturdays with no home game,Won as expected,103,7.8708,-5.4786,23.1055,0.261
+Ducks+Beavers home football,crashes_lane,fall Saturdays with no home game,Lost when favored,16,-0.9992,-22.1432,25.8868,0.9347
+Ducks+Beavers home football,crashes_lane,fall Saturdays with no home game,Won as the underdog,12,17.481,-10.477,54.1704,0.2453
+Ducks+Beavers home football,crashes_lane,fall Saturdays with no home game,Lost as expected (underdog),15,2.1367,-19.4144,29.4513,0.8612
+Ducks+Beavers home football,crashes_all_6cty,fall Saturdays with no home game,Won as expected,103,-0.3626,-7.3433,7.1442,0.9219
+Ducks+Beavers home football,crashes_all_6cty,fall Saturdays with no home game,Lost when favored,16,5.7336,-7.1937,20.4614,0.4021
+Ducks+Beavers home football,crashes_all_6cty,fall Saturdays with no home game,Won as the underdog,12,2.5488,-11.8447,19.2924,0.7443
+Ducks+Beavers home football,crashes_all_6cty,fall Saturdays with no home game,Lost as expected (underdog),15,-6.1307,-17.8242,7.2268,0.3513
+Ducks+Beavers home football,crashes_injury_fatal_6cty,fall Saturdays with no home game,Won as expected,103,1.8626,-6.7373,11.2556,0.6817
+Ducks+Beavers home football,crashes_injury_fatal_6cty,fall Saturdays with no home game,Lost when favored,16,6.7218,-9.0803,25.2704,0.4262
+Ducks+Beavers home football,crashes_injury_fatal_6cty,fall Saturdays with no home game,Won as the underdog,12,0.1512,-16.775,20.5197,0.9872
+Ducks+Beavers home football,crashes_injury_fatal_6cty,fall Saturdays with no home game,Lost as expected (underdog),15,-2.4239,-16.7816,14.4109,0.7625
+Ducks+Beavers home football,eugene_police_calls,fall Saturdays with no home game,Won as expected,21,-0.8786,-10.4346,9.6969,0.8645
+Ducks+Beavers home football,eugene_police_calls,fall Saturdays with no home game,Lost when favored,3,-5.2224,-19.5188,11.6134,0.5202
+Ducks+Beavers home football,eugene_police_calls,fall Saturdays with no home game,Won as the underdog,3,5.9918,-10.0503,24.895,0.4871
+Ducks+Beavers home football,eugene_police_calls,fall Saturdays with no home game,Lost as expected (underdog),2,8.5953,-11.0074,32.516,0.4169
+Ducks+Beavers men's basketball,crashes_lane,days with no home game (weekday×month matched),Won as expected,281,1.7375,-3.249,6.981,0.5017
+Ducks+Beavers men's basketball,crashes_lane,days with no home game (weekday×month matched),Lost when favored,71,10.7701,1.0501,21.425,0.029
+Ducks+Beavers men's basketball,crashes_lane,days with no home game (weekday×month matched),Won as the underdog,35,12.8024,-1.1895,28.7756,0.0746
+Ducks+Beavers men's basketball,crashes_lane,days with no home game (weekday×month matched),Lost as expected (underdog),48,1.0835,-10.0896,13.6449,0.8569
+Ducks+Beavers men's basketball,crashes_all_6cty,days with no home game (weekday×month matched),Won as expected,281,4.2963,1.0365,7.6613,0.0094
+Ducks+Beavers men's basketball,crashes_all_6cty,days with no home game (weekday×month matched),Lost when favored,71,1.138,-4.8557,7.5092,0.7166
+Ducks+Beavers men's basketball,crashes_all_6cty,days with no home game (weekday×month matched),Won as the underdog,35,9.6497,0.6605,19.4416,0.0348
+Ducks+Beavers men's basketball,crashes_all_6cty,days with no home game (weekday×month matched),Lost as expected (underdog),48,0.4386,-6.8404,8.2863,0.9092
+Ducks+Beavers men's basketball,crashes_injury_fatal_6cty,days with no home game (weekday×month matched),Won as expected,281,7.3915,3.494,11.4359,0.0002
+Ducks+Beavers men's basketball,crashes_injury_fatal_6cty,days with no home game (weekday×month matched),Lost when favored,71,1.7798,-5.3125,9.4032,0.6321
+Ducks+Beavers men's basketball,crashes_injury_fatal_6cty,days with no home game (weekday×month matched),Won as the underdog,35,5.9899,-4.4093,17.5204,0.2695
+Ducks+Beavers men's basketball,crashes_injury_fatal_6cty,days with no home game (weekday×month matched),Lost as expected (underdog),48,0.2321,-8.3746,9.6474,0.9596
+Ducks+Beavers men's basketball,eugene_police_calls,days with no home game (weekday×month matched),Won as expected,60,1.5246,-2.473,5.6861,0.4604
+Ducks+Beavers men's basketball,eugene_police_calls,days with no home game (weekday×month matched),Lost when favored,12,-0.2343,-8.1595,8.3748,0.9557
+Ducks+Beavers men's basketball,eugene_police_calls,days with no home game (weekday×month matched),Won as the underdog,7,4.4226,-6.105,16.1307,0.4248
+Ducks+Beavers men's basketball,eugene_police_calls,days with no home game (weekday×month matched),Lost as expected (underdog),13,-4.5367,-12.346,3.9684,0.2863

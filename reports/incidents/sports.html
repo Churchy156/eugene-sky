@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ducks &amp; Beavers games, betting lines and crashes — Eugene</title>
+<style>body{font-family:system-ui,sans-serif;background:#10151c;color:#e9edf2;max-width:1100px;margin:0 auto;padding:16px;line-height:1.5}a{color:#74c0fc}
+img{width:100%;background:#fff;border-radius:8px;margin:8px 0}table{border-collapse:collapse;margin:8px 0}td,th{border:1px solid #334;padding:4px 10px;text-align:left}
+.box{background:#1a2230;border-radius:10px;padding:12px 16px;margin:14px 0}.note{font-size:14px;opacity:.85}</style></head><body>
+<p><a href="../">← Eugene dashboard</a></p>
+<h1>🏈🏀 Ducks &amp; Beavers home games: betting lines vs crashes &amp; police calls</h1>
+<p class="note">Updated Oct 28, 2026 8:17 AM PT. All dates are Pacific Time calendar days.</p>
+<div class="box"><b>Short answer:</b> when the Ducks or Beavers lose a home game they were expected to win (an "upset"), or when the result is a big surprise compared with the Vegas betting line, there is <b>no reliable change</b> in crashes or police calls that day or the next.
+We ran 724 comparisons; none held up after correcting for running so many tests (44 looked interesting on their own, about what luck alone would give: ≈36).</div>
+<h2>What we found</h2><ul>
+<li><b>Upsets don't stand out.</b> Lane County crashes on the day of a big surprise: +0% (range -6% to +6%) per 10 points of surprise (football, 178 game days).</li>
+<li><b>One hint worth watching:</b> the day <i>after</i> the Ducks lost a home football game they were favored to win, Lane County crashes were +35% (range +4% to +75%) — but that rests on just 10 games and does not survive the many-tests correction, so it is probably luck.</li>
+<li><b>Men's basketball:</b> Lane County crashes on days the home team lost when favored: +7% (range -4% to +19%) (71 games) — not clearly different.</li>
+<li><b>Civil War days have fewer crashes</b> (-18% (range -29% to -6%), 6 counties), but that game is on Thanksgiving weekend, when traffic is unusual anyway — it's the holiday, not the rivalry.</li>
+<li>Police-call records only start in 2023, so there are too few football game days to test them; basketball tests showed nothing.</li></ul>
+<h2>Charts</h2>
+<img src="chart_odds_upset_days.png" alt="Crashes on game days by result vs betting line">
+<img src="chart_odds_surprise_scatter.png" alt="Surprise size vs Lane County crashes">
+<img src="chart_odds_summary.png" alt="Summary of all football comparisons">
+<h2>Games with betting lines</h2>
+<table><tr><th>Sport</th><th>Home games with a closing line</th><th>Dates</th><th>Underdog won</th><th>Home team lost when favored</th></tr><tr><td>Football</td><td>246</td><td>Aug 2007 – Oct 2026</td><td>51</td><td>31</td></tr><tr><td>Men&#x27;s basketball</td><td>612</td><td>Nov 2007 – Mar 2026</td><td>155</td><td>92</td></tr><tr><td>Women&#x27;s basketball</td><td>106</td><td>Dec 2020 – Mar 2026</td><td>22</td><td>14</td></tr></table>
+<p class="note">Crash data (ODOT) covers 2007–2024, so newer games add to the betting table but not yet to the crash comparisons.</p>
+<h3>Biggest home football upsets</h3><table><tr><th>Date</th><th>Home team</th><th>Opponent</th><th>Vegas line</th><th>Result</th></tr><tr><td>Aug 31, 2013</td><td>Beavers</td><td>Eastern Washington</td><td>favored by 25.5</td><td>lost 46–49</td></tr><tr><td>Nov 13, 2010</td><td>Beavers</td><td>Washington State</td><td>favored by 24</td><td>lost 14–31</td></tr><tr><td>Sep 3, 2011</td><td>Beavers</td><td>Sacramento State</td><td>favored by 24</td><td>lost 28–29</td></tr><tr><td>Oct 2, 2014</td><td>Ducks</td><td>Arizona</td><td>favored by 21.5</td><td>lost 24–31</td></tr><tr><td>Nov 8, 2025</td><td>Beavers</td><td>Sam Houston</td><td>favored by 21.5</td><td>lost 17–21</td></tr><tr><td>Nov 17, 2012</td><td>Ducks</td><td>Stanford</td><td>favored by 18.5</td><td>lost 14–17</td></tr><tr><td>Oct 10, 2015</td><td>Ducks</td><td>Washington State</td><td>favored by 15.5</td><td>lost 38–45</td></tr><tr><td>Nov 19, 2011</td><td>Ducks</td><td>USC</td><td>favored by 15.5</td><td>lost 35–38</td></tr><tr><td>Sep 24, 2016</td><td>Ducks</td><td>Colorado</td><td>favored by 13</td><td>lost 38–41</td></tr><tr><td>Nov 12, 2022</td><td>Ducks</td><td>Washington</td><td>favored by 12</td><td>lost 34–37</td></tr></table>
+<h2>How this was done</h2><p class="note">Closing betting lines (spread, over/under, moneyline) come from the Sportsbook Reviews Online archive (football 2007–2022, men's basketball 2007–2021) and ESPN's odds feed (median across real sportsbooks) for later years and women's basketball; scores and Top-25 ranks from ESPN.
+Minor-league baseball and Hayward Field track meets are left out because there are no betting lines for them.
+Each comparison uses only home game days and adjusts for weekday, month, year, US holidays and weather (rain, temperatures, air pressure); football is also checked using fall Saturdays only.
+"Probably real" means a Benjamini–Hochberg corrected chance-of-fluke (q) under 0.05. Correlation is not causation.
+Data: <a href="odds_correlations.csv">all comparisons (CSV)</a> · <a href="odds_result_types.csv">result types vs no-game days (CSV)</a> · <a href="odds_out.txt">full text output</a> · <a href="https://github.com/Churchy156/eugene-sky/blob/main/data/sports_odds_games.csv">game-by-game lines (CSV)</a>.</p>
+</body></html>

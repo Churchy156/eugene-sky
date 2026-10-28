@@ -1,0 +1,78 @@
+Betting lines & results of Ducks/Beavers home games vs crashes and police calls.
+Question: on game days, does an UNEXPECTED result (upset, home team losing when favored, a big miss vs the spread)
+go with more/fewer crashes or police calls than an EXPECTED result?  Same day and next day.
+W  = within game days only: Poisson GLM (quasi, scale=X2); controls = day-of-week, month, year, US holiday, weather.
+WS = football only, within fall-Saturday game days (Sep-Nov): month, year, holiday, weather.
+C  = result-type comparison vs days with no home game (football: fall Saturdays; basketball: all days, DOWxmonth+year+holiday+weather).
+Benjamini-Hochberg q-values across every W/WS test.  Dates are Pacific Time calendar days.
+
+Games with a closing line and final score used (home games of UO/OSU):
+  Ducks home football: 126 games, 2007-09-01 to 2026-10-17, upsets=17, lost when favored=12
+  Ducks+Beavers home football: 244 games, 2007-08-30 to 2026-10-17, upsets=51, lost when favored=31
+  Ducks+Beavers men's basketball: 608 games, 2007-11-10 to 2026-03-07, upsets=155, lost when favored=92
+  Ducks+Beavers women's basketball: 106 games, 2020-12-13 to 2026-03-01, upsets=22, lost when favored=14
+
+Tests: 724; q<0.05: 0; q<0.10: 0; raw p<0.05: 44 (expected by chance ≈ 36)
+
+Top 25 by p:
+                                group                    outcome     predictor  lag_days                                                 spec  pct_change    ci_lo     ci_hi       p   q_fdr  n_game_days  n_event_days
+358       Ducks+Beavers home football  crashes_injury_fatal_6cty  home_favored         1  fall-Saturday game days; month+year+holiday+weather     28.5993  10.2450   50.0093  0.0014  0.5270          145         118.0
+107               Ducks home football  crashes_injury_fatal_6cty       rivalry         0   game days only; weekday+month+year+holiday+weather    -32.4006 -47.9306  -12.2388  0.0033  0.5270          114           9.0
+320       Ducks+Beavers home football  crashes_injury_fatal_6cty       rivalry         0   game days only; weekday+month+year+holiday+weather    -22.6188 -34.8333   -8.1149  0.0034  0.5270          178          17.0
+344       Ducks+Beavers home football  crashes_injury_fatal_6cty  home_favored         1   game days only; weekday+month+year+holiday+weather     21.9944   6.7690   39.3909  0.0035  0.5270          177         139.0
+7                 Ducks home football           crashes_all_6cty       rivalry         0   game days only; weekday+month+year+holiday+weather    -26.2674 -39.9579   -9.4552  0.0036  0.5270          114           9.0
+208       Ducks+Beavers home football           crashes_all_6cty       rivalry         0   game days only; weekday+month+year+holiday+weather    -17.9691 -28.5018   -5.8847  0.0047  0.5705          178          17.0
+706  Ducks+Beavers women's basketball   springfield_police_calls       blowout         0   game days only; weekday+month+year+holiday+weather     22.3933   6.0915   41.1999  0.0056  0.5756           51          17.0
+366       Ducks+Beavers home football  crashes_injury_fatal_6cty   spread_home         1  fall-Saturday game days; month+year+holiday+weather      5.2658   1.4271    9.2497  0.0068  0.5756          146           NaN
+348       Ducks+Beavers home football  crashes_injury_fatal_6cty       rivalry         1   game days only; weekday+month+year+holiday+weather    -24.1440 -38.2976   -6.7439  0.0087  0.5756          178          17.0
+609  Ducks+Beavers women's basketball               crashes_lane      home_won         0   game days only; weekday+month+year+holiday+weather     50.9399  10.2529  106.6417  0.0102  0.5756           71          49.0
+715  Ducks+Beavers women's basketball   springfield_police_calls  home_favored         1   game days only; weekday+month+year+holiday+weather     24.0556   4.9087   46.6971  0.0117  0.5756           52          36.0
+302       Ducks+Beavers home football               crashes_lane  home_favored         1  fall-Saturday game days; month+year+holiday+weather     33.2706   6.5569   66.6814  0.0119  0.5756          145         118.0
+269       Ducks+Beavers home football               crashes_lane    total_line         0   game days only; weekday+month+year+holiday+weather     11.0231   2.2794   20.5144  0.0125  0.5756          175           NaN
+584  Ducks+Beavers women's basketball           crashes_all_6cty         upset         0   game days only; weekday+month+year+holiday+weather    -20.8947 -34.2235   -4.8650  0.0128  0.5756           71          11.0
+232       Ducks+Beavers home football           crashes_all_6cty  home_favored         1   game days only; weekday+month+year+holiday+weather     13.8399   2.6925   26.1974  0.0137  0.5756          177         139.0
+518    Ducks+Beavers men's basketball    fatal_crashes_FARS_9cty  surprise_pts         0   game days only; weekday+month+year+holiday+weather    -25.8977 -41.7267   -5.7690  0.0145  0.5756          435           NaN
+645  Ducks+Beavers women's basketball  crashes_injury_fatal_6cty      home_won         1   game days only; weekday+month+year+holiday+weather     29.8535   5.1898   60.3000  0.0151  0.5756           71          49.0
+288       Ducks+Beavers home football               crashes_lane  home_favored         1   game days only; weekday+month+year+holiday+weather     23.5204   4.0163   46.6816  0.0160  0.5756          177         139.0
+254       Ducks+Beavers home football           crashes_all_6cty   spread_home         1  fall-Saturday game days; month+year+holiday+weather      3.5895   0.6444    6.6208  0.0166  0.5756          146           NaN
+263       Ducks+Beavers home football               crashes_lane    high_total         0   game days only; weekday+month+year+holiday+weather     17.6858   2.8615   34.6465  0.0178  0.5756          175          79.0
+432    Ducks+Beavers men's basketball           crashes_all_6cty       rivalry         0   game days only; weekday+month+year+holiday+weather     14.0100   2.2393   27.1357  0.0184  0.5756          435          35.0
+716  Ducks+Beavers women's basketball   springfield_police_calls    close_game         1   game days only; weekday+month+year+holiday+weather    -18.5426 -31.3236   -3.3831  0.0185  0.5756           52          12.0
+283       Ducks+Beavers home football               crashes_lane    total_line         0  fall-Saturday game days; month+year+holiday+weather     12.8304   1.9974   24.8139  0.0191  0.5756          145           NaN
+694  Ducks+Beavers women's basketball        eugene_police_calls    close_game         1   game days only; weekday+month+year+holiday+weather    -12.1551 -21.1771   -2.1004  0.0191  0.5756           52          12.0
+607  Ducks+Beavers women's basketball           crashes_all_6cty    total_line         1   game days only; weekday+month+year+holiday+weather     12.8184   1.8963   24.9112  0.0203  0.5866           71           NaN
+
+Result types vs no-game days:
+                             group                    outcome                                   compared_with                     category    n  pct_change    ci_lo    ci_hi       p
+0      Ducks+Beavers home football               crashes_lane                fall Saturdays with no home game              Won as expected  103      7.8708  -5.4786  23.1055  0.2610
+1      Ducks+Beavers home football               crashes_lane                fall Saturdays with no home game            Lost when favored   16     -0.9992 -22.1432  25.8868  0.9347
+2      Ducks+Beavers home football               crashes_lane                fall Saturdays with no home game          Won as the underdog   12     17.4810 -10.4770  54.1704  0.2453
+3      Ducks+Beavers home football               crashes_lane                fall Saturdays with no home game  Lost as expected (underdog)   15      2.1367 -19.4144  29.4513  0.8612
+4      Ducks+Beavers home football           crashes_all_6cty                fall Saturdays with no home game              Won as expected  103     -0.3626  -7.3433   7.1442  0.9219
+5      Ducks+Beavers home football           crashes_all_6cty                fall Saturdays with no home game            Lost when favored   16      5.7336  -7.1937  20.4614  0.4021
+6      Ducks+Beavers home football           crashes_all_6cty                fall Saturdays with no home game          Won as the underdog   12      2.5488 -11.8447  19.2924  0.7443
+7      Ducks+Beavers home football           crashes_all_6cty                fall Saturdays with no home game  Lost as expected (underdog)   15     -6.1307 -17.8242   7.2268  0.3513
+8      Ducks+Beavers home football  crashes_injury_fatal_6cty                fall Saturdays with no home game              Won as expected  103      1.8626  -6.7373  11.2556  0.6817
+9      Ducks+Beavers home football  crashes_injury_fatal_6cty                fall Saturdays with no home game            Lost when favored   16      6.7218  -9.0803  25.2704  0.4262
+10     Ducks+Beavers home football  crashes_injury_fatal_6cty                fall Saturdays with no home game          Won as the underdog   12      0.1512 -16.7750  20.5197  0.9872
+11     Ducks+Beavers home football  crashes_injury_fatal_6cty                fall Saturdays with no home game  Lost as expected (underdog)   15     -2.4239 -16.7816  14.4109  0.7625
+12     Ducks+Beavers home football        eugene_police_calls                fall Saturdays with no home game              Won as expected   21     -0.8786 -10.4346   9.6969  0.8645
+13     Ducks+Beavers home football        eugene_police_calls                fall Saturdays with no home game            Lost when favored    3     -5.2224 -19.5188  11.6134  0.5202
+14     Ducks+Beavers home football        eugene_police_calls                fall Saturdays with no home game          Won as the underdog    3      5.9918 -10.0503  24.8950  0.4871
+15     Ducks+Beavers home football        eugene_police_calls                fall Saturdays with no home game  Lost as expected (underdog)    2      8.5953 -11.0074  32.5160  0.4169
+16  Ducks+Beavers men's basketball               crashes_lane  days with no home game (weekday×month matched)              Won as expected  281      1.7375  -3.2490   6.9810  0.5017
+17  Ducks+Beavers men's basketball               crashes_lane  days with no home game (weekday×month matched)            Lost when favored   71     10.7701   1.0501  21.4250  0.0290
+18  Ducks+Beavers men's basketball               crashes_lane  days with no home game (weekday×month matched)          Won as the underdog   35     12.8024  -1.1895  28.7756  0.0746
+19  Ducks+Beavers men's basketball               crashes_lane  days with no home game (weekday×month matched)  Lost as expected (underdog)   48      1.0835 -10.0896  13.6449  0.8569
+20  Ducks+Beavers men's basketball           crashes_all_6cty  days with no home game (weekday×month matched)              Won as expected  281      4.2963   1.0365   7.6613  0.0094
+21  Ducks+Beavers men's basketball           crashes_all_6cty  days with no home game (weekday×month matched)            Lost when favored   71      1.1380  -4.8557   7.5092  0.7166
+22  Ducks+Beavers men's basketball           crashes_all_6cty  days with no home game (weekday×month matched)          Won as the underdog   35      9.6497   0.6605  19.4416  0.0348
+23  Ducks+Beavers men's basketball           crashes_all_6cty  days with no home game (weekday×month matched)  Lost as expected (underdog)   48      0.4386  -6.8404   8.2863  0.9092
+24  Ducks+Beavers men's basketball  crashes_injury_fatal_6cty  days with no home game (weekday×month matched)              Won as expected  281      7.3915   3.4940  11.4359  0.0002
+25  Ducks+Beavers men's basketball  crashes_injury_fatal_6cty  days with no home game (weekday×month matched)            Lost when favored   71      1.7798  -5.3125   9.4032  0.6321
+26  Ducks+Beavers men's basketball  crashes_injury_fatal_6cty  days with no home game (weekday×month matched)          Won as the underdog   35      5.9899  -4.4093  17.5204  0.2695
+27  Ducks+Beavers men's basketball  crashes_injury_fatal_6cty  days with no home game (weekday×month matched)  Lost as expected (underdog)   48      0.2321  -8.3746   9.6474  0.9596
+28  Ducks+Beavers men's basketball        eugene_police_calls  days with no home game (weekday×month matched)              Won as expected   60      1.5246  -2.4730   5.6861  0.4604
+29  Ducks+Beavers men's basketball        eugene_police_calls  days with no home game (weekday×month matched)            Lost when favored   12     -0.2343  -8.1595   8.3748  0.9557
+30  Ducks+Beavers men's basketball        eugene_police_calls  days with no home game (weekday×month matched)          Won as the underdog    7      4.4226  -6.1050  16.1307  0.4248
+31  Ducks+Beavers men's basketball        eugene_police_calls  days with no home game (weekday×month matched)  Lost as expected (underdog)   13     -4.5367 -12.3460   3.9684  0.2863

@@ -115,12 +115,20 @@
 "label": "Schumann signal strength",
 "explain": "How loud the main ~7.8 Hz hum is (relative units, not comparable between stations)."
 },
+"any_upset_home_loss": {
+"label": "Ducks/Beavers lost at home when favored (any sport)",
+"explain": ""
+},
 "ap": {
 "label": "Magnetic field disturbance, daily average",
 "explain": "Another daily measure of geomagnetic storminess (bigger = stormier)."
 },
 "aqi_epa_aqs_lane": {
 "label": "Air quality index (official EPA)",
+"explain": ""
+},
+"ats_margin": {
+"label": "How much the home team beat expectations (per 10 points)",
 "explain": ""
 },
 "best_baseline": {
@@ -131,12 +139,20 @@
 "label": "Change per typical swing",
 "explain": "How much it changes when the other thing moves by one typical amount."
 },
+"blowout": {
+"label": "Blowout",
+"explain": ""
+},
 "clim+damped_anom": {
 "label": "Simple guess: usual value + fading recent difference",
 "explain": ""
 },
 "climatology": {
 "label": "Simple guess: usual value for the time of year",
+"explain": ""
+},
+"close_game": {
+"label": "Close game",
 "explain": ""
 },
 "covid_hosp_rate_or": {
@@ -239,6 +255,54 @@
 "label": "Deadly crashes, 9 counties (since 1975)",
 "explain": ""
 },
+"fb_beat_spread_pts": {
+"label": "Football: how much the home team beat expectations (points)",
+"explain": "Positive = home team did better than the spread said; negative = worse."
+},
+"fb_blowout": {
+"label": "Football: blowout (won by 21+)",
+"explain": ""
+},
+"fb_close_game": {
+"label": "Football: close game (won by 7 or less)",
+"explain": ""
+},
+"fb_high_total": {
+"label": "Football: high-scoring game expected (top third of over/under lines)",
+"explain": ""
+},
+"fb_home_lost_as_favorite": {
+"label": "Ducks/Beavers lost when favored (football)",
+"explain": "Home team was expected to win but lost."
+},
+"fb_home_spread": {
+"label": "Football: betting spread for the home team",
+"explain": "Negative = home team (Ducks or Beavers) expected to win by that many points. Closing line from Vegas books."
+},
+"fb_home_won": {
+"label": "Football: home team (Ducks/Beavers) won",
+"explain": ""
+},
+"fb_ranked_opponent": {
+"label": "Football: opponent ranked in the Top 25",
+"explain": ""
+},
+"fb_rivalry": {
+"label": "Football: rivalry game (Civil War / Duck–Beaver)",
+"explain": ""
+},
+"fb_surprise_pts": {
+"label": "Football: how far off the betting line was (points)",
+"explain": "Size of the miss vs the spread, either direction."
+},
+"fb_total_line": {
+"label": "Football: expected total points (over/under line)",
+"explain": ""
+},
+"fb_upset": {
+"label": "Football: the underdog won",
+"explain": "The team the betting market expected to lose won the game."
+},
 "first_rain_after_7dry": {
 "label": "First rain after a dry week",
 "explain": "Oil builds up on roads in dry spells, so the first rain is slick."
@@ -283,6 +347,10 @@
 "label": "Full moon (± 1 day)",
 "explain": ""
 },
+"games_with_odds": {
+"label": "Home games that had betting lines",
+"explain": ""
+},
 "games_within_100mi": {
 "label": "Sports games within 100 mi",
 "explain": ""
@@ -313,6 +381,30 @@
 },
 "hayward_major_meet": {
 "label": "Big track meet at Hayward Field",
+"explain": ""
+},
+"high_total": {
+"label": "High-scoring game expected",
+"explain": ""
+},
+"home_favored": {
+"label": "Home team was favored",
+"explain": ""
+},
+"home_ranked": {
+"label": "Home team ranked in the Top 25",
+"explain": ""
+},
+"home_upset_loss": {
+"label": "Home team lost when favored",
+"explain": ""
+},
+"home_upset_win": {
+"label": "Home team won as the underdog",
+"explain": ""
+},
+"home_won": {
+"label": "Home team won",
 "explain": ""
 },
 "kp_max": {
@@ -361,6 +453,34 @@
 },
 "major_home_game_next_day": {
 "label": "Day after a Ducks/Beavers home football game",
+"explain": ""
+},
+"mbb_blowout": {
+"label": "Men's basketball: blowout (20+ points)",
+"explain": ""
+},
+"mbb_close_game": {
+"label": "Men's basketball: close game (5 points or less)",
+"explain": ""
+},
+"mbb_high_total": {
+"label": "Men's basketball: high-scoring game expected",
+"explain": ""
+},
+"mbb_home_lost_as_favorite": {
+"label": "Ducks/Beavers lost when favored (men's basketball)",
+"explain": ""
+},
+"mbb_home_spread": {
+"label": "Men's basketball: betting spread for the home team",
+"explain": "Negative = home team expected to win by that many points."
+},
+"mbb_surprise_pts": {
+"label": "Men's basketball: how far off the betting line was (points)",
+"explain": ""
+},
+"mbb_upset": {
+"label": "Men's basketball: the underdog won",
 "explain": ""
 },
 "milb_home_game": {
@@ -430,6 +550,10 @@
 "omni_sw_V": {
 "label": "Solar wind speed",
 "explain": "How fast the stream of particles from the Sun is moving (km/s)."
+},
+"opp_ranked": {
+"label": "Opponent ranked in the Top 25",
+"explain": ""
 },
 "oregon_quakes_500km_M2.5+": {
 "label": "Quakes within 500 km of Eugene (M2.5+)",
@@ -591,6 +715,10 @@
 "label": "Ring of Fire volcanoes erupting",
 "explain": ""
 },
+"rivalry": {
+"label": "Rivalry game (Civil War)",
+"explain": ""
+},
 "rof_eq_M5plus": {
 "label": "Ring of Fire quakes M5+",
 "explain": ""
@@ -667,6 +795,10 @@
 "label": "Link strength (−1 to +1)",
 "explain": "0 = no link; + = rise together; − = one rises as the other falls."
 },
+"spread_home": {
+"label": "How much the home team was expected to win by (per 10 points)",
+"explain": ""
+},
 "springfield_police_calls": {
 "label": "Springfield police calls",
 "explain": ""
@@ -686,6 +818,10 @@
 "sunspot_n": {
 "label": "Sunspot count",
 "explain": "Number of dark spots on the Sun; peaks every ~11 years."
+},
+"surprise_pts": {
+"label": "How far off the betting line was (per 10 points)",
+"explain": ""
 },
 "sw_Bz_gsm_nT": {
 "label": "Solar wind magnetic direction",
@@ -787,12 +923,20 @@
 "label": "Sharpness of Schumann tone 4, Siberia (Tomsk)",
 "explain": ""
 },
+"total_line": {
+"label": "Expected total points (per 10 points)",
+"explain": ""
+},
 "tsunami_events_global": {
 "label": "Tsunamis worldwide",
 "explain": ""
 },
 "tsunami_events_rof": {
 "label": "Pacific tsunamis",
+"explain": ""
+},
+"upset": {
+"label": "Underdog won (upset)",
 "explain": ""
 },
 "us_aqi_max": {
@@ -845,6 +989,14 @@
 },
 "volc_new_eruptions_rof": {
 "label": "New Ring of Fire eruptions",
+"explain": ""
+},
+"wbb_home_spread": {
+"label": "Women's basketball: betting spread for the home team",
+"explain": ""
+},
+"wbb_upset": {
+"label": "Women's basketball: the underdog won",
 "explain": ""
 },
 "wind_avg_mph": {

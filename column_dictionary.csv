@@ -141,3 +141,26 @@ tsunami_events_global,"Tsunami source events that day worldwide (NOAA NCEI HazEL
 tsunami_events_rof,Tsunami source events that day inside the Ring of Fire mask (NOAA NCEI),1950-01-01,2026-10-27,100.0
 ncei_sig_eq_global,NOAA NCEI significant earthquakes that day worldwide (damage/deaths/M7.5+/tsunami criteria),1950-01-01,2026-10-27,100.0
 ncei_sig_eq_rof,NOAA NCEI significant earthquakes that day inside the Ring of Fire mask,1950-01-01,2026-10-27,100.0
+fb_home_spread,"Point spread for the home team in that day's Ducks/Beavers home football game (negative = home team favoured; mean if both play at home). SBR closing line 2007–2022, ESPN sportsbook median 2023+",2007-08-30,2026-10-17,0.7
+fb_upset,Ducks/Beavers home football game that day ended in an upset (the betting underdog won outright); blank = no game or no line,2007-08-30,2026-10-17,0.7
+fb_home_lost_as_favorite,Ducks/Beavers home football team lost a game it was favoured to win,2007-08-30,2026-10-17,0.7
+fb_surprise_pts,"How far the home football result missed the spread, in points (|final margin + spread|)",2007-08-30,2026-10-17,0.7
+fb_beat_spread_pts,Home football result vs the spread in points (positive = home team did better than expected),2007-08-30,2026-10-17,0.7
+fb_close_game,Home football game decided by 7 points or fewer,2003-08-28,2026-10-17,0.9
+fb_blowout,Home football game decided by 21 points or more,2003-08-28,2026-10-17,0.9
+fb_total_line,Over/under total for the home football game (expected combined points),2007-08-30,2026-10-17,0.7
+fb_high_total,Home football over/under in the top third of all lines (expected shootout),2007-08-30,2026-10-17,0.7
+fb_rivalry,Home football game was the Civil War / rivalry (Oregon vs Oregon State),1950-10-07,2026-10-17,2.4
+fb_ranked_opponent,Home football opponent was ranked in the AP/coaches top 25 (ESPN),2003-08-28,2026-10-17,0.9
+fb_home_won,Home football team won (1) or lost (0),2007-08-30,2026-10-17,0.7
+mbb_home_spread,Point spread for the Ducks/Beavers home men's basketball game (negative = home favoured),2007-11-10,2026-03-07,1.7
+mbb_upset,Home men's basketball game ended in an upset (underdog won),2007-11-10,2026-03-07,1.7
+mbb_home_lost_as_favorite,Home men's basketball team lost a game it was favoured to win,2007-11-10,2026-03-07,1.7
+mbb_surprise_pts,"How far the home men's basketball result missed the spread, in points",2007-11-10,2026-03-07,1.7
+mbb_close_game,Home men's basketball game decided by 5 points or fewer,2002-11-23,2026-03-07,2.2
+mbb_blowout,Home men's basketball game decided by 20 points or more,2002-11-23,2026-03-07,2.2
+mbb_high_total,Home men's basketball over/under in the top third of all lines,2007-11-10,2026-03-07,1.7
+wbb_home_spread,"Point spread for the Ducks/Beavers home women's basketball game (ESPN, mostly 2019+)",2020-12-13,2026-03-01,0.3
+wbb_upset,Home women's basketball game ended in an upset (underdog won),2020-12-13,2026-03-01,0.3
+games_with_odds,Number of Ducks/Beavers home games (football + basketball) that day with a betting line,2007-08-30,2026-10-28,24.9
+any_upset_home_loss,Any Ducks/Beavers home team (football or basketball) lost as the betting favourite that day,2007-08-30,2026-10-17,2.6
