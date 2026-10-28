@@ -12,5 +12,5 @@ for c,r in cols.items():
     v=d[c].round(r)
     data[c]=[None if pd.isna(x) else (int(x) if r==0 else float(x)) for x in v]
 js=open(os.path.join(os.path.dirname(plotly.__file__),'package_data','plotly.min.js')).read()
-html=open('dash_template.html').read().replace('/*PLOTLY*/',js).replace('/*DATA*/','const D='+json.dumps(data,separators=(',',':'))+';')
+html=open('dash_template.html').read().replace('/*PLOTLY*/',js).replace('/*DATA*/','const D='+json.dumps(data,separators=(',',':'))+';').replace('/*LABELS*/','const EXP='+json.dumps({k:v[1] for k,v in __import__('labels').L.items() if v[1]},ensure_ascii=False)+';')
 import sys; os.makedirs('site',exist_ok=True); open(sys.argv[1] if len(sys.argv)>1 else 'site/index.html','w').write(html); print(os.path.getsize(sys.argv[1] if len(sys.argv)>1 else 'site/index.html')/1e6,'MB')

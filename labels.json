@@ -1,0 +1,858 @@
+{
+"A1": {
+"label": "Schumann signal strength",
+"explain": "How loud the main ~7.8 Hz hum is (relative units, not comparable between stations)."
+},
+"AE": {
+"label": "Northern lights activity",
+"explain": "Strength of the electric currents that light up the aurora."
+},
+"AE_mean": {
+"label": "Northern lights activity",
+"explain": "Strength of the electric currents that light up the aurora."
+},
+"Ap": {
+"label": "Magnetic field disturbance, daily average",
+"explain": "Another daily measure of geomagnetic storminess (bigger = stormier)."
+},
+"Bz": {
+"label": "Solar wind magnetic direction",
+"explain": "Negative (southward) lets solar energy into Earth's field more easily."
+},
+"Bz_gsm": {
+"label": "Solar wind magnetic direction",
+"explain": "Negative (southward) lets solar energy into Earth's field more easily."
+},
+"DJF": {
+"label": "Winter (Dec–Feb)",
+"explain": ""
+},
+"Dst": {
+"label": "Magnetic storm depth",
+"explain": "How far the magnetic field dips during a storm. More negative = stronger storm."
+},
+"Dst_min": {
+"label": "Magnetic storm depth",
+"explain": "How far the magnetic field dips during a storm. More negative = stronger storm."
+},
+"F10.7": {
+"label": "Sun's radio brightness",
+"explain": "Radio glow from the Sun; rises and falls with the 11-year sunspot cycle."
+},
+"F107": {
+"label": "Sun's radio brightness",
+"explain": "Radio glow from the Sun; rises and falls with the 11-year sunspot cycle."
+},
+"F107_adj": {
+"label": "Sun's radio brightness",
+"explain": "Radio glow from the Sun; rises and falls with the 11-year sunspot cycle."
+},
+"JJA": {
+"label": "Summer (Jun–Aug)",
+"explain": ""
+},
+"Kp": {
+"label": "Geomagnetic storm level (0–9)",
+"explain": "How shaken Earth's magnetic field is. 5+ is a storm; 7+ is strong."
+},
+"Kp_max": {
+"label": "Geomagnetic storm level (0–9)",
+"explain": "How shaken Earth's magnetic field is. 5+ is a storm; 7+ is strong."
+},
+"MAM": {
+"label": "Spring (Mar–May)",
+"explain": ""
+},
+"NZ M4+ count (log)": {
+"label": "Number of New Zealand quakes M4+",
+"explain": ""
+},
+"NZ quake M5+ day": {
+"label": "Day with a New Zealand quake M5+",
+"explain": ""
+},
+"R": {
+"label": "Sunspot count",
+"explain": "Number of dark spots on the Sun; peaks every ~11 years."
+},
+"RoF M5+ count (log)": {
+"label": "Number of Ring of Fire quakes M5+",
+"explain": ""
+},
+"RoF M5+ count (positive control)": {
+"label": "Ring of Fire aftershocks M5+ (method check)",
+"explain": "Big quakes really do cause aftershocks, so this should show a clear effect."
+},
+"RoF new eruption day": {
+"label": "Day a new Ring of Fire eruption started",
+"explain": ""
+},
+"RoF quake M6+ day": {
+"label": "Day with a Ring of Fire quake M6+",
+"explain": ""
+},
+"RoF quake M7+ day": {
+"label": "Day with a Ring of Fire quake M7+",
+"explain": ""
+},
+"RoF tsunami event day": {
+"label": "Day with a Pacific tsunami",
+"explain": ""
+},
+"RoF volcanoes erupting": {
+"label": "Ring of Fire volcanoes erupting",
+"explain": ""
+},
+"SON": {
+"label": "Fall (Sep–Nov)",
+"explain": ""
+},
+"X_flare_day": {
+"label": "Big (X-class) solar flare",
+"explain": ""
+},
+"a1": {
+"label": "Schumann signal strength",
+"explain": "How loud the main ~7.8 Hz hum is (relative units, not comparable between stations)."
+},
+"ap": {
+"label": "Magnetic field disturbance, daily average",
+"explain": "Another daily measure of geomagnetic storminess (bigger = stormier)."
+},
+"aqi_epa_aqs_lane": {
+"label": "Air quality index (official EPA)",
+"explain": ""
+},
+"best_baseline": {
+"label": "Simple guess it was compared with",
+"explain": ""
+},
+"beta_per_sd": {
+"label": "Change per typical swing",
+"explain": "How much it changes when the other thing moves by one typical amount."
+},
+"clim+damped_anom": {
+"label": "Simple guess: usual value + fading recent difference",
+"explain": ""
+},
+"climatology": {
+"label": "Simple guess: usual value for the time of year",
+"explain": ""
+},
+"covid_hosp_rate_or": {
+"label": "COVID hospital admissions, Oregon",
+"explain": ""
+},
+"covid_wastewater_log10": {
+"label": "COVID level in Lane County wastewater",
+"explain": ""
+},
+"crashes_all_6cty": {
+"label": "Crashes, 6 nearby counties",
+"explain": "Lane, Linn, Benton, Douglas, Marion and Lincoln (ODOT, 2007–2024)."
+},
+"crashes_injury_fatal_6cty": {
+"label": "Injury & deadly crashes, 6 counties",
+"explain": ""
+},
+"crashes_lane": {
+"label": "Crashes, Lane County",
+"explain": ""
+},
+"daylight_hours": {
+"label": "Hours of daylight",
+"explain": ""
+},
+"ducks_home_football": {
+"label": "Ducks home football game",
+"explain": ""
+},
+"ducks_home_mbb": {
+"label": "Ducks men's basketball home game",
+"explain": ""
+},
+"ducks_home_wbb": {
+"label": "Ducks women's basketball home game",
+"explain": ""
+},
+"epa_aqi_official": {
+"label": "Air quality index (official EPA)",
+"explain": ""
+},
+"eq_500km_M2.5plus": {
+"label": "Quakes within 500 km of Eugene (M2.5+)",
+"explain": ""
+},
+"eq_500km_maxmag": {
+"label": "Biggest quake within 500 km (magnitude)",
+"explain": ""
+},
+"eq_global_M6plus": {
+"label": "Big quakes worldwide (M6+), count",
+"explain": ""
+},
+"eq_global_maxmag": {
+"label": "Biggest quake worldwide (magnitude)",
+"explain": ""
+},
+"est_attendance_100mi": {
+"label": "Estimated fans at games within 100 mi",
+"explain": ""
+},
+"eugene_police_calls": {
+"label": "Eugene police calls",
+"explain": ""
+},
+"ev_ducks_fb_home": {
+"label": "Ducks home football game",
+"explain": ""
+},
+"ev_us_holiday": {
+"label": "US holiday",
+"explain": ""
+},
+"f1": {
+"label": "Main Schumann tone, north-south sensor (Hz)",
+"explain": "The Earth–sky cavity hums at about 7.8 Hz, driven by lightning worldwide. This is the pitch of that main hum."
+},
+"f107": {
+"label": "Sun's radio brightness",
+"explain": "Radio glow from the Sun; rises and falls with the 11-year sunspot cycle."
+},
+"f1_EW": {
+"label": "Main Schumann tone, east-west sensor (Hz)",
+"explain": "The Earth–sky cavity hums at about 7.8 Hz, driven by lightning worldwide. This is the pitch of that main hum."
+},
+"f1_NS": {
+"label": "Main Schumann tone, north-south sensor (Hz)",
+"explain": "The Earth–sky cavity hums at about 7.8 Hz, driven by lightning worldwide. This is the pitch of that main hum."
+},
+"f1_ew": {
+"label": "Main Schumann tone, east-west sensor (Hz)",
+"explain": "The Earth–sky cavity hums at about 7.8 Hz, driven by lightning worldwide. This is the pitch of that main hum."
+},
+"f1_ns": {
+"label": "Main Schumann tone, north-south sensor (Hz)",
+"explain": "The Earth–sky cavity hums at about 7.8 Hz, driven by lightning worldwide. This is the pitch of that main hum."
+},
+"fatal_crashes_FARS_9cty": {
+"label": "Deadly crashes, 9 counties (since 1975)",
+"explain": ""
+},
+"first_rain_after_7dry": {
+"label": "First rain after a dry week",
+"explain": "Oil builds up on roads in dry spells, so the first rain is slick."
+},
+"flare_max_class": {
+"label": "Biggest solar flare that day",
+"explain": "0 = none, 1 = small (C), 2 = medium (M), 3 = big (X)."
+},
+"flares_C": {
+"label": "Small solar flares (C-class), count",
+"explain": ""
+},
+"flares_M": {
+"label": "Medium solar flares (M-class), count",
+"explain": ""
+},
+"flares_MX": {
+"label": "Medium + big solar flares, count",
+"explain": ""
+},
+"flares_X": {
+"label": "Big solar flares (X-class), count",
+"explain": ""
+},
+"flu_hosp_rate_or": {
+"label": "Flu hospital admissions, Oregon",
+"explain": ""
+},
+"football_attendance (per 10k, game days only)": {
+"label": "Each extra 10,000 football fans (game days)",
+"explain": ""
+},
+"football_attendance_100mi": {
+"label": "Each extra 10,000 football fans (game days)",
+"explain": ""
+},
+"football_kickoff_hour": {
+"label": "Football kickoff time (hour, PT)",
+"explain": ""
+},
+"full_moon(±1d)": {
+"label": "Full moon (± 1 day)",
+"explain": ""
+},
+"games_within_100mi": {
+"label": "Sports games within 100 mi",
+"explain": ""
+},
+"games_within_100mi (per game)": {
+"label": "Each extra game within 100 mi",
+"explain": ""
+},
+"gbm:all(+wx)": {
+"label": "Machine-learning forecast: everything",
+"explain": ""
+},
+"gbm:hist": {
+"label": "Machine-learning forecast: recent history only",
+"explain": ""
+},
+"gbm:hist+solar": {
+"label": "Machine-learning forecast: history + Sun data",
+"explain": ""
+},
+"gbm:hist+solar+moon": {
+"label": "Machine-learning forecast: history + Sun + Moon",
+"explain": ""
+},
+"h": {
+"label": "Days ahead",
+"explain": ""
+},
+"hayward_major_meet": {
+"label": "Big track meet at Hayward Field",
+"explain": ""
+},
+"kp_max": {
+"label": "Geomagnetic storm level (0–9)",
+"explain": "How shaken Earth's magnetic field is. 5+ is a storm; 7+ is strong."
+},
+"kp_sum": {
+"label": "Geomagnetic storm level, all-day total",
+"explain": "The day's eight 3-hour storm levels added up."
+},
+"lag": {
+"label": "Days later",
+"explain": ""
+},
+"lag_days": {
+"label": "Days later",
+"explain": ""
+},
+"lane_pm25_log": {
+"label": "Smoke & dust in the air, Lane County (PM2.5)",
+"explain": ""
+},
+"log_p10MeV": {
+"label": "Solar radiation storm level",
+"explain": "Amount of high-energy protons from the Sun (log scale)."
+},
+"log_p10MeV_max": {
+"label": "Solar radiation storm level",
+"explain": "Amount of high-energy protons from the Sun (log scale)."
+},
+"mae_baseline": {
+"label": "Typical error of the simple guess",
+"explain": ""
+},
+"mae_model": {
+"label": "Typical forecast error",
+"explain": ""
+},
+"major_home_game": {
+"label": "Ducks or Beavers home football game",
+"explain": ""
+},
+"major_home_game(UO/OSU FB)": {
+"label": "Ducks or Beavers home football game",
+"explain": ""
+},
+"major_home_game_next_day": {
+"label": "Day after a Ducks/Beavers home football game",
+"explain": ""
+},
+"milb_home_game": {
+"label": "Minor-league baseball home game",
+"explain": ""
+},
+"milb_home_games": {
+"label": "Minor-league baseball home game",
+"explain": ""
+},
+"model": {
+"label": "Forecast method",
+"explain": ""
+},
+"moon_age_days": {
+"label": "Days since new moon",
+"explain": ""
+},
+"moon_dist_km": {
+"label": "Moon's distance from Earth",
+"explain": "Closer moon = slightly stronger tides."
+},
+"moon_illum": {
+"label": "Moon brightness (0 = new, 1 = full)",
+"explain": "Share of the Moon that is lit."
+},
+"moon_illum_eph": {
+"label": "Moon brightness (0 = new, 1 = full)",
+"explain": "Share of the Moon that is lit."
+},
+"n_days": {
+"label": "Days of data",
+"explain": ""
+},
+"nz_eq_M4plus": {
+"label": "New Zealand quakes M4+",
+"explain": ""
+},
+"nz_eq_M5plus": {
+"label": "New Zealand quakes M5+",
+"explain": ""
+},
+"nz_eq_maxmag": {
+"label": "Biggest New Zealand quake (magnitude)",
+"explain": ""
+},
+"nz_quake_M5+_day": {
+"label": "Day with a New Zealand quake M5+",
+"explain": ""
+},
+"omni_Bz": {
+"label": "Solar wind magnetic direction",
+"explain": "Negative (southward) lets solar energy into Earth's field more easily."
+},
+"omni_Kp_max": {
+"label": "Geomagnetic storm level (0–9)",
+"explain": "How shaken Earth's magnetic field is. 5+ is a storm; 7+ is strong."
+},
+"omni_sw_N": {
+"label": "Solar wind density",
+"explain": "How many solar-wind particles per cubic centimetre."
+},
+"omni_sw_P": {
+"label": "Solar wind pressure",
+"explain": "How hard the solar wind pushes on Earth's magnetic field."
+},
+"omni_sw_V": {
+"label": "Solar wind speed",
+"explain": "How fast the stream of particles from the Sun is moving (km/s)."
+},
+"oregon_quakes_500km_M2.5+": {
+"label": "Quakes within 500 km of Eugene (M2.5+)",
+"explain": ""
+},
+"osu_home_football": {
+"label": "Beavers home football game",
+"explain": ""
+},
+"osu_home_mbb": {
+"label": "Beavers men's basketball home game",
+"explain": ""
+},
+"osu_home_wbb": {
+"label": "Beavers women's basketball home game",
+"explain": ""
+},
+"p": {
+"label": "Chance it's a fluke (single test)",
+"explain": "Below 0.05 looks interesting, but with many tests some will by luck."
+},
+"p10MeV": {
+"label": "Solar radiation storm level",
+"explain": "Amount of high-energy protons from the Sun (log scale)."
+},
+"p_circshift": {
+"label": "Chance it's a fluke (single test)",
+"explain": "Below 0.05 looks interesting, but with many tests some will by luck."
+},
+"p_one_sided": {
+"label": "Chance it's a fluke (single test)",
+"explain": "Below 0.05 looks interesting, but with many tests some will by luck."
+},
+"p_value": {
+"label": "Chance it's a fluke (single test)",
+"explain": "Below 0.05 looks interesting, but with many tests some will by luck."
+},
+"partial_r": {
+"label": "Link strength (−1 to +1)",
+"explain": "0 = no link; + = rise together; − = one rises as the other falls."
+},
+"pct_change": {
+"label": "% change",
+"explain": ""
+},
+"persist_7d_mean": {
+"label": "Simple guess: last week's average",
+"explain": ""
+},
+"persistence": {
+"label": "Simple guess: tomorrow = today",
+"explain": ""
+},
+"pm25": {
+"label": "Smoke & dust in the air (PM2.5)",
+"explain": "Tiny particles from smoke, dust and exhaust (µg/m³)."
+},
+"pm25_epa_lane_mean": {
+"label": "Smoke & dust in the air (PM2.5)",
+"explain": "Tiny particles from smoke, dust and exhaust (µg/m³)."
+},
+"pm25_ugm3_cams": {
+"label": "Smoke & dust in the air (PM2.5)",
+"explain": "Tiny particles from smoke, dust and exhaust (µg/m³)."
+},
+"prcp_in": {
+"label": "Rain (inches)",
+"explain": ""
+},
+"predictor": {
+"label": "Possible cause",
+"explain": ""
+},
+"pressure_change_24h": {
+"label": "Air pressure change since yesterday",
+"explain": ""
+},
+"pressure_msl": {
+"label": "Air pressure",
+"explain": "Barometer reading. Low pressure usually means stormy weather."
+},
+"pressure_msl_hPa_era5": {
+"label": "Air pressure",
+"explain": "Barometer reading. Low pressure usually means stormy weather."
+},
+"proton_event_10pfu": {
+"label": "Solar radiation storm",
+"explain": ""
+},
+"q": {
+"label": "Chance it's a fluke (after correction)",
+"explain": "Adjusted for running many tests. Under 0.05 = probably real."
+},
+"q-value": {
+"label": "Chance it's a fluke (after correction)",
+"explain": "Adjusted for running many tests. Under 0.05 = probably real."
+},
+"q_fdr": {
+"label": "Chance it's a fluke (after correction)",
+"explain": "Adjusted for running many tests. Under 0.05 = probably real."
+},
+"q_value": {
+"label": "Chance it's a fluke (after correction)",
+"explain": "Adjusted for running many tests. Under 0.05 = probably real."
+},
+"quakes_500km_M2.5+": {
+"label": "Quakes within 500 km of Eugene (M2.5+)",
+"explain": ""
+},
+"r": {
+"label": "Link strength (−1 to +1)",
+"explain": "0 = no link; + = rise together; − = one rises as the other falls."
+},
+"rain_day(>0.1in)": {
+"label": "Rainy day (over 0.1 inch)",
+"explain": ""
+},
+"rain_in": {
+"label": "Rain (inches)",
+"explain": ""
+},
+"resp_hosp_covid_rate_or": {
+"label": "COVID hospital admissions, Oregon",
+"explain": ""
+},
+"resp_hosp_flu_rate_or": {
+"label": "Flu hospital admissions, Oregon",
+"explain": ""
+},
+"resp_hosp_rsv_rate_or": {
+"label": "RSV hospital admissions, Oregon",
+"explain": ""
+},
+"ridge:all(+wx)": {
+"label": "Our forecast: history + Sun + Moon + weather",
+"explain": ""
+},
+"ridge:hist": {
+"label": "Our forecast: recent history only",
+"explain": ""
+},
+"ridge:hist+solar": {
+"label": "Our forecast: history + Sun data",
+"explain": ""
+},
+"ridge:hist+solar+moon": {
+"label": "Our forecast: history + Sun + Moon",
+"explain": ""
+},
+"ring_of_fire_M6+_day": {
+"label": "Day with a Ring of Fire quake M6+",
+"explain": ""
+},
+"ring_of_fire_tsunami_day": {
+"label": "Day with a Pacific tsunami",
+"explain": ""
+},
+"ring_of_fire_volcanoes_erupting": {
+"label": "Ring of Fire volcanoes erupting",
+"explain": ""
+},
+"rof_eq_M5plus": {
+"label": "Ring of Fire quakes M5+",
+"explain": ""
+},
+"rof_eq_M6plus": {
+"label": "Ring of Fire quakes M6+",
+"explain": ""
+},
+"rof_eq_M7plus": {
+"label": "Ring of Fire quakes M7+",
+"explain": ""
+},
+"rof_eq_maxmag": {
+"label": "Biggest Ring of Fire quake (magnitude)",
+"explain": ""
+},
+"rsv_hosp_rate_or": {
+"label": "RSV hospital admissions, Oregon",
+"explain": ""
+},
+"skill": {
+"label": "Forecast improvement",
+"explain": ""
+},
+"skill_vs_best_baseline": {
+"label": "Forecast improvement over the best simple guess",
+"explain": ""
+},
+"snow_day": {
+"label": "Snow day",
+"explain": ""
+},
+"snow_in": {
+"label": "Snow (inches)",
+"explain": ""
+},
+"solar_wind_speed": {
+"label": "Solar wind speed",
+"explain": "How fast the stream of particles from the Sun is moving (km/s)."
+},
+"sou_a1_ew": {
+"label": "Schumann signal strength, Arctic (Svalbard), east-west sensor",
+"explain": "How loud the main ~7.8 Hz hum is (relative units, not comparable between stations)."
+},
+"sou_a1_ns": {
+"label": "Schumann signal strength, Arctic (Svalbard), north-south sensor",
+"explain": "How loud the main ~7.8 Hz hum is (relative units, not comparable between stations)."
+},
+"sou_a2_ew": {
+"label": "2nd Schumann tone strength, Arctic (Svalbard), east-west sensor",
+"explain": "Loudness of the 2nd hum (~14 Hz)."
+},
+"sou_a2_ns": {
+"label": "2nd Schumann tone strength, Arctic (Svalbard), north-south sensor",
+"explain": "Loudness of the 2nd hum (~14 Hz)."
+},
+"sou_a3_ew": {
+"label": "3rd Schumann tone strength, Arctic (Svalbard), east-west sensor",
+"explain": "Loudness of the 3rd hum (~20 Hz)."
+},
+"sou_a3_ns": {
+"label": "3rd Schumann tone strength, Arctic (Svalbard), north-south sensor",
+"explain": "Loudness of the 3rd hum (~20 Hz)."
+},
+"sou_f1_ew": {
+"label": "Main Schumann tone, Arctic (Svalbard), east-west sensor (Hz)",
+"explain": "The Earth–sky cavity hums at about 7.8 Hz, driven by lightning worldwide. This is the pitch of that main hum."
+},
+"sou_f1_ns": {
+"label": "Main Schumann tone, Arctic (Svalbard), north-south sensor (Hz)",
+"explain": "The Earth–sky cavity hums at about 7.8 Hz, driven by lightning worldwide. This is the pitch of that main hum."
+},
+"spearman_r": {
+"label": "Link strength (−1 to +1)",
+"explain": "0 = no link; + = rise together; − = one rises as the other falls."
+},
+"springfield_police_calls": {
+"label": "Springfield police calls",
+"explain": ""
+},
+"storm_Kp7": {
+"label": "Strong geomagnetic storm (level 7+)",
+"explain": ""
+},
+"storm_Kp>=5": {
+"label": "Geomagnetic storm day (level 5+)",
+"explain": "Days when the storm level reached 5 or more."
+},
+"sunset_hour_local": {
+"label": "Sunset time (hour, PT)",
+"explain": ""
+},
+"sunspot_n": {
+"label": "Sunspot count",
+"explain": "Number of dark spots on the Sun; peaks every ~11 years."
+},
+"sw_Bz_gsm_nT": {
+"label": "Solar wind magnetic direction",
+"explain": "Negative (southward) lets solar energy into Earth's field more easily."
+},
+"sw_N": {
+"label": "Solar wind density",
+"explain": "How many solar-wind particles per cubic centimetre."
+},
+"sw_P": {
+"label": "Solar wind pressure",
+"explain": "How hard the solar wind pushes on Earth's magnetic field."
+},
+"sw_V": {
+"label": "Solar wind speed",
+"explain": "How fast the stream of particles from the Sun is moving (km/s)."
+},
+"sw_density_cc": {
+"label": "Solar wind density",
+"explain": "How many solar-wind particles per cubic centimetre."
+},
+"sw_speed_kms": {
+"label": "Solar wind speed",
+"explain": "How fast the stream of particles from the Sun is moving (km/s)."
+},
+"target": {
+"label": "What is forecast",
+"explain": ""
+},
+"tide_range": {
+"label": "Tide range at the coast (ft)",
+"explain": "Gap between high and low tide that day."
+},
+"tide_range_ft": {
+"label": "Tide range at the coast (ft)",
+"explain": "Gap between high and low tide that day."
+},
+"tmax": {
+"label": "Daily high temperature (°F)",
+"explain": ""
+},
+"tmax_F": {
+"label": "Daily high temperature (°F)",
+"explain": ""
+},
+"tmin_F": {
+"label": "Daily low temperature (°F)",
+"explain": ""
+},
+"tmin_freezing": {
+"label": "Freezing night (low at or below 32°F)",
+"explain": ""
+},
+"tomsk_A1": {
+"label": "Schumann signal strength, Siberia (Tomsk)",
+"explain": "How loud the main ~7.8 Hz hum is (relative units, not comparable between stations)."
+},
+"tomsk_A2": {
+"label": "Strength of Schumann tone 2, Siberia (Tomsk)",
+"explain": ""
+},
+"tomsk_A3": {
+"label": "Strength of Schumann tone 3, Siberia (Tomsk)",
+"explain": ""
+},
+"tomsk_A4": {
+"label": "Strength of Schumann tone 4, Siberia (Tomsk)",
+"explain": ""
+},
+"tomsk_F1": {
+"label": "Main Schumann tone, Siberia (Tomsk) (Hz)",
+"explain": "The Earth–sky cavity hums at about 7.8 Hz, driven by lightning worldwide. This is the pitch of that main hum."
+},
+"tomsk_F2": {
+"label": "2nd Schumann tone, Siberia (Tomsk) (Hz)",
+"explain": "Pitch of the 2nd hum (~14 Hz)."
+},
+"tomsk_F3": {
+"label": "3rd Schumann tone, Siberia (Tomsk) (Hz)",
+"explain": ""
+},
+"tomsk_F4": {
+"label": "4th Schumann tone, Siberia (Tomsk) (Hz)",
+"explain": ""
+},
+"tomsk_Q1": {
+"label": "Sharpness of the main Schumann tone, Siberia (Tomsk)",
+"explain": "Higher = a cleaner, narrower hum."
+},
+"tomsk_Q2": {
+"label": "Sharpness of Schumann tone 2, Siberia (Tomsk)",
+"explain": ""
+},
+"tomsk_Q3": {
+"label": "Sharpness of Schumann tone 3, Siberia (Tomsk)",
+"explain": ""
+},
+"tomsk_Q4": {
+"label": "Sharpness of Schumann tone 4, Siberia (Tomsk)",
+"explain": ""
+},
+"tsunami_events_global": {
+"label": "Tsunamis worldwide",
+"explain": ""
+},
+"tsunami_events_rof": {
+"label": "Pacific tsunamis",
+"explain": ""
+},
+"us_aqi_max": {
+"label": "Air quality index, worst hour (forecast model)",
+"explain": "0–50 good, 100+ unhealthy for sensitive groups."
+},
+"us_aqi_max_cams": {
+"label": "Air quality index, worst hour (forecast model)",
+"explain": "0–50 good, 100+ unhealthy for sensitive groups."
+},
+"ver_a1_ew": {
+"label": "Schumann signal strength, Antarctica (Vernadsky), east-west sensor",
+"explain": "How loud the main ~7.8 Hz hum is (relative units, not comparable between stations)."
+},
+"ver_a1_ns": {
+"label": "Schumann signal strength, Antarctica (Vernadsky), north-south sensor",
+"explain": "How loud the main ~7.8 Hz hum is (relative units, not comparable between stations)."
+},
+"ver_a2_ew": {
+"label": "2nd Schumann tone strength, Antarctica (Vernadsky), east-west sensor",
+"explain": "Loudness of the 2nd hum (~14 Hz)."
+},
+"ver_a2_ns": {
+"label": "2nd Schumann tone strength, Antarctica (Vernadsky), north-south sensor",
+"explain": "Loudness of the 2nd hum (~14 Hz)."
+},
+"ver_a3_ew": {
+"label": "3rd Schumann tone strength, Antarctica (Vernadsky), east-west sensor",
+"explain": "Loudness of the 3rd hum (~20 Hz)."
+},
+"ver_a3_ns": {
+"label": "3rd Schumann tone strength, Antarctica (Vernadsky), north-south sensor",
+"explain": "Loudness of the 3rd hum (~20 Hz)."
+},
+"ver_f1_ew": {
+"label": "Main Schumann tone, Antarctica (Vernadsky), east-west sensor (Hz)",
+"explain": "The Earth–sky cavity hums at about 7.8 Hz, driven by lightning worldwide. This is the pitch of that main hum."
+},
+"ver_f1_ns": {
+"label": "Main Schumann tone, Antarctica (Vernadsky), north-south sensor (Hz)",
+"explain": "The Earth–sky cavity hums at about 7.8 Hz, driven by lightning worldwide. This is the pitch of that main hum."
+},
+"volc_erupting_global": {
+"label": "Volcanoes erupting worldwide",
+"explain": ""
+},
+"volc_erupting_rof": {
+"label": "Ring of Fire volcanoes erupting",
+"explain": ""
+},
+"volc_new_eruptions_rof": {
+"label": "New Ring of Fire eruptions",
+"explain": ""
+},
+"wind_avg_mph": {
+"label": "Average wind (mph)",
+"explain": ""
+},
+"ww_sarscov2_log10_lane": {
+"label": "COVID level in Lane County wastewater",
+"explain": ""
+}
+}

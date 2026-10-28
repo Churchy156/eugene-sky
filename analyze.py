@@ -52,3 +52,6 @@ for i in range(len(p)):
     for j in range(3): a.text(j,i,f'{p.iloc[i,j]:.3f}',ha='center',fontsize=8)
 plt.colorbar(im); a.set_title('Same-day Spearman r vs Eugene weather anomalies\n(pressure = positive control)'); plt.tight_layout(); plt.savefig('chart2_correlation_heatmap.png',dpi=110)
 fig,a=plt.subplots(figsize=(9,4)); a.bar(range(8),mc.wet_frac,tick_label=['New','WxC','1stQ','WxG','Full','WnG','LastQ','WnC']); a.set_ylim(.3,.45); a.set_ylabel('Fraction of days with rain'); a.set_title(f'Eugene rain frequency by moon phase (chi² p={chi[1]:.3f})'); plt.tight_layout(); plt.savefig('chart3_rain_by_moon_phase.png',dpi=110)
+
+# Re-draw chart1-3 with plain-English labels (labels.py).
+import runpy as _rp, os as _os; _rp.run_path(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "make_main_charts.py"))
