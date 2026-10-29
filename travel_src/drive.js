@@ -23,6 +23,8 @@ const RUSH=[[6.5,9.5],[15,18.5]];
 // Which states our road-report relay covers, and with what (honest list for the page)
 const FEEDS={OR:'crashes, closures, roadwork and cameras (TripCheck)',CA:'CHP incidents and cameras (no work zones)'};
 'UT IA FL MN MD AZ MO WI NM HI NY KY NJ KS TX ID NC ND WA DE LA IN MS'.split(' ').forEach(s=>FEEDS[s]='planned roadwork only — no crash or closure reports');
+const CAMSRC={WA:'cameras (WSDOT)',IL:'cameras (IDOT Gateway / Travel Midwest, CC BY-SA 2.0)',ND:'cameras (NDDOT travel info, provided as-is with no warranty)',WI:'cameras (511WI)',ID:'cameras (511 Idaho)'};
+const CAMNOTE={IL:'Illinois camera images: IDOT Gateway / Travel Midwest, licensed CC BY-SA 2.0.',ND:'North Dakota camera images come from NDDOT travel info and are provided as-is, with no warranty or liability; check conditions yourself.'};
 const S511={OR:'https://tripcheck.com',WA:'https://wsdot.com/travel/real-time/map',ID:'https://511.idaho.gov',MT:'https://www.511mt.net',ND:'https://travel.dot.nd.gov',
  MN:'https://511mn.org',WI:'https://511wi.gov',IL:'https://www.gettingaroundillinois.com',SD:'https://sd511.org',WY:'https://www.wyoroad.info',IA:'https://511ia.org',
  IN:'https://511in.org',CA:'https://quickmap.dot.ca.gov',NV:'https://www.nvroads.com',UT:'https://udottraffic.utah.gov',CO:'https://www.cotrip.org'};
@@ -103,11 +105,16 @@ async function routeAlerts(S){const seen={};const P=S.filter((s,k)=>s.pass||k%2=
     j.features.forEach(f=>{const a=f.properties;if(a.status!=='Actual'||a.messageType==='Cancel')return;const k=(a.event||'')+'|'+(a.areaDesc||'').slice(0,40);
       if(!seen[k])seen[k]={event:a.event,headline:a.headline||a.event,near:p.name,url:'https://api.weather.gov/alerts/'+a.id}})});
   return Object.values(seen)}
-async function roadReports(states){const out={inc:[],wz:[],cam:[],src:[],cov:[]};
-  await Promise.all(states.map(async s=>{let d=null,lbl='';for(const[u,l]of[[RELAY+'/traffic/'+s+'.json','relay'],[LIVE+s+'.json','backup copy']]){try{d=await cj(u,2);lbl=l;break}catch(e){}}
-    const has=d&&((d.inc||[]).length||(d.wz||[]).length||(d.cam||[]).length);
-    if(has){['inc','wz','cam'].forEach(k=>out[k].push(...(d[k]||[])));out.src.push(`${s} (${lbl}, ${(d.built||'').slice(0,16).replace('T',' ')} UTC)`)}
-    out.cov.push({st:s,ok:!!has,what:has?(FEEDS[s]||'road reports'):(FEEDS[s]?'feed unavailable right now':'no free road-report feed'),url:S511[s]})}));
+async function roadReports(states){const out={inc:[],wz:[],cam:[],src:[],cov:[],camBy:{}};
+  await Promise.all(states.map(async s=>{
+    // Ask the relay and the 10-min backup copy together and merge them: the relay may only have roadwork for a state while the backup copy also has its cameras.
+    const got=(await Promise.all([[RELAY+'/traffic/'+s+'.json','relay'],[LIVE+s+'.json','backup copy']].map(([u,l])=>cj(u,2).then(d=>({d,l}),()=>null)))).filter(z=>z&&z.d);
+    const n=z=>(z.d.inc||[]).length+(z.d.wz||[]).length,rep=got.find(z=>n(z))||null,seen=new Set(),cams=[],used=new Set();
+    if(rep){out.inc.push(...(rep.d.inc||[]));out.wz.push(...(rep.d.wz||[]));used.add(rep)}
+    got.forEach(z=>(z.d.cam||[]).forEach(c=>{if(!seen.has(c[3])){seen.add(c[3]);cams.push([...c,s]);used.add(z)}}));out.cam.push(...cams);
+    used.forEach(z=>out.src.push(`${s} (${z.l}, ${(z.d.built||'').slice(0,16).replace('T',' ')} UTC)`));
+    const has=!!(rep||cams.length),what=has?[rep?(FEEDS[s]||'road reports'):'',cams.length&&!/camera/.test(rep?FEEDS[s]||'':'')?(CAMSRC[s]||'cameras'):''].filter(Boolean).join(' + '):(FEEDS[s]?'feed unavailable right now':'no free road-report feed');
+    out.cov.push({st:s,ok:has,what,url:S511[s],nCam:cams.length})}));
   out.cov.sort((a,b)=>states.indexOf(a.st)-states.indexOf(b.st));return out}
 // Driving schedule. One day: leave + map time. Longer than ~10 h: split into even days of ≤ ~9 h, overnight near a town,
 // and start each next day at the same local clock time as the first morning (in the stop's own time zone).
@@ -150,7 +157,11 @@ async function planDrive(l){
   rr.wz.forEach(x=>{if(x.length>5&&((x[4]&&x[4]>lastDay)||(x[5]&&x[5]<day)))return;const[d,i]=near(R,[x[0],x[1]],.3);if(d>.3)return;const k='w'+x[2]+'|'+String(x[3]).slice(0,60);if(issues.some(z=>z.key===k))return;
     const add=/no (traffic )?impact|no delay/i.test(x[3])?0:3;wzMin+=add;issues.push({key:k,kind:'work zone',road:x[2],text:x[3],mi:R.cm[i],lat:x[0],lon:x[1],add})});
   incMin=Math.min(incMin,60);wzMin=Math.min(wzMin,D.length>1?30:15);
-  const cams=rr.cam.map(x=>{const[d,i]=near(R,[x[0],x[1]],.4);return d<=.4?{name:x[2],url:x[3],mi:R.cm[i],lat:x[0],lon:x[1]}:null}).filter(Boolean).sort((a,b)=>a.mi-b.mi).slice(0,40);
+  // Cameras: within ~1.5 mi of the route, then only the nearest few per 50-mile stretch so long drives get an even spread instead of one city's worth.
+  const SEG=50,PER=R.miles<200?3:2,bins={};
+  rr.cam.forEach(x=>{const[d,i]=near(R,[x[0],x[1]],1.5);if(d>1.5)return;const b=Math.floor(R.cm[i]/SEG);(bins[b]=bins[b]||[]).push({name:x[2],url:x[3],mi:R.cm[i],lat:x[0],lon:x[1],st:x[4],d})});
+  const cams=Object.values(bins).flatMap(a=>a.sort((p,q)=>p.d-q.d).slice(0,PER)).sort((a,b)=>a.mi-b.mi);
+  rr.cov.forEach(c=>c.onRoute=cams.filter(z=>z.st===c.st).length);
   let nwsPct=0,nwsMin=0;alerts.forEach(a=>{const e=(a.event||'').toLowerCase();if(/winter storm warning|ice storm|blizzard/.test(e))nwsPct=Math.max(nwsPct,30);else if(/winter weather advisory|winter storm watch|freezing (rain|drizzle|fog)/.test(e))nwsPct=Math.max(nwsPct,15);else if(/high wind|dense fog|flood|dust|smoke/.test(e))nwsMin=10});
   const tzNear=i=>{let best=S[0],bd=1e9;S.forEach(s=>{const x=Math.abs(s.i-i);if(x<bd){bd=x;best=s}});return best.tz||TZ};
   const evaluate=at=>{const rs=[],wx=[];let worst=0,fog=false,gust=false,icy=false;const pts=[];
@@ -201,7 +212,7 @@ function driveHTML(l,p,i){
   const dayHTML=multi?`<h3>🛏️ Suggested overnight stops <span class="small">(${p.days.length} days, about ${fmtMin(p.driveMin/p.days.length)} of driving each)</span></h3><ol style="padding-left:20px;font-size:13px;margin:4px 0">${p.days.map((d,k)=>`<li><b>${ptD(d.start,d.tzStart)}</b>: leave ${esc(d.from)} ${tT(d.start,d.tzStart)} → ${k===p.days.length-1?'arrive':'stay overnight near <b>'+esc(d.to)+'</b>, about'} ${tT(d.end,d.tzEnd)} · ${Math.round((k===p.days.length-1?p.miles:d.stopMi)-(k?p.days[k-1].stopMi:0))} mi, ${fmtMin(d.driveMin)} driving</li>`).join('')}</ol>
      <div class="small">Over about 10 hours of driving is a lot for one day, so the drive is split into even days. Each morning starts at the same local clock time as the first. Any town near the stop works; book a room ahead in winter.${p.oneDay?` If you'd rather push through in one long day, you'd get in about <b>${tDT(p.oneDay,B)}</b> (${fmtMin(p.driveMin+p.buffer)} with stops) — only with two drivers or plenty of rest.`:''}</div>`
     :(p.driveMin>480?'<div class="small warm">Long day: plan a real break every 2 hours or so.</div>':'');
-  const cov=p.cov.length?`<h3>Which states have road reports</h3><ul style="padding-left:18px;font-size:13px;margin:4px 0">${p.cov.map(c=>`<li>${c.ok?'✅':'⚠️'} <b>${c.st}</b>: ${esc(c.what)}${c.url?` — <a href="${c.url}" target="_blank" style="color:#74c0fc">${c.st} 511</a>`:''}</li>`).join('')}</ul>${p.cov.some(c=>!c.ok||/roadwork only/.test(c.what))?'<div class="small">Where it says roadwork only or no feed, crashes and closures there will NOT show here. Check that state\'s 511 link before you drive that part.</div>':''}`:'';
+  const cov=p.cov.length?`<h3>Which states have road reports</h3><ul style="padding-left:18px;font-size:13px;margin:4px 0">${p.cov.map(c=>`<li>${c.ok?'✅':'⚠️'} <b>${c.st}</b>: ${esc(c.what)}${c.nCam?` · ${c.onRoute||0} camera${c.onRoute===1?'':'s'} shown on this route`:''}${c.url?` — <a href="${c.url}" target="_blank" style="color:#74c0fc">${c.st} 511</a>`:''}</li>`).join('')}</ul>${p.cov.some(c=>!c.ok||/roadwork only/.test(c.what))?'<div class="small">Where it says roadwork only or no feed, crashes and closures there will NOT show here. Check that state\'s 511 link before you drive that part.</div>':''}`:'';
   const why=p.reasons.map(([m,t])=>`<li>${m} min — ${esc(t)}</li>`).join('');
   const past=p.leave<Date.now()?'<div class="alert">⏰ That leave time has already passed.</div>':'';
   const rr=p.issues.filter(z=>z.kind!=='notice').sort((a,b)=>a.mi-b.mi);
@@ -223,7 +234,7 @@ function driveHTML(l,p,i){
    ${p.alerts.length?'<h3>Weather Service alerts on the route</h3>'+p.alerts.map(a=>`<div class="alert">⚠️ <b>${esc(a.event)}</b> near ${esc(a.near)} — ${esc(a.headline)}</div>`).join(''):'<div class="small ok" style="margin-top:6px">✓ No Weather Service alerts on the route right now.</div>'}
    <h3>Road reports on the route <span class="small">right now</span></h3>${rr.length?rr.slice(0,15).map(z=>`<div class="${['closure','incident'].includes(z.kind)?'alert':'small'}" style="margin:3px 0">${KIND_IC[z.kind]||''} <b>${esc(z.road||'')}</b> mile ${Math.round(z.mi)}: ${esc(z.text)}</div>`).join(''):'<div class="small ok">✓ No crashes, closures or roadwork reported on the route right now.</div>'}
    ${cov}
-   ${p.cams.length?`<details><summary class="small" style="cursor:pointer">📷 ${p.cams.length} road cameras on the route</summary><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">${p.cams.slice(0,24).map(c=>`<a href="${esc(c.url)}" target="_blank" class="small" style="color:#9fb3c8"><img loading="lazy" src="${esc(c.url)}" style="width:100%;border-radius:6px" alt=""><br>${esc(c.name)} · mile ${Math.round(c.mi)}</a>`).join('')}</div></details>`:''}
+   ${p.cams.length?`<details><summary class="small" style="cursor:pointer">📷 ${p.cams.length} road cameras on the route</summary><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">${p.cams.slice(0,60).map(c=>`<a href="${esc(c.url)}" target="_blank" class="small" style="color:#9fb3c8"><img loading="lazy" src="${esc(c.url)}" style="width:100%;border-radius:6px" alt=""><br>${esc(c.name)}${c.st?' ('+c.st+')':''} · mile ${Math.round(c.mi)}</a>`).join('')}</div><div class="small">Up to ${p.miles<200?3:2} cameras closest to the road in each 50-mile stretch. Camera pictures only: no keyless source gives live traffic speeds, so none are shown.${[...new Set(p.cams.map(c=>c.st))].filter(st=>CAMNOTE[st]).map(st=>' '+esc(CAMNOTE[st])).join('')}</div></details>`:''}
    <div class="panel noprint" style="background:#1d2b3a"><h3 style="margin-top:0">📡 Get leave-time and traffic updates by email</h3>
     <div class="small">Trips you type here only live in this browser, so Grok Bot can't see them. To have it watch this drive, copy the line below and send it to Grok Bot (or add it to <code>data/trips.json</code> in the repo).
     You'll get a heads-up at 7 PM the night before an early start, a "Leave by" email about 3 hours before you should leave, another if the leave time moves 15+ minutes, and an email if a crash, closure or road-weather alert shows up on the route while you're on the way.</div>
