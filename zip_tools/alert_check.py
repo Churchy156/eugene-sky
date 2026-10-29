@@ -14,11 +14,12 @@ First run (no state file) seeds silently.
 Reuses: eq_map.py (USGS geojson, distance, map styling, md->HTML), power_feeds.py (utility feed URLs, HTTP,
 distance, nearest-town lookup), ringfire_core.py (Ring of Fire mask, NOAA PTWC/NTWC tsunami feed parser),
 and the NWS alert query from daily_report.py (Lane County zone ORC039 / SAME 041039 + the Eugene point)."""
-import os, sys, json, math, time, hashlib, datetime as dt, shutil, traceback
+import os, sys, re, json, math, time, hashlib, datetime as dt, shutil, traceback
 from concurrent.futures import ThreadPoolExecutor
 from zoneinfo import ZoneInfo
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import eq_map, power_feeds as pf, ringfire_core as rf
+import drive_core as dc
 
 # ======================= THRESHOLDS / SETTINGS =======================
 EUG = (44.052, -123.087)                 # Eugene (lat, lon)
@@ -38,6 +39,12 @@ PWR_NEAR_MI = 45                         # Pacific Power outages within 45 mi of
 NWS_SAME = '041039'                      # Lane County FIPS (NWS SAME code)
 NWS_ZONES = 'ORZ118,ORC039'              # as used in daily_report.py alerts()
 EXPIRE_DAYS = 7
+# Watched drives (data/trips.json, added from the travel page). Times there are Pacific wall-clock times.
+TRIPS = os.environ.get('ALERT_TRIPS', os.path.join(HERE, '..', 'data', 'trips.json'))
+DRIVE_LEAVE_H = 3                        # "Leave by" email this many hours before the suggested leave time
+DRIVE_PREVIEW_HOUR = 19                  # ...plus a 7 PM heads-up the evening before when you'd leave before 11 AM
+DRIVE_CHANGE_MIN = 15                    # re-send if the suggested leave time later moves by this much
+DRIVE_MAX = 3                            # at most this many trips checked per run
 # Paths default to the box; GitHub Actions (.github/workflows/alerts.yml) overrides them with env vars.
 STATE = os.environ.get('ALERT_STATE', '/workspace/eugene-env/data/alert_state.json')
 LOG = os.environ.get('ALERT_LOG', '/workspace/eugene-env/data/alert_check.log')
@@ -155,8 +162,29 @@ def f_power():
 UTIL_NAME = {'eweb': 'EWEB', 'epud': 'Emerald PUD', 'blachly': 'Blachly-Lane', 'pacific': 'Pacific Power'}
 UTIL_LINK = {'eweb': pf.LINKS['eweb'], 'epud': pf.LINKS['epud'], 'blachly': pf.LINKS['blachly'], 'pacific': pf.LINKS['pacific']}
 
+def load_trips():
+    if not os.path.exists(TRIPS): return []
+    j = json.load(open(TRIPS)); out = []
+    for t in (j.get('trips') if isinstance(j, dict) else j) or []:
+        try:
+            when = t.get('arrive_by') or t.get('depart')
+            tgt = dt.datetime.fromisoformat(when).replace(tzinfo=PT)
+            t['id'] = t.get('id') or hashlib.sha1(f"{t.get('to')}|{when}".encode()).hexdigest()[:10]
+            # watch from 30 h before until the arrival (or 8 h after a set departure)
+            lo = tgt - dt.timedelta(hours=30 if t.get('arrive_by') else 27); hi = tgt + dt.timedelta(hours=0 if t.get('arrive_by') else 8)
+            if lo <= NOW <= hi: out.append(t)
+        except Exception as e: log(f'trip skipped ({e}): {str(t)[:120]}')
+    return out[:DRIVE_MAX]
+
+def f_trips():
+    res = []
+    for t in load_trips():
+        try: res.append((t, dc.plan(t, NOW)))
+        except Exception as e: log(f"feed failed: drive {t.get('id')}: {type(e).__name__}: {str(e)[:150]}")
+    return res
+
 def fetch_all():
-    jobs = {'quakes': f_quakes, 'tsunami': f_tsunami, 'nws': f_nws, 'power': f_power}
+    jobs = {'quakes': f_quakes, 'tsunami': f_tsunami, 'nws': f_nws, 'power': f_power, 'trips': f_trips}
     out = {}
     with ThreadPoolExecutor(4) as ex:
         fut = {k: ex.submit(fn) for k, fn in jobs.items()}
@@ -173,7 +201,7 @@ def load_state():
         log(f'state unreadable ({e}); backing up and re-seeding'); shutil.copy2(STATE, STATE + f'.bad.{int(time.time())}'); return None
 def save_state(S):
     cut = NOW - dt.timedelta(days=EXPIRE_DAYS)
-    for sec in ('quake', 'tsunami', 'nws', 'outage'):
+    for sec in ('quake', 'tsunami', 'nws', 'outage', 'drive'):
         S[sec] = {k: v for k, v in S.get(sec, {}).items() if (parse(v.get('last_seen')) or NOW) >= cut}
     S['updated'] = iso(NOW)
     tmp = STATE + '.tmp'; os.makedirs(os.path.dirname(STATE), exist_ok=True)
@@ -257,6 +285,41 @@ def detect(D, S, seed=False):
         elif us['high'] and tot < PWR_UTIL_CLEAR:
             if us.get('alerted') and not seed: new.append(dict(kind='util_clear', util=u, cust=tot))
             us['high'] = False; us['alerted'] = False
+    if not all_seed: new += detect_drives(D.get('trips') or [], S, now)
+    return new
+
+def drive_alertable(p, S):
+    """Issues worth an email on their own: closures, real incidents, NWS alerts not already sent for Lane County."""
+    out = [i for i in p['issues'] if i['kind'] in ('closure', 'incident')]
+    out += [dict(a, kind='weather alert') for a in p['alerts'] if a['id'] not in S.get('nws', {})
+            and re.search(r'winter|\bice\b|blizzard|snow|freezing (rain|drizzle|fog)|wind|fog|flood|dust|smoke|fire|avalanche', a['event'] or '', re.I)]
+    return out
+
+def detect_drives(plans, S, now):
+    new = []; D = S.setdefault('drive', {})
+    for t, p in plans:
+        st = D.setdefault(t['id'], dict(sent=[], leave=None, issues=[], to=t.get('to')))
+        st['last_seen'] = now
+        leave = p['leave']; lt = leave.astimezone(PT)
+        t_leave = leave - dt.timedelta(hours=DRIVE_LEAVE_H)
+        t_prev = (lt - dt.timedelta(days=1)).replace(hour=DRIVE_PREVIEW_HOUR, minute=0, second=0, microsecond=0) if lt.hour < 11 else None
+        end = (p['arrive_by'] or p['est_arrive'])
+        stage = None
+        if 'leave' not in st['sent'] and t_leave <= NOW < leave + dt.timedelta(minutes=30): stage = 'leave'
+        elif t_prev and 'preview' not in st['sent'] and 'leave' not in st['sent'] and t_prev <= NOW < t_leave: stage = 'preview'
+        elif ('leave' in st['sent'] and st.get('leave') and NOW < leave and st.get('changes', 0) < 2
+              and abs((leave - parse(st['leave'])).total_seconds()) >= DRIVE_CHANGE_MIN * 60): stage = 'change'
+        cur = drive_alertable(p, S); keys = [i['key'] for i in cur]
+        if stage:
+            new.append(dict(kind='drive', stage=stage, trip=t, plan=p, was=parse(st['leave']) if stage == 'change' else None))
+            st['sent'] = sorted(set(st['sent']) | {stage}); st['leave'] = iso(leave)
+            if stage == 'change': st['changes'] = st.get('changes', 0) + 1
+            st['issues'] = sorted(set(st['issues']) | set(keys))
+        elif t_leave <= NOW < end:
+            fresh = [i for i in cur if i['key'] not in st['issues']]
+            if fresh:
+                new.append(dict(kind='drive_issue', trip=t, plan=p, fresh=fresh))
+                st['issues'] = sorted(set(st['issues']) | {i['key'] for i in fresh})
     return new
 
 # ----------------------------- writing -----------------------------
@@ -273,7 +336,48 @@ def headline(i):
     if k == 'util_high': return f"{i['cust']:,} {UTIL_NAME[i['util']]} customers out"
     if k == 'restored': return f"{UTIL_NAME[i['util']]} outage restored"
     if k == 'util_clear': return f"{UTIL_NAME[i['util']]} mostly back on"
-PRIO = {'tsunami': 0, 'quake': 1, 'nws': 2, 'util_high': 3, 'outage': 4, 'util_clear': 5, 'restored': 6}
+    if k == 'drive':
+        p = i['plan']; to = p['to'].split(',')[0]; lv = dc.hhmm(p['leave'].astimezone(PT))
+        if i['stage'] == 'change': return f"Drive to {to}: leave time now {lv} PT (was {dc.hhmm(i['was'].astimezone(PT))})"
+        if p['mode'] == 'depart': return f"Drive to {to}: leaving {lv} PT, arrive about {dc.hhmm(p['est_arrive'])}"
+        return f"Drive to {to}: leave by {lv} PT" + (' tomorrow' if i['stage'] == 'preview' else '')
+    if k == 'drive_issue':
+        f = i['fresh']; c = [x for x in f if x['kind'] == 'closure']
+        return f"Drive to {i['plan']['to'].split(',')[0]}: " + ('possible road closure on your route' if c else f"new {f[0]['kind']} on your route")
+PRIO = {'tsunami': 0, 'quake': 1, 'nws': 2, 'drive_issue': 2.4, 'drive': 2.5, 'util_high': 3, 'outage': 4, 'util_clear': 5, 'restored': 6}
+
+def drive_lines(i):
+    p = i['plan']; lt = p['leave'].astimezone(PT); L = []
+    day = f"{lt:%a %b} {lt.day}"
+    L.append(f"## Your drive: {p['frm']} to {p['to']} ({day})")
+    if i['kind'] == 'drive_issue':
+        L.append('- New on or near your route since the last update:')
+        for x in i['fresh'][:6]:
+            if x['kind'] == 'weather alert': L.append(f"  - **{x['event']}** near {x['near']}: {x['headline']}")
+            else: L.append(f"  - **{x['kind'].capitalize()}** on {x['road'] or 'the route'} ({x['mi']:.0f} mi into the drive): {x['text'][:220]}")
+    if p['mode'] == 'arrive':
+        L.append(f"- **Leave by {dc.hhmm(lt)} PT** to arrive by {dc.hhmm(p['arrive_by'])} PT." + (f" (Last update said {dc.hhmm(i['was'].astimezone(PT))}.)" if i.get('was') else ''))
+    else:
+        L.append(f"- Leaving **{dc.hhmm(lt)} PT**, you should arrive about **{dc.hhmm(p['est_arrive'])} PT**.")
+    L.append(f"- {p['miles']:.0f} miles. Normal drive time with no traffic: {dc.fmt_min(p['drive_min'])} (map estimate). Extra time built in: {dc.fmt_min(p['buffer'])}, because:")
+    for m, why in p['reasons']: L.append(f"  - {m} min: {why}")
+    rr = [x for x in p['issues'] if x['kind'] in ('closure', 'incident', 'roadwork')]
+    if rr:
+        L.append('- Road reports on the route:')
+        for x in sorted(rr, key=lambda x: x['mi'])[:6]: L.append(f"  - {x['road'] or 'Route'} at {x['mi']:.0f} mi: {x['text'][:200]}")
+    else: L.append('- No crashes, closures or roadwork reported on the route right now.')
+    pts = [x for x in p['points'] if x['w']]
+    if pts:
+        bad = [x for x in pts if x['kind'] or x['pass_']]
+        L.append('- Weather along the way, at the time you would pass:')
+        for x in (bad or [pts[len(pts) // 2]])[:6]:
+            w = x['w']; L.append(f"  - {x['name']} about {dc.hhmm(x['t'])}: {w['temp']:.0f}°F" + (f", {x['kind']}" if x['kind'] else ', dry') +
+                                 (f", gusts {w['gust']:.0f} mph" if (w['gust'] or 0) >= 30 else ''))
+    else: L.append('- The trip is past the 16-day forecast, so there is no weather for the route yet.')
+    if p['alerts']: L.append('- Weather Service alerts on the route: ' + '; '.join(f"{a['event']} (near {a['near']})" for a in p['alerts'][:5]))
+    L.append("- Live traffic speeds are not included (no free source has them). Check TripCheck cameras before you go: https://tripcheck.com")
+    L.append('- Trip page: https://churchy156.github.io/eugene-sky/travel/'); L.append('')
+    return L
 
 def body_lines(items):
     L = []; by = lambda *ks: [i for i in items if i['kind'] in ks]
@@ -320,6 +424,11 @@ def body_lines(items):
             elif i['kind'] == 'restored': L.append(f"- Restored: the {n} outage" + (f" {i['where']}" if i.get('where') else '') + f" (peak {i.get('peak') or 0:,} customers) is off the outage map.")
             elif i['kind'] == 'util_clear': L.append(f"- {n} is mostly back: {i['cust']:,} customers still out (under {PWR_UTIL_CLEAR}).")
         L.append('')
+    for i in by('drive_issue', 'drive'): L += drive_lines(i)
+    if by('drive_issue', 'drive'):
+        L.append(f"_Checked {ptime(NOW)}. Drive sources: OSRM route, Open-Meteo forecast, National Weather Service, ODOT TripCheck and other state road reports. "
+                 'Drive updates come a few hours before you leave and when something new shows up on the route._')
+        if all(i['kind'] in ('drive', 'drive_issue') for i in items): return L
     L.append(f"_Checked {ptime(NOW)}. Sources: USGS, NOAA tsunami.gov (PTWC/NTWC), National Weather Service, EWEB, Emerald PUD, Blachly-Lane, Pacific Power outage maps. "
              'You get these only when something new crosses a threshold; the full picture is in the morning report._')
     return L
@@ -379,7 +488,7 @@ def render_map(qs, path):
 def write_alert(items, suffix=''):
     items = sorted(items, key=lambda i: (PRIO[i['kind']], -(i.get('mag') or i.get('cust') or 0)))
     stamp = dt.datetime.now(PT).strftime('%Y%m%d_%H%M') + suffix
-    subj = 'Eugene alert: ' + headline(items[0]) + (f" + {len(items) - 1} more" if len(items) > 1 else '')
+    subj = ('Trip update: ' if items[0]['kind'].startswith('drive') else 'Eugene alert: ') + headline(items[0]) + (f" + {len(items) - 1} more" if len(items) > 1 else '')
     if all(i['kind'] in ('restored', 'util_clear') for i in items): subj = 'Eugene update: ' + headline(items[0]) + (f" + {len(items) - 1} more" if len(items) > 1 else '')
     md = [subj, ''] + body_lines(items)
     os.makedirs(REPORTS, exist_ok=True)
@@ -414,6 +523,10 @@ def fake_items():
 
 def main():
     a = sys.argv[1:]
+    if '--test-drive' in a:   # real route/weather for a sample Eugene -> Bend trip tomorrow 10 AM; no state, nothing sent
+        t = dict(id='test', to='Bend, OR', to_lat=44.0582, to_lon=-121.3153, arrive_by=(NOW.astimezone(PT) + dt.timedelta(days=1)).strftime('%Y-%m-%dT10:00'))
+        p = dc.plan(t, NOW); mdp, htp, att = write_alert([dict(kind='drive', stage='leave', trip=t, plan=p, was=None)], suffix='_testdrive')
+        print(f'ALERT {mdp} {htp} {att}'); return 0
     if '--test' in a:
         mdp, htp, att = write_alert(fake_items(), suffix='_test'); print(f'ALERT {mdp} {htp} {att}'); return 0
     t0 = time.time(); D = fetch_all(); S = load_state()
@@ -422,6 +535,7 @@ def main():
     if seed: S = dict(created=iso(NOW))
     new = detect(D, S, seed=seed)
     ok = {k: ('fail' if v is None else (','.join(f"{u}:{'fail' if x is None else len(x)}" for u, x in v.items()) if k == 'power' else len(v))) for k, v in D.items()}
+    if D.get('trips'): ok['trips'] = ','.join(f"{t['id']}:leave {p['leave']:%m-%d %H:%M}" for t, p in D['trips'])
     log(f"{'SEED' if seed else 'run'} {time.time() - t0:.1f}s feeds={ok} new={len(new)}" + (f" [{'; '.join(headline(i) for i in new)}]" if new else ''))
     if DIRTY_FILE:
         open(DIRTY_FILE, 'w').write('1' if (new or stale or signature(S) != sig0) else '0')

@@ -71,6 +71,7 @@ function dayInfo(l,date,by){
 function stops(){ // destinations with date ranges
   const o=[];const L=trip.legs;
   L.filter(l=>l.type==='hotel'&&l.loc&&l.in&&l.out).forEach(l=>o.push({name:l.name?`${l.name} — ${l.loc.name}`:l.loc.name,loc:l.loc,a:l.in,b:addD(l.out,-1)<l.in?l.in:l.out,nights:Math.max(1,(new Date(l.out)-new Date(l.in))/864e5)}));
+  if(!o.length&&!L.some(l=>l.type==='flight'&&l.toAp&&l.dep))L.filter(l=>l.type==='drive'&&l.toLoc&&l.when).forEach(l=>{const d=l.when.slice(0,10);o.push({name:l.toLoc.name,loc:l.toLoc,a:d,b:d,nights:1})});
   if(!o.length){const F=L.filter(l=>l.type==='flight'&&l.toAp&&l.dep).sort((a,b)=>a.dep<b.dep?-1:1);
     F.forEach((f,i)=>{if(trip.home&&dist(f.toAp,trip.home)<80)return;const a=(f.arr||f.dep).slice(0,10),nx=F[i+1],b=nx?nx.dep.slice(0,10):a;o.push({name:f.toAp.name,loc:f.toAp,a,b,nights:Math.max(1,(new Date(b)-new Date(a))/864e5)})})}
   return o.sort((x,y)=>x.a<y.a?-1:1);
@@ -78,6 +79,7 @@ function stops(){ // destinations with date ranges
 function dist(a,b){const R=3959,t=Math.PI/180,dl=(b.lat-a.lat)*t,dn=(b.lon-a.lon)*t,h=Math.sin(dl/2)**2+Math.cos(a.lat*t)*Math.cos(b.lat*t)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
 // ---------- editor ----------
 function legHTML(l,i){
+  if(l.type==='drive')return driveLegHTML(l,i);
   if(l.type==='flight')return`<div class="leg" data-i="${i}"><b>✈️ Flight</b> <button class="x" data-del="${i}" style="float:right;padding:2px 8px">✕</button><div class="row">
    <label>Flight # (optional)<input data-k="fl" value="${esc(l.fl)}" placeholder="AS 2105" size="9"></label>
    <label>From<input data-k="from" list="aplist" value="${esc(l.from)}" placeholder="EUG" size="12"></label>
@@ -95,8 +97,9 @@ $('#legs').addEventListener('input',e=>{const k=e.target.dataset.k,i=e.target.cl
 $('#legs').addEventListener('click',e=>{const d=e.target.dataset.del;if(d!=null){trip.legs.splice(+d,1);save();drawLegs()}});
 $('#addF').onclick=()=>{const p=trip.legs.filter(l=>l.type==='flight').pop();trip.legs.push({type:'flight',from:p?.to||'',to:p?.from||''});drawLegs();save()};
 $('#addH').onclick=()=>{const p=trip.legs.filter(l=>l.type==='flight').pop();trip.legs.push({type:'hotel',where:p&&APX[(p.to||'').slice(0,3).toUpperCase()]?.city||'',in:p?.arr?.slice(0,10)||p?.dep?.slice(0,10)||''});drawLegs();save()};
+$('#addD').onclick=()=>{const t=new Date(Date.now()+864e5).toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'});trip.legs.push({type:'drive',from:trip.home?.name||'Eugene, OR',to:'',mode:'arrive',when:t+'T10:00'});drawLegs();save()};
 $('#clear').onclick=()=>{if(confirm('Clear this trip?')){trip={home:trip.home,legs:[]};save();drawLegs();$('#out').innerHTML='';st('')}};
-function packTrip(){return{h:trip.home&&{n:trip.home.name,a:r2(trip.home.lat),o:r2(trip.home.lon)},l:trip.legs.map(({loc,fromAp,toAp,...r})=>r)}}
+function packTrip(){return{h:trip.home&&{n:trip.home.name,a:r2(trip.home.lat),o:r2(trip.home.lon)},l:trip.legs.map(({loc,fromAp,toAp,fromLoc,toLoc,plan,...r})=>r)}}
 function unpack(p){return{home:p.h&&{name:p.h.n,lat:p.h.a,lon:p.h.o},legs:p.l||[]}}
 function save(){localStorage.setItem('travel_trip',JSON.stringify(packTrip()));history.replaceState(null,'','#t='+btoa(unescape(encodeURIComponent(JSON.stringify(packTrip())))))}
 $('#share').onclick=async()=>{save();try{await navigator.clipboard.writeText(location.href);st('🔗 Share link copied — anyone opening it sees this trip.')}catch(e){prompt('Copy this link:',location.href)}};
@@ -109,9 +112,11 @@ $('#samples').onchange=e=>{const v=e.target.value;e.target.value='';if(!v)return
   if(v==='hnl'){const d=addD(t,7);trip={home:{name:'Eugene, OR 97401',lat:44.05,lon:-123.09},legs:[
     {type:'flight',fl:'AS 2105',from:'EUG',to:'HNL',dep:d+'T08:00',arr:d+'T13:30'},{type:'hotel',name:'Waikiki Beach hotel',where:'Honolulu, HI',in:d,out:addD(d,5)},
     {type:'flight',fl:'AS 2106',from:'HNL',to:'EUG',dep:addD(d,5)+'T14:30',arr:addD(d,5)+'T22:30'}]}}
-  else{const y=new Date().getFullYear(),d=(t>y+'-12-18'?y+1:y)+'-12-18';trip={home:{name:'Eugene, OR 97401',lat:44.05,lon:-123.09},legs:[
+  else if(v==='den'){const y=new Date().getFullYear(),d=(t>y+'-12-18'?y+1:y)+'-12-18';trip={home:{name:'Eugene, OR 97401',lat:44.05,lon:-123.09},legs:[
     {type:'flight',fl:'UA 5432',from:'EUG',to:'DEN',dep:d+'T06:10',arr:d+'T09:40'},{type:'hotel',name:'',where:'1600 California St, Denver, CO',in:d,out:addD(d,4)},
     {type:'flight',fl:'UA 5433',from:'DEN',to:'EUG',dep:addD(d,4)+'T18:00',arr:addD(d,4)+'T19:50'}]}}
+  if(v==='bend'||v==='pdx'){const d=new Date(Date.now()+864e5).toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'});trip={home:{name:'Eugene, OR 97401',lat:44.05,lon:-123.09},legs:[
+    {type:'drive',from:'Eugene, OR',to:v==='bend'?'Bend, OR':'Portland, OR',mode:'arrive',when:d+'T10:00'}]}}
   save();drawLegs();run()};
 // ---------- run ----------
 $('#run').onclick=()=>run();
@@ -121,21 +126,22 @@ async function run(){
     if(!trip.home){if($('#homeQ').value)trip.home=await geocode($('#homeQ').value);else throw new Error('Set your home location first.')}
     st('📍 Looking up places…');
     for(const l of trip.legs){if(l.type==='flight'){l.fromAp=apFind(l.from||'');l.toAp=apFind(l.to||'');if(!l.fromAp&&l.from)l.fromAp=await geocode(l.from);if(!l.toAp&&l.to)l.toAp=await geocode(l.to)}
+      else if(l.type==='drive'){l.fromLoc=await geocode(l.from||'Eugene, OR');l.toLoc=l.to?await geocode(l.to):null}
       else if(l.where){l.loc=await geocode(l.where)}}
-    const S=stops();if(!S.length)throw new Error('Add at least one hotel stay or flight with a date.');
+    const S=stops();if(!S.length)throw new Error('Add at least one hotel stay, flight, or drive with a date.');
     const locs=[trip.home,...S.map(s=>s.loc),...trip.legs.filter(l=>l.type==='flight').flatMap(f=>[f.fromAp,f.toAp]).filter(Boolean)];
     st('🌤️ Loading forecasts (one batched request)…');await loadForecasts(locs);
     const hist={};for(const l of [trip.home,...S.map(s=>s.loc)]){st('📚 Loading 20 years of history for '+esc(l.name)+'…');hist[r2(l.lat)+','+r2(l.lon)]=await loadHist(l)}
     const H=l=>hist[r2(l.lat)+','+r2(l.lon)];
     let html='';
     S.forEach((s,si)=>{s.days=days(s.a,s.b).map(d=>({d,...dayInfo(s.loc,d,H(s.loc))}));s.home=days(s.a,s.b).map(d=>({d,...dayInfo(trip.home,d,H(trip.home))}))});
-    html+=flightsHTML();
+    html+=drivesHTML();html+=flightsHTML();
     S.forEach((s,si)=>html+=stopHTML(s,si));
     html+=packHTML(S);
     $('#out').innerHTML=html;
     S.forEach((s,si)=>chart(s,si,H(s.loc)));
     st('✅ Updated '+new Date().toLocaleTimeString()+'. <span class="small">Cached locally — reloading is free.</span>');
-    extras(S);
+    drivePanels().then(()=>st('✅ Updated '+new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',minute:'2-digit'})+' PT.'));extras(S);
   }catch(e){console.error(e);st('⚠️ '+esc(e.message))}
 }
 const f0=x=>x==null||isNaN(x)?'–':Math.round(x);
@@ -245,5 +251,5 @@ async function extras(S){
   $('#aplist').innerHTML=AP.filter(a=>a[3]==='US'||/International/.test(a[1])).map(a=>`<option value="${a[0]} ${esc(a[2])}">${esc(a[1])}</option>`).join('');
   const h=location.hash.match(/#t=(.+)/);let p=null;try{p=h?JSON.parse(decodeURIComponent(escape(atob(h[1])))):JSON.parse(localStorage.getItem('travel_trip')||'null')}catch(e){}
   if(p)trip=unpack(p);drawLegs();if(trip.home)$('#homeQ').value=trip.home.name;
-  if(trip.legs.length&&trip.home)run();else st('Set your home, then add flights and hotel stays — or pick a sample trip.');
+  if(trip.legs.length&&trip.home)run();else st('Set your home, then add flights, hotel stays or a drive — or pick a sample trip.');
 })();
