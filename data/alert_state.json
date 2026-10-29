@@ -1,17 +1,18 @@
 {
  "created": "2026-10-28T15:25:40+00:00",
+ "drive": {},
  "nws": {
   "urn:oid:2.49.0.1.840.0.092e4523b733aa21cc0d9bd93379325290940da3.001.1": {
    "event": "Frost Advisory",
    "first_seen": "2026-10-29T18:41:27+00:00",
-   "last_seen": "2026-10-29T18:41:27+00:00",
+   "last_seen": "2026-10-29T23:00:34+00:00",
    "refs": [],
    "seeded": false
   },
   "urn:oid:2.49.0.1.840.0.092e4523b733aa21cc0d9bd93379325290940da3.002.1": {
    "event": "Freeze Watch",
    "first_seen": "2026-10-29T18:41:27+00:00",
-   "last_seen": "2026-10-29T18:41:27+00:00",
+   "last_seen": "2026-10-29T23:00:34+00:00",
    "refs": [],
    "seeded": false
   },
@@ -35,31 +36,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-10-29T18:41:27+00:00",
+ "updated": "2026-10-29T23:00:34+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-10-29T18:41:27+00:00"
+   "last_seen": "2026-10-29T23:00:34+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 2,
+   "cust": 1,
    "high": false,
-   "last_seen": "2026-10-29T18:41:27+00:00"
+   "last_seen": "2026-10-29T23:00:34+00:00"
   },
   "eweb": {
    "alerted": false,
-   "cust": 6,
+   "cust": 1,
    "high": false,
-   "last_seen": "2026-10-29T18:41:27+00:00"
+   "last_seen": "2026-10-29T23:00:34+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 7,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-10-29T18:41:27+00:00"
+   "last_seen": "2026-10-29T23:00:34+00:00"
   }
  }
 }
