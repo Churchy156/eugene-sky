@@ -21,31 +21,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-10-28T15:25:40+00:00",
+ "updated": "2026-10-29T05:59:34+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-10-28T15:25:40+00:00"
+   "last_seen": "2026-10-29T05:59:34+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 1,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-10-28T15:25:40+00:00"
+   "last_seen": "2026-10-29T05:59:34+00:00"
   },
   "eweb": {
    "alerted": false,
-   "cust": 8,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-10-28T15:25:40+00:00"
+   "last_seen": "2026-10-29T05:59:34+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 1,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-10-28T15:25:40+00:00"
+   "last_seen": "2026-10-29T05:59:34+00:00"
   }
  }
 }
