@@ -117,6 +117,8 @@ $('#samples').onchange=e=>{const v=e.target.value;e.target.value='';if(!v)return
     {type:'flight',fl:'UA 5433',from:'DEN',to:'EUG',dep:addD(d,4)+'T18:00',arr:addD(d,4)+'T19:50'}]}}
   if(v==='bend'||v==='pdx'){const d=new Date(Date.now()+864e5).toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'});trip={home:{name:'Eugene, OR 97401',lat:44.05,lon:-123.09},legs:[
     {type:'drive',from:'Eugene, OR',to:v==='bend'?'Bend, OR':'Portland, OR',mode:'arrive',when:d+'T10:00'}]}}
+  if(v==='fgo-chi'||v==='fgo-pdx'){const d=new Date(Date.now()+864e5).toLocaleDateString('en-CA',{timeZone:'America/Chicago'});trip={home:{name:'Fargo, ND',lat:46.877,lon:-96.79},legs:[
+    {type:'drive',from:'Fargo, ND',to:v==='fgo-chi'?'Chicago, IL':'Portland, OR',mode:'depart',when:d+'T07:00'}]}}
   save();drawLegs();run()};
 // ---------- run ----------
 $('#run').onclick=()=>run();

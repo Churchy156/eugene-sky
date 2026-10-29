@@ -168,10 +168,10 @@ def load_trips():
     for t in (j.get('trips') if isinstance(j, dict) else j) or []:
         try:
             when = t.get('arrive_by') or t.get('depart')
-            tgt = dt.datetime.fromisoformat(when).replace(tzinfo=PT)
+            tgt = dt.datetime.fromisoformat(when).replace(tzinfo=ZoneInfo(t['tz']) if t.get('tz') else PT)  # 'tz' = the trip's own zone
             t['id'] = t.get('id') or hashlib.sha1(f"{t.get('to')}|{when}".encode()).hexdigest()[:10]
-            # watch from 30 h before until the arrival (or 8 h after a set departure)
-            lo = tgt - dt.timedelta(hours=30 if t.get('arrive_by') else 27); hi = tgt + dt.timedelta(hours=0 if t.get('arrive_by') else 8)
+            # watch from 30 h before until the arrival (or 8 h after a set departure); long multi-day drives get up to 3 days more
+            lo = tgt - dt.timedelta(hours=(30 + 72 * bool(t.get('long'))) if t.get('arrive_by') else 27); hi = tgt + dt.timedelta(hours=0 if t.get('arrive_by') else 8 + 72 * bool(t.get('long')))
             if lo <= NOW <= hi: out.append(t)
         except Exception as e: log(f'trip skipped ({e}): {str(t)[:120]}')
     return out[:DRIVE_MAX]
@@ -356,9 +356,12 @@ def drive_lines(i):
             if x['kind'] == 'weather alert': L.append(f"  - **{x['event']}** near {x['near']}: {x['headline']}")
             else: L.append(f"  - **{x['kind'].capitalize()}** on {x['road'] or 'the route'} ({x['mi']:.0f} mi into the drive): {x['text'][:220]}")
     if p['mode'] == 'arrive':
-        L.append(f"- **Leave by {dc.hhmm(lt)} PT** to arrive by {dc.hhmm(p['arrive_by'])} PT." + (f" (Last update said {dc.hhmm(i['was'].astimezone(PT))}.)" if i.get('was') else ''))
+        L.append(f"- **Leave by {dc.hhmm(lt)} PT** to arrive by {dc.hhmm(p['arrive_by'].astimezone(PT))} PT." + (f" (Last update said {dc.hhmm(i['was'].astimezone(PT))}.)" if i.get('was') else ''))
     else:
         L.append(f"- Leaving **{dc.hhmm(lt)} PT**, you should arrive about **{dc.hhmm(p['est_arrive'])} PT**.")
+    if p.get('days'):
+        L.append(f"- {len(p['days'])}-day drive. Suggested overnight stops (times in PT): " + '; '.join(
+            f"day {k + 1} {d['start']:%a} {dc.hhmm(d['start'])}" + (f" to {d['stop']} about {dc.hhmm(d['end'])}" if d.get('stop') else f" to arrival about {dc.hhmm(d['end'])}") for k, d in enumerate(p['days'])) + '.')
     L.append(f"- {p['miles']:.0f} miles. Normal drive time with no traffic: {dc.fmt_min(p['drive_min'])} (map estimate). Extra time built in: {dc.fmt_min(p['buffer'])}, because:")
     for m, why in p['reasons']: L.append(f"  - {m} min: {why}")
     rr = [x for x in p['issues'] if x['kind'] in ('closure', 'incident', 'roadwork')]

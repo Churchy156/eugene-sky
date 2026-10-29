@@ -23,14 +23,24 @@ PASSES = [  # name, lat, lon, feet
     ('Black Butte Summit (I-5)', 41.3600, -122.3300, 3912), ('Deadman Pass / Cabbage Hill (I-84)', 45.6045, -118.5350, 3615),
     ('Snoqualmie Pass (I-90)', 47.4245, -121.4130, 3022), ('Stevens Pass (US 2)', 47.7466, -121.0859, 4061),
     ('White Pass (US 12)', 46.6376, -121.3912, 4500), ('Donner Summit (I-80)', 39.3233, -120.3283, 7227),
-    ('Echo Summit (US 50)', 38.8126, -120.0303, 7382), ('Chemult / US 97 high desert', 43.2200, -121.7800, 4760)]
+    ('Echo Summit (US 50)', 38.8126, -120.0303, 7382), ('Chemult / US 97 high desert', 43.2200, -121.7800, 4760),
+    ('Bozeman Pass (I-90)', 45.6617, -110.8069, 5702), ('Homestake Pass (I-90)', 45.9203, -112.4136, 6329), ('Lookout Pass (I-90)', 47.4566, -115.6966, 4710),
+    ('Fourth of July Pass (I-90)', 47.6247, -116.5197, 3081), ('MacDonald Pass (US 12)', 46.5603, -112.3103, 6320), ('Lolo Pass (US 12)', 46.6347, -114.5797, 5233),
+    ('Blue Mountains / Emigrant Hill (I-84)', 45.47, -118.43, 4193), ('Ladd Canyon (I-84)', 45.17, -117.98, 3800), ('Sherman Summit (I-80 WY)', 41.14, -105.38, 8640),
+    ('Vail Pass (I-70)', 39.53, -106.22, 10662), ('Eisenhower Tunnel (I-70)', 39.68, -105.92, 11158)]
 METROS = [  # name, lat, lon, radius mi, typical weekday rush-hour extra minutes
     ('Portland', 45.52, -122.68, 15, 25), ('Seattle', 47.61, -122.33, 15, 30), ('Tacoma', 47.25, -122.44, 8, 15),
     ('Salem', 44.94, -123.03, 6, 5), ('Eugene-Springfield', 44.05, -123.05, 6, 5), ('Sacramento', 38.58, -121.49, 12, 20),
-    ('San Francisco Bay Area', 37.77, -122.27, 25, 35), ('Boise', 43.61, -116.20, 8, 10), ('Bend', 44.06, -121.31, 4, 5)]
+    ('San Francisco Bay Area', 37.77, -122.27, 25, 35), ('Boise', 43.61, -116.20, 8, 10), ('Bend', 44.06, -121.31, 4, 5),
+    ('Spokane', 47.66, -117.42, 8, 10), ('Billings', 45.78, -108.5, 6, 5), ('Fargo-Moorhead', 46.88, -96.79, 6, 5), ('Minneapolis-St Paul', 44.97, -93.2, 18, 30),
+    ('Madison', 43.07, -89.4, 8, 10), ('Milwaukee', 43.04, -87.93, 10, 15), ('Chicago', 41.88, -87.66, 22, 40), ('Denver', 39.74, -104.99, 15, 25)]
+DAY_MAX, DAY_AIM = 600, 540   # over ~10 h of map driving -> overnight stops, ~9 h a day (same as the page)
 RUSH = [(6.5, 9.5), (15.0, 18.5)]
 STATE_BOX = {'OR': (41.9, 46.3, -124.7, -116.4), 'WA': (45.5, 49.1, -124.9, -116.9), 'CA': (32.5, 42.1, -124.5, -114.1),
-             'ID': (41.9, 49.1, -117.3, -111.0), 'NV': (35.0, 42.1, -120.1, -114.0)}
+             'ID': (41.9, 49.1, -117.3, -111.0), 'NV': (35.0, 42.1, -120.1, -114.0),
+             # the relay has planned-roadwork feeds for these (no crash reports); MT, IL, SD, WY have no free feed
+             'ND': (45.9, 49.0, -104.1, -96.5), 'MN': (43.5, 49.4, -97.3, -89.5), 'WI': (42.5, 47.1, -92.9, -86.8), 'IA': (40.4, 43.5, -96.7, -90.1),
+             'IN': (37.8, 41.8, -88.1, -84.8), 'UT': (37.0, 42.0, -114.1, -109.0)}
 
 def mi(a, b):
     R = 3958.8; t = math.pi / 180; dl = (b[0] - a[0]) * t; dn = (b[1] - a[1]) * t
@@ -89,7 +99,7 @@ def samples(R):
 
 def weather(S):
     j = get('https://api.open-meteo.com/v1/forecast', params=dict(latitude=','.join(f"{s['lat']:.3f}" for s in S), longitude=','.join(f"{s['lon']:.3f}" for s in S),
-            hourly='temperature_2m,precipitation,snowfall,weather_code,visibility,wind_gusts_10m', timeformat='unixtime', forecast_days=16,
+            hourly='temperature_2m,precipitation,snowfall,weather_code,visibility,wind_gusts_10m', timeformat='unixtime', timezone='auto', forecast_days=16,
             temperature_unit='fahrenheit', precipitation_unit='inch', wind_speed_unit='mph'))
     return j if isinstance(j, list) else [j]
 
@@ -140,12 +150,13 @@ def road_reports(R):
                 if k != 'src': out[k] += d.get(k) or []
     return out
 
-def rush_extra(R, leave_ts):
+def rush_extra(R, at, tz_near=lambda i: PT):
+    """at(route seconds) -> epoch seconds; rush hour is judged in each city's own local time."""
     out = []
     for n, la, lo, rad, extra in METROS:
         d, i = near_route(R, (la, lo), rad)
         if d > rad: continue
-        t = dt.datetime.fromtimestamp(leave_ts + R['cum_t'][i], PT)
+        t = dt.datetime.fromtimestamp(at(R['cum_t'][i]), tz_near(i))
         h = t.hour + t.minute / 60
         if t.weekday() < 5 and any(a <= h <= b for a, b in RUSH): out.append((n, extra, t))
     return out
@@ -158,19 +169,50 @@ def classify(txt):
     if re.search(r'minimal delay|use caution|fire in the area', txt, re.I): return 'notice', 0
     return 'incident', 10
 def hhmm(t): return f"{t:%-I:%M %p}"
+def tzab(t): n = t.tzname() or ''; return re.sub(r'^(AK|H|[ECMPA])[SD]T$', r'\1T', n)
 def plan(trip, now=None, R=None):
     """Return a dict with leave/arrive times, buffer reasons and on-route issues. Raises if routing fails."""
     now = now or dt.datetime.now(UTC)
     a = (trip['from_lat'], trip['from_lon']) if trip.get('from_lat') is not None else geocode(trip.get('from') or 'Eugene, OR')
     b = (trip['to_lat'], trip['to_lon']) if trip.get('to_lat') is not None else geocode(trip['to'])
     R = R or route(a, b); S = samples(R)
-    W = weather(S); rr = road_reports(R)
-    alerts = nws([s for k, s in enumerate(S) if s.get('pass_') or k % 2 == 0][:10])
+    W = []
+    for k in range(0, len(S), 40): W += weather(S[k:k + 40])
+    for s, w in zip(S, W):
+        try: s['tz'] = ZoneInfo(w.get('timezone')) if w.get('timezone') not in (None, 'GMT') else PT
+        except Exception: s['tz'] = PT
+    rr = road_reports(R)
+    alerts = nws([s for k, s in enumerate(S) if s.get('pass_') or k % 2 == 0 or k == len(S) - 1][:18])
+    tz_near = lambda i: min(S, key=lambda s: abs(s['i'] - i)).get('tz', PT)
     drive_min = R['secs'] / 60; base = max(10, round(drive_min * 0.05))
     mode = 'arrive' if trip.get('arrive_by') else 'depart'
-    tgt = dt.datetime.fromisoformat(trip.get('arrive_by') or trip['depart']).replace(tzinfo=PT)
+    tz_in = ZoneInfo(trip['tz']) if trip.get('tz') else PT   # wall-clock time in the trip's own zone (default Pacific)
+    tgt = dt.datetime.fromisoformat(trip.get('arrive_by') or trip['depart']).replace(tzinfo=tz_in)
+    # long drives: even days of <= ~9 h, overnight where each day ends, next morning same local clock time
+    n_days = 1 if drive_min <= DAY_MAX else math.ceil(drive_min / DAY_AIM)
+    days = [dict(t0=R['secs'] * k / n_days, t1=R['secs'] * (k + 1) / n_days) for k in range(n_days)]
+    for d in days[:-1]:
+        i = next((j for j, t in enumerate(R['cum_t']) if t >= d['t1']), len(R['cum_t']) - 1)
+        d['stop_i'] = i; d['stop'] = town(*R['coords'][i]) or f"mile {R['cum_mi'][i]:.0f}"; d['tz'] = tz_near(i)
+    def sched(frac):
+        f = 1 + frac; st = [0.0] * n_days; tzs = [tz_in if k == 0 else days[k - 1]['tz'] for k in range(n_days)]
+        if mode == 'depart':
+            st[0] = tgt.timestamp(); hm = tgt.astimezone(tz_in).time()
+            for k in range(1, n_days):
+                end = dt.datetime.fromtimestamp(st[k - 1] + (days[k - 1]['t1'] - days[k - 1]['t0']) * f, tzs[k])
+                st[k] = dt.datetime.combine(end.date() + dt.timedelta(days=1), hm, tzs[k]).timestamp()
+        else:
+            st[-1] = tgt.timestamp() - (days[-1]['t1'] - days[-1]['t0']) * f; hm = dt.datetime.fromtimestamp(st[-1], tzs[-1]).time()
+            for k in range(n_days - 2, -1, -1):
+                need = (days[k]['t1'] - days[k]['t0']) * f; nx = dt.datetime.fromtimestamp(st[k + 1], tzs[k])
+                s0 = dt.datetime.combine(nx.date() - dt.timedelta(days=1), hm, tzs[k]).timestamp()
+                st[k] = min(s0, st[k + 1] - 8 * 3600 - need)
+            st[0] -= st[0] % 300
+        def at(t):
+            k = next((j for j, d in enumerate(days) if t <= d['t1']), n_days - 1); return st[k] + (t - days[k]['t0']) * f
+        return st, at, st[-1] + (days[-1]['t1'] - days[-1]['t0']) * f
     # incidents / work zones near the route (time-independent)
-    trip_day = tgt.date().isoformat(); issues = []; inc_min = 0; wz_min = 0
+    trip_day = tgt.date().isoformat(); last_day = (tgt + dt.timedelta(days=n_days if n_days > 1 else 0)).date().isoformat(); issues = []; inc_min = 0; wz_min = 0
     for x in rr['inc']:
         d, i = near_route(R, (x[0], x[1]), 0.5)
         if d > 0.5: continue
@@ -181,14 +223,14 @@ def plan(trip, now=None, R=None):
         issues.append(dict(key=k, kind=kd,
                            road=x[2], text=x[3], mi=R['cum_mi'][i], when=x[4] if len(x) > 4 else '', add=add))
     for x in rr['wz']:
-        if len(x) > 5 and ((x[4] and x[4] > trip_day) or (x[5] and x[5] < trip_day)): continue
+        if len(x) > 5 and ((x[4] and x[4] > last_day) or (x[5] and x[5] < trip_day)): continue
         d, i = near_route(R, (x[0], x[1]), 0.3)
         if d > 0.3: continue
         k = 'wz:' + hashlib.sha1(f"{x[2]}|{x[3][:60]}".encode()).hexdigest()[:12]
         if any(z['key'] == k for z in issues): continue
         add = 0 if re.search(r'no (traffic )?impact|no delay', x[3], re.I) else 3
         wz_min += add; issues.append(dict(key=k, kind='work zone', road=x[2], text=x[3], mi=R['cum_mi'][i], add=add))
-    inc_min = min(inc_min, 60); wz_min = min(wz_min, 15)
+    inc_min = min(inc_min, 60); wz_min = min(wz_min, 30 if n_days > 1 else 15)
     cams = []
     for x in rr['cam']:
         d, i = near_route(R, (x[0], x[1]), 0.4)
@@ -200,10 +242,11 @@ def plan(trip, now=None, R=None):
         if re.search(r'winter storm warning|ice storm|blizzard', e): nws_pct = max(nws_pct, 30)
         elif re.search(r'winter weather advisory|winter storm watch|freezing (rain|drizzle|fog)', e): nws_pct = max(nws_pct, 15)
         elif re.search(r'high wind|dense fog|flood|dust|smoke', e): nws_min = 10
-    def evaluate(leave_ts):
+    def evaluate(at):
+        if not callable(at): at = (lambda lv: lambda t: lv + t)(at)
         rs = []; wx = []; worst = 0; fog = gust = icy = False; pts = []
         for s, w in zip(S, W):
-            ts = leave_ts + s['t_off']; x = wx_at(w, ts); kd = wx_kind(x)
+            ts = at(s['t_off']); x = wx_at(w, ts); kd = wx_kind(x)
             pts.append(dict(name=s['name'], mi=s['mi'], t=dt.datetime.fromtimestamp(ts, PT), w=x, kind=kd, pass_=s.get('pass_'), ft=s.get('ft')))
             if not x: continue
             pct = {'snow': 25, 'ice': 25, 'heavy rain': 10, 'rain': 5}.get(kd, 0)
@@ -223,8 +266,8 @@ def plan(trip, now=None, R=None):
         if fog: rs.append((10, f'Fog (under half a mile visibility) near {fog}'))
         if gust: rs.append((10, f'Strong wind gusts (45+ mph) near {gust}'))
         if icy: rs.append((5, f'Below freezing at {icy} - watch for icy patches'))
-        rm = rush_extra(R, leave_ts)
-        for n, e, t in rm: rs.append((e, f'Usual weekday rush hour in {n} (you\'d be there about {hhmm(t)} PT)'))
+        rm = rush_extra(R, at, tz_near)
+        for n, e, t in rm: rs.append((e, f'Usual weekday rush hour in {n} (you\'d be there about {hhmm(t)} {tzab(t)})'))
         if nws_pct: rs.append((round(drive_min * nws_pct / 100), 'Weather Service alert on the route: ' + ', '.join(sorted({a['event'] for a in alerts if re.search(r'winter|ice storm|blizzard|freezing (rain|drizzle|fog)', a['event'] or '', re.I)}))))
         if nws_min: rs.append((10, 'Weather Service alert on the route: ' + ', '.join(sorted({a['event'] for a in alerts if re.search(r'wind|fog|flood|dust|smoke', a['event'] or '', re.I)}))))
         if inc_min: rs.append((inc_min, f"{sum(1 for z in issues if z['kind'] in ('closure', 'incident', 'roadwork') and z['add'])} road report(s) on the route that may slow you" + (' - one sounds like a CLOSURE' if any(z['kind'] == 'closure' for z in issues) else '')))
@@ -241,8 +284,13 @@ def plan(trip, now=None, R=None):
     else:
         leave_ts = tgt.timestamp(); E = evaluate(leave_ts)
         est = dt.datetime.fromtimestamp(leave_ts + R['secs'] + (E['buffer'] - base) * 60, PT); arrive = None
+    if n_days > 1:  # replace the one-day math with the overnight schedule
+        frac = base / drive_min
+        for _ in range(3): st, at, end = sched(frac); E = evaluate(at); frac = E['buffer'] / drive_min
+        st, at, end = sched(frac); leave_ts = st[0]; est = dt.datetime.fromtimestamp(end, PT); arrive = tgt if mode == 'arrive' else None
+        for k, d in enumerate(days): d['start'] = dt.datetime.fromtimestamp(st[k], PT); d['end'] = dt.datetime.fromtimestamp(st[k] + (d['t1'] - d['t0']) * (1 + frac), PT)
     return dict(mode=mode, leave=dt.datetime.fromtimestamp(leave_ts, PT), target=tgt, est_arrive=est, arrive_by=arrive, miles=R['miles'], drive_min=drive_min,
-                base=base, **E, issues=issues, alerts=alerts, cams=cams[:40], sources=rr['src'], frm=trip.get('from') or 'Eugene, OR', to=trip['to'])
+                base=base, **E, days=days if n_days > 1 else [], issues=issues, alerts=alerts, cams=cams[:40], sources=rr['src'], frm=trip.get('from') or 'Eugene, OR', to=trip['to'])
 
 def fmt_min(m):
     m = int(round(m)); return f"{m // 60} h {m % 60:02d} min" if m >= 60 else f"{m} min"
