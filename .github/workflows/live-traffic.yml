@@ -18,6 +18,8 @@ jobs:
       FIRMS_MAP_KEY: ${{ secrets.FIRMS_MAP_KEY }}
       OPENSKY_CLIENT_ID: ${{ secrets.OPENSKY_CLIENT_ID }}
       OPENSKY_CLIENT_SECRET: ${{ secrets.OPENSKY_CLIENT_SECRET }}
+      WI511_KEY: ${{ secrets.WI511_KEY }}
+      ID511_KEY: ${{ secrets.ID511_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
