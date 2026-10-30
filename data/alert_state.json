@@ -44,21 +44,32 @@
   "urn:oid:2.49.0.1.840.0.8aeb6e8dcb643182351efe8a564b5f7a69b93749.001.2": {
    "event": "Frost Advisory",
    "first_seen": "2026-10-30T20:11:07+00:00",
-   "last_seen": "2026-10-30T20:11:07+00:00",
+   "last_seen": "2026-10-30T23:53:01+00:00",
    "refs": [],
    "seeded": false
   },
   "urn:oid:2.49.0.1.840.0.8aeb6e8dcb643182351efe8a564b5f7a69b93749.002.1": {
    "event": "Frost Advisory",
    "first_seen": "2026-10-30T20:11:07+00:00",
-   "last_seen": "2026-10-30T20:11:07+00:00",
+   "last_seen": "2026-10-30T23:53:01+00:00",
    "refs": [
     "urn:oid:2.49.0.1.840.0.3683bebe5477d4a2af210bf53679002f8f77cd1a.001.1"
    ],
    "seeded": false
   }
  },
- "outage": {},
+ "outage": {
+  "pac:44.593,-123.252|03:39 PM on 10/30": {
+   "alerted": true,
+   "cust": 60,
+   "first_seen": "2026-10-30T23:53:01+00:00",
+   "last_seen": "2026-10-30T23:53:01+00:00",
+   "peak": 60,
+   "seeded_big": false,
+   "util": "pacific",
+   "where": "near Corvallis (ZIP 97330), 38 mi from Eugene"
+  }
+ },
  "quake": {},
  "seeded_feeds": [
   "quakes",
@@ -70,31 +81,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-10-30T20:11:07+00:00",
+ "updated": "2026-10-30T23:53:01+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-10-30T20:11:07+00:00"
+   "last_seen": "2026-10-30T23:53:01+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 3,
+   "cust": 4,
    "high": false,
-   "last_seen": "2026-10-30T20:11:07+00:00"
+   "last_seen": "2026-10-30T23:53:01+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-10-30T20:11:07+00:00"
+   "last_seen": "2026-10-30T23:53:01+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 2,
+   "cust": 61,
    "high": false,
-   "last_seen": "2026-10-30T20:11:07+00:00"
+   "last_seen": "2026-10-30T23:53:01+00:00"
   }
  }
 }
