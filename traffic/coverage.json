@@ -1,0 +1,243 @@
+{
+"built": "2026-10-31T17:45+00:00",
+"states": {
+"MN": {
+"wz": [
+"WZDx: Minnesota DOT"
+]
+},
+"IA": {
+"wz": [
+"WZDx: Iowa DOT"
+]
+},
+"MD": {
+"wz": [
+"WZDx: Maryland DOT"
+]
+},
+"UT": {
+"wz": [
+"WZDx: Utah DOT"
+]
+},
+"WA": {
+"wz": [
+"WZDx: Washington State DOT"
+],
+"cam": [
+"WSDOT cameras (ArcGIS)"
+]
+},
+"HI": {
+"wz": [
+"WZDx: Hawaii DOT"
+]
+},
+"KY": {
+"wz": [
+"WZDx: Kentucky Transportation Cabinet"
+]
+},
+"MO": {
+"wz": [
+"WZDx: Missouri DOT",
+"WZDx: St. Charles County"
+]
+},
+"WI": {
+"wz": [
+"WZDx: Wisconsin DOT"
+]
+},
+"OK": {
+"wz": [
+"WZDx: Oklahoma DOT"
+]
+},
+"ID": {
+"wz": [
+"WZDx: Idaho DOT"
+]
+},
+"FL": {
+"wz": [
+"WZDx: Florida DOT"
+]
+},
+"ND": {
+"wz": [
+"WZDx: North Dakota DOT"
+],
+"cam": [
+"NDDOT travel info (provided as-is)"
+]
+},
+"OR": {
+"wz": [
+"WZDx: ODOT"
+],
+"cam": [
+"ODOT TripCheck"
+],
+"inc": [
+"ODOT TripCheck"
+]
+},
+"IN": {
+"wz": [
+"WZDx: Indiana DOT"
+]
+},
+"MS": {
+"wz": [
+"WZDx: Mississippi DOT"
+]
+},
+"AZ": {
+"wz": [
+"WZDx: Maricopa County DOT"
+]
+},
+"NJ": {
+"wz": [
+"WZDx: New Jersey Institute of Technology"
+]
+},
+"TX": {
+"wz": [
+"WZDx: City of Austin"
+]
+},
+"KS": {
+"wz": [
+"WZDx: Kansas DOT"
+]
+},
+"CA": {
+"cam": [
+"Caltrans CWWP2"
+],
+"inc": [
+"CHP CAD"
+]
+},
+"IL": {
+"cam": [
+"IDOT Gateway / Travel Midwest (CC BY-SA)"
+]
+}
+},
+"counts": {
+"MN": {
+"cam": 0,
+"inc": 0,
+"wz": 310
+},
+"IA": {
+"cam": 0,
+"inc": 0,
+"wz": 910
+},
+"MD": {
+"cam": 0,
+"inc": 0,
+"wz": 62
+},
+"UT": {
+"cam": 0,
+"inc": 0,
+"wz": 744
+},
+"WA": {
+"cam": 1706,
+"inc": 0,
+"wz": 426
+},
+"HI": {
+"cam": 0,
+"inc": 0,
+"wz": 123
+},
+"KY": {
+"cam": 0,
+"inc": 0,
+"wz": 216
+},
+"MO": {
+"cam": 0,
+"inc": 0,
+"wz": 527
+},
+"WI": {
+"cam": 0,
+"inc": 0,
+"wz": 2633
+},
+"OK": {
+"cam": 0,
+"inc": 0,
+"wz": 74
+},
+"ID": {
+"cam": 0,
+"inc": 0,
+"wz": 594
+},
+"FL": {
+"cam": 0,
+"inc": 0,
+"wz": 28405
+},
+"ND": {
+"cam": 190,
+"inc": 0,
+"wz": 69
+},
+"OR": {
+"cam": 1131,
+"inc": 128,
+"wz": 162
+},
+"IN": {
+"cam": 0,
+"inc": 0,
+"wz": 1079
+},
+"MS": {
+"cam": 0,
+"inc": 0,
+"wz": 122
+},
+"AZ": {
+"cam": 0,
+"inc": 0,
+"wz": 2634
+},
+"NJ": {
+"cam": 0,
+"inc": 0,
+"wz": 489
+},
+"TX": {
+"cam": 0,
+"inc": 0,
+"wz": 3006
+},
+"KS": {
+"cam": 0,
+"inc": 0,
+"wz": 367
+},
+"CA": {
+"cam": 3432,
+"inc": 88,
+"wz": 0
+},
+"IL": {
+"cam": 3843,
+"inc": 0,
+"wz": 0
+}
+}
+}
