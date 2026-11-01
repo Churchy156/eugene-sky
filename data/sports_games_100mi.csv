@@ -5491,7 +5491,7 @@ date,sport,level,host,team,opponent,venue,city,state,lat,lon,dist_mi,kickoff_loc
 2026-10-10,football,NCAA D1,UO,UO,UCLA Bruins,Autzen Stadium,Eugene,OR,44.0582,-123.0685,1.2,12:30,0,59262.0,ESPN team schedule,
 2026-10-17,football,NCAA D1,OSU,OSU,Washington State Cougars,Reser Stadium,Corvallis,OR,44.5595,-123.2811,36.4,15:00,0,39257.0,ESPN team schedule,
 2026-10-17,football,NCAA D1,UO,UO,Nebraska Cornhuskers,Autzen Stadium,Eugene,OR,44.0582,-123.0685,1.2,20:00,0,58391.0,ESPN team schedule,
-2026-10-31,football,NCAA D1,UO,UO,Northwestern Wildcats,Autzen Stadium,Eugene,OR,44.0582,-123.0685,1.2,12:30,0,,ESPN team schedule,
+2026-10-31,football,NCAA D1,UO,UO,Northwestern Wildcats,Autzen Stadium,Eugene,OR,44.0582,-123.0685,1.2,12:30,0,55673.0,ESPN team schedule,
 2026-11-02,mens_basketball,NCAA D1,OSU,OSU,Weber State Wildcats,Gill Coliseum,Corvallis,OR,44.5612,-123.2793,36.5,18:30,0,,ESPN team schedule,
 2026-11-02,mens_basketball,NCAA D1,UO,UO,Montana Grizzlies,Matthew Knight Arena,Eugene,OR,44.0451,-123.0662,1.2,19:00,0,,ESPN team schedule,
 2026-11-02,womens_basketball,NCAA D1,UO,UO,Hawai'i Rainbow Wahine,Matthew Knight Arena,Eugene,OR,44.0451,-123.0662,1.2,15:00,0,,ESPN team schedule,
