@@ -26,6 +26,13 @@
    ],
    "seeded": false
   },
+  "urn:oid:2.49.0.1.840.0.2a829410ed53622c07a3213ad0823efaea81ff7a.001.1": {
+   "event": "Dense Fog Advisory",
+   "first_seen": "2026-11-01T08:06:34+00:00",
+   "last_seen": "2026-11-01T08:06:34+00:00",
+   "refs": [],
+   "seeded": false
+  },
   "urn:oid:2.49.0.1.840.0.3683bebe5477d4a2af210bf53679002f8f77cd1a.001.1": {
    "event": "Frost Advisory",
    "first_seen": "2026-10-30T15:45:07+00:00",
@@ -106,31 +113,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-10-31T15:47:54+00:00",
+ "updated": "2026-11-01T08:06:34+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-10-31T15:47:54+00:00"
+   "last_seen": "2026-11-01T08:06:34+00:00"
   },
   "epud": {
    "alerted": false,
    "cust": 5,
    "high": false,
-   "last_seen": "2026-10-31T15:47:54+00:00"
+   "last_seen": "2026-11-01T08:06:34+00:00"
   },
   "eweb": {
    "alerted": false,
-   "cust": 0,
+   "cust": 4,
    "high": false,
-   "last_seen": "2026-10-31T15:47:54+00:00"
+   "last_seen": "2026-11-01T08:06:34+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 1,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-10-31T15:47:54+00:00"
+   "last_seen": "2026-11-01T08:06:34+00:00"
   }
  }
 }
