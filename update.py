@@ -42,6 +42,16 @@ def _():
 def _():
     s=pd.read_csv(io.StringIO(get('https://www.sidc.be/SILSO/INFO/sndtotcsv.php').text),sep=';',header=None)
     s.index=pd.to_datetime(dict(year=s[0],month=s[1],day=s[2])); put('sunspot_n',s[4].where(s[4]>=0))
+@src('NASA Thermosphere Climate Index (LASP LaTiS)')
+def _():
+    if pd.notna(df.loc[today].get('tci_GW')): log.append('note TCI: already have today, skipped (one fetch a day)'); return
+    t=pd.read_csv(io.StringIO(get(f'https://lasp.colorado.edu/space-weather-portal/latis/dap/tci.csv?time>={start:%Y-%m-%d}').text)); t.columns=['d','v']
+    t.index=pd.to_datetime(t.d,format='%m %d %Y'); put('tci_GW',(t.v.where(t.v>0)/1e9).groupby(level=0).last())  # -999 = missing
+@src('Oulu neutron monitor cosmic rays (daily, pressure-corrected)')
+def _():
+    if pd.notna(df.loc[today].get('cosmic_rays_oulu_cpm')): log.append('note Oulu: already have today, skipped (one fetch a day)'); return
+    o=pd.read_csv(io.StringIO(get('https://cosmicrays.oulu.fi/webform/onlinequery.cgi',params=dict(station='OULU',startday=f'{start:%d}',startmonth=f'{start:%m}',startyear=start.year,starttime='00:00',endday=f'{today:%d}',endmonth=f'{today:%m}',endyear=today.year,endtime='00:00',resolution=1440,outputmode='csv')).text))
+    o.index=pd.to_datetime(o.Timestamp.str[:10]); c=pd.to_numeric(o['CorrectedCountRate[cts/min]'],errors='coerce'); put('cosmic_rays_oulu_cpm',c.where(c>0))
 @src('solar wind (SWPC real-time, last ~day; OMNI history)')
 def _():
     w=pd.DataFrame(get('https://services.swpc.noaa.gov/json/rtsw/rtsw_wind_1m.json').json()); w.index=pd.to_datetime(w.time_tag)

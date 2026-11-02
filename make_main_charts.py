@@ -18,7 +18,7 @@ ax[1].plot(y.index[:-1], y.sunspot_n[:-1], c='orange'); ax[1].set_ylabel(label('
 ax[2].plot(y.index[:-1], y.Ap[:-1], c='purple'); ax[2].set_ylabel('Magnetic disturbance\n(yearly average)')
 caption(fig, "Each point is one year. Eugene has warmed steadily, while sunspots and magnetic storms go up and down every ~11 years, so the Sun's cycle does not explain the warming.")
 fig.savefig(j('chart1_annual_temp_vs_solar.png'), dpi=110); plt.close(fig)
-drivers = ['Ap', 'kp_max', 'sunspot_n', 'F107_adj', 'sw_speed_kms', 'sw_Bz_gsm_nT', 'flares_M', 'moon_illum', 'tide_range_ft', 'eq_500km_M2.5plus', 'eq_global_M6plus', 'pressure_msl_hPa_era5']
+drivers = ['Ap', 'kp_max', 'sunspot_n', 'F107_adj', 'sw_speed_kms', 'sw_Bz_gsm_nT', 'flares_M', 'moon_illum', 'tide_range_ft', 'eq_500km_M2.5plus', 'eq_global_M6plus', 'tci_GW', 'cosmic_rays_oulu_cpm', 'pressure_msl_hPa_era5']
 TG = {'tmax_F': 'Daily high\nvs. normal', 'tmin_F': 'Daily low\nvs. normal', 'prcp_in': 'Rain\nvs. normal'}
 p = R[R.lag_days == 0].pivot(index='driver', columns='target', values='spearman_r').loc[drivers][list(TG)]
 fig, a = plt.subplots(figsize=(9, 8.5)); im = a.imshow(p, cmap='RdBu_r', vmin=-.4, vmax=.4, aspect='auto')

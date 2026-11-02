@@ -42,6 +42,8 @@ _a(['Ap', 'ap'], 'Magnetic field disturbance, daily average', 'Another daily mea
 _a('storm_Kp>=5', 'Geomagnetic storm day (level 5+)', 'Days when the storm level reached 5 or more.')
 _a(['Dst', 'Dst_min'], 'Magnetic storm depth', 'How far the magnetic field dips during a storm. More negative = stronger storm.')
 _a(['AE', 'AE_mean'], 'Northern lights activity', 'Strength of the electric currents that light up the aurora.')
+_a(['tci_GW', 'tci'], 'Upper-atmosphere heat (NASA index)', "Heat the very top of the air gives off to space, in billions of watts. Rises with a busy Sun and storms. NASA's Thermosphere Climate Index.")
+_a(['cosmic_rays_oulu_cpm', 'cosmic_rays'], 'Cosmic rays reaching Earth', 'Particles from deep space counted at the Oulu, Finland station, per minute. Fewer when the Sun is busy, because its magnetic field blocks them.')
 _a(['F107_adj', 'f107', 'F10.7', 'F107'], "Sun's radio brightness", 'Radio glow from the Sun; rises and falls with the 11-year sunspot cycle.')
 _a(['sunspot_n', 'R'], 'Sunspot count', 'Number of dark spots on the Sun; peaks every ~11 years.')
 _a(['Bz', 'Bz_gsm', 'omni_Bz', 'sw_Bz_gsm_nT'], 'Solar wind magnetic direction', 'Negative (southward) lets solar energy into Earth\'s field more easily.')

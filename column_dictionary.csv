@@ -177,3 +177,5 @@ hs_home_basketball,Varsity high-school home basketball games (boys + girls) at t
 hs_playoff_home_games,Locally hosted varsity high-school state-playoff games (OSAA brackets).,2005-09-02,2026-10-28,27.5
 hs_rivalry_game,"Big local rivalry games that day (Thurston-Springfield, Sheldon-South Eugene, Churchill-South Eugene, Sheldon-Churchill, North Eugene-Willamette, Creswell-Pleasant Hill, Junction City-Harrisburg, Monroe-Harrisburg).",2005-09-02,2026-10-28,27.5
 hs_local_derby_games,Home games where both teams are among the 13 local high schools (any sport).,2005-09-02,2026-10-28,27.5
+tci_GW,"NASA Thermosphere Climate Index (NO infrared power from the thermosphere), billions of watts; NASA LaRC SABER via LASP LaTiS (source starts 1947-04-29; -999 = blank)",1950-01-01,2026-11-02,98.1
+cosmic_rays_oulu_cpm,"Cosmic rays: Oulu neutron monitor daily mean count rate, pressure/efficiency corrected, counts per minute (cosmicrays.oulu.fi)",1964-04-01,2026-11-02,81.3

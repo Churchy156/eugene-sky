@@ -10,7 +10,7 @@ def anom(s):
 A=pd.DataFrame(index=df.index)
 for c in ['tmax_F','tmin_F']: A[c]=anom(df[c])
 A['prcp_in']=anom(df.prcp_in); A['wet']=(df.prcp_in>=0.01).astype(float).where(df.prcp_in.notna())
-drivers=['Ap','kp_max','sunspot_n','F107_adj','sw_speed_kms','sw_Bz_gsm_nT','flares_M','moon_illum','tide_range_ft','eq_500km_M2.5plus','eq_global_M6plus','pressure_msl_hPa_era5']
+drivers=['Ap','kp_max','sunspot_n','F107_adj','sw_speed_kms','sw_Bz_gsm_nT','flares_M','moon_illum','tide_range_ft','eq_500km_M2.5plus','eq_global_M6plus','tci_GW','cosmic_rays_oulu_cpm','pressure_msl_hPa_era5']
 rng=np.random.default_rng(0); out=[]
 for d in drivers:
     x=df[d]
