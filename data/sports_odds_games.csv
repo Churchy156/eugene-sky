@@ -3851,9 +3851,9 @@ date,sport,host,opponent,opponent_espn,venue,attendance,eid,home_rank,opp_rank,h
 2026-10-17,football,OSU,Washington State Cougars,Washington State Cougars,Reser Stadium,39257.0,401860903,99.0,99.0,48.0,30.0,-18.5,52.5,-1000.0,650.0,ESPN (median of sportsbooks),1.0,0,18.0,1.0,1.0,-0.5,0.0,0.0,0.0,0.0,0.5,0.0,0.0,78.0,1.0,0.0,0.0,0.0,0.0
 2026-10-17,football,UO,Nebraska Cornhuskers,Nebraska Cornhuskers,Autzen Stadium,58391.0,401858492,99.0,99.0,17.0,14.0,-6.5,50.5,-238.0,195.0,ESPN (median of sportsbooks),1.0,0,3.0,1.0,1.0,-3.5,0.0,0.0,0.0,0.0,3.5,1.0,0.0,31.0,0.0,0.0,0.0,0.0,0.0
 2026-10-31,football,UO,Northwestern Wildcats,Northwestern Wildcats,Autzen Stadium,,401858505,99.0,20.0,,,-3.5,47.5,-175.0,145.0,ESPN (median of sportsbooks),1.0,0,,,1.0,,,,,,,,,,,0.0,0.0,1.0,0.0
-2026-11-02,mens_basketball,OSU,Weber State Wildcats,Weber State Wildcats,Gill Coliseum,,401925947,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
-2026-11-02,mens_basketball,UO,Montana Grizzlies,Montana Grizzlies,Matthew Knight Arena,,401922029,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
-2026-11-02,womens_basketball,UO,Hawai'i Rainbow Wahine,Hawai'i Rainbow Wahine,Matthew Knight Arena,,401918901,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
+2026-11-02,mens_basketball,OSU,Weber State Wildcats,Weber State Wildcats,Gill Coliseum,3546.0,401925947,99.0,99.0,102.0,61.0,,,,,,,0,41.0,1.0,,,,,,,,0.0,1.0,163.0,,,0.0,0.0,0.0
+2026-11-02,mens_basketball,UO,Montana Grizzlies,Montana Grizzlies,Matthew Knight Arena,4067.0,401922029,99.0,99.0,87.0,69.0,,,,,,,0,18.0,1.0,,,,,,,,0.0,0.0,156.0,,,0.0,0.0,0.0
+2026-11-02,womens_basketball,UO,Hawai'i Rainbow Wahine,Hawai'i Rainbow Wahine,Matthew Knight Arena,3856.0,401918901,99.0,99.0,87.0,54.0,,,,,,,0,33.0,1.0,,,,,,,,0.0,1.0,141.0,,,0.0,0.0,0.0
 2026-11-04,womens_basketball,OSU,California Baptist Lancers,California Baptist Lancers,Gill Coliseum,,401921577,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2026-11-06,mens_basketball,OSU,California Baptist Lancers,California Baptist Lancers,Gill Coliseum,,401920344,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2026-11-06,mens_basketball,UO,Eastern Washington Eagles,Eastern Washington Eagles,Matthew Knight Arena,,401920717,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
