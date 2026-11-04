@@ -108,18 +108,7 @@
    "seeded": false
   }
  },
- "outage": {
-  "pac:44.548,-123.263|10:46 AM on 11/03": {
-   "alerted": true,
-   "cust": 70,
-   "first_seen": "2026-11-03T22:21:27+00:00",
-   "last_seen": "2026-11-03T22:21:27+00:00",
-   "peak": 70,
-   "seeded_big": false,
-   "util": "pacific",
-   "where": "near Corvallis (ZIP 97333), 35 mi from Eugene"
-  }
- },
+ "outage": {},
  "quake": {},
  "seeded_feeds": [
   "quakes",
@@ -131,31 +120,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-03T22:21:27+00:00",
+ "updated": "2026-11-04T02:33:35+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-03T22:21:27+00:00"
+   "last_seen": "2026-11-04T02:33:35+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 2,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-11-03T22:21:27+00:00"
+   "last_seen": "2026-11-04T02:33:35+00:00"
   },
   "eweb": {
    "alerted": false,
-   "cust": 10,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-11-03T22:21:27+00:00"
+   "last_seen": "2026-11-04T02:33:35+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 75,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-11-03T22:21:27+00:00"
+   "last_seen": "2026-11-04T02:33:35+00:00"
   }
  }
 }
