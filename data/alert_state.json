@@ -51,12 +51,12 @@
    ],
    "seeded": false
   },
-  "urn:oid:2.49.0.1.840.0.76f850cd1abf7fca2d6f1f69cdfb39f79d4e343a.002.1": {
-   "event": "Winter Weather Advisory",
-   "first_seen": "2026-10-28T15:25:40+00:00",
-   "last_seen": "2026-10-28T15:25:40+00:00",
+  "urn:oid:2.49.0.1.840.0.86bb68369b44efaf5a770a8a31a65349e385fadc.001.1": {
+   "event": "Dense Fog Advisory",
+   "first_seen": "2026-11-04T17:37:42+00:00",
+   "last_seen": "2026-11-04T17:37:42+00:00",
    "refs": [],
-   "seeded": true
+   "seeded": false
   },
   "urn:oid:2.49.0.1.840.0.8aeb6e8dcb643182351efe8a564b5f7a69b93749.001.2": {
    "event": "Frost Advisory",
@@ -120,31 +120,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-04T02:33:35+00:00",
+ "updated": "2026-11-04T17:37:42+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-04T02:33:35+00:00"
+   "last_seen": "2026-11-04T17:37:42+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 0,
+   "cust": 1,
    "high": false,
-   "last_seen": "2026-11-04T02:33:35+00:00"
+   "last_seen": "2026-11-04T17:37:42+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-04T02:33:35+00:00"
+   "last_seen": "2026-11-04T17:37:42+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 0,
+   "cust": 22,
    "high": false,
-   "last_seen": "2026-11-04T02:33:35+00:00"
+   "last_seen": "2026-11-04T17:37:42+00:00"
   }
  }
 }
