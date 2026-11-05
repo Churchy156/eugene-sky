@@ -109,7 +109,14 @@
   }
  },
  "outage": {},
- "quake": {},
+ "quake": {
+  "nc75462637": {
+   "first_seen": "2026-11-05T10:49:24+00:00",
+   "last_seen": "2026-11-05T10:49:24+00:00",
+   "mag": 5.0,
+   "seeded": false
+  }
+ },
  "seeded_feeds": [
   "quakes",
   "tsunami",
@@ -120,31 +127,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-04T17:37:42+00:00",
+ "updated": "2026-11-05T10:49:24+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-04T17:37:42+00:00"
+   "last_seen": "2026-11-05T10:49:24+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 1,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-11-04T17:37:42+00:00"
+   "last_seen": "2026-11-05T10:49:24+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-04T17:37:42+00:00"
+   "last_seen": "2026-11-05T10:49:24+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 22,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-11-04T17:37:42+00:00"
+   "last_seen": "2026-11-05T10:49:24+00:00"
   }
  }
 }
