@@ -26,22 +26,11 @@
    "refs": [],
    "seeded": false
   },
-  "urn:oid:2.49.0.1.840.0.3683bebe5477d4a2af210bf53679002f8f77cd1a.001.1": {
-   "event": "Frost Advisory",
-   "first_seen": "2026-10-30T15:45:07+00:00",
-   "last_seen": "2026-10-30T15:45:07+00:00",
-   "refs": [
-    "urn:oid:2.49.0.1.840.0.092e4523b733aa21cc0d9bd93379325290940da3.001.1"
-   ],
-   "seeded": false
-  },
-  "urn:oid:2.49.0.1.840.0.3683bebe5477d4a2af210bf53679002f8f77cd1a.002.1": {
-   "event": "Freeze Watch",
-   "first_seen": "2026-10-30T15:45:07+00:00",
-   "last_seen": "2026-10-30T15:45:07+00:00",
-   "refs": [
-    "urn:oid:2.49.0.1.840.0.092e4523b733aa21cc0d9bd93379325290940da3.002.1"
-   ],
+  "urn:oid:2.49.0.1.840.0.5eb3aed20e309738e5f6d69867f5e5dd61b9efb4.001.1": {
+   "event": "Beach Hazards Statement",
+   "first_seen": "2026-11-06T18:26:01+00:00",
+   "last_seen": "2026-11-06T18:26:01+00:00",
+   "refs": [],
    "seeded": false
   },
   "urn:oid:2.49.0.1.840.0.86bb68369b44efaf5a770a8a31a65349e385fadc.001.1": {
@@ -65,6 +54,13 @@
    "refs": [
     "urn:oid:2.49.0.1.840.0.3683bebe5477d4a2af210bf53679002f8f77cd1a.001.1"
    ],
+   "seeded": false
+  },
+  "urn:oid:2.49.0.1.840.0.909c1990fe9691a53e2b9cf6732809468c1a77c1.001.1": {
+   "event": "High Wind Watch",
+   "first_seen": "2026-11-06T18:26:01+00:00",
+   "last_seen": "2026-11-06T18:26:01+00:00",
+   "refs": [],
    "seeded": false
   },
   "urn:oid:2.49.0.1.840.0.a1a5d086539b589aa7e5b18d1abf99d9e517c694.001.1": {
@@ -120,31 +116,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-05T23:46:30+00:00",
+ "updated": "2026-11-06T18:26:01+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-05T23:46:30+00:00"
+   "last_seen": "2026-11-06T18:26:01+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 1,
+   "cust": 3,
    "high": false,
-   "last_seen": "2026-11-05T23:46:30+00:00"
+   "last_seen": "2026-11-06T18:26:01+00:00"
   },
   "eweb": {
    "alerted": false,
-   "cust": 0,
+   "cust": 1,
    "high": false,
-   "last_seen": "2026-11-05T23:46:30+00:00"
+   "last_seen": "2026-11-06T18:26:01+00:00"
   },
   "pacific": {
    "alerted": false,
    "cust": 1,
    "high": false,
-   "last_seen": "2026-11-05T23:46:30+00:00"
+   "last_seen": "2026-11-06T18:26:01+00:00"
   }
  }
 }
