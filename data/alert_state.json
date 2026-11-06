@@ -59,7 +59,7 @@
   "urn:oid:2.49.0.1.840.0.909c1990fe9691a53e2b9cf6732809468c1a77c1.001.1": {
    "event": "High Wind Watch",
    "first_seen": "2026-11-06T18:26:01+00:00",
-   "last_seen": "2026-11-06T18:26:01+00:00",
+   "last_seen": "2026-11-06T23:25:04+00:00",
    "refs": [],
    "seeded": false
   },
@@ -95,6 +95,22 @@
     "urn:oid:2.49.0.1.840.0.960b65f13bfb17746b566f639313b4bec3f961ce.002.1"
    ],
    "seeded": false
+  },
+  "urn:oid:2.49.0.1.840.0.fd164afbd6eea6b9abb28be8772685df7936281d.001.1": {
+   "event": "High Surf Advisory",
+   "first_seen": "2026-11-06T23:25:04+00:00",
+   "last_seen": "2026-11-06T23:25:04+00:00",
+   "refs": [],
+   "seeded": false
+  },
+  "urn:oid:2.49.0.1.840.0.fd164afbd6eea6b9abb28be8772685df7936281d.001.2": {
+   "event": "Beach Hazards Statement",
+   "first_seen": "2026-11-06T23:25:04+00:00",
+   "last_seen": "2026-11-06T23:25:04+00:00",
+   "refs": [
+    "urn:oid:2.49.0.1.840.0.5eb3aed20e309738e5f6d69867f5e5dd61b9efb4.001.1"
+   ],
+   "seeded": false
   }
  },
  "outage": {},
@@ -116,31 +132,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-06T18:26:01+00:00",
+ "updated": "2026-11-06T23:25:04+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-06T18:26:01+00:00"
+   "last_seen": "2026-11-06T23:25:04+00:00"
   },
   "epud": {
    "alerted": false,
    "cust": 3,
    "high": false,
-   "last_seen": "2026-11-06T18:26:01+00:00"
+   "last_seen": "2026-11-06T23:25:04+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 1,
    "high": false,
-   "last_seen": "2026-11-06T18:26:01+00:00"
+   "last_seen": "2026-11-06T23:25:04+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 1,
+   "cust": 26,
    "high": false,
-   "last_seen": "2026-11-06T18:26:01+00:00"
+   "last_seen": "2026-11-06T23:25:04+00:00"
   }
  }
 }
