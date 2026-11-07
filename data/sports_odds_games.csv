@@ -3855,9 +3855,9 @@ date,sport,host,opponent,opponent_espn,venue,attendance,eid,home_rank,opp_rank,h
 2026-11-02,mens_basketball,UO,Montana Grizzlies,Montana Grizzlies,Matthew Knight Arena,4067.0,401922029,99.0,99.0,87.0,69.0,,,,,,,0,18.0,1.0,,,,,,,,0.0,0.0,156.0,,,0.0,0.0,0.0
 2026-11-02,womens_basketball,UO,Hawai'i Rainbow Wahine,Hawai'i Rainbow Wahine,Matthew Knight Arena,3856.0,401918901,99.0,99.0,87.0,54.0,,,,,,,0,33.0,1.0,,,,,,,,0.0,1.0,141.0,,,0.0,0.0,0.0
 2026-11-04,womens_basketball,OSU,California Baptist Lancers,California Baptist Lancers,Gill Coliseum,2859.0,401921577,99.0,99.0,77.0,79.0,,,,,,,0,-2.0,0.0,,,,,,,,1.0,0.0,156.0,,,0.0,0.0,0.0
-2026-11-06,mens_basketball,OSU,California Baptist Lancers,California Baptist Lancers,Gill Coliseum,,401920344,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
-2026-11-06,mens_basketball,UO,Eastern Washington Eagles,Eastern Washington Eagles,Matthew Knight Arena,,401920717,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
-2026-11-06,womens_basketball,UO,Washington State Cougars,Washington State Cougars,Matthew Knight Arena,,401903554,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
+2026-11-06,mens_basketball,OSU,California Baptist Lancers,California Baptist Lancers,Gill Coliseum,3120.0,401920344,99.0,99.0,96.0,68.0,,,,,,,0,28.0,1.0,,,,,,,,0.0,1.0,164.0,,,0.0,0.0,0.0
+2026-11-06,mens_basketball,UO,Eastern Washington Eagles,Eastern Washington Eagles,Matthew Knight Arena,4047.0,401920717,99.0,99.0,98.0,71.0,,,,,,,0,27.0,1.0,,,,,,,,0.0,1.0,169.0,,,0.0,0.0,0.0
+2026-11-06,womens_basketball,UO,Washington State Cougars,Washington State Cougars,Matthew Knight Arena,4531.0,401903554,99.0,99.0,64.0,57.0,,,,,,,0,7.0,1.0,,,,,,,,0.0,0.0,121.0,,,0.0,0.0,0.0
 2026-11-07,football,OSU,Texas State Bobcats,Texas State Bobcats,Reser Stadium,,401860912,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2026-11-08,womens_basketball,OSU,Eastern Washington Eagles,Eastern Washington Eagles,Gill Coliseum,,401926951,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2026-11-09,mens_basketball,OSU,Eastern Washington Eagles,Eastern Washington Eagles,Gill Coliseum,,401920718,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
