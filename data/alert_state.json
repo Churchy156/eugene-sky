@@ -9,13 +9,6 @@
    "refs": [],
    "seeded": false
   },
-  "urn:oid:2.49.0.1.840.0.2a829410ed53622c07a3213ad0823efaea81ff7a.001.1": {
-   "event": "Dense Fog Advisory",
-   "first_seen": "2026-11-01T08:06:34+00:00",
-   "last_seen": "2026-11-01T08:06:34+00:00",
-   "refs": [],
-   "seeded": false
-  },
   "urn:oid:2.49.0.1.840.0.34152a97e432212f5bf023a783a0ede13ab7c511.002.1": {
    "event": "High Surf Advisory",
    "first_seen": "2026-11-07T09:58:06+00:00",
@@ -33,6 +26,15 @@
    "refs": [
     "urn:oid:2.49.0.1.840.0.fd164afbd6eea6b9abb28be8772685df7936281d.001.2",
     "urn:oid:2.49.0.1.840.0.102215757395c16fce5bf23b194612c54c2909f9.002.2"
+   ],
+   "seeded": false
+  },
+  "urn:oid:2.49.0.1.840.0.41764d6c3f28b1a91a7ef4de6555b0c0cd958021.002.2": {
+   "event": "High Surf Advisory",
+   "first_seen": "2026-11-08T16:17:03+00:00",
+   "last_seen": "2026-11-08T16:17:03+00:00",
+   "refs": [
+    "urn:oid:2.49.0.1.840.0.696701c73e884843829913e1c900cf4f2248dec2.002.1"
    ],
    "seeded": false
   },
@@ -120,31 +122,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-07T23:41:48+00:00",
+ "updated": "2026-11-08T16:17:03+00:00",
  "util": {
   "blachly": {
    "alerted": false,
-   "cust": 0,
+   "cust": 3,
    "high": false,
-   "last_seen": "2026-11-07T23:41:48+00:00"
+   "last_seen": "2026-11-08T16:17:03+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 5,
+   "cust": 9,
    "high": false,
-   "last_seen": "2026-11-07T23:41:48+00:00"
+   "last_seen": "2026-11-08T16:17:03+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-07T23:41:48+00:00"
+   "last_seen": "2026-11-08T16:17:03+00:00"
   },
   "pacific": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-07T23:41:48+00:00"
+   "last_seen": "2026-11-08T16:17:03+00:00"
   }
  }
 }
