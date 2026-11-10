@@ -96,13 +96,6 @@
    "refs": [],
    "seeded": false
   },
-  "urn:oid:2.49.0.1.840.0.a422ccf468a10f34306470641c3e3c2fedc54321.001.1": {
-   "event": "Dense Fog Advisory",
-   "first_seen": "2026-11-02T09:46:56+00:00",
-   "last_seen": "2026-11-02T09:46:56+00:00",
-   "refs": [],
-   "seeded": false
-  },
   "urn:oid:2.49.0.1.840.0.fd164afbd6eea6b9abb28be8772685df7936281d.001.1": {
    "event": "High Surf Advisory",
    "first_seen": "2026-11-06T23:25:04+00:00",
@@ -139,31 +132,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-09T05:59:35+00:00",
+ "updated": "2026-11-10T00:06:23+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-09T05:59:35+00:00"
+   "last_seen": "2026-11-10T00:06:23+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 6,
+   "cust": 2,
    "high": false,
-   "last_seen": "2026-11-09T05:59:35+00:00"
+   "last_seen": "2026-11-10T00:06:23+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-09T05:59:35+00:00"
+   "last_seen": "2026-11-10T00:06:23+00:00"
   },
   "pacific": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-09T05:59:35+00:00"
+   "last_seen": "2026-11-10T00:06:23+00:00"
   }
  }
 }
