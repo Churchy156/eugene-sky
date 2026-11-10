@@ -113,7 +113,18 @@
    "seeded": false
   }
  },
- "outage": {},
+ "outage": {
+  "pac:44.622,-123.116|10:40 PM on 11/09": {
+   "alerted": true,
+   "cust": 884,
+   "first_seen": "2026-11-10T07:09:48+00:00",
+   "last_seen": "2026-11-10T07:09:48+00:00",
+   "peak": 884,
+   "seeded_big": false,
+   "util": "pacific",
+   "where": "near Albany (ZIP 97321), 39 mi from Eugene"
+  }
+ },
  "quake": {
   "nc75462637": {
    "first_seen": "2026-11-05T10:49:24+00:00",
@@ -132,31 +143,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-10T00:06:23+00:00",
+ "updated": "2026-11-10T07:09:48+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-10T00:06:23+00:00"
+   "last_seen": "2026-11-10T07:09:48+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 2,
+   "cust": 1,
    "high": false,
-   "last_seen": "2026-11-10T00:06:23+00:00"
+   "last_seen": "2026-11-10T07:09:48+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-10T00:06:23+00:00"
+   "last_seen": "2026-11-10T07:09:48+00:00"
   },
   "pacific": {
-   "alerted": false,
-   "cust": 0,
-   "high": false,
-   "last_seen": "2026-11-10T00:06:23+00:00"
+   "alerted": true,
+   "cust": 884,
+   "high": true,
+   "last_seen": "2026-11-10T07:09:48+00:00"
   }
  }
 }
