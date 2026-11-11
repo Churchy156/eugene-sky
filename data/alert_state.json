@@ -82,13 +82,6 @@
    ],
    "seeded": false
   },
-  "urn:oid:2.49.0.1.840.0.86bb68369b44efaf5a770a8a31a65349e385fadc.001.1": {
-   "event": "Dense Fog Advisory",
-   "first_seen": "2026-11-04T17:37:42+00:00",
-   "last_seen": "2026-11-04T17:37:42+00:00",
-   "refs": [],
-   "seeded": false
-  },
   "urn:oid:2.49.0.1.840.0.909c1990fe9691a53e2b9cf6732809468c1a77c1.001.1": {
    "event": "High Wind Watch",
    "first_seen": "2026-11-06T18:26:01+00:00",
@@ -113,7 +106,18 @@
    "seeded": false
   }
  },
- "outage": {},
+ "outage": {
+  "pac:44.610,-123.093|02:23 PM on 11/11": {
+   "alerted": true,
+   "cust": 65,
+   "first_seen": "2026-11-11T22:39:37+00:00",
+   "last_seen": "2026-11-11T22:39:37+00:00",
+   "peak": 65,
+   "seeded_big": false,
+   "util": "pacific",
+   "where": "near Albany (ZIP 97322), 39 mi from Eugene"
+  }
+ },
  "quake": {
   "nc75462637": {
    "first_seen": "2026-11-05T10:49:24+00:00",
@@ -132,31 +136,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-11T08:00:38+00:00",
+ "updated": "2026-11-11T22:39:37+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-11T08:00:38+00:00"
+   "last_seen": "2026-11-11T22:39:37+00:00"
   },
   "epud": {
    "alerted": false,
    "cust": 1,
    "high": false,
-   "last_seen": "2026-11-11T08:00:38+00:00"
+   "last_seen": "2026-11-11T22:39:37+00:00"
   },
   "eweb": {
    "alerted": false,
-   "cust": 0,
+   "cust": 9,
    "high": false,
-   "last_seen": "2026-11-11T08:00:38+00:00"
+   "last_seen": "2026-11-11T22:39:37+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 5,
+   "cust": 75,
    "high": false,
-   "last_seen": "2026-11-11T08:00:38+00:00"
+   "last_seen": "2026-11-11T22:39:37+00:00"
   }
  }
 }
