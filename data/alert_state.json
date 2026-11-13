@@ -48,11 +48,13 @@
    ],
    "seeded": false
   },
-  "urn:oid:2.49.0.1.840.0.5eb3aed20e309738e5f6d69867f5e5dd61b9efb4.001.1": {
-   "event": "Beach Hazards Statement",
-   "first_seen": "2026-11-06T18:26:01+00:00",
-   "last_seen": "2026-11-06T18:26:01+00:00",
-   "refs": [],
+  "urn:oid:2.49.0.1.840.0.5461048a3a8bb472b22a0f7e5c34fadaa889761a.003.1": {
+   "event": "High Surf Warning",
+   "first_seen": "2026-11-13T21:26:57+00:00",
+   "last_seen": "2026-11-13T21:26:57+00:00",
+   "refs": [
+    "urn:oid:2.49.0.1.840.0.21f7070395cbf30a5af8bb01403b0586723849d4.003.1"
+   ],
    "seeded": false
   },
   "urn:oid:2.49.0.1.840.0.696701c73e884843829913e1c900cf4f2248dec2.002.1": {
@@ -130,31 +132,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-13T15:12:48+00:00",
+ "updated": "2026-11-13T21:26:57+00:00",
  "util": {
   "blachly": {
    "alerted": false,
-   "cust": 19,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-11-13T15:12:48+00:00"
+   "last_seen": "2026-11-13T21:26:57+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 1,
+   "cust": 11,
    "high": false,
-   "last_seen": "2026-11-13T15:12:48+00:00"
+   "last_seen": "2026-11-13T21:26:57+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-13T15:12:48+00:00"
+   "last_seen": "2026-11-13T21:26:57+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 0,
+   "cust": 1,
    "high": false,
-   "last_seen": "2026-11-13T15:12:48+00:00"
+   "last_seen": "2026-11-13T21:26:57+00:00"
   }
  }
 }
