@@ -54,6 +54,15 @@
    ],
    "seeded": false
   },
+  "urn:oid:2.49.0.1.840.0.3ac8787698e44fd3380ac39c3682ca5f7c68cd96.001.1": {
+   "event": "High Surf Advisory",
+   "first_seen": "2026-11-15T10:32:30+00:00",
+   "last_seen": "2026-11-15T10:32:30+00:00",
+   "refs": [
+    "urn:oid:2.49.0.1.840.0.27bad849ce4ea138e5ed4ff3dce3dff7cf52a8cc.001.2"
+   ],
+   "seeded": false
+  },
   "urn:oid:2.49.0.1.840.0.41764d6c3f28b1a91a7ef4de6555b0c0cd958021.002.2": {
    "event": "High Surf Advisory",
    "first_seen": "2026-11-08T16:17:03+00:00",
@@ -69,26 +78,6 @@
    "last_seen": "2026-11-13T21:26:57+00:00",
    "refs": [
     "urn:oid:2.49.0.1.840.0.21f7070395cbf30a5af8bb01403b0586723849d4.003.1"
-   ],
-   "seeded": false
-  },
-  "urn:oid:2.49.0.1.840.0.696701c73e884843829913e1c900cf4f2248dec2.002.1": {
-   "event": "High Surf Advisory",
-   "first_seen": "2026-11-07T23:41:48+00:00",
-   "last_seen": "2026-11-07T23:41:48+00:00",
-   "refs": [
-    "urn:oid:2.49.0.1.840.0.fd164afbd6eea6b9abb28be8772685df7936281d.001.1",
-    "urn:oid:2.49.0.1.840.0.34152a97e432212f5bf023a783a0ede13ab7c511.002.1"
-   ],
-   "seeded": false
-  },
-  "urn:oid:2.49.0.1.840.0.696701c73e884843829913e1c900cf4f2248dec2.002.2": {
-   "event": "Beach Hazards Statement",
-   "first_seen": "2026-11-07T23:41:48+00:00",
-   "last_seen": "2026-11-07T23:41:48+00:00",
-   "refs": [
-    "urn:oid:2.49.0.1.840.0.fd164afbd6eea6b9abb28be8772685df7936281d.001.2",
-    "urn:oid:2.49.0.1.840.0.34152a97e432212f5bf023a783a0ede13ab7c511.002.2"
    ],
    "seeded": false
   },
@@ -124,31 +113,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-14T23:26:20+00:00",
+ "updated": "2026-11-15T10:32:30+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-14T23:26:20+00:00"
+   "last_seen": "2026-11-15T10:32:30+00:00"
   },
   "epud": {
    "alerted": false,
    "cust": 13,
    "high": false,
-   "last_seen": "2026-11-14T23:26:20+00:00"
+   "last_seen": "2026-11-15T10:32:30+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-14T23:26:20+00:00"
+   "last_seen": "2026-11-15T10:32:30+00:00"
   },
   "pacific": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-14T23:26:20+00:00"
+   "last_seen": "2026-11-15T10:32:30+00:00"
   }
  }
 }
