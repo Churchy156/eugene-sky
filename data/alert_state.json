@@ -65,6 +65,15 @@
    ],
    "seeded": false
   },
+  "urn:oid:2.49.0.1.840.0.629b9c58fa077a69afba945cd4cc515e3fc55558.001.1": {
+   "event": "High Surf Advisory",
+   "first_seen": "2026-11-16T18:54:40+00:00",
+   "last_seen": "2026-11-16T18:54:40+00:00",
+   "refs": [
+    "urn:oid:2.49.0.1.840.0.a916494e7a2b967c1ab7b8b2aca8be3000166211.001.1"
+   ],
+   "seeded": false
+  },
   "urn:oid:2.49.0.1.840.0.9da6e34a3e98a5b34a7e1425e24ee37260960fe3.001.1": {
    "event": "High Surf Advisory",
    "first_seen": "2026-11-15T21:58:04+00:00",
@@ -105,31 +114,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-16T08:38:04+00:00",
+ "updated": "2026-11-16T18:54:40+00:00",
  "util": {
   "blachly": {
    "alerted": false,
-   "cust": 0,
+   "cust": 17,
    "high": false,
-   "last_seen": "2026-11-16T08:38:04+00:00"
+   "last_seen": "2026-11-16T18:54:40+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 8,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-11-16T08:38:04+00:00"
+   "last_seen": "2026-11-16T18:54:40+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 1,
    "high": false,
-   "last_seen": "2026-11-16T08:38:04+00:00"
+   "last_seen": "2026-11-16T18:54:40+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 2,
+   "cust": 21,
    "high": false,
-   "last_seen": "2026-11-16T08:38:04+00:00"
+   "last_seen": "2026-11-16T18:54:40+00:00"
   }
  }
 }
