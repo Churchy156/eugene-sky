@@ -65,22 +65,21 @@
    ],
    "seeded": false
   },
-  "urn:oid:2.49.0.1.840.0.82a1432a32ed2d988a0510da8cd6d8f013687504.001.1": {
-   "event": "High Surf Warning",
-   "first_seen": "2026-11-09T05:59:35+00:00",
-   "last_seen": "2026-11-09T05:59:35+00:00",
-   "refs": [
-    "urn:oid:2.49.0.1.840.0.06f32577af14ac2a3815203abd691e7736b9b9cd.001.2",
-    "urn:oid:2.49.0.1.840.0.06f32577af14ac2a3815203abd691e7736b9b9cd.002.1"
-   ],
-   "seeded": false
-  },
   "urn:oid:2.49.0.1.840.0.9da6e34a3e98a5b34a7e1425e24ee37260960fe3.001.1": {
    "event": "High Surf Advisory",
    "first_seen": "2026-11-15T21:58:04+00:00",
    "last_seen": "2026-11-15T21:58:04+00:00",
    "refs": [
     "urn:oid:2.49.0.1.840.0.3ac8787698e44fd3380ac39c3682ca5f7c68cd96.001.1"
+   ],
+   "seeded": false
+  },
+  "urn:oid:2.49.0.1.840.0.a916494e7a2b967c1ab7b8b2aca8be3000166211.001.1": {
+   "event": "High Surf Advisory",
+   "first_seen": "2026-11-16T08:38:04+00:00",
+   "last_seen": "2026-11-16T08:38:04+00:00",
+   "refs": [
+    "urn:oid:2.49.0.1.840.0.9da6e34a3e98a5b34a7e1425e24ee37260960fe3.001.1"
    ],
    "seeded": false
   },
@@ -106,31 +105,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-15T21:58:04+00:00",
+ "updated": "2026-11-16T08:38:04+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-15T21:58:04+00:00"
+   "last_seen": "2026-11-16T08:38:04+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 14,
+   "cust": 8,
    "high": false,
-   "last_seen": "2026-11-15T21:58:04+00:00"
+   "last_seen": "2026-11-16T08:38:04+00:00"
   },
   "eweb": {
    "alerted": false,
-   "cust": 0,
+   "cust": 1,
    "high": false,
-   "last_seen": "2026-11-15T21:58:04+00:00"
+   "last_seen": "2026-11-16T08:38:04+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 0,
+   "cust": 2,
    "high": false,
-   "last_seen": "2026-11-15T21:58:04+00:00"
+   "last_seen": "2026-11-16T08:38:04+00:00"
   }
  }
 }
