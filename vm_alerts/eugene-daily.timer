@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Eugene daily outlook weekdays at 6:45 AM Pacific
+
+[Timer]
+OnCalendar=Mon..Fri 06:45:00
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

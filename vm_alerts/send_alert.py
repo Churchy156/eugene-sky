@@ -1,14 +1,19 @@
 #!/usr/bin/env python3
 """Email one alert (plain + HTML, quake map inline via cid: and attached) straight over SMTP.
-Usage: send_alert.py <alert.md> <alert.html> <map.png or -> [--test] [--check]
+Usage: send_alert.py <alert.md> <alert.html> <map.png or -> [--test] [--check] [--self-test]
 Settings come from /etc/eugene-alerts/alerts.env (root-only), loaded by run_alerts.sh:
-  SMTP_HOST, SMTP_PORT (587 STARTTLS / 465 SSL), SMTP_USER, SMTP_FROM, ALERT_TO
+  SMTP_HOST, SMTP_PORT (587 STARTTLS / 465 SSL), SMTP_USER, SMTP_FROM, SMTP_REPLY_TO, ALERT_TO
   SMTP_PASSWORD_REF  = op://vault/item/field  (read at run time with the 1Password CLI; needs OP_SERVICE_ACCOUNT_TOKEN)
   or SMTP_PASSWORD   = the app password itself (only inside the root-only env file)
-The password is never printed or logged."""
-import os, sys, ssl, smtplib, subprocess, mimetypes
+The password is never printed or logged.
+Recipient is hard-coded to steve@cobaltservicesinc.com; any other ALERT_TO is refused."""
+import os, sys, ssl, smtplib, subprocess, tempfile
 from email.message import EmailMessage
 from email.utils import formatdate, make_msgid
+
+ALLOWED_TO = 'steve@cobaltservicesinc.com'
+DEFAULT_REPLY_TO = 'eugene-sky+crazy-data-set-bot@mail.grokbot.com'
+TEST_SUBJECT = 'TEST: Eugene alert self-send'
 
 def secret(name):
     ref = os.environ.get(name + '_REF')
@@ -26,42 +31,80 @@ def configured():
     if not (os.environ.get('SMTP_PASSWORD_REF') or os.environ.get('SMTP_PASSWORD')): miss.append('SMTP_PASSWORD(_REF)')
     return miss
 
+def recipient():
+    to = (os.environ.get('ALERT_TO') or ALLOWED_TO).strip()
+    if to.lower() != ALLOWED_TO:
+        raise RuntimeError('refusing to send: ALERT_TO is not the allowed recipient')
+    return ALLOWED_TO
+
+def build_message(subject, text, body_html, png):
+    m = EmailMessage()
+    m['Subject'] = subject
+    m['From'] = os.environ.get('SMTP_FROM') or os.environ['SMTP_USER']
+    m['To'] = recipient()
+    m['Reply-To'] = os.environ.get('SMTP_REPLY_TO') or DEFAULT_REPLY_TO
+    m['Date'] = formatdate(localtime=True)
+    m['Message-ID'] = make_msgid('eugene-alerts')
+    m.set_content(text)
+    if png and os.path.exists(png):
+        name = os.path.basename(png)
+        m.add_alternative(body_html, subtype='html')
+        data = open(png, 'rb').read()
+        m.get_payload()[1].add_related(data, 'image', 'png', cid=f'<{name}>', filename=name, disposition='inline')
+        m.add_attachment(data, maintype='image', subtype='png', filename=name)
+    else:
+        m.add_alternative(body_html, subtype='html')
+    return m
+
+def smtp_send(m):
+    host = os.environ['SMTP_HOST']
+    port = int(os.environ.get('SMTP_PORT', '587'))
+    pw = secret('SMTP_PASSWORD')
+    ctx = ssl.create_default_context()
+    if port == 465:
+        s = smtplib.SMTP_SSL(host, port, context=ctx, timeout=60)
+    else:
+        s = smtplib.SMTP(host, port, timeout=60)
+        s.starttls(context=ctx)
+    with s:
+        s.login(os.environ['SMTP_USER'], pw)
+        refused = s.send_message(m)
+    if refused:
+        raise RuntimeError('SMTP refused some recipients')
+    return True
+
 def main():
-    a = [x for x in sys.argv[1:] if not x.startswith('--')]; test = '--test' in sys.argv
+    flags = {x for x in sys.argv[1:] if x.startswith('--')}
+    a = [x for x in sys.argv[1:] if not x.startswith('--')]
+    test = '--test' in flags or '--self-test' in flags
     miss = configured()
-    if '--check' in sys.argv:
+    if '--check' in flags:
         print('ok' if not miss else 'missing: ' + ','.join(miss)); return 0 if not miss else 3
     if miss: print('send skipped, missing: ' + ','.join(miss), file=sys.stderr); return 3
+    recipient()  # refuse early if ALERT_TO is wrong
+
+    if '--self-test' in flags:
+        subject = TEST_SUBJECT
+        text = ('This is a TEST email from the GROKBOTS alert computer (eugene-alerts VM). '
+                'Nothing in it is a real alert.\n')
+        body_html = (f'<p style="background:#fff3cd;padding:8px;border:1px solid #e0c36a"><b>{text.strip()}</b></p>'
+                     '<p>If you received this, the VM can send Eugene emails on its own.</p>')
+        m = build_message(subject, text, body_html, None)
+        smtp_send(m)
+        print(f'sent: {subject}'); return 0
+
     md, html, att = a[0], a[1], a[2]
     text = open(md, encoding='utf-8').read(); body_html = open(html, encoding='utf-8').read()
     subject = text.splitlines()[0].lstrip('# ').strip()
     if test:
         note = 'This is a TEST email from the GROKBOTS alert computer (eugene-alerts VM). Nothing in it is real.'
-        subject = '[TEST] ' + subject; text = note + '\n\n' + text
+        subject = TEST_SUBJECT
+        text = note + '\n\n' + text
         body_html = (f'<p style="background:#fff3cd;padding:8px;border:1px solid #e0c36a"><b>{note}</b></p>' + body_html)
-    m = EmailMessage()
-    m['Subject'] = subject; m['From'] = os.environ.get('SMTP_FROM') or os.environ['SMTP_USER']
-    m['To'] = os.environ['ALERT_TO']; m['Date'] = formatdate(localtime=True); m['Message-ID'] = make_msgid('eugene-alerts')
-    m.set_content(text)
     adir = os.environ.get('ALERT_ATTACH', '.')
     png = None if att in ('-', '') else (att if os.path.isabs(att) else os.path.join(adir, att))
-    if png and os.path.exists(png):
-        name = os.path.basename(png)
-        m.add_alternative(body_html, subtype='html')
-        data = open(png, 'rb').read()
-        # inline copy for <img src="cid:NAME">
-        m.get_payload()[1].add_related(data, 'image', 'png', cid=f'<{name}>', filename=name, disposition='inline')
-        m.add_attachment(data, maintype='image', subtype='png', filename=name)
-    else:
-        m.add_alternative(body_html, subtype='html')
-    host = os.environ['SMTP_HOST']; port = int(os.environ.get('SMTP_PORT', '587')); pw = secret('SMTP_PASSWORD')
-    ctx = ssl.create_default_context()
-    if port == 465:
-        s = smtplib.SMTP_SSL(host, port, context=ctx, timeout=60)
-    else:
-        s = smtplib.SMTP(host, port, timeout=60); s.starttls(context=ctx)
-    with s:
-        s.login(os.environ['SMTP_USER'], pw); s.send_message(m)
+    m = build_message(subject, text, body_html, png)
+    smtp_send(m)
     print(f'sent: {subject}'); return 0
 
 if __name__ == '__main__':

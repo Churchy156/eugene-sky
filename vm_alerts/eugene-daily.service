@@ -1,0 +1,9 @@
+[Unit]
+Description=Eugene weekday daily outlook - build and send
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/eugene-alerts/repo/vm_alerts/run_daily.sh
+TimeoutStartSec=480

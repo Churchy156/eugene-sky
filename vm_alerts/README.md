@@ -5,3 +5,4 @@ checker -> email over SMTP (no bot) -> heartbeat to repo variable `ALERT_PRIMARY
 when the heartbeat is missing or older than 30 minutes. Settings: `/etc/eugene-alerts/alerts.env` (see example).
 Logs: /var/log/eugene-alerts/ (logrotate weekly, 8 kept). State: /var/lib/eugene-alerts/alert_state.json.
 Test email: `sudo /opt/eugene-alerts/repo/vm_alerts/run_alerts.sh --test`.
+Weekday daily outlook: `eugene-daily.timer` at 6:45 AM PT runs `run_daily.sh` (build + send via the same SMTP). Test: `sudo /opt/eugene-alerts/repo/vm_alerts/run_daily.sh`.
