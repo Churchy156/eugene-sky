@@ -8,6 +8,14 @@ for f in /etc/eugene-alerts/op.env /etc/eugene-alerts/alerts.env; do [ -f "$f" ]
 export TZ=America/Los_Angeles MPLBACKEND=Agg FEED_TIMEOUT=20
 export ALERT_ATTACH=$REPO/reports
 log(){ echo "$(date '+%F %T %Z') $*" >> "$LOGF"; }
+if [ -z "${TRIPCHECK_KEY:-}" ] && [ -n "${TRIPCHECK_KEY_REF:-}" ]; then
+  if k=$(op read --no-newline "$TRIPCHECK_KEY_REF" 2>>"$LOGF"); then
+    export TRIPCHECK_KEY="$k"
+  else
+    log "TRIPCHECK_KEY_REF could not be read"
+  fi
+  unset k
+fi
 exec 9>"$DATA/.daily.lock"; flock -n 9 || { log "previous daily run still going, skipping"; exit 0; }
 # Weekdays only (timer is also weekdays; this is a belt-and-suspenders check)
 if [ "$(date +%u)" -ge 6 ]; then log "weekend, skip"; exit 0; fi

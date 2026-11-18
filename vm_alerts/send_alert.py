@@ -45,6 +45,8 @@ def build_message(subject, text, body_html, png):
     m['Reply-To'] = os.environ.get('SMTP_REPLY_TO') or DEFAULT_REPLY_TO
     m['Date'] = formatdate(localtime=True)
     m['Message-ID'] = make_msgid('eugene-alerts')
+    # Keep links as written (no click.maileroo.net rewrite) for this mailbox's SMTP sends.
+    m['X-Maileroo-Track'] = 'no'
     m.set_content(text)
     if png and os.path.exists(png):
         name = os.path.basename(png)

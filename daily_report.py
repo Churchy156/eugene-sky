@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """Plain-language daily outlook for Eugene/Lane County. Usage: python daily_report.py [YYYY-MM-DD]
 Writes reports/outlook_YYYY-MM-DD.md and prints it. Each source is fetched independently; failures are reported, not fatal.
-Optional env: TRIPCHECK_KEY (ODOT TripCheck API subscription key, free registration at apiportal.odot.state.or.us)."""
-import os, sys, json, math, pickle, datetime as dt
+Optional env: TRIPCHECK_KEY or TRIPCHECK_KEY_REF=op://vault/item/field (ODOT TripCheck API).
+Roads cover incidents, closures and conditions for I-5, OR-126 and OR-58 near Eugene.
+Pass --roads-only to print just that section (no email files)."""
+import os, sys, json, math, pickle, datetime as dt, re, subprocess
 import requests, ephem, numpy as np, pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar
 from zoneinfo import ZoneInfo
 PT=ZoneInfo('America/Los_Angeles'); HERE=os.path.dirname(os.path.abspath(__file__))
 LAT,LON=44.05,-123.09; UA={'User-Agent':'eugene-env daily_report (personal research)'}
-day=pd.Timestamp(sys.argv[1]) if len(sys.argv)>1 else pd.Timestamp(dt.datetime.now(PT).date())
+_args=[a for a in sys.argv[1:] if not a.startswith('--')]
+day=pd.Timestamp(_args[0]) if _args else pd.Timestamp(dt.datetime.now(PT).date())
 out=[f'# Eugene daily outlook — {day:%A %b %d, %Y}', f'_Generated {dt.datetime.now(PT):%Y-%m-%d %H:%M} PT_','']
 def get(url,headers=None,**kw):
     r=requests.get(url,headers={**UA,**(headers or {})},timeout=25,**kw); r.raise_for_status(); return r
@@ -29,12 +32,146 @@ def alerts():
     f=get('https://api.weather.gov/alerts/active',params={'zone':'ORZ118,ORC039'}).json()['features']
     if not f: return ['- No active NWS watches, warnings or advisories for Eugene / Lane County.']
     return [f"- **{a['properties']['event']}** until {a['properties'].get('ends') or a['properties'].get('expires')}: {a['properties']['headline']}" for a in f]
+def _secret_env(name):
+    v=os.environ.get(name)
+    if v: return v
+    ref=os.environ.get(name+'_REF')
+    if not ref: return None
+    r=subprocess.run(['op','read','--no-newline',ref],capture_output=True,text=True,timeout=60)
+    if r.returncode!=0: raise RuntimeError(f'1Password read failed for {name}')
+    return r.stdout
+
+def _hav_pt(lat,lon):
+    p1,p2=math.radians(LAT),math.radians(lat); dl=math.radians(lon-LON)
+    a=math.sin((p2-p1)/2)**2+math.cos(p1)*math.cos(p2)*math.sin(dl/2)**2
+    return 2*3958.8*math.asin(math.sqrt(a))
+
+def _route_group(rid):
+    s=re.sub(r'[^A-Za-z0-9]','',(rid or '').upper())
+    if s in {'I5','I05'}: return 'I-5'
+    if s.startswith('OR126') or s.startswith('ORE126'): return 'OR-126'
+    if s.startswith('OR58') or s.startswith('ORE58'): return 'OR-58'
+    return None
+
+def _loc_pts(loc):
+    loc=loc or {}
+    s,e=loc.get('start-location') or {}, loc.get('end-location') or {}
+    return [(lat,lon) for lat,lon in ((s.get('start-lat'),s.get('start-long')),(e.get('end-lat'),e.get('end-long'))) if lat and lon]
+
+def _nearest_mi(pts):
+    return min((_hav_pt(*p) for p in pts), default=None)
+
+INCIDENT_MI=50
+COND_MI={'I-5':50,'OR-126':80,'OR-58':80}  # I-5 stays near Cottage Grove/Rice Hill; OR-58 includes Willamette Pass
+ROUTE_ORDER=('I-5','OR-126','OR-58')
+
+def _inc_kind(i):
+    t,imp=(i.get('event-type-id') or ''), (i.get('impact-desc') or '')
+    if 'closure' in imp.lower() or str(i.get('event-subtype-id'))=='465': return 0,'CLOSURE'
+    if t=='VH': return 1,'Crash'
+    if t=='WT': return 2,'Weather'
+    if t=='OB': return 3,'Obstruction'
+    if t=='RW': return 5,'Construction'
+    return 4,'Incident'
+
 def roads():
-    k=os.environ.get('TRIPCHECK_KEY')
-    if not k: return ['- ODOT TripCheck API needs a free subscription key (set TRIPCHECK_KEY). Meanwhile see https://tripcheck.com/ (I-5, OR-126, OR-58 near Eugene).']
-    r=get('https://api.odot.state.or.us/tripcheck/Incidents',headers={**UA,'Ocp-Apim-Subscription-Key':k}).json()
-    inc=[i for i in r.get('incidents',[]) if 'Lane' in json.dumps(i)]
-    return [f"- {len(inc)} TripCheck incidents/closures mentioning Lane County."]+[f"  - {i.get('headline') or i.get('comments','')[:120]}" for i in inc[:8]]
+    k=_secret_env('TRIPCHECK_KEY')
+    if not k:
+        return ['- ODOT TripCheck API key is not configured (set TRIPCHECK_KEY_REF on the alert computer). I-5, OR-126 and OR-58 near Eugene are not listed in this run.']
+    h={**UA,'Ocp-Apim-Subscription-Key':k}
+    inc=get('https://api.odot.state.or.us/tripcheck/Incidents',headers=h).json().get('incidents') or []
+    cond=get('https://api.odot.state.or.us/tripcheck/RW/Reports',headers=h).json().get('road-weather-reports') or []
+    meta=(get('https://api.odot.state.or.us/tripcheck/RW/Metadata',headers=h).json().get('road-weather-items') or {})
+    wx={int(x['weather-id']):x['weather-desc'] for x in meta.get('weather-condition-list') or []}
+    rd={int(x['road-cond-id']):x['road-cond-desc'] for x in meta.get('road-condition-list') or []}
+    drv={str(x['restriction-id']):x['restriction-desc'] for x in meta.get('driving-restriction-list') or []}
+    now=dt.datetime.now(PT)
+
+    def active_inc(i):
+        if str(i.get('is-active','true')).lower()!='true': return False
+        loc=i.get('location') or {}
+        grp=_route_group(loc.get('route-id'))
+        if not grp: return False
+        pts=_loc_pts(loc); mi=_nearest_mi(pts)
+        return mi is not None and mi<=INCIDENT_MI
+
+    def active_cond(x):
+        exp=x.get('expiry-time')
+        if exp:
+            try:
+                ts=pd.Timestamp(exp)
+                if ts.tzinfo is None: ts=ts.tz_localize(PT)
+                if ts<now: return False
+            except Exception:
+                pass
+        loc=x.get('location') or {}
+        grp=_route_group(loc.get('route-id'))
+        if not grp: return False
+        pts=_loc_pts(loc); mi=_nearest_mi(pts)
+        return mi is not None and mi<=COND_MI.get(grp,80)
+
+    incs=[i for i in inc if active_inc(i)]
+    conds=[x for x in cond if active_cond(x)]
+    n_close=sum(_inc_kind(i)[0]==0 for i in incs)
+    n_crash=sum(_inc_kind(i)[0]==1 for i in incs)
+    L=[f"- I-5, OR-126 and OR-58 near Eugene: {len(incs)} incident{'s' if len(incs)!=1 else ''} ({n_close} closure{'s' if n_close!=1 else ''}, {n_crash} crash{'es' if n_crash!=1 else ''}) and {len(conds)} road-weather report{'s' if len(conds)!=1 else ''}."]
+
+    def fmt_inc(i):
+        loc=i.get('location') or {}
+        desc=(loc.get('start-location') or {}).get('location-desc') or loc.get('route-id') or ''
+        kind=_inc_kind(i)[1]
+        head=(i.get('headline') or i.get('comments') or '').strip()
+        imp=(i.get('impact-desc') or '').strip()
+        extra=f' ({imp})' if imp and imp.lower() not in head.lower() else ''
+        return f"  - **{kind}** {desc}: {head[:140]}{extra}"
+
+    def fmt_cond(x):
+        loc=x.get('location') or {}
+        name=loc.get('location-name') or (loc.get('start-location') or {}).get('location-desc') or loc.get('route-id') or 'station'
+        bits=[]
+        wid=(x.get('weather-conditions') or {}).get('weather-id')
+        rid=(x.get('road-conditions') or {}).get('road-cond-id')
+        if wid is not None and int(wid) not in (0,) and wx.get(int(wid)):
+            w=wx[int(wid)]
+            if w!='No Report': bits.append(w)
+        if rid is not None and int(rid) not in (0,) and rd.get(int(rid)):
+            rdesc=rd[int(rid)]
+            if rdesc!='No Report': bits.append(rdesc)
+        air=x.get('air-temperature')
+        if air is not None:
+            try: bits.append(f"{air*9/5+32:.0f}°F")
+            except Exception: pass
+        rest=str((x.get('driving-restriction') or {}).get('restriction-id') or '')
+        rdesc=drv.get(rest,'')
+        snowish = (rid is not None and int(rid) in {2,3,5,6}) or (wid is not None and int(wid) in {7,8,9,91,92,93})
+        # "A" (carry chains) is posted widely in winter; mention it on snow/ice or passes, and always mention B–D.
+        if rest in {'B','B1','C','D'} or (rest=='A' and snowish) or (rest=='A' and 'pass' in name.lower()):
+            if rdesc and not rdesc.startswith('<'): bits.append(rdesc)
+        comm=(x.get('comments') or '').strip()
+        if comm and comm.lower() not in ' '.join(bits).lower(): bits.append(comm[:140])
+        return f"  - {name.title()}: {'; '.join(bits) if bits else 'no unusual conditions reported.'}"
+
+    for grp in ROUTE_ORDER:
+        gi=[i for i in incs if _route_group((i.get('location') or {}).get('route-id'))==grp]
+        gc=[x for x in conds if _route_group((x.get('location') or {}).get('route-id'))==grp]
+        gi.sort(key=lambda i: (_inc_kind(i)[0], _nearest_mi(_loc_pts(i.get('location') or {})) or 99))
+        gc.sort(key=lambda x: _nearest_mi(_loc_pts(x.get('location') or {})) or 99)
+        L.append(f"- **{grp}**")
+        if not gi and not gc:
+            L.append(f"  - No incidents, closures or road-weather reports near Eugene.")
+            continue
+        if gi:
+            L.extend(fmt_inc(i) for i in gi[:6])
+            if len(gi)>6: L.append(f"  - …and {len(gi)-6} more on {grp}.")
+        else:
+            L.append("  - No incidents or closures near Eugene.")
+        if gc:
+            L.append("  - Conditions:")
+            L.extend(fmt_cond(x) for x in gc[:4])
+        else:
+            L.append("  - No road-weather reports near Eugene.")
+    return L
+
 def fire():
     q=get('https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Incident_Locations_Current/FeatureServer/0/query',params=dict(where="IncidentTypeCategory='WF'",geometry=f'{LON},{LAT}',geometryType='esriGeometryPoint',distance=100,units='esriSRUnit_StatuteMile',inSR=4326,outFields='IncidentName,IncidentSize,PercentContained',f='json')).json()['features']
     q=sorted([x['attributes'] for x in q],key=lambda a:-(a['IncidentSize'] or 0))
@@ -215,6 +352,10 @@ def ring_of_fire():  # GeoNet + Pacific Ring of Fire (shared code in eugene-sky/
     import ringfire_core
     return ringfire_core.report_lines()
 
+if '--roads-only' in sys.argv:
+    try: lines=roads()
+    except Exception as e: lines=[f'- (unavailable: {type(e).__name__}: {str(e)[:120]})']
+    print('\n'.join(['## Roads (ODOT TripCheck)']+lines)); sys.exit(0)
 section('Weather',weather); section('NWS alerts',alerts); section('Roads (ODOT TripCheck)',roads); section('Wildfire & smoke',fire)
 section('Rivers (NOAA NWPS)',rivers); section('Events & calendar',events); section('Daylight',daylight); section('Space weather (NOAA SWPC)',space)
 section('Earthquakes',earthquakes); section('Ring of Fire (Pacific quakes, volcanoes, tsunami)',ring_of_fire)
