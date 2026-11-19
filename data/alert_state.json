@@ -91,15 +91,6 @@
     "urn:oid:2.49.0.1.840.0.9da6e34a3e98a5b34a7e1425e24ee37260960fe3.001.1"
    ],
    "seeded": false
-  },
-  "urn:oid:2.49.0.1.840.0.afa8fcdba808962b8a30917da76e74a01dc300fe.002.1": {
-   "event": "High Surf Warning",
-   "first_seen": "2026-11-12T19:08:43+00:00",
-   "last_seen": "2026-11-12T19:08:43+00:00",
-   "refs": [
-    "urn:oid:2.49.0.1.840.0.bcb36648316adda3b5ee6657e7f35fdc0781d7ed.001.1"
-   ],
-   "seeded": false
   }
  },
  "outage": {},
@@ -114,31 +105,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-19T07:59:28+00:00",
+ "updated": "2026-11-19T23:37:43+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-19T07:59:28+00:00"
+   "last_seen": "2026-11-19T23:37:43+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 1,
+   "cust": 2,
    "high": false,
-   "last_seen": "2026-11-19T07:59:28+00:00"
+   "last_seen": "2026-11-19T23:37:43+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-19T07:59:28+00:00"
+   "last_seen": "2026-11-19T23:37:43+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 0,
+   "cust": 9,
    "high": false,
-   "last_seen": "2026-11-19T07:59:28+00:00"
+   "last_seen": "2026-11-19T23:37:43+00:00"
   }
  }
 }
