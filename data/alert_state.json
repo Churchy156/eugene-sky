@@ -19,16 +19,6 @@
    ],
    "seeded": false
   },
-  "urn:oid:2.49.0.1.840.0.21f7070395cbf30a5af8bb01403b0586723849d4.003.1": {
-   "event": "High Surf Warning",
-   "first_seen": "2026-11-13T15:12:48+00:00",
-   "last_seen": "2026-11-13T15:12:48+00:00",
-   "refs": [
-    "urn:oid:2.49.0.1.840.0.afa8fcdba808962b8a30917da76e74a01dc300fe.002.1",
-    "urn:oid:2.49.0.1.840.0.bcb36648316adda3b5ee6657e7f35fdc0781d7ed.001.1"
-   ],
-   "seeded": false
-  },
   "urn:oid:2.49.0.1.840.0.25d3fbffe230715b527518c32d9a5613209904ee.002.1": {
    "event": "High Surf Warning",
    "first_seen": "2026-11-14T01:37:51+00:00",
@@ -93,7 +83,18 @@
    "seeded": false
   }
  },
- "outage": {},
+ "outage": {
+  "pac:44.403,-122.724|09:01 AM on 11/20": {
+   "alerted": true,
+   "cust": 54,
+   "first_seen": "2026-11-20T21:04:27+00:00",
+   "last_seen": "2026-11-20T21:04:27+00:00",
+   "peak": 54,
+   "seeded_big": false,
+   "util": "pacific",
+   "where": "near Sweet Home (ZIP 97386), 30 mi from Eugene"
+  }
+ },
  "quake": {},
  "seeded_feeds": [
   "quakes",
@@ -105,31 +106,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-20T13:10:12+00:00",
+ "updated": "2026-11-20T21:04:27+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-20T13:10:12+00:00"
+   "last_seen": "2026-11-20T21:04:27+00:00"
   },
   "epud": {
    "alerted": false,
    "cust": 2,
    "high": false,
-   "last_seen": "2026-11-20T13:10:12+00:00"
+   "last_seen": "2026-11-20T21:04:27+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-20T13:10:12+00:00"
+   "last_seen": "2026-11-20T21:04:27+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 0,
+   "cust": 55,
    "high": false,
-   "last_seen": "2026-11-20T13:10:12+00:00"
+   "last_seen": "2026-11-20T21:04:27+00:00"
   }
  }
 }
