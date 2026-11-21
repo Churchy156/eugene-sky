@@ -1,0 +1,269 @@
+{
+"built": "2026-11-21T08:47+00:00",
+"states": {
+"MN": {
+"wz": [
+"WZDx: Minnesota DOT"
+]
+},
+"HI": {
+"wz": [
+"WZDx: Hawaii DOT"
+]
+},
+"WA": {
+"wz": [
+"WZDx: Washington State DOT"
+],
+"cam": [
+"WSDOT cameras (ArcGIS)"
+]
+},
+"IA": {
+"wz": [
+"WZDx: Iowa DOT"
+]
+},
+"KY": {
+"wz": [
+"WZDx: Kentucky Transportation Cabinet"
+]
+},
+"MO": {
+"wz": [
+"WZDx: Missouri DOT",
+"WZDx: St. Charles County"
+]
+},
+"WI": {
+"wz": [
+"WZDx: Wisconsin DOT"
+],
+"cam": [
+"WI 511 API"
+]
+},
+"OK": {
+"wz": [
+"WZDx: Oklahoma DOT"
+]
+},
+"LA": {
+"wz": [
+"WZDx: Louisiana DOTD"
+]
+},
+"IN": {
+"wz": [
+"WZDx: Indiana DOT"
+]
+},
+"DE": {
+"wz": [
+"WZDx: Delaware DOT"
+]
+},
+"FL": {
+"wz": [
+"WZDx: Florida DOT"
+]
+},
+"MD": {
+"wz": [
+"WZDx: Maryland DOT"
+]
+},
+"NJ": {
+"wz": [
+"WZDx: New Jersey Institute of Technology"
+]
+},
+"ID": {
+"wz": [
+"WZDx: Idaho DOT"
+],
+"cam": [
+"ID 511 API"
+]
+},
+"ND": {
+"wz": [
+"WZDx: North Dakota DOT"
+],
+"cam": [
+"NDDOT travel info (provided as-is)"
+]
+},
+"SD": {
+"wz": [
+"WZDx: South Dakota DOT"
+]
+},
+"MS": {
+"wz": [
+"WZDx: Mississippi DOT"
+]
+},
+"AZ": {
+"wz": [
+"WZDx: Maricopa County DOT"
+]
+},
+"OR": {
+"wz": [
+"WZDx: ODOT"
+],
+"cam": [
+"ODOT TripCheck"
+],
+"inc": [
+"ODOT TripCheck"
+]
+},
+"KS": {
+"wz": [
+"WZDx: Kansas DOT"
+]
+},
+"TX": {
+"wz": [
+"WZDx: City of Austin"
+]
+},
+"CA": {
+"cam": [
+"Caltrans CWWP2"
+],
+"inc": [
+"CHP CAD"
+]
+},
+"IL": {
+"cam": [
+"IDOT Gateway / Travel Midwest (CC BY-SA)"
+]
+}
+},
+"counts": {
+"MN": {
+"cam": 0,
+"inc": 0,
+"wz": 135
+},
+"HI": {
+"cam": 0,
+"inc": 0,
+"wz": 105
+},
+"WA": {
+"cam": 1710,
+"inc": 0,
+"wz": 409
+},
+"IA": {
+"cam": 0,
+"inc": 0,
+"wz": 731
+},
+"KY": {
+"cam": 0,
+"inc": 0,
+"wz": 209
+},
+"MO": {
+"cam": 0,
+"inc": 0,
+"wz": 508
+},
+"WI": {
+"cam": 461,
+"inc": 0,
+"wz": 1346
+},
+"OK": {
+"cam": 0,
+"inc": 0,
+"wz": 82
+},
+"LA": {
+"cam": 0,
+"inc": 0,
+"wz": 1
+},
+"IN": {
+"cam": 0,
+"inc": 0,
+"wz": 885
+},
+"DE": {
+"cam": 0,
+"inc": 0,
+"wz": 13
+},
+"FL": {
+"cam": 0,
+"inc": 0,
+"wz": 28775
+},
+"MD": {
+"cam": 0,
+"inc": 0,
+"wz": 59
+},
+"NJ": {
+"cam": 0,
+"inc": 0,
+"wz": 431
+},
+"ID": {
+"cam": 456,
+"inc": 0,
+"wz": 1153
+},
+"ND": {
+"cam": 190,
+"inc": 0,
+"wz": 29
+},
+"SD": {
+"cam": 0,
+"inc": 0,
+"wz": 132
+},
+"MS": {
+"cam": 0,
+"inc": 0,
+"wz": 104
+},
+"AZ": {
+"cam": 0,
+"inc": 0,
+"wz": 2367
+},
+"OR": {
+"cam": 1134,
+"inc": 130,
+"wz": 156
+},
+"KS": {
+"cam": 0,
+"inc": 0,
+"wz": 335
+},
+"TX": {
+"cam": 0,
+"inc": 0,
+"wz": 3571
+},
+"CA": {
+"cam": 3441,
+"inc": 139,
+"wz": 0
+},
+"IL": {
+"cam": 3842,
+"inc": 0,
+"wz": 0
+}
+}
+}
