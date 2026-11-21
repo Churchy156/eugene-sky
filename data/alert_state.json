@@ -29,6 +29,20 @@
    ],
    "seeded": false
   },
+  "urn:oid:2.49.0.1.840.0.8b9c1a4084b7ce8318dcde2a8c4b07f9b09e4ad2.001.1": {
+   "event": "Coastal Flood Advisory",
+   "first_seen": "2026-11-21T22:06:42+00:00",
+   "last_seen": "2026-11-21T22:06:42+00:00",
+   "refs": [],
+   "seeded": false
+  },
+  "urn:oid:2.49.0.1.840.0.8b9c1a4084b7ce8318dcde2a8c4b07f9b09e4ad2.001.2": {
+   "event": "Coastal Flood Watch",
+   "first_seen": "2026-11-21T22:06:42+00:00",
+   "last_seen": "2026-11-21T22:06:42+00:00",
+   "refs": [],
+   "seeded": false
+  },
   "urn:oid:2.49.0.1.840.0.9da6e34a3e98a5b34a7e1425e24ee37260960fe3.001.1": {
    "event": "High Surf Advisory",
    "first_seen": "2026-11-15T21:58:04+00:00",
@@ -60,31 +74,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-21T16:58:33+00:00",
+ "updated": "2026-11-21T22:06:42+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-21T16:58:33+00:00"
+   "last_seen": "2026-11-21T22:06:42+00:00"
   },
   "epud": {
    "alerted": false,
    "cust": 3,
    "high": false,
-   "last_seen": "2026-11-21T16:58:33+00:00"
+   "last_seen": "2026-11-21T22:06:42+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-21T16:58:33+00:00"
+   "last_seen": "2026-11-21T22:06:42+00:00"
   },
   "pacific": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-21T16:58:33+00:00"
+   "last_seen": "2026-11-21T22:06:42+00:00"
   }
  }
 }
