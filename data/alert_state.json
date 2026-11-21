@@ -19,15 +19,6 @@
    ],
    "seeded": false
   },
-  "urn:oid:2.49.0.1.840.0.25d3fbffe230715b527518c32d9a5613209904ee.002.1": {
-   "event": "High Surf Warning",
-   "first_seen": "2026-11-14T01:37:51+00:00",
-   "last_seen": "2026-11-14T01:37:51+00:00",
-   "refs": [
-    "urn:oid:2.49.0.1.840.0.5461048a3a8bb472b22a0f7e5c34fadaa889761a.003.1"
-   ],
-   "seeded": false
-  },
   "urn:oid:2.49.0.1.840.0.27bad849ce4ea138e5ed4ff3dce3dff7cf52a8cc.001.2": {
    "event": "High Surf Advisory",
    "first_seen": "2026-11-14T23:26:20+00:00",
@@ -43,15 +34,6 @@
    "last_seen": "2026-11-15T10:32:30+00:00",
    "refs": [
     "urn:oid:2.49.0.1.840.0.27bad849ce4ea138e5ed4ff3dce3dff7cf52a8cc.001.2"
-   ],
-   "seeded": false
-  },
-  "urn:oid:2.49.0.1.840.0.5461048a3a8bb472b22a0f7e5c34fadaa889761a.003.1": {
-   "event": "High Surf Warning",
-   "first_seen": "2026-11-13T21:26:57+00:00",
-   "last_seen": "2026-11-13T21:26:57+00:00",
-   "refs": [
-    "urn:oid:2.49.0.1.840.0.21f7070395cbf30a5af8bb01403b0586723849d4.003.1"
    ],
    "seeded": false
   },
@@ -83,18 +65,7 @@
    "seeded": false
   }
  },
- "outage": {
-  "pac:44.403,-122.724|09:01 AM on 11/20": {
-   "alerted": true,
-   "cust": 54,
-   "first_seen": "2026-11-20T21:04:27+00:00",
-   "last_seen": "2026-11-20T21:04:27+00:00",
-   "peak": 54,
-   "seeded_big": false,
-   "util": "pacific",
-   "where": "near Sweet Home (ZIP 97386), 30 mi from Eugene"
-  }
- },
+ "outage": {},
  "quake": {},
  "seeded_feeds": [
   "quakes",
@@ -106,31 +77,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-20T21:04:27+00:00",
+ "updated": "2026-11-21T02:08:58+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-20T21:04:27+00:00"
+   "last_seen": "2026-11-21T02:08:58+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 2,
+   "cust": 3,
    "high": false,
-   "last_seen": "2026-11-20T21:04:27+00:00"
+   "last_seen": "2026-11-21T02:08:58+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-20T21:04:27+00:00"
+   "last_seen": "2026-11-21T02:08:58+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 55,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-11-20T21:04:27+00:00"
+   "last_seen": "2026-11-21T02:08:58+00:00"
   }
  }
 }
