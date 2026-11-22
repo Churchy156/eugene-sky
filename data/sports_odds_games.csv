@@ -3870,7 +3870,7 @@ date,sport,host,opponent,opponent_espn,venue,attendance,eid,home_rank,opp_rank,h
 2026-11-17,womens_basketball,UO,Murray State Racers,Murray State Racers,Matthew Knight Arena,5426.0,401918904,99.0,99.0,97.0,76.0,,,,,,,0,21.0,1.0,,,,,,,,0.0,1.0,173.0,,,0.0,0.0,0.0
 2026-11-18,womens_basketball,OSU,UC Riverside Highlanders,UC Riverside Highlanders,Gill Coliseum,7665.0,401928312,99.0,99.0,64.0,57.0,,,,,,,0,7.0,1.0,,,,,,,,0.0,0.0,121.0,,,0.0,0.0,0.0
 2026-11-19,womens_basketball,UO,Fairfield Stags,Fairfield Stags,Matthew Knight Arena,3995.0,401918905,99.0,99.0,96.0,75.0,,,,,,,0,21.0,1.0,,,,,,,,0.0,1.0,171.0,,,0.0,0.0,0.0
-2026-11-21,football,OSU,Utah State Aggies,Utah State Aggies,Reser Stadium,,401860919,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
+2026-11-21,football,OSU,Utah State Aggies,Utah State Aggies,Reser Stadium,34359.0,401860919,99.0,99.0,31.0,24.0,,,,,,,0,7.0,1.0,,,,,,,,1.0,0.0,55.0,,,0.0,0.0,0.0
 2026-11-21,womens_basketball,OSU,Fairfield Stags,Fairfield Stags,Gill Coliseum,3045.0,401919413,99.0,99.0,71.0,60.0,,,,,,,0,11.0,1.0,,,,,,,,0.0,0.0,131.0,,,0.0,0.0,0.0
 2026-11-28,football,UO,Washington Huskies,Washington Huskies,Autzen Stadium,,401858541,13.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,1.0
 2026-11-29,mens_basketball,OSU,Milwaukee Panthers,Milwaukee Panthers,Gill Coliseum,,401926869,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
