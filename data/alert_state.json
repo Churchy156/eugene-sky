@@ -2,6 +2,27 @@
  "created": "2026-10-28T15:25:40+00:00",
  "drive": {},
  "nws": {
+  "urn:oid:2.49.0.1.840.0.275be10ce47ea2d262918c399c31cfd17fca05eb.002.1": {
+   "event": "Coastal Flood Warning",
+   "first_seen": "2026-11-24T00:48:13+00:00",
+   "last_seen": "2026-11-24T00:48:13+00:00",
+   "refs": [],
+   "seeded": false
+  },
+  "urn:oid:2.49.0.1.840.0.275be10ce47ea2d262918c399c31cfd17fca05eb.002.2": {
+   "event": "Coastal Flood Advisory",
+   "first_seen": "2026-11-24T00:48:13+00:00",
+   "last_seen": "2026-11-24T00:48:13+00:00",
+   "refs": [],
+   "seeded": false
+  },
+  "urn:oid:2.49.0.1.840.0.275be10ce47ea2d262918c399c31cfd17fca05eb.002.3": {
+   "event": "Coastal Flood Advisory",
+   "first_seen": "2026-11-24T00:48:13+00:00",
+   "last_seen": "2026-11-24T00:48:13+00:00",
+   "refs": [],
+   "seeded": false
+  },
   "urn:oid:2.49.0.1.840.0.356ed8591a37177af660d1c51151a10f0d9477c7.001.1": {
    "event": "Coastal Flood Advisory",
    "first_seen": "2026-11-22T09:53:28+00:00",
@@ -35,15 +56,6 @@
    "last_seen": "2026-11-23T13:07:37+00:00",
    "refs": [
     "urn:oid:2.49.0.1.840.0.b3538a28f85029b5fd2779e2438e1c38deba11a3.001.3"
-   ],
-   "seeded": false
-  },
-  "urn:oid:2.49.0.1.840.0.629b9c58fa077a69afba945cd4cc515e3fc55558.001.1": {
-   "event": "High Surf Advisory",
-   "first_seen": "2026-11-16T18:54:40+00:00",
-   "last_seen": "2026-11-16T18:54:40+00:00",
-   "refs": [
-    "urn:oid:2.49.0.1.840.0.a916494e7a2b967c1ab7b8b2aca8be3000166211.001.1"
    ],
    "seeded": false
   },
@@ -90,31 +102,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-23T13:07:37+00:00",
+ "updated": "2026-11-24T00:48:13+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-23T13:07:37+00:00"
+   "last_seen": "2026-11-24T00:48:13+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 5,
+   "cust": 0,
    "high": false,
-   "last_seen": "2026-11-23T13:07:37+00:00"
+   "last_seen": "2026-11-24T00:48:13+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-23T13:07:37+00:00"
+   "last_seen": "2026-11-24T00:48:13+00:00"
   },
   "pacific": {
    "alerted": false,
-   "cust": 0,
+   "cust": 1,
    "high": false,
-   "last_seen": "2026-11-23T13:07:37+00:00"
+   "last_seen": "2026-11-24T00:48:13+00:00"
   }
  }
 }
