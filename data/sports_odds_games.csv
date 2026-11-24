@@ -3893,8 +3893,8 @@ date,sport,host,opponent,opponent_espn,venue,attendance,eid,home_rank,opp_rank,h
 2026-12-30,mens_basketball,OSU,Western Oregon Wolves,Western Oregon Wolves,Gill Coliseum,,401929195,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,1.0,0.0,0.0
 2027-01-05,womens_basketball,UO,Wisconsin Badgers,Wisconsin Badgers,Matthew Knight Arena,,401922080,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2027-01-06,mens_basketball,OSU,San Diego State Aztecs,San Diego State Aztecs,Gill Coliseum,,401927757,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
-2027-01-06,mens_basketball,UO,Indiana Hoosiers,Indiana Hoosiers,Matthew Knight Arena,,401921783,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
-2027-01-10,mens_basketball,UO,Nebraska Cornhuskers,Nebraska Cornhuskers,Matthew Knight Arena,,401921912,99.0,24.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,1.0,0.0
+2027-01-06,mens_basketball,UO,Indiana Hoosiers,Indiana Hoosiers,Matthew Knight Arena,,401921783,99.0,23.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,1.0,0.0
+2027-01-10,mens_basketball,UO,Nebraska Cornhuskers,Nebraska Cornhuskers,Matthew Knight Arena,,401921912,99.0,21.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,1.0,0.0
 2027-01-13,womens_basketball,OSU,San Diego State Aztecs,San Diego State Aztecs,Gill Coliseum,,401928317,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2027-01-16,mens_basketball,OSU,Utah State Aggies,Utah State Aggies,Gill Coliseum,,401927768,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2027-01-17,womens_basketball,OSU,Washington State Cougars,Washington State Cougars,Gill Coliseum,,401928318,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
@@ -3914,12 +3914,12 @@ date,sport,host,opponent,opponent_espn,venue,attendance,eid,home_rank,opp_rank,h
 2027-02-11,womens_basketball,OSU,Gonzaga Bulldogs,Gonzaga Bulldogs,Gill Coliseum,,401928306,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2027-02-14,mens_basketball,OSU,Texas State Bobcats,Texas State Bobcats,Gill Coliseum,,401927802,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2027-02-17,mens_basketball,UO,Maryland Terrapins,Maryland Terrapins,Matthew Knight Arena,,401921979,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
-2027-02-20,mens_basketball,UO,Illinois Fighting Illini,Illinois Fighting Illini,Matthew Knight Arena,,401921984,99.0,10.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,1.0,0.0
+2027-02-20,mens_basketball,UO,Illinois Fighting Illini,Illinois Fighting Illini,Matthew Knight Arena,,401921984,99.0,4.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,1.0,0.0
 2027-02-20,womens_basketball,UO,Rutgers Scarlet Knights,Rutgers Scarlet Knights,Matthew Knight Arena,,401922184,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2027-02-21,womens_basketball,OSU,Colorado State Rams,Colorado State Rams,Gill Coliseum,,401928277,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2027-02-24,mens_basketball,UO,Purdue Boilermakers,Purdue Boilermakers,Matthew Knight Arena,,401921995,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2027-02-27,mens_basketball,OSU,Colorado State Rams,Colorado State Rams,Gill Coliseum,,401927815,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2027-02-28,womens_basketball,OSU,Texas State Bobcats,Texas State Bobcats,Gill Coliseum,,401928323,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
 2027-02-28,womens_basketball,UO,USC Trojans,USC Trojans,Matthew Knight Arena,,401922208,99.0,4.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,1.0,0.0
-2027-03-03,mens_basketball,UO,UCLA Bruins,UCLA Bruins,Matthew Knight Arena,,401922007,99.0,7.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,1.0,0.0
+2027-03-03,mens_basketball,UO,UCLA Bruins,UCLA Bruins,Matthew Knight Arena,,401922007,99.0,6.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,1.0,0.0
 2027-03-06,mens_basketball,OSU,Fresno State Bulldogs,Fresno State Bulldogs,Gill Coliseum,,401927823,99.0,99.0,,,,,,,,,0,,,,,,,,,,,,,,,0.0,0.0,0.0
