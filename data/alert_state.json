@@ -5,7 +5,7 @@
   "urn:oid:2.49.0.1.840.0.275be10ce47ea2d262918c399c31cfd17fca05eb.002.1": {
    "event": "Coastal Flood Warning",
    "first_seen": "2026-11-24T00:48:13+00:00",
-   "last_seen": "2026-11-24T10:29:36+00:00",
+   "last_seen": "2026-11-25T03:50:05+00:00",
    "refs": [],
    "seeded": false
   },
@@ -97,9 +97,29 @@
     "urn:oid:2.49.0.1.840.0.356ed8591a37177af660d1c51151a10f0d9477c7.001.1"
    ],
    "seeded": false
+  },
+  "urn:oid:2.49.0.1.840.0.d04911cf2762b8ace56e7547babcaf053ae628fd.004.1": {
+   "event": "Coastal Flood Advisory",
+   "first_seen": "2026-11-25T03:50:05+00:00",
+   "last_seen": "2026-11-25T03:50:05+00:00",
+   "refs": [
+    "urn:oid:2.49.0.1.840.0.57a861ce046707b2385c2813ce29f963e6d0a502.004.1"
+   ],
+   "seeded": false
   }
  },
- "outage": {},
+ "outage": {
+  "pac:44.313,-123.293|03:56 PM on 11/24": {
+   "alerted": true,
+   "cust": 267,
+   "first_seen": "2026-11-25T03:50:05+00:00",
+   "last_seen": "2026-11-25T03:50:05+00:00",
+   "peak": 267,
+   "seeded_big": false,
+   "util": "pacific",
+   "where": "near Monroe (ZIP 97456), 21 mi from Eugene"
+  }
+ },
  "quake": {},
  "seeded_feeds": [
   "quakes",
@@ -111,31 +131,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-24T10:29:36+00:00",
+ "updated": "2026-11-25T03:50:05+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-24T10:29:36+00:00"
+   "last_seen": "2026-11-25T03:50:05+00:00"
   },
   "epud": {
    "alerted": false,
-   "cust": 0,
+   "cust": 1,
    "high": false,
-   "last_seen": "2026-11-24T10:29:36+00:00"
+   "last_seen": "2026-11-25T03:50:05+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-24T10:29:36+00:00"
+   "last_seen": "2026-11-25T03:50:05+00:00"
   },
   "pacific": {
-   "alerted": false,
-   "cust": 0,
-   "high": false,
-   "last_seen": "2026-11-24T10:29:36+00:00"
+   "alerted": true,
+   "cust": 267,
+   "high": true,
+   "last_seen": "2026-11-25T03:50:05+00:00"
   }
  }
 }
