@@ -2,10 +2,17 @@
  "created": "2026-10-28T15:25:40+00:00",
  "drive": {},
  "nws": {
+  "urn:oid:2.49.0.1.840.0.1c22dbfd8e31131229524929e1e4640c0d2a470d.004.1": {
+   "event": "Coastal Flood Advisory",
+   "first_seen": "2026-11-25T13:39:02+00:00",
+   "last_seen": "2026-11-25T13:39:02+00:00",
+   "refs": [],
+   "seeded": false
+  },
   "urn:oid:2.49.0.1.840.0.275be10ce47ea2d262918c399c31cfd17fca05eb.002.1": {
    "event": "Coastal Flood Warning",
    "first_seen": "2026-11-24T00:48:13+00:00",
-   "last_seen": "2026-11-25T03:50:05+00:00",
+   "last_seen": "2026-11-25T13:39:02+00:00",
    "refs": [],
    "seeded": false
   },
@@ -108,18 +115,7 @@
    "seeded": false
   }
  },
- "outage": {
-  "pac:44.313,-123.293|03:56 PM on 11/24": {
-   "alerted": true,
-   "cust": 267,
-   "first_seen": "2026-11-25T03:50:05+00:00",
-   "last_seen": "2026-11-25T03:50:05+00:00",
-   "peak": 267,
-   "seeded_big": false,
-   "util": "pacific",
-   "where": "near Monroe (ZIP 97456), 21 mi from Eugene"
-  }
- },
+ "outage": {},
  "quake": {},
  "seeded_feeds": [
   "quakes",
@@ -131,31 +127,31 @@
   "power:pacific"
  ],
  "tsunami": {},
- "updated": "2026-11-25T03:50:05+00:00",
+ "updated": "2026-11-25T13:39:02+00:00",
  "util": {
   "blachly": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-25T03:50:05+00:00"
+   "last_seen": "2026-11-25T13:39:02+00:00"
   },
   "epud": {
    "alerted": false,
    "cust": 1,
    "high": false,
-   "last_seen": "2026-11-25T03:50:05+00:00"
+   "last_seen": "2026-11-25T13:39:02+00:00"
   },
   "eweb": {
    "alerted": false,
    "cust": 0,
    "high": false,
-   "last_seen": "2026-11-25T03:50:05+00:00"
+   "last_seen": "2026-11-25T13:39:02+00:00"
   },
   "pacific": {
-   "alerted": true,
-   "cust": 267,
-   "high": true,
-   "last_seen": "2026-11-25T03:50:05+00:00"
+   "alerted": false,
+   "cust": 0,
+   "high": false,
+   "last_seen": "2026-11-25T13:39:02+00:00"
   }
  }
 }
